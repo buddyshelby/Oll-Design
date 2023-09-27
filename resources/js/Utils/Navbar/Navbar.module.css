@@ -1,0 +1,71 @@
+.sidebar {
+    color: #003832;
+    width: 100%;
+    height: 100vh;
+    padding-top: 4rem;
+}
+
+.sidebar .sidebar-brand h1 {
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 0.4rem;
+}
+
+.sidebar .language {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .5rem;
+}
+
+.sidebar .language button {
+    border: 1px solid #003832;
+    padding: 0 .25rem;
+}
+
+.sidebar .language button:hover {
+    background: #003832;
+    color: #ffffff;
+    text-decoration: underline;
+    transition: 0.15s ease;
+}
+
+.sidebar .sidebar-title {
+    letter-spacing: 0.3rem;
+    margin: 4rem 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .sidebar-title a {
+    padding: 0 0.25rem;
+    margin: .5rem 0;
+}
+
+.sidebar .sidebar-title a:hover {
+    transition: 0.15s ease;
+    text-decoration: underline;
+    background: #003832;
+    color: #f6f6f6;
+}
+
+.sidebar .sidebar-socialmedia {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sidebar .sidebar-socialmedia a {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #003832;
+    text-align: center;
+}
+
+.sidebar .sidebar-socialmedia a:hover {
+    transition: 0.15s ease;
+    background: #003832;
+    color: #f6f6f6;
+}

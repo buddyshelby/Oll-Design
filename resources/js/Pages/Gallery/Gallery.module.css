@@ -1,0 +1,40 @@
+.gallery {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4rem;
+}
+
+.gallery .gallery-item {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    color: #003832;
+    font-size: 14;
+    font-weight: 300;
+    animation: fade .5s ease;
+}
+
+.gallery .gallery-item img:hover {
+    opacity: 50%;
+    transition: .25s ease;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1366px) {
+    .gallery {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+}
+
+@keyframes fade {
+    from { opacity: 0%; }
+    to   { opacity: 100%; }
+}
