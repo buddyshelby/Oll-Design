@@ -1,0 +1,17 @@
+{
+    "title": "Willkommen zu react und react-i18next OLL DESIGN",
+    "description": {
+        "part1": "Um loszulegen, ändere <1>src/App(DE).js</1> und speichere um neuzuladen.",
+        "part2": "Wechsle die Sprache zwischen deutsch und englisch mit Hilfe der beiden Schalter."
+    },
+    "navbar": {
+        "projects": "事業内容",
+        "company-profile": "会社概要",
+        "design-works": "デザイン事例",
+        "sub-design-works": {
+            "store-design": "STORE DESIGN",
+            "graphic-design": "GRAPHIC DESIGN"
+        },
+        "contact": "問い合わせ"
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "title": "Welcome to react using react-i18next OLL DESIGN",
+    "description": {
+        "part1": "To get started, edit <1>src/App.js</1> and save to reload.",
+        "part2": "Switch language between english and german using buttons above."
+    },
+    "navbar": {
+        "projects": "PROJECTS",
+        "company-profile": "COMPANY PROFILE",
+        "design-works": "DESIGN WORKS",
+        "sub-design-works": {
+            "store-design": "STORE DESIGN",
+            "graphic-design": "GRAPHIC DESIGN"
+        },
+        "contact": "CONTACT"
+    }
+}

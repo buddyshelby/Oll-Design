@@ -1,3 +1,5 @@
+import test from '../../../public/locales/en/translation.json';
+
 const brand = "OLL DESIGN";
 
 const lang = [
@@ -152,4 +154,4 @@ const img = [
     },
 ];
 
-export { brand, menu, socialMedia, imgGroupper, img, lang };
+export { brand, menu, socialMedia, imgGroupper, img, lang, test };

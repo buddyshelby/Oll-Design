@@ -2,6 +2,8 @@ import React from "react";
 import classes from "./Navbar.module.css";
 import { brand, menu, socialMedia, lang } from "../../Static/index";
 
+import { useTranslation, withTranslation, Trans } from "react-i18next";
+
 const Navbar = () => {
     return (
         <div className={classes.sidebar}>

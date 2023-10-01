@@ -7,6 +7,8 @@ import { imgGroupper, img } from "../Static/index";
 
 import GalleryDetail from "./Gallery/Detail/GalleryDetail";
 
+import Test from './Test';
+
 const Home = () => {
     const [filter, setFilter] = useState("#all");
 
@@ -31,13 +33,15 @@ const Home = () => {
                     </div>
                     <div className="col-10">
                         <div className="mt-16" />
-                        <ImgGroupper
+                        {/* <ImgGroupper
                             data={imgGroupper}
                             onGetFilter={getFilter}
                         />
-                        <Gallery imgData={filterImg} />
+                        <Gallery imgData={filterImg} /> */}
 
                         {/* <GalleryDetail /> */}
+
+                        <Test />
                     </div>
                 </div>
             </div>
