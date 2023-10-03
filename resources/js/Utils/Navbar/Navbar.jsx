@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./Navbar.module.css";
 import { brand, menu, socialMedia, lang } from "../../Static/index";
 
-import { useTranslation, withTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
+    const { t, i18n } = useTranslation();
+    const [ isHover, setIsHover ] = useState(null);
+
+    const changeLanguage = (lng) => {
+        i18n.changeLanguage(lng);
+    };
+
+    const handleMouseOver = (e) => {
+        switch (e.target.id) {
+            case "1": setIsHover(1); break;
+            case "2": setIsHover(2); break;
+            case "3": setIsHover(3); break;
+            case "4": setIsHover(4); break;
+        }
+    }
+
+    const handleMouseOut = () => {
+        setIsHover(null);
+    };
+
+    console.log(i18n.store.data.en.translation.navbar_jp, 'en');
+
     return (
         <div className={classes.sidebar}>
             <div className={classes["sidebar-content"]}>
@@ -19,9 +41,12 @@ const Navbar = () => {
                     ))}
                 </div>
                 <div className={classes["sidebar-title"]}>
-                    {menu.map((m) => (
-                        <a href={m.url} key={m.id}>
-                            {m.menu}
+                    {/* <a href="" id="1" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>{isHover === 1 ? t("navbar.projects") : t("navbar_jp.projects")}</a>
+                    <a href="" id="2" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>{isHover === 2 ? t("navbar.company_profile") : t("navbar_jp.company_profile")}</a>
+                    <a href="" id="3" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>{isHover === 3 ? t("navbar.design-works") : t("navbar_jp.design_works")}</a> */}
+                    {i18n.store.data.en.translation.navbar_jp.map((m) => (
+                        <a href={m.url} id={m.id} key={m.id} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+                            {isHover === m.id ? m.title_hover.toUpperCase() : m.title}
                         </a>
                     ))}
                 </div>

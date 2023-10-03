@@ -33,7 +33,7 @@ function Page() {
     i18n.changeLanguage(lng);
   };
 
-  console.log(test, 't i18n od');
+  // console.log(test, 't i18n od');
 
   return (
     <div className="App">

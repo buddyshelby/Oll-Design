@@ -28,20 +28,19 @@ const Home = () => {
         <>
             <div className="container-fluid px-12">
                 <div className="row">
-                    <div className="col-2">
+                    <div className="col-2 col-md-3">
                         <Navbar />
                     </div>
-                    <div className="col-10">
+                    <div className="col-10 col-md-9">
                         <div className="mt-16" />
-                        {/* <ImgGroupper
+                        <ImgGroupper
                             data={imgGroupper}
                             onGetFilter={getFilter}
                         />
-                        <Gallery imgData={filterImg} /> */}
-
+                        <Gallery imgData={filterImg} />
                         {/* <GalleryDetail /> */}
 
-                        <Test />
+                        {/* <Test /> */}
                     </div>
                 </div>
             </div>

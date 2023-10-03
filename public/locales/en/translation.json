@@ -6,12 +6,38 @@
     },
     "navbar": {
         "projects": "PROJECTS",
-        "company-profile": "COMPANY PROFILE",
-        "design-works": "DESIGN WORKS",
-        "sub-design-works": {
-            "store-design": "STORE DESIGN",
-            "graphic-design": "GRAPHIC DESIGN"
+        "company_profile": "COMPANY PROFILE",
+        "design_works": "DESIGN WORKS",
+        "sub_design_works": {
+            "store_design": "STORE DESIGN",
+            "graphic_design": "GRAPHIC DESIGN"
         },
         "contact": "CONTACT"
-    }
+    },
+    "navbar_jp": [
+        {
+            "id": 1,
+            "title": "会社紹介",
+            "title_hover": "Company Introduction",
+            "url": ""
+        },
+        {
+            "id": 2,
+            "title": "事業紹介",
+            "title_hover": "Business Introduction",
+            "url": ""
+        },
+        {
+            "id": 3,
+            "title": "作品紹介",
+            "title_hover": "Portfolio",
+            "url": ""
+        },
+        {
+            "id": 4,
+            "title": "問い合わせ",
+            "title_hover": "Contact Us",
+            "url": ""
+        }
+    ]
 }
