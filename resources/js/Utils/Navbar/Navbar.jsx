@@ -25,8 +25,6 @@ const Navbar = () => {
         setIsHover(null);
     };
 
-    console.log(i18n.store.data.en.translation.navbar_jp, 'en');
-
     return (
         <div className={classes.sidebar}>
             <div className={classes["sidebar-content"]}>
@@ -45,7 +43,7 @@ const Navbar = () => {
                     <a href="" id="2" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>{isHover === 2 ? t("navbar.company_profile") : t("navbar_jp.company_profile")}</a>
                     <a href="" id="3" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>{isHover === 3 ? t("navbar.design-works") : t("navbar_jp.design_works")}</a> */}
                     {i18n.store.data.en.translation.navbar_jp.map((m) => (
-                        <a href={m.url} id={m.id} key={m.id} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+                        <a href={m.url} className="text-sm" id={m.id} key={m.id} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
                             {isHover === m.id ? m.title_hover.toUpperCase() : m.title}
                         </a>
                     ))}

@@ -41,7 +41,6 @@
 .sidebar .sidebar-title a {
     padding: 0 .25rem;
     margin: .75rem 0;
-    font-size: 14px;
 }
 
 .sidebar .sidebar-title a:hover {
@@ -49,7 +48,6 @@
     text-decoration: underline;
     background: #003832;
     color: #f6f6f6;
-    font-size: 14px;
 }
 
 .sidebar .sidebar-socialmedia {

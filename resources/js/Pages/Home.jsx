@@ -7,10 +7,15 @@ import { imgGroupper, img } from "../Static/index";
 
 import GalleryDetail from "./Gallery/Detail/GalleryDetail";
 
-import Test from './Test';
+import Test from "./Test";
 
 const Home = () => {
     const [filter, setFilter] = useState("#all");
+    const [isPageId, setIsPageId] = useState(0);
+
+    const getDetailId = (selected) => {
+        setIsPageId(selected);
+    };
 
     const getFilter = (selected) => {
         setFilter(selected);
@@ -24,6 +29,10 @@ const Home = () => {
         }
     });
 
+    const onDetailPageId = img.filter((pages) => {
+        return pages.id === parseInt(isPageId);
+    });
+
     return (
         <>
             <div className="container-fluid px-12">
@@ -33,11 +42,20 @@ const Home = () => {
                     </div>
                     <div className="col-10 col-md-9">
                         <div className="mt-16" />
-                        <ImgGroupper
-                            data={imgGroupper}
-                            onGetFilter={getFilter}
-                        />
-                        <Gallery imgData={filterImg} />
+                        {isPageId !== 0 ? (
+                            <GalleryDetail detailPages={onDetailPageId} />
+                        ) : (
+                            <>
+                                <ImgGroupper
+                                    data={imgGroupper}
+                                    onGetFilter={getFilter}
+                                />
+                                <Gallery
+                                    imgData={filterImg}
+                                    onGetDetailId={getDetailId}
+                                />
+                            </>
+                        )}
                         {/* <GalleryDetail /> */}
 
                         {/* <Test /> */}

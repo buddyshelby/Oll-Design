@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { img } from "../../../Static/index";
-
 
 import classes from "./GalleryDetail.module.css";
 
-const GalleryDetail = () => {
+const GalleryDetail = (props) => {
+    const detail = props.detailPages[0];
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <div className={classes["gallery-detail"]}>
             <div className="container">
@@ -19,7 +23,7 @@ const GalleryDetail = () => {
                                     <p>-</p>
                                 </div>
                                 <div className={classes.content}>
-                                    <p>Emon Works</p>
+                                    <p>{detail.works_title}</p>
                                 </div>
                             </div>
                         </div>
@@ -32,7 +36,7 @@ const GalleryDetail = () => {
                                     <p>-</p>
                                 </div>
                                 <div className={classes.content}>
-                                    <p>Logo</p>
+                                    <p>{detail.works_content}</p>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +49,7 @@ const GalleryDetail = () => {
                                     <p>-</p>
                                 </div>
                                 <div className={classes.content}>
-                                    <p>Design: Oll Design</p>
+                                    <p>{detail.works_credit}</p>
                                 </div>
                             </div>
                         </div>
@@ -58,34 +62,22 @@ const GalleryDetail = () => {
                                     <p>-</p>
                                 </div>
                                 <div className={classes.content}>
-                                    <p>Oll Design, Inc</p>
+                                    <p>{detail.works_client}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className={`${classes.desctription} mt-16`}>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Neque enim minima eos praesentium, cum labore voluptatum
-                        incidunt soluta aut, veniam laboriosam dignissimos sint
-                        quaerat eaque fugit rem impedit? Facilis, odio unde
-                        deserunt corrupti quisquam repudiandae reprehenderit ea
-                        aut error eveniet labore, aliquid qui natus numquam
-                        accusamus a eos quo ad commodi inventore. Explicabo
-                        temporibus aliquid consectetur possimus eveniet in ab
-                        rerum animi aspernatur hic. Ratione, illo! Quis dolorem
-                        magni fugiat, dignissimos nam provident tempore,
-                        laudantium quia sit porro consequuntur sint laboriosam
-                        soluta voluptatibus perspiciatis doloribus inventore
-                        optio quas unde architecto dolores officiis fugit.
-                        Voluptatibus temporibus nulla ex! Veritatis, assumenda
-                        inventore.
+                        {detail.description}
                     </div>
                 </div>
                 <div className="row">
                     <div className={`${classes["contents-images"]} mt-8`}>
-                        <div className={classes.images}>
-                            <img src={img[0].url[0]} alt="test" />
-                        </div>
+                        {detail.url.map((img, index) => (
+                            <div className={classes.images} key={index}>
+                                <img src={img} alt="" />
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

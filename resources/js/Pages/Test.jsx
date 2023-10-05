@@ -32,9 +32,7 @@ function Page() {
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
-
-  // console.log(test, 't i18n od');
-
+  
   return (
     <div className="App">
       <div className="App-header">

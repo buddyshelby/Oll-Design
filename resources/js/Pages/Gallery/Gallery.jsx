@@ -6,17 +6,19 @@ import "swiper/css";
 import "./Swiper.css";
 import classes from "./Gallery.module.css";
 
-const Gallery = (props) => {
-    const onPageRoute = () => {
-        window.location.href ='/Detail/GalleryDetail';
-    }
+const Gallery = (props) => {    
+    const onGetPageIdHandler = (e) => {
+        props.onGetDetailId(e.currentTarget.id);
+    };
+
     return (
         <div className={`${classes.gallery} mt-6`}>
             {props.imgData.map((img) => (
                 <div
                     className={classes["gallery-item"]}
+                    id={img.id}
                     key={img.id}
-                    onClick={onPageRoute}
+                    onClick={onGetPageIdHandler}
                 >
                     <Swiper
                         autoplay={{

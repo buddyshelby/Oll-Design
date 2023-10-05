@@ -1,4 +1,4 @@
-import test from '../../../public/locales/en/translation.json';
+import test from "../../../public/locales/en/translation.json";
 
 const brand = "OLL DESIGN";
 
@@ -14,8 +14,8 @@ const lang = [
     {
         id: 3,
         lang: "CH",
-    }
-]
+    },
+];
 
 const menu = [
     {
@@ -58,7 +58,7 @@ const imgGroupper = [
         id: 2,
         badge: "GRAPHIC DESIGN",
         navigate: "#graphic-design",
-    }
+    },
 ];
 
 const img = [
@@ -70,6 +70,12 @@ const img = [
         ],
         navigate: "#graphic-design",
         name: "Image 1",
+        description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque enim minima eos praesentium, cum labore voluptatum incidunt soluta aut, veniam laboriosam dignissimos sint quaerat eaque fugit rem impedit? Facilis, odio unde deserunt corrupti quisquam repudiandae reprehenderit ea aut error eveniet labore, aliquid qui natus numquam accusamus a eos quo ad commodi inventore. Explicabo temporibus aliquid consectetur possimus eveniet in ab rerum animi aspernatur hic. Ratione, illo! Quis dolorem magni fugiat, dignissimos nam provident tempore, laudantium quia sit porro consequuntur sint laboriosam soluta voluptatibus perspiciatis doloribus inventore optio quas unde architecto dolores officiis fugit. Voluptatibus temporibus nulla ex! Veritatis, assumenda inventore.",
+        works_title: "Emon Works One",
+        works_content: "Logo One",
+        works_credit: "Design: Oll Design",
+        works_client: "Oll Design, Inc",
     },
     {
         id: 2,
@@ -79,6 +85,12 @@ const img = [
         ],
         navigate: "#graphic-design",
         name: "Image 2",
+        description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque enim minima eos praesentium, cum labore voluptatum incidunt soluta aut, veniam laboriosam dignissimos sint quaerat eaque fugit rem impedit? Facilis, odio unde deserunt corrupti quisquam repudiandae reprehenderit ea aut error eveniet labore, aliquid qui natus numquam accusamus a eos quo ad commodi inventore. Explicabo temporibus aliquid consectetur possimus eveniet in ab rerum animi aspernatur hic. Ratione, illo! Quis dolorem magni fugiat, dignissimos nam provident tempore, laudantium quia sit porro consequuntur sint laboriosam soluta voluptatibus perspiciatis doloribus inventore optio quas unde architecto dolores officiis fugit. Voluptatibus temporibus nulla ex! Veritatis, assumenda inventore.",
+        works_title: "Emon Works Two",
+        works_content: "Logo Two",
+        works_credit: "Design: Oll Design",
+        works_client: "Oll Design, Inc",
     },
     {
         id: 3,
@@ -88,6 +100,12 @@ const img = [
         ],
         navigate: "#store-design",
         name: "Image 3",
+        description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque enim minima eos praesentium, cum labore voluptatum incidunt soluta aut, veniam laboriosam dignissimos sint quaerat eaque fugit rem impedit? Facilis, odio unde deserunt corrupti quisquam repudiandae reprehenderit ea aut error eveniet labore, aliquid qui natus numquam accusamus a eos quo ad commodi inventore. Explicabo temporibus aliquid consectetur possimus eveniet in ab rerum animi aspernatur hic. Ratione, illo! Quis dolorem magni fugiat, dignissimos nam provident tempore, laudantium quia sit porro consequuntur sint laboriosam soluta voluptatibus perspiciatis doloribus inventore optio quas unde architecto dolores officiis fugit. Voluptatibus temporibus nulla ex! Veritatis, assumenda inventore.",
+        works_title: "Emon Works Three",
+        works_content: "Logo Three",
+        works_credit: "Design: Oll Design",
+        works_client: "Oll Design, Inc",
     },
     {
         id: 4,
@@ -97,6 +115,12 @@ const img = [
         ],
         navigate: "#store-design",
         name: "Image 4",
+        description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque enim minima eos praesentium, cum labore voluptatum incidunt soluta aut, veniam laboriosam dignissimos sint quaerat eaque fugit rem impedit? Facilis, odio unde deserunt corrupti quisquam repudiandae reprehenderit ea aut error eveniet labore, aliquid qui natus numquam accusamus a eos quo ad commodi inventore. Explicabo temporibus aliquid consectetur possimus eveniet in ab rerum animi aspernatur hic. Ratione, illo! Quis dolorem magni fugiat, dignissimos nam provident tempore, laudantium quia sit porro consequuntur sint laboriosam soluta voluptatibus perspiciatis doloribus inventore optio quas unde architecto dolores officiis fugit. Voluptatibus temporibus nulla ex! Veritatis, assumenda inventore.",
+        works_title: "Emon Works Four",
+        works_content: "Logo Four",
+        works_credit: "Design: Oll Design",
+        works_client: "Oll Design, Inc",
     },
     {
         id: 5,
@@ -106,6 +130,12 @@ const img = [
         ],
         navigate: "#store-design",
         name: "Image 5",
+        description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque enim minima eos praesentium, cum labore voluptatum incidunt soluta aut, veniam laboriosam dignissimos sint quaerat eaque fugit rem impedit? Facilis, odio unde deserunt corrupti quisquam repudiandae reprehenderit ea aut error eveniet labore, aliquid qui natus numquam accusamus a eos quo ad commodi inventore. Explicabo temporibus aliquid consectetur possimus eveniet in ab rerum animi aspernatur hic. Ratione, illo! Quis dolorem magni fugiat, dignissimos nam provident tempore, laudantium quia sit porro consequuntur sint laboriosam soluta voluptatibus perspiciatis doloribus inventore optio quas unde architecto dolores officiis fugit. Voluptatibus temporibus nulla ex! Veritatis, assumenda inventore.",
+        works_title: "Emon Works Five",
+        works_content: "Logo Five",
+        works_credit: "Design: Oll Design",
+        works_client: "Oll Design, Inc",
     },
     {
         id: 6,
@@ -115,6 +145,12 @@ const img = [
         ],
         navigate: "#graphic-design",
         name: "Image 6",
+        description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque enim minima eos praesentium, cum labore voluptatum incidunt soluta aut, veniam laboriosam dignissimos sint quaerat eaque fugit rem impedit? Facilis, odio unde deserunt corrupti quisquam repudiandae reprehenderit ea aut error eveniet labore, aliquid qui natus numquam accusamus a eos quo ad commodi inventore. Explicabo temporibus aliquid consectetur possimus eveniet in ab rerum animi aspernatur hic. Ratione, illo! Quis dolorem magni fugiat, dignissimos nam provident tempore, laudantium quia sit porro consequuntur sint laboriosam soluta voluptatibus perspiciatis doloribus inventore optio quas unde architecto dolores officiis fugit. Voluptatibus temporibus nulla ex! Veritatis, assumenda inventore.",
+        works_title: "Emon Works Six",
+        works_content: "Logo Six",
+        works_credit: "Design: Oll Design",
+        works_client: "Oll Design, Inc",
     },
     {
         id: 7,
@@ -124,6 +160,12 @@ const img = [
         ],
         navigate: "#store-design",
         name: "Image 7",
+        description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque enim minima eos praesentium, cum labore voluptatum incidunt soluta aut, veniam laboriosam dignissimos sint quaerat eaque fugit rem impedit? Facilis, odio unde deserunt corrupti quisquam repudiandae reprehenderit ea aut error eveniet labore, aliquid qui natus numquam accusamus a eos quo ad commodi inventore. Explicabo temporibus aliquid consectetur possimus eveniet in ab rerum animi aspernatur hic. Ratione, illo! Quis dolorem magni fugiat, dignissimos nam provident tempore, laudantium quia sit porro consequuntur sint laboriosam soluta voluptatibus perspiciatis doloribus inventore optio quas unde architecto dolores officiis fugit. Voluptatibus temporibus nulla ex! Veritatis, assumenda inventore.",
+        works_title: "Emon Works Seven",
+        works_content: "Logo Seven",
+        works_credit: "Design: Oll Design",
+        works_client: "Oll Design, Inc",
     },
     {
         id: 8,
@@ -133,6 +175,12 @@ const img = [
         ],
         navigate: "#graphic-design",
         name: "Image 8",
+        description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque enim minima eos praesentium, cum labore voluptatum incidunt soluta aut, veniam laboriosam dignissimos sint quaerat eaque fugit rem impedit? Facilis, odio unde deserunt corrupti quisquam repudiandae reprehenderit ea aut error eveniet labore, aliquid qui natus numquam accusamus a eos quo ad commodi inventore. Explicabo temporibus aliquid consectetur possimus eveniet in ab rerum animi aspernatur hic. Ratione, illo! Quis dolorem magni fugiat, dignissimos nam provident tempore, laudantium quia sit porro consequuntur sint laboriosam soluta voluptatibus perspiciatis doloribus inventore optio quas unde architecto dolores officiis fugit. Voluptatibus temporibus nulla ex! Veritatis, assumenda inventore.",
+        works_title: "Emon Works Eight",
+        works_content: "Logo Eight",
+        works_credit: "Design: Oll Design",
+        works_client: "Oll Design, Inc",
     },
     {
         id: 9,
@@ -142,6 +190,12 @@ const img = [
         ],
         navigate: "#store-design",
         name: "Image 9",
+        description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque enim minima eos praesentium, cum labore voluptatum incidunt soluta aut, veniam laboriosam dignissimos sint quaerat eaque fugit rem impedit? Facilis, odio unde deserunt corrupti quisquam repudiandae reprehenderit ea aut error eveniet labore, aliquid qui natus numquam accusamus a eos quo ad commodi inventore. Explicabo temporibus aliquid consectetur possimus eveniet in ab rerum animi aspernatur hic. Ratione, illo! Quis dolorem magni fugiat, dignissimos nam provident tempore, laudantium quia sit porro consequuntur sint laboriosam soluta voluptatibus perspiciatis doloribus inventore optio quas unde architecto dolores officiis fugit. Voluptatibus temporibus nulla ex! Veritatis, assumenda inventore.",
+        works_title: "Emon Works Nine",
+        works_content: "Logo Nine",
+        works_credit: "Design: Oll Design",
+        works_client: "Oll Design, Inc",
     },
     {
         id: 10,
@@ -151,6 +205,12 @@ const img = [
         ],
         navigate: "#store-design",
         name: "Image 10",
+        description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque enim minima eos praesentium, cum labore voluptatum incidunt soluta aut, veniam laboriosam dignissimos sint quaerat eaque fugit rem impedit? Facilis, odio unde deserunt corrupti quisquam repudiandae reprehenderit ea aut error eveniet labore, aliquid qui natus numquam accusamus a eos quo ad commodi inventore. Explicabo temporibus aliquid consectetur possimus eveniet in ab rerum animi aspernatur hic. Ratione, illo! Quis dolorem magni fugiat, dignissimos nam provident tempore, laudantium quia sit porro consequuntur sint laboriosam soluta voluptatibus perspiciatis doloribus inventore optio quas unde architecto dolores officiis fugit. Voluptatibus temporibus nulla ex! Veritatis, assumenda inventore.",
+        works_title: "Emon Works Ten",
+        works_content: "Logo Ten",
+        works_credit: "Design: Oll Design",
+        works_client: "Oll Design, Inc",
     },
 ];
 
