@@ -10,7 +10,7 @@ import GalleryDetail from "./Gallery/Detail/GalleryDetail";
 import Test from "./Test";
 
 const Home = () => {
-    const { t, i18n } = useTranslation();
+    const { i18n } = useTranslation();
     const [filter, setFilter] = useState("#all");
     const [isPageId, setIsPageId] = useState(0);
     
@@ -23,8 +23,6 @@ const Home = () => {
     } else {
         data = i18n.store.data.ch.translation
     }
-
-    console.log (data, i18n.language);
 
     const getDetailId = (selected) => {
         setIsPageId(selected);

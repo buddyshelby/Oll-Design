@@ -17,26 +17,26 @@
     "navbar_jp": [
         {
             "id": 1,
-            "title": "会社紹介",
-            "title_hover": "Company Introduction",
+            "title": "Company Introduction",
+            "title_hover": "会社紹介",
             "url": ""
         },
         {
             "id": 2,
-            "title": "事業紹介",
-            "title_hover": "Business Introduction",
+            "title": "Business Introduction",
+            "title_hover": "事業紹介",
             "url": ""
         },
         {
             "id": 3,
-            "title": "作品紹介",
-            "title_hover": "Portfolio",
+            "title": "Portfolio",
+            "title_hover": "作品紹介",
             "url": ""
         },
         {
             "id": 4,
-            "title": "問い合わせ",
-            "title_hover": "Contact Us",
+            "title": "Contact Us",
+            "title_hover": "問い合わせ",
             "url": ""
         }
     ],
@@ -186,11 +186,13 @@
         {
             "id": 1,
             "badge": "STORE DESIGN",
+            "badge_hover": "店舗デザイン",
             "navigate": "#store-design"
         },
         {
             "id": 2,
             "badge": "GRAPHIC DESIGN",
+            "badge_hover": "グラフィックデザイン",
             "navigate": "#graphic-design"
         }
     ],

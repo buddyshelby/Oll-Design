@@ -185,12 +185,14 @@
     "gallery_groups": [
         {
             "id": 1,
-            "badge": "STORE DESIGN",
+            "badge": "店舗デザイン",
+            "badge_hover": "STORE DESIGN",
             "navigate": "#store-design"
         },
         {
             "id": 2,
-            "badge": "GRAPHIC DESIGN",
+            "badge": "グラフィックデザイン",
+            "badge_hover": "GRAPHIC DESIGN",
             "navigate": "#graphic-design"
         }
     ],
