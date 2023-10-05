@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Navbar from "@/Utils/Navbar/Navbar";
 import ImgGroupper from "@/Utils/ImageGroupper/ImgGroupper";
 import Gallery from "@/Pages/Gallery/Gallery";
@@ -13,9 +13,18 @@ const Home = () => {
     const { t, i18n } = useTranslation();
     const [filter, setFilter] = useState("#all");
     const [isPageId, setIsPageId] = useState(0);
+    
+    let data;
 
-    const img = i18n.store.data.en.translation.gallery;
-    const imgGroupper = i18n.store.data.en.translation.gallery_groups;
+    if (i18n.language === "jp") {
+        data = i18n.store.data.jp.translation
+    } else if (i18n.language === "en") {
+        data = i18n.store.data.en.translation
+    } else {
+        data = i18n.store.data.ch.translation
+    }
+
+    console.log (data, i18n.language);
 
     const getDetailId = (selected) => {
         setIsPageId(selected);
@@ -25,15 +34,15 @@ const Home = () => {
         setFilter(selected);
     };
 
-    const filterImg = img.filter((imgFilter) => {
+    const filterImg = data.gallery.filter((imgFilter) => {
         if (filter === "#all") {
-            return img;
+            return data.gallery;
         } else {
             return imgFilter.navigate === filter;
         }
     });
 
-    const onDetailPageId = img.filter((pages) => {
+    const onDetailPageId = data.gallery.filter((pages) => {
         return pages.id === parseInt(isPageId);
     });
 
@@ -46,12 +55,10 @@ const Home = () => {
                     </div>
                     <div className="col-10 col-md-9">
                         <div className="mt-16" />
-                        {isPageId !== 0 ? (
-                            <GalleryDetail detailPages={onDetailPageId} />
-                        ) : (
+                        {isPageId === 0 ? (
                             <>
                                 <ImgGroupper
-                                    data={imgGroupper}
+                                    data={data.gallery_groups}
                                     onGetFilter={getFilter}
                                 />
                                 <Gallery
@@ -59,6 +66,8 @@ const Home = () => {
                                     onGetDetailId={getDetailId}
                                 />
                             </>
+                        ) : (
+                            <GalleryDetail detailPages={onDetailPageId} />
                         )}
                         {/* <Test /> */}
                     </div>

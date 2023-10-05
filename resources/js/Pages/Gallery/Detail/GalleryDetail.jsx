@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
-import { img } from "../../../Static/index";
+
+import { useTranslation, Trans } from "react-i18next";
 
 import classes from "./GalleryDetail.module.css";
 
 const GalleryDetail = (props) => {
     const detail = props.detailPages[0];
+
+    console.log(detail, 'detail');
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -17,7 +20,11 @@ const GalleryDetail = (props) => {
                         <div className="col">
                             <div className={classes["title-contents"]}>
                                 <div className={classes.content}>
-                                    <p>title</p>
+                                    <p>
+                                        <Trans i18nKey="gallery_header_details.title">
+                                            title
+                                        </Trans>
+                                    </p>
                                 </div>
                                 <div className={classes.content}>
                                     <p>-</p>
@@ -30,7 +37,11 @@ const GalleryDetail = (props) => {
                         <div className="col">
                             <div className={classes["title-contents"]}>
                                 <div className={classes.content}>
-                                    <p>contents</p>
+                                    <p>
+                                        <Trans i18nKey="gallery_header_details.contents">
+                                            contents
+                                        </Trans>
+                                    </p>
                                 </div>
                                 <div className={classes.content}>
                                     <p>-</p>
@@ -43,7 +54,11 @@ const GalleryDetail = (props) => {
                         <div className="col">
                             <div className={classes["title-contents"]}>
                                 <div className={classes.content}>
-                                    <p>credit</p>
+                                    <p>
+                                        <Trans i18nKey="gallery_header_details.credit">
+                                            credit
+                                        </Trans>
+                                    </p>
                                 </div>
                                 <div className={classes.content}>
                                     <p>-</p>
@@ -56,7 +71,11 @@ const GalleryDetail = (props) => {
                         <div className="col">
                             <div className={classes["title-contents"]}>
                                 <div className={classes.content}>
-                                    <p>client</p>
+                                    <p>
+                                        <Trans i18nKey="gallery_header_details.client">
+                                            client
+                                        </Trans>
+                                    </p>
                                 </div>
                                 <div className={classes.content}>
                                     <p>-</p>

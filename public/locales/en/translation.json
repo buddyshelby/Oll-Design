@@ -193,5 +193,11 @@
             "badge": "GRAPHIC DESIGN",
             "navigate": "#graphic-design"
         }
-    ]
+    ],
+    "gallery_header_details": {
+        "title": "title",
+        "contents": "contents",
+        "credit": "credit",
+        "client": "client"
+    }
 }

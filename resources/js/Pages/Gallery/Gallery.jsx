@@ -2,11 +2,13 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 
+import { useTranslation, Trans } from "react-i18next";
+
 import "swiper/css";
 import "./Swiper.css";
 import classes from "./Gallery.module.css";
 
-const Gallery = (props) => {    
+const Gallery = (props) => {
     const onGetPageIdHandler = (e) => {
         props.onGetDetailId(e.currentTarget.id);
     };
@@ -36,7 +38,9 @@ const Gallery = (props) => {
                         ))}
                     </Swiper>
                     <div className="gallery-title">
-                        <h2>{img.name}</h2>
+                        <h2>
+                            {img.name}
+                        </h2>
                     </div>
                 </div>
             ))}

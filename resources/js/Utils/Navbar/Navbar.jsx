@@ -35,14 +35,14 @@ const Navbar = () => {
                 </div>
                 <div className={`${classes.language} mt-2`}>
                     {lang.map((item) => (
-                        <button key={item.id}>{item.lang}</button>
+                        <button key={item.id} onClick={() => changeLanguage(item.lang.toString().toLowerCase())}>{item.lang}</button>
                     ))}
                 </div>
                 <div className={classes["sidebar-title"]}>
                     {/* <a href="" id="1" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>{isHover === 1 ? t("navbar.projects") : t("navbar_jp.projects")}</a>
                     <a href="" id="2" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>{isHover === 2 ? t("navbar.company_profile") : t("navbar_jp.company_profile")}</a>
                     <a href="" id="3" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>{isHover === 3 ? t("navbar.design-works") : t("navbar_jp.design_works")}</a> */}
-                    {i18n.store.data.en.translation.navbar_jp.map((m) => (
+                    {i18n.store.data.jp.translation.navbar_jp.map((m) => (
                         <a href={m.url} className="text-sm" id={m.id} key={m.id} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
                             {isHover === m.id ? m.title_hover.toUpperCase() : m.title}
                         </a>
