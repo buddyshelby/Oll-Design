@@ -3,15 +3,19 @@ import Navbar from "@/Utils/Navbar/Navbar";
 import ImgGroupper from "@/Utils/ImageGroupper/ImgGroupper";
 import Gallery from "@/Pages/Gallery/Gallery";
 
-import { imgGroupper, img } from "../Static/index";
+import { useTranslation } from "react-i18next";
 
 import GalleryDetail from "./Gallery/Detail/GalleryDetail";
 
 import Test from "./Test";
 
 const Home = () => {
+    const { t, i18n } = useTranslation();
     const [filter, setFilter] = useState("#all");
     const [isPageId, setIsPageId] = useState(0);
+
+    const img = i18n.store.data.en.translation.gallery;
+    const imgGroupper = i18n.store.data.en.translation.gallery_groups;
 
     const getDetailId = (selected) => {
         setIsPageId(selected);
@@ -56,8 +60,6 @@ const Home = () => {
                                 />
                             </>
                         )}
-                        {/* <GalleryDetail /> */}
-
                         {/* <Test /> */}
                     </div>
                 </div>
