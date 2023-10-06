@@ -2,8 +2,6 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 
-import { useTranslation, Trans } from "react-i18next";
-
 import "swiper/css";
 import "./Swiper.css";
 import classes from "./Gallery.module.css";

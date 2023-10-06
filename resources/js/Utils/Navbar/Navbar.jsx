@@ -63,7 +63,7 @@ const Navbar = () => {
                     <a href="" id="3" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>{isHover === 3 ? t("navbar.design-works") : t("navbar_jp.design_works")}</a> */}
                     {data.navbar_jp.map((m) => (
                         <a href={m.url} className="text-sm" id={m.id} key={m.id} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-                            {isHover === m.id ? m.title_hover.toUpperCase() : m.title}
+                            {isHover === m.id ? m.title_hover.toUpperCase() : m.title.toUpperCase()}
                         </a>
                     ))}
                 </div>

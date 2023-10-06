@@ -40,7 +40,7 @@ const ImgGroupper = (props) => {
                         onMouseOver={handleMouseOver}
                         onMouseOut={handleMouseOut}
                     >
-                        {isHover === item.id ? item.badge_hover.toUpperCase() : item.badge}
+                        {isHover === item.id ? item.badge_hover.toUpperCase() : item.badge.toUpperCase()}
                     </a>
                 </div>
             ))}
