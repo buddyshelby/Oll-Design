@@ -1,0 +1,15 @@
+.company {
+    display: grid;
+    grid-template-columns: 15rem auto;
+    color: #003832;
+    font-size: 16px;
+    margin: .5rem 0;
+}
+
+.company .company-content .content span {
+    display: list-item;
+    list-style-type: circle;
+    list-style-position: outside;
+    font-size: 16px;
+    color: #003832;
+}

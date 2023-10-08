@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import Navbar from "@/Utils/Navbar/Navbar";
 import ImgGroupper from "@/Utils/ImageGroupper/ImgGroupper";
 import Gallery from "@/Pages/Gallery/Gallery";
+import GalleryDetail from "./Gallery/Detail/GalleryDetail";
+import Company from "./Company/Company";
 
 import { useTranslation } from "react-i18next";
 
-import GalleryDetail from "./Gallery/Detail/GalleryDetail";
-
-import Test from "./Test";
 
 const Home = () => {
     const { i18n } = useTranslation();
@@ -53,7 +52,7 @@ const Home = () => {
                     </div>
                     <div className="col-10 col-md-9">
                         <div className="mt-16" />
-                        {isPageId === 0 ? (
+                        {/* {isPageId === 0 ? (
                             <>
                                 <ImgGroupper
                                     data={data.gallery_groups}
@@ -66,8 +65,9 @@ const Home = () => {
                             </>
                         ) : (
                             <GalleryDetail detailPages={onDetailPageId} />
-                        )}
-                        {/* <Test /> */}
+                        )} */}
+
+                        <Company data={data.company} />
                     </div>
                 </div>
             </div>
