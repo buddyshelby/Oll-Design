@@ -20,6 +20,10 @@ Route::get('/', function () {
     return Inertia::render('Home');
 });
 
+Route::get('/company', function () {
+    return Inertia::render('Company/Company');
+});
+
 // Route::get('/admin', function () {
 //     return Inertia::render('Welcome', [
 //         'canLogin' => Route::has('login'),
