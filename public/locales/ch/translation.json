@@ -185,12 +185,14 @@
     "gallery_groups": [
         {
             "id": 1,
-            "badge": "STORE DESIGN",
+            "badge": "店舗デザイン",
+            "badge_hover": "STORE DESIGN",
             "navigate": "#store-design"
         },
         {
             "id": 2,
-            "badge": "GRAPHIC DESIGN",
+            "badge": "グラフィックデザイン",
+            "badge_hover": "GRAPHIC DESIGN",
             "navigate": "#graphic-design"
         }
     ],
@@ -199,5 +201,154 @@
         "contents": "コンテンツ",
         "credit": "クレジット",
         "client": "クライアント"
+    },
+    "company": {
+        "profile": [
+            {
+                "id": 1,
+                "title": "商号",
+                "desc": [
+                    {
+                        "id": 1,
+                        "address": "OLLDESIGN株式会社( OLLDESIGN CO., Ltd. )",
+                        "telp": null,
+                        "fax": null
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "title": "Head Office",
+                "desc": [
+                    {
+                        "id": 1,
+                        "address": "〒659-0067 兵庫県芦屋市茶屋之町11-11（2017年４月事務所移転）",
+                        "telp": "TEL : 0797-35-8806",
+                        "fax": "FAX : 0797-35-8807"
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "title": "Tokyo Office",
+                "desc": [
+                    {
+                        "id": 1,
+                        "address": "〒166-0012 東京都杉並区和田3-60-13 ｾﾞﾝﾌﾋﾞﾙ401号",
+                        "telp": "TEL : 03-5929-8727",
+                        "fax": "FAX : 03-5929-8728"
+                    }
+                ]
+            },
+            {
+                "id": 4,
+                "title": "Group Company",
+                "desc": [
+                    {
+                        "id": 1,
+                        "name": "上海事務所",
+                        "address": "ZIP 200041 上海市静安区陕西北路173号车间8"
+                    },
+                    {
+                        "id": 2,
+                        "name": "家具工場",
+                        "address": "ZIP 201613 上海市松江工業区開明路268号"
+                    },
+                    {
+                        "id": 3,
+                        "name": "看板工場",
+                        "address": "ZIP 201615 上海市松江区九鎮高科技園区九径路119弄225号"
+                    },
+                    {
+                        "id": 4,
+                        "name": "厨房工場",
+                        "address": "ZIP 529100 江門市新会区江会路菜甲村北中国工並区"
+                    }
+                ]
+            }
+        ],
+        "business": {
+            "title": "業務",
+            "desc": [
+                {
+                    "id": 1,
+                    "business": "出店プロデュース（国内・海外対応）",
+                    "sub_business": [
+                        {
+                            "id": 1,
+                            "name": "物件調査"
+                        },
+                        {
+                            "id": 2,
+                            "name": "店舗企画・店舗設計・設計監理"
+                        },
+                        {
+                            "id": 3,
+                            "name": "物件紹介・売上げ予測"
+                        },
+                        {
+                            "id": 4,
+                            "name": "店舗改装・新業態開発"
+                        },
+                        {
+                            "id": 5,
+                            "name": "国内・海外出店コンサルティング"
+                        },
+                        {
+                            "id": 6,
+                            "name": "海外輸入品制作・販売（家具・什器・厨房等"
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "business": "グラフィックデザイン",
+                    "sub_business": [
+                        {
+                            "id": 1,
+                            "name": "ロゴデザイン"
+                        },
+                        {
+                            "id": 2,
+                            "name": "紙面デザイン（チラシ・名刺・メニュー等）～印刷"
+                        },
+                        {
+                            "id": 3,
+                            "name": "ウェブデザイン・ホームページ作成"
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "business": "イベント企画・イベントプロデュース",
+                    "sub_business": [
+                        {
+                            "id": 1,
+                            "name": "音響設備レンタル・音響スタッフ派遣"
+                        },
+                        {
+                            "id": 2,
+                            "name": "オリジナルグッズ作成・販売（Tシャツ・ユニフォ−ム等）"
+                        }
+                    ]
+                }
+            ]
+        },
+        "contact": [
+            {
+                "id": 1,
+                "contact_to": {
+                    "type": "URL",
+                    "body": "https://www.olldesign.jp"
+                }
+            },
+            {
+                "id": 2,
+                "contact_to": {
+                    "type": "E-mail",
+                    "body": "info@olldesign.jp"
+                }
+            }
+        ]
     }
 }

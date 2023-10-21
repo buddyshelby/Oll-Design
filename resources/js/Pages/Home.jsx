@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Head } from '@inertiajs/react';
 import Navbar from "@/Utils/Navbar/Navbar";
 import ImgGroupper from "@/Utils/ImageGroupper/ImgGroupper";
 import Gallery from "@/Pages/Gallery/Gallery";
@@ -40,11 +41,12 @@ const Home = () => {
         } else if (i18n.language === "en") {
             setIsLanguage(i18n.store.data.en.translation)
         } else {
-            setIsLanguage(i18n.store.data.jp.translation)
+            setIsLanguage(i18n.store.data.ch.translation)
         }
     });
     return (
         <>
+            <Head title="Oll Design" />
             <div className="container-fluid px-12">
                 <div className="row">
                     <div className="col-2 col-md-3">
@@ -52,7 +54,7 @@ const Home = () => {
                     </div>
                     <div className="col-10 col-md-9">
                         <div className="mt-16" />
-                        {isPageId === 0 ? (
+                        {/* {isPageId === 0 ? (
                             <>
                                 <ImgGroupper
                                     data={isLanguage.gallery_groups}
@@ -65,9 +67,9 @@ const Home = () => {
                             </>
                         ) : (
                             <GalleryDetail detailPages={onDetailPageId} />
-                        )}
+                        )} */}
 
-                        {/* <Company data={isLanguage.company} /> */}
+                        <Company data={isLanguage.company} />
                     </div>
                 </div>
             </div>
