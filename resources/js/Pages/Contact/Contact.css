@@ -1,0 +1,61 @@
+
+form {
+    margin-right: 10rem;
+    margin-left: 8rem;
+
+}
+.form-control {
+    width: 75%; 
+}
+.message-box {
+    border: 1px solid #000000; 
+    padding: 8px;
+    width: 75%;
+    border-radius: 0;
+}
+.btn {    
+    width: 15vw;
+    height: 8vh;
+    background-color: #003832;
+    color: white;
+    border-radius: 0;
+
+}
+.btn:hover {
+    color: black; 
+}
+@media screen and (max-width: 1115px) {
+    .form-control {
+        width: 100%;
+    }
+    .message-box {
+        width: 100%;
+    }
+    form {
+        margin-right: 8rem;
+        margin-left: 5rem;
+    
+    }
+}
+
+@media screen and (max-width: 920px) {
+    .form-control {
+        width: 100%;
+    }
+    .message-box {
+        width: 100%;
+    }
+    form {
+        margin-right: 5rem;
+        margin-left: 3rem;
+    }
+}
+@media (max-width: 500px) {
+    .form-control {
+        width: 100%;
+    }
+    .message-box {
+        width: 100%;
+    }
+}
+
