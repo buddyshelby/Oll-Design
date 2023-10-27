@@ -62,6 +62,36 @@ const Company = (props) => {
                     </div>
                 ))}
             </div>
+            <div className="row mt-4">
+                <div className="col-8">
+                    <div className={classes.maps}>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3279.0304836186056!2d135.3057121155833!3d34.729625989175524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000f2d06eae0a45%3A0xd5de03e561edccac!2z5pel5pysLCDjgJI2NTktMDA2NyDlhbXluqvnnIzoiqblsYvluILojLblsYvkuYvnlLrvvJHvvJHiiJLvvJHvvJE!5e0!3m2!1sja!2sus!4v1495449729213"
+                            frameborder="0"
+                            style={{ border: 0, minWidth: "100%", minHeight: "100%" }}
+                            allowfullscreen=""
+                            aria-hidden="false"
+                            tabindex="0"
+                        ></iframe>
+                    </div>
+                </div>
+                <div className="col-4">
+                    <div className={classes["small-gallery-company"]}>
+                        <div className={classes.images}>
+                            <img
+                                src="https://olldesign.jp/images/company/img3.gif"
+                                alt=""
+                            />
+                        </div>
+                        <div className={classes.images}>
+                            <img
+                                src="https://olldesign.jp/images/company/img4.gif"
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
