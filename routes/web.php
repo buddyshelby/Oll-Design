@@ -20,8 +20,16 @@ Route::get('/', function () {
     return Inertia::render('Home');
 });
 
-Route::get('/company', function () {
+Route::get('/company-introduction', function () {
     return Inertia::render('Company/Company');
+});
+
+Route::get('/business-introduction', function () {
+    return Inertia::render('Business/Business');
+});
+
+Route::get('/contact-us', function () {
+    return Inertia::render('Contact/Contact');
 });
 
 // Route::get('/admin', function () {

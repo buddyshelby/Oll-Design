@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Head } from "@inertiajs/react";
+
 import Navbar from "@/Utils/Navbar/Navbar";
 import ImgGroupper from "@/Utils/ImageGroupper/ImgGroupper";
+
 import Gallery from "@/Pages/Gallery/Gallery";
-import GalleryDetail from "./Gallery/Detail/GalleryDetail";
-import Company from "./Company/Company";
+import Company from "@/Pages/Company/Company";
+import Business from "@/Pages/Business/Business";
+import GalleryDetail from "@/Pages/Gallery/Detail/GalleryDetail";
+import ContactUs from "@/Pages/Contact/Contact";
+
 
 import { useTranslation } from "react-i18next";
 
@@ -13,9 +18,7 @@ const Home = () => {
     const { i18n } = useTranslation();
     const [filter, setFilter] = useState("#all");
     const [isPageId, setIsPageId] = useState(0);
-    const [isLanguage, setIsLanguage] = useState(
-        i18n.store.data.jp.translation
-    );
+    const [isLanguage, setIsLanguage] = useState(i18n.store.data.jp.translation);
 
     const getDetailId = (selected) => {
         setIsPageId(selected);
@@ -52,10 +55,9 @@ const Home = () => {
             <div className="container-fluid px-12">
                 <div className="row">
                     <div className="col-2 col-md-3">
-                        <Navbar />
+                        <Navbar language={isLanguage} />
                     </div>
-                    <div className="col-10 col-md-9">
-                        <div className="mt-16" />
+                    <div className="col-10 col-md-9 mt-16 mb-6">
                         <Routes>
                             <Route
                                 path="/"
@@ -79,9 +81,14 @@ const Home = () => {
                                 }
                             />
                             <Route
-                                path="/company"
+                                path="/company-introduction"
                                 element={<Company data={isLanguage.company} />}
                             />
+                            <Route
+                                path="/business-introduction"
+                                element={<Business />}
+                            />
+                            <Route path="/contact-us" element={<ContactUs />} />
                         </Routes>
                     </div>
                 </div>

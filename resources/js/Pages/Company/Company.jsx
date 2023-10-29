@@ -5,7 +5,7 @@ import classes from "./Company.module.css";
 const Company = (props) => {
     console.log(props.data);
     return (
-        <div className="container-fluid mb-6">
+        <div className="container-fluid">
             <div className="bg-white rounded-md p-4">
                 {props.data.profile.map((c) => (
                     <div className={classes.company} key={c.id}>

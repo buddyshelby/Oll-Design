@@ -19,13 +19,13 @@
             "id": 1,
             "title": "Company Introduction",
             "title_hover": "会社紹介",
-            "url": "/company"
+            "url": "/company-introduction"
         },
         {
             "id": 2,
             "title": "Business Introduction",
             "title_hover": "事業紹介",
-            "url": ""
+            "url": "/business-introduction"
         },
         {
             "id": 3,
@@ -37,7 +37,7 @@
             "id": 4,
             "title": "Contact Us",
             "title_hover": "問い合わせ",
-            "url": ""
+            "url": "/contact-us"
         }
     ],
     "gallery": [

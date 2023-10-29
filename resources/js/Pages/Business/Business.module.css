@@ -1,0 +1,77 @@
+.card-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.card-list .card-placement {
+    display: flex;
+    align-items: center;
+}
+
+.card-list .card-placement:nth-child(odd) {
+    justify-content: flex-start;
+}
+
+.card-list .card-placement:nth-child(even) {
+    justify-content: flex-end;
+}
+
+.card-list .card-placement .card-component {
+    width: 450px;
+    height: 270px;
+}
+
+.card-list .card-placement .card-component .card-sub-component {
+    position: relative;
+    background: white;
+    width: 100%;
+    height: 100%;
+    transition: transform .5s;
+    transform-style: preserve-3d;
+}
+
+.card-component:hover .card-sub-component {
+    transform: rotateY(180deg);
+}
+
+.card-component .card-sub-component .component-front,
+.card-component .card-sub-component .component-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 1.25rem;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.card-component .card-sub-component .component-front {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-component .card-sub-component .component-back {
+    transform: rotateY(180deg);
+}
+
+.card-list .card-placement .card-component .card-header {
+    /* Sementara */
+    font-size: 24px;
+    font-weight: bold;
+    width: 100%;
+    text-align: start;
+}
+
+.card-list .card-placement .card-component .card-section {
+    font-size: 40px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+}
+
+.card-list .card-placement .card-component .card-footer {
+    width: 100%;
+    text-align: end;
+}
