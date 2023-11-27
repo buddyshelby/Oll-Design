@@ -45,12 +45,16 @@ Route::get('/admin', function () {
     return Inertia::render('Dashboard'); // Passwords "olldesignadmin"
 })->middleware(['auth', 'verified'])->name('admin');
 
-
+Route::get('/imaging', function () {
+    return Inertia::render('Panel/Imaging/ImagingPanel');
+})->middleware(['auth', 'verified'])->name('imaging');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::resource('galleries', GalleriesController::class);
 
 require __DIR__.'/auth.php';
