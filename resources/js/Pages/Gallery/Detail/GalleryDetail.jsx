@@ -5,9 +5,10 @@ import { useTranslation, Trans } from "react-i18next";
 import classes from "./GalleryDetail.module.css";
 
 const GalleryDetail = (props) => {
+    const { i18n } = useTranslation();
     const detail = props.detailPages[0];
 
-    console.log(detail, 'detail');
+    const lang = i18n.language;
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -30,7 +31,7 @@ const GalleryDetail = (props) => {
                                     <p>-</p>
                                 </div>
                                 <div className={classes.content}>
-                                    <p>{detail.works_title}</p>
+                                    {/* <p>{detail.works_title}</p> */}
                                 </div>
                             </div>
                         </div>
@@ -47,7 +48,7 @@ const GalleryDetail = (props) => {
                                     <p>-</p>
                                 </div>
                                 <div className={classes.content}>
-                                    <p>{detail.works_content}</p>
+                                    {/* <p>{detail.works_content}</p> */}
                                 </div>
                             </div>
                         </div>
@@ -64,7 +65,7 @@ const GalleryDetail = (props) => {
                                     <p>-</p>
                                 </div>
                                 <div className={classes.content}>
-                                    <p>{detail.works_credit}</p>
+                                    {/* <p>{detail.works_credit}</p> */}
                                 </div>
                             </div>
                         </div>
@@ -81,20 +82,20 @@ const GalleryDetail = (props) => {
                                     <p>-</p>
                                 </div>
                                 <div className={classes.content}>
-                                    <p>{detail.works_client}</p>
+                                    {/* <p>{detail.works_client}</p> */}
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className={`${classes.desctription} mt-16`}>
-                        {detail.description}
+                        {lang === 'jp' ? detail.DescriptionJp : lang === 'en' ? detail.DescriptionEn : detail.DescriptionCh}
                     </div>
                 </div>
                 <div className="row">
                     <div className={`${classes["contents-images"]} mt-8`}>
-                        {detail.url.map((img, index) => (
+                        {detail.Img.map((img, index) => (
                             <div className={classes.images} key={index}>
-                                <img src={img} alt="" />
+                                <img src={`storage/` + img} alt="" />
                             </div>
                         ))}
                     </div>

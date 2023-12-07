@@ -25,3 +25,5 @@ Route::resource('galleries', GalleriesController::class);
 Route::get('/imagings', [ImagingController::class, 'index']);
 Route::post('/imagings', [ImagingController::class, 'store']);
 Route::delete('/imagings/{id}', [ImagingController::class, 'destroy']);
+
+Route::get('/galleryList', [ImagingController::class, 'index']);

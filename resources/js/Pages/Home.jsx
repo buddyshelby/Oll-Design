@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Head } from "@inertiajs/react";
+import axios from "axios";
 
 import Navbar from "@/Utils/Navbar/Navbar";
 import ImgGroupper from "@/Utils/ImageGroupper/ImgGroupper";
@@ -11,14 +12,29 @@ import Business from "@/Pages/Business/Business";
 import GalleryDetail from "@/Pages/Gallery/Detail/GalleryDetail";
 import ContactUs from "@/Pages/Contact/Contact";
 
-
 import { useTranslation } from "react-i18next";
 
 const Home = () => {
     const { i18n } = useTranslation();
+    const [isData, setIsData] = useState([]);
     const [filter, setFilter] = useState("#all");
     const [isPageId, setIsPageId] = useState(0);
-    const [isLanguage, setIsLanguage] = useState(i18n.store.data.jp.translation);
+    const [isLanguage, setIsLanguage] = useState(
+        i18n.store.data.jp.translation
+    );
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        try {
+            const res = await axios.get("http://localhost:8000/api/galleryList");
+            setIsData(res.data.galleryList);
+        } catch (e) {
+            console.error("Error fetching imagings:", e);
+        }
+    }
 
     const getDetailId = (selected) => {
         setIsPageId(selected);
@@ -28,15 +44,15 @@ const Home = () => {
         setFilter(selected);
     };
 
-    const filterImg = isLanguage.gallery.filter((imgFilter) => {
+    const filterImg = isData.filter((imgFilter) => {
         if (filter === "#all") {
-            return isLanguage.gallery;
+            return isData;
         } else {
             return imgFilter.navigate === filter;
         }
     });
 
-    const onDetailPageId = isLanguage.gallery.filter((pages) => {
+    const onDetailPageId = isData.filter((pages) => {
         return pages.id === parseInt(isPageId);
     });
 

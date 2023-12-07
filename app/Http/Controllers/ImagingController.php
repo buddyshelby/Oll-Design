@@ -13,7 +13,6 @@ class ImagingController extends Controller
 {
     public function index()
     {
-        // $imaging = Imaging::all();
         $imagings = DB::table('imagings')
             ->leftJoin('galleries', 'galleries.id', '=', 'imagings.GalleriesID')
             ->select('imagings.*', 'galleries.Name')
@@ -25,7 +24,23 @@ class ImagingController extends Controller
             return $item;
         });
 
-        return response()->json($imagings);
+        $getListGallery = DB::Table('imagings')
+            ->leftJoin('galleries', 'galleries.id', '=', 'imagings.GalleriesID')
+            ->select('galleries.*', 'imagings.Img')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $getListGallery = $getListGallery->map(function ($item) {
+            $item->Img = json_decode($item->Img, true);
+            return $item;
+        });
+
+        $responseData = [
+            'imagings' => $imagings,
+            'galleryList' => $getListGallery
+        ];
+        
+        return response()->json($responseData);
     }
 
     public function store(Request $request)

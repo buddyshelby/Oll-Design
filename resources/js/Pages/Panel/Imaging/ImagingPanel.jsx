@@ -23,13 +23,11 @@ export default function ImagingPanel(props) {
             const response = await axios.get(
                 "http://localhost:8000/api/imagings"
             );
-            setImagings(response.data);
+            setImagings(response.data.imagings);
         } catch (error) {
             console.error("Error fetching imagings:", error);
         }
     };
-
-    console.log(imagings, "imagings");
 
     const fetchGalleries = async () => {
         try {
