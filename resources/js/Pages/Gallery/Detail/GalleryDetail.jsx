@@ -31,7 +31,7 @@ const GalleryDetail = (props) => {
                                     <p>-</p>
                                 </div>
                                 <div className={classes.content}>
-                                    {/* <p>{detail.works_title}</p> */}
+                                    <p>{detail.WorksTitle}</p>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@ const GalleryDetail = (props) => {
                                     <p>-</p>
                                 </div>
                                 <div className={classes.content}>
-                                    {/* <p>{detail.works_content}</p> */}
+                                    <p>{detail.WorksContent}</p>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@ const GalleryDetail = (props) => {
                                     <p>-</p>
                                 </div>
                                 <div className={classes.content}>
-                                    {/* <p>{detail.works_credit}</p> */}
+                                    <p>{detail.WorksCredit}</p>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@ const GalleryDetail = (props) => {
                                     <p>-</p>
                                 </div>
                                 <div className={classes.content}>
-                                    {/* <p>{detail.works_client}</p> */}
+                                    <p>{detail.WorksClient}</p>
                                 </div>
                             </div>
                         </div>

@@ -16,6 +16,10 @@ class Galleries extends Model
         'DescriptionJp',
         'DescriptionEn',
         'DescriptionCh',
-        'UpdateByUser'
+        'UpdateByUser',
+        'WorksTitle',
+        'WorksContent',
+        'WorksCredit',
+        'WorksClient'
     ];
 }

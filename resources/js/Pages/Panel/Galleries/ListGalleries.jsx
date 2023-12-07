@@ -149,7 +149,19 @@ export default function ListGalleries() {
                             <th scope="col" class="px-6 py-3">
                                 Description Design (Chinese)
                             </th>
-                            <th scope="col" class="px-6 py-3 w-[200px]">
+                            <th scope="col" class="px-6 py-3">
+                                Works Title
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Works Content
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Works Credit
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Works Client
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 <span class="sr-only">Edit</span>
                             </th>
                         </tr>
@@ -183,7 +195,27 @@ export default function ListGalleries() {
                                             {row.DescriptionCh}
                                         </p>
                                     </td>
-                                    <td class="px-6 py-4 text-right">
+                                    <td class="px-6 py-4">
+                                        <p className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
+                                            {row.WorksTitle}
+                                        </p>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <p className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
+                                            {row.WorksContent}
+                                        </p>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <p className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
+                                            {row.WorksCredit}
+                                        </p>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <p className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
+                                            {row.WorksClient}
+                                        </p>
+                                    </td>
+                                    <td class="px-6 py-4 text-right flex">
                                         <button
                                             type="button"
                                             className="font-medium text-blue-600 hover:underline mr-2"
@@ -329,6 +361,70 @@ export default function ListGalleries() {
                                 rows="4"
                                 class="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             ></textarea>
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                Works Title :
+                            </label>
+                            <input
+                                type="text"
+                                className="w-full p-2 border rounded"
+                                value={updatedData.WorksTitle}
+                                onChange={(e) =>
+                                    setUpdatedData({
+                                        ...updatedData,
+                                        WorksTitle: e.target.value,
+                                    })
+                                }
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                Works Content :
+                            </label>
+                            <input
+                                type="text"
+                                className="w-full p-2 border rounded"
+                                value={updatedData.WorksContent}
+                                onChange={(e) =>
+                                    setUpdatedData({
+                                        ...updatedData,
+                                        WorksContent: e.target.value,
+                                    })
+                                }
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                Works Credit :
+                            </label>
+                            <input
+                                type="text"
+                                className="w-full p-2 border rounded"
+                                value={updatedData.WorksCredit}
+                                onChange={(e) =>
+                                    setUpdatedData({
+                                        ...updatedData,
+                                        WorksCredit: e.target.value,
+                                    })
+                                }
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                Works Client :
+                            </label>
+                            <input
+                                type="text"
+                                className="w-full p-2 border rounded"
+                                value={updatedData.WorksClient}
+                                onChange={(e) =>
+                                    setUpdatedData({
+                                        ...updatedData,
+                                        WorksClient: e.target.value,
+                                    })
+                                }
+                            />
                         </div>
                         <div className="flex justify-end">
                             <button
