@@ -20,8 +20,12 @@ class GalleriesController extends Controller
             'Date',
             'DescriptionEn',
             'DescriptionJp',
-            'DescriptionCh'
-        )->orderBy('Date', 'desc')->get(); //->paginate(5);
+            'DescriptionCh',
+            'WorksTitle',
+            'WorksContent',
+            'WorksCredit',
+            'WorksClient'
+        )->orderBy('Date', 'desc')->get();
 
         return response()->json($galleries);
     }
@@ -45,12 +49,16 @@ class GalleriesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Name' => 'required|string|max:255',
+            'Name' => 'required|string',
             'Date' => 'required|date',
             'DescriptionJp' => 'required|string',
             'DescriptionEn' => 'required|string',
             'DescriptionCh' => 'required|string',
             'UpdateByUser' => 'string',
+            'WorksTitle' => 'required|string',
+            'WorksContent' => 'required|string',
+            'WorksCredit' => 'required|string',
+            'WorksClient' => 'required|string'
         ]);
 
         try {
@@ -61,6 +69,10 @@ class GalleriesController extends Controller
                 'DescriptionEn' => $request->input('DescriptionEn'),
                 'DescriptionCh' => $request->input('DescriptionCh'),
                 'UpdateByUser' => $request->input('UpdateByUser'),
+                'WorksTitle' => $request->input('WorksTitle'),
+                'WorksContent' => $request->input('WorksContent'),
+                'WorksCredit' => $request->input('WorksCredit'),
+                'WorksClient' => $request->input('WorksClient'),
             ]);
 
             return response()->json([
@@ -120,12 +132,16 @@ class GalleriesController extends Controller
             }
 
             $request->validate([
-                'Name' => 'required|string|max:255',
+                'Name' => 'required|string',
                 'Date' => 'required|date',
                 'DescriptionJp' => 'required|string',
                 'DescriptionEn' => 'required|string',
                 'DescriptionCh' => 'required|string',
                 'UpdateByUser' => 'string',
+                'WorksTitle' => 'required|string',
+                'WorksContent' => 'required|string',
+                'WorksCredit' => 'required|string',
+                'WorksClient' => 'required|string'
             ]);
 
             $gallery->update([
@@ -135,6 +151,10 @@ class GalleriesController extends Controller
                 'DescriptionEn' => $request->input('DescriptionEn'),
                 'DescriptionCh' => $request->input('DescriptionCh'),
                 'UpdateByUser' => $request->input('UpdateByUser'),
+                'WorksTitle' => $request->input('WorksTitle'),
+                'WorksContent' => $request->input('WorksContent'),
+                'WorksCredit' => $request->input('WorksCredit'),
+                'WorksClient' => $request->input('WorksClient'),
             ]);
 
             return response()->json([

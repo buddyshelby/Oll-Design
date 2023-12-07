@@ -11,6 +11,10 @@ export default function CreateGalleries() {
     const [descriptionEn, setDescriptionEn] = useState("");
     const [descriptionCh, setDescriptionCh] = useState("");
     const [updateByUser, setUpdateByUser] = useState("admin");
+    const [workstitle, setWotksTitle] = useState("");
+    const [workscontent, setWorksContent] = useState("");
+    const [workscredit, setWorksCredit] = useState("");
+    const [worksclient, setWorksClient] = useState("");
     const [validationError, setValidationError] = useState({});
 
     const createGallery = async (e) => {
@@ -24,6 +28,10 @@ export default function CreateGalleries() {
         formData.append("DescriptionEn", descriptionEn);
         formData.append("DescriptionCh", descriptionCh);
         formData.append("UpdateByUser", updateByUser);
+        formData.append("WorksTitle", workstitle);
+        formData.append("WorksContent", workscontent);
+        formData.append("WorksCredit", workscredit);
+        formData.append("WorksClient", worksclient);
 
         try {
             const response = await axios.post(
@@ -144,6 +152,58 @@ export default function CreateGalleries() {
                         class="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                         placeholder="Write your descript here..."
                     ></textarea>
+                </div>
+                <div className="m-4">
+                    <InputLabel>Works Title :</InputLabel>
+                    <input
+                        type="text"
+                        className="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-100"
+                        name="workstitle"
+                        id="workstitle"
+                        value={workstitle}
+                        onChange={(e) => {
+                            setWotksTitle(e.target.value);
+                        }}
+                    />
+                </div>
+                <div className="m-4">
+                    <InputLabel>Works Content :</InputLabel>
+                    <input
+                        type="text"
+                        className="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-100"
+                        name="workscontent"
+                        id="workscontent"
+                        value={workscontent}
+                        onChange={(e) => {
+                            setWorksContent(e.target.value);
+                        }}
+                    />
+                </div>
+                <div className="m-4">
+                    <InputLabel>Works Credit :</InputLabel>
+                    <input
+                        type="text"
+                        className="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-100"
+                        name="workscredit"
+                        id="workscredit"
+                        value={workscredit}
+                        onChange={(e) => {
+                            setWorksCredit(e.target.value);
+                        }}
+                    />
+                </div>
+                <div className="m-4">
+                    <InputLabel>Works Client :</InputLabel>
+                    <input
+                        type="text"
+                        className="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-100"
+                        name="worksclient"
+                        id="worksclient"
+                        value={worksclient}
+                        onChange={(e) => {
+                            setWorksClient(e.target.value);
+                        }}
+                    />
                 </div>
                 <div className="m-4">
                     <button
