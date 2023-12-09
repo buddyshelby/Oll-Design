@@ -1,21 +1,14 @@
 .card-list {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 1.5rem;
 }
 
 .card-list .card-placement {
     display: flex;
     align-items: center;
-}
-
-.card-list .card-placement:nth-child(odd) {
-    justify-content: flex-start;
-}
-
-.card-list .card-placement:nth-child(even) {
-    justify-content: flex-end;
 }
 
 .card-list .card-placement .card-component {
@@ -28,8 +21,9 @@
     background: white;
     width: 100%;
     height: 100%;
-    transition: transform .5s;
+    transition: transform 0.5s;
     transform-style: preserve-3d;
+    border-radius: 16px;
 }
 
 .card-component:hover .card-sub-component {
@@ -48,30 +42,21 @@
 
 .card-component .card-sub-component .component-front {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .card-component .card-sub-component .component-back {
     transform: rotateY(180deg);
-}
-
-.card-list .card-placement .card-component .card-header {
-    /* Sementara */
-    font-size: 24px;
-    font-weight: bold;
-    width: 100%;
-    text-align: start;
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 500;
 }
 
 .card-list .card-placement .card-component .card-section {
     font-size: 40px;
     font-weight: bold;
-    width: 100%;
-    text-align: center;
-}
-
-.card-list .card-placement .card-component .card-footer {
-    width: 100%;
-    text-align: end;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }

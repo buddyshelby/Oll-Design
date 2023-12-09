@@ -1,40 +1,43 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Head } from "@inertiajs/react";
+import { Routes, Route } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 
-import Navbar from "@/Utils/Navbar/Navbar";
 import ImgGroupper from "@/Utils/ImageGroupper/ImgGroupper";
+import MediaQuery from "@/Components/MediaQuery";
+import Page from "./Page";
 
 import Gallery from "@/Pages/Gallery/Gallery";
-import Company from "@/Pages/Company/Company";
-import Business from "@/Pages/Business/Business";
 import GalleryDetail from "@/Pages/Gallery/Detail/GalleryDetail";
-import ContactUs from "@/Pages/Contact/Contact";
-
-import { useTranslation } from "react-i18next";
 
 const Home = () => {
     const { i18n } = useTranslation();
     const [isData, setIsData] = useState([]);
     const [filter, setFilter] = useState("#all");
     const [isPageId, setIsPageId] = useState(0);
-    const [isLanguage, setIsLanguage] = useState(
-        i18n.store.data.jp.translation
-    );
+    const [isLanguage, setIsLanguage] = useState(i18n.store.data.jp.translation);
 
     useEffect(() => {
         fetchData();
-    }, []);
+        if (i18n.language === "jp") {
+            setIsLanguage(i18n.store.data.jp.translation);
+        } else if (i18n.language === "en") {
+            setIsLanguage(i18n.store.data.en.translation);
+        } else {
+            setIsLanguage(i18n.store.data.ch.translation);
+        }
+    }, [i18n.language]);
 
     const fetchData = async () => {
         try {
-            const res = await axios.get("http://localhost:8000/api/galleryList");
+            const res = await axios.get(
+                "http://localhost:8000/api/galleryList"
+            );
             setIsData(res.data.galleryList);
         } catch (e) {
             console.error("Error fetching imagings:", e);
         }
-    }
+    };
 
     const getDetailId = (selected) => {
         setIsPageId(selected);
@@ -56,24 +59,13 @@ const Home = () => {
         return pages.id === parseInt(isPageId);
     });
 
-    useEffect(() => {
-        if (i18n.language === "jp") {
-            setIsLanguage(i18n.store.data.jp.translation);
-        } else if (i18n.language === "en") {
-            setIsLanguage(i18n.store.data.en.translation);
-        } else {
-            setIsLanguage(i18n.store.data.ch.translation);
-        }
-    });
     return (
-        <Router>
-            <Head title="Oll Design" />
-            <div className="container-fluid px-12">
-                <div className="row">
-                    <div className="col-2 col-md-3">
-                        <Navbar language={isLanguage} />
-                    </div>
-                    <div className="col-10 col-md-9 mt-16 mb-6">
+        <MediaQuery query="(max-width: 768px)">
+            {({ matches }) => (
+                <Page>
+                    {matches ? (
+                        <p>Mobile view.</p>
+                    ) : (
                         <Routes>
                             <Route
                                 path="/"
@@ -96,20 +88,11 @@ const Home = () => {
                                     )
                                 }
                             />
-                            <Route
-                                path="/company-introduction"
-                                element={<Company data={isLanguage.company} />}
-                            />
-                            <Route
-                                path="/business-introduction"
-                                element={<Business />}
-                            />
-                            <Route path="/contact-us" element={<ContactUs />} />
                         </Routes>
-                    </div>
-                </div>
-            </div>
-        </Router>
+                    )}
+                </Page>
+            )}
+        </MediaQuery>
     );
 };
 
