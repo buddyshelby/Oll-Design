@@ -3,6 +3,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import ReactPaginate from "react-paginate";
 
+const ITEMS_PER_PAGE = 1;
+
 export default function ListGalleries() {
     const [list, setList] = useState([]);
     const [isTags, setIsTag] = useState([]);
@@ -20,11 +22,12 @@ export default function ListGalleries() {
         WorksClient: "",
         TagsID: "",
     });
+    const [currentPage, setCurrentPage] = useState(0);
 
     useEffect(() => {
         fetchGalleries();
         fetchTags();
-    }, []);
+    }, [currentPage]);
 
     const fetchGalleries = async () => {
         try {
@@ -146,6 +149,12 @@ export default function ListGalleries() {
         }
     };
 
+    // Add pagination logic to map only the items for the current page
+    const displayedList = list.slice(
+        currentPage * ITEMS_PER_PAGE,
+        (currentPage + 1) * ITEMS_PER_PAGE
+    );
+
     return (
         <div className="bg-white overflow-hidden shadow-sm rounded p-4">
             <h2 className="font-semibold text-xl text-gray-800 leading-tight mb-4">
@@ -193,7 +202,7 @@ export default function ListGalleries() {
                     </thead>
                     <tbody>
                         {list && list.length > 0 ? (
-                            list.map((row) => (
+                            displayedList.map((row) => (
                                 <tr
                                     className="odd:bg-white even:bg-gray-50 border-b"
                                     key={row.id}
@@ -277,6 +286,21 @@ export default function ListGalleries() {
                     </tbody>
                 </table>
             </div>
+
+            {/* Pagination */}
+            <ReactPaginate
+                previousLabel={"< Previous"}
+                nextLabel={"Next >"}
+                breakLabel={"..."}
+                breakClassName={"break-me"}
+                pageCount={Math.ceil(list.length / ITEMS_PER_PAGE)}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={(data) => setCurrentPage(data.selected)}
+                containerClassName={"pagination"}
+                subContainerClassName={"pages pagination"}
+                activeClassName={"active"}
+            />
 
             {/* Update Modal */}
             {isModalOpen && (
