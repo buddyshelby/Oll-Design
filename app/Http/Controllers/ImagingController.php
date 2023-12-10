@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
-
 class ImagingController extends Controller
 {
     public function index()
@@ -26,7 +25,8 @@ class ImagingController extends Controller
 
         $getListGallery = DB::Table('imagings')
             ->leftJoin('galleries', 'galleries.id', '=', 'imagings.GalleriesID')
-            ->select('galleries.*', 'imagings.Img')
+            ->leftJoin('tags', 'tags.id', '=', 'galleries.TagsID')
+            ->select('galleries.*', 'imagings.Img', 'tags.ShortTags')
             ->orderBy('created_at', 'desc')
             ->get();
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Galleries;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GalleriesController extends Controller
 {
@@ -14,20 +15,20 @@ class GalleriesController extends Controller
      */
     public function index()
     {
-        $galleries = Galleries::select(
-            'id',
-            'Name',
-            'Date',
-            'DescriptionEn',
-            'DescriptionJp',
-            'DescriptionCh',
-            'WorksTitle',
-            'WorksContent',
-            'WorksCredit',
-            'WorksClient'
-        )->orderBy('Date', 'desc')->get();
+        $galleries = DB::table('galleries')
+            ->leftJoin('tags', 'tags.id', '=', 'galleries.TagsID')
+            ->select('galleries.id', 'galleries.Name', 'galleries.Date', 'galleries.DescriptionEn', 'galleries.DescriptionJp', 'galleries.DescriptionCh', 'galleries.WorksTitle', 'galleries.WorksContent', 'galleries.WorksCredit', 'galleries.WorksClient', 'galleries.TagsID', 'tags.ShortTags')
+            ->orderBy('Date', 'desc')
+            ->get();
 
-        return response()->json($galleries);
+        $tags = DB::table('tags')->select('tags.*')->orderBy('created_at', 'desc')->get();
+
+        $res = [
+            'galleries' => $galleries,
+            'tags' => $tags
+        ];
+
+        return response()->json($res);
     }
 
     /**
@@ -58,7 +59,8 @@ class GalleriesController extends Controller
             'WorksTitle' => 'required|string',
             'WorksContent' => 'required|string',
             'WorksCredit' => 'required|string',
-            'WorksClient' => 'required|string'
+            'WorksClient' => 'required|string',
+            'TagsID' => 'required|string',
         ]);
 
         try {
@@ -73,6 +75,7 @@ class GalleriesController extends Controller
                 'WorksContent' => $request->input('WorksContent'),
                 'WorksCredit' => $request->input('WorksCredit'),
                 'WorksClient' => $request->input('WorksClient'),
+                'TagsID' => $request->input('TagsID'),
             ]);
 
             return response()->json([
@@ -141,7 +144,8 @@ class GalleriesController extends Controller
                 'WorksTitle' => 'required|string',
                 'WorksContent' => 'required|string',
                 'WorksCredit' => 'required|string',
-                'WorksClient' => 'required|string'
+                'WorksClient' => 'required|string',
+                'TagsID' => 'required|string',
             ]);
 
             $gallery->update([
@@ -155,6 +159,7 @@ class GalleriesController extends Controller
                 'WorksContent' => $request->input('WorksContent'),
                 'WorksCredit' => $request->input('WorksCredit'),
                 'WorksClient' => $request->input('WorksClient'),
+                'TagsID' => $request->input('TagsID'),
             ]);
 
             return response()->json([
@@ -189,12 +194,12 @@ class GalleriesController extends Controller
             $gallery->delete();
 
             return response()->json([
-                'message' => 'Product Deleted Successfully!!'
+                'message' => 'Gallery Deleted Successfully!!'
             ]);
         } catch (\Exception $e) {
             \Log::error($e->getMessage());
             return response()->json([
-                'message' => 'Something goes wrong while deleting a product!!'
+                'message' => 'Something goes wrong while deleting a gallery!!'
             ]);
         }
     }

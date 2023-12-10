@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import axios from "axios";
@@ -11,19 +11,8 @@ const Gallery = (props) => {
     const [isData, setIsData] = useState([]);
 
     useEffect(() => {
-        fetchData();
-    }, []);
-
-    const fetchData = async () => {
-        try {
-            const res = await axios.get(
-                "http://localhost:8000/api/galleryList"
-            );
-            setIsData(res.data.galleryList);
-        } catch (e) {
-            console.error("Error fetching imagings:", e);
-        }
-    };
+        setIsData(props.imgData);
+    }, [props.imgData]);
 
     const onGetPageIdHandler = (e) => {
         props.onGetDetailId(e.currentTarget.id);

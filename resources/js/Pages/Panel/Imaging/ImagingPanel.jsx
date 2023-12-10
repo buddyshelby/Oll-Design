@@ -64,6 +64,9 @@ export default function ImagingPanel(props) {
                 Swal.fire({
                     icon: "success",
                     text: "Imaging created successfully!",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
                 });
                 fetchImagings();
                 // Reset form fields
@@ -103,6 +106,9 @@ export default function ImagingPanel(props) {
             Swal.fire({
                 icon: "success",
                 text: "Imaging deleted successfully!",
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
             });
             fetchImagings();
         } catch (error) {
@@ -170,7 +176,7 @@ export default function ImagingPanel(props) {
                             </div>
                             <div className="m-4">
                                 <button
-                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                                     type="submit"
                                 >
                                     Save
@@ -178,16 +184,16 @@ export default function ImagingPanel(props) {
                             </div>
                         </form>
                         <table className="w-full shadow-sm text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" className="px-6 py-3">
                                         Design Name
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" className="px-6 py-3">
                                         Images
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        <span class="sr-only">Edit</span>
+                                    <th scope="col" className="px-6 py-3">
+                                        <span className="sr-only">Edit</span>
                                     </th>
                                 </tr>
                             </thead>
@@ -195,16 +201,16 @@ export default function ImagingPanel(props) {
                                 {imagings && imagings.length > 0 ? (
                                     imagings.map((row) => (
                                         <tr
-                                            class="odd:bg-white even:bg-gray-50 border-b"
+                                            className="odd:bg-white even:bg-gray-50 border-b"
                                             key={row.id}
                                         >
                                             <th
                                                 scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                                                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                                             >
                                                 {row.Name}
                                             </th>
-                                            <td class="flex justify-start align-items-center gap-2 px-6 py-4">
+                                            <td className="flex justify-start align-items-center gap-2 px-6 py-4">
                                                 {row.Img.map((img) => (
                                                     <img
                                                         src={`storage/${img}`}
@@ -213,10 +219,10 @@ export default function ImagingPanel(props) {
                                                     />
                                                 ))}
                                             </td>
-                                            <td class="px-6 py-4 text-right">
+                                            <td className="px-6 py-4 text-right">
                                                 <button
                                                     type="button"
-                                                    class="font-medium text-blue-600 hover:underline"
+                                                    className="font-medium text-blue-600 hover:underline"
                                                     onClick={() =>
                                                         deleteImaging(
                                                             row.id
@@ -240,28 +246,6 @@ export default function ImagingPanel(props) {
                                 )}
                             </tbody>
                         </table>
-                        {/* <ul>
-                            {imagings.map((imaging) => (
-                                <li key={imaging.id} className="flex">
-                                    {imaging.Img.map((img) => (
-                                        <img
-                                            src={`storage/${img}`}
-                                            alt={img}
-                                            className="w-[250px]"
-                                        />
-                                    ))}{" "}
-                                    <button
-                                        type="button"
-                                        class="font-medium text-blue-600 hover:underline"
-                                        onClick={() =>
-                                            deleteImaging(imaging.id)
-                                        }
-                                    >
-                                        Delete
-                                    </button>
-                                </li>
-                            ))}
-                        </ul> */}
                     </div>
                 </div>
             </div>

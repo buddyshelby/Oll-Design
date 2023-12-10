@@ -27,7 +27,7 @@ const Page = ({ children }) => {
                     <>
                         <Head title="Oll Design" />
                         {matches ? (
-                            <p>Mobile view</p>
+                            <>{children}</>
                         ) : (
                             <div className="container-fluid px-12">
                                 <div className="row">

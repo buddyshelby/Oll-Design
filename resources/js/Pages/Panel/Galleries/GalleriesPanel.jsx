@@ -18,7 +18,7 @@ const GalleriesPanel = () => {
                 <textarea
                     id="message"
                     rows="4"
-                    class="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                    className="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                     placeholder="Write your descript here..."
                 ></textarea>
             </div>
@@ -27,7 +27,7 @@ const GalleriesPanel = () => {
                 <textarea
                     id="message"
                     rows="4"
-                    class="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                    className="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                     placeholder="Write your descript here..."
                 ></textarea>
             </div>
@@ -36,7 +36,7 @@ const GalleriesPanel = () => {
                 <textarea
                     id="message"
                     rows="4"
-                    class="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                    className="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                     placeholder="Write your descript here..."
                 ></textarea>
             </div>

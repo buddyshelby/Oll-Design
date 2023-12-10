@@ -1,21 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 import InputLabel from "@/Components/InputLabel";
 
 export default function CreateGalleries() {
+    const [isTag, setIsTag] = useState([]);
     const [name, setName] = useState("");
     const [date, setDate] = useState("");
     const [descriptionJp, setDescriptionJp] = useState("");
     const [descriptionEn, setDescriptionEn] = useState("");
     const [descriptionCh, setDescriptionCh] = useState("");
+    const [isSelectedTag, setIsSelectedTag] = useState("");
     const [updateByUser, setUpdateByUser] = useState("admin");
     const [workstitle, setWotksTitle] = useState("");
     const [workscontent, setWorksContent] = useState("");
     const [workscredit, setWorksCredit] = useState("");
     const [worksclient, setWorksClient] = useState("");
     const [validationError, setValidationError] = useState({});
+
+    useEffect(() => {
+        fetchTags();
+    }, []);
+
+    const fetchTags = async () => {
+        try {
+            const res = await axios.get("http://localhost:8000/api/galleries");
+            setIsTag(res.data.tags);
+        } catch (e) {
+            console.error("Error fetching tags:", error);
+        }
+    };
+
+    const onChangeSelectedTags = (e) => {
+        setIsSelectedTag(e.target.value);
+    };
 
     const createGallery = async (e) => {
         e.preventDefault();
@@ -32,6 +51,7 @@ export default function CreateGalleries() {
         formData.append("WorksContent", workscontent);
         formData.append("WorksCredit", workscredit);
         formData.append("WorksClient", worksclient);
+        formData.append("TagsID", isSelectedTag);
 
         try {
             const response = await axios.post(
@@ -42,13 +62,13 @@ export default function CreateGalleries() {
             Swal.fire({
                 icon: "success",
                 text: response.data.message,
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
             });
-            
             setTimeout(() => {
                 window.location.reload();
             }, 2000);
-
-            // Lakukan sesuatu setelah berhasil, misalnya mengosongkan form atau navigasi ke halaman lain
         } catch (error) {
             if (error.response && error.response.status === 422) {
                 setValidationError(error.response.data.errors);
@@ -80,11 +100,7 @@ export default function CreateGalleries() {
                     </div>
                 </div>
             )}
-            <form
-                action=""
-                method="post"
-                onSubmit={createGallery}
-            >
+            <form action="" method="post" onSubmit={createGallery}>
                 <div className="m-4">
                     <InputLabel>Design Name :</InputLabel>
                     <input
@@ -121,7 +137,7 @@ export default function CreateGalleries() {
                             setDescriptionJp(e.target.value);
                         }}
                         rows="4"
-                        class="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                        className="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                         placeholder="Write your descript here..."
                     ></textarea>
                 </div>
@@ -135,7 +151,7 @@ export default function CreateGalleries() {
                             setDescriptionEn(e.target.value);
                         }}
                         rows="4"
-                        class="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                        className="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                         placeholder="Write your descript here..."
                     ></textarea>
                 </div>
@@ -149,9 +165,26 @@ export default function CreateGalleries() {
                             setDescriptionCh(e.target.value);
                         }}
                         rows="4"
-                        class="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                        className="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                         placeholder="Write your descript here..."
                     ></textarea>
+                </div>
+                <div className="m-4">
+                    <InputLabel>Select Tag:</InputLabel>
+                    <select
+                        value={isSelectedTag}
+                        onChange={onChangeSelectedTags}
+                        className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    >
+                        <option value="" disabled>
+                            Select Tags
+                        </option>
+                        {isTag.map((tg) => (
+                            <option key={tg.id} value={tg.id}>
+                                {tg.ShortTags}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className="m-4">
                     <InputLabel>Works Title :</InputLabel>
@@ -207,7 +240,7 @@ export default function CreateGalleries() {
                 </div>
                 <div className="m-4">
                     <button
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                         type="submit"
                     >
                         Save
