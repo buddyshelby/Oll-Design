@@ -21,24 +21,19 @@ export default function ListGalleries() {
         TagsID: "",
     });
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const [lastPage, setLastPage] = useState(1);
-
     useEffect(() => {
-        fetchGalleries(currentPage);
+        fetchGalleries();
         fetchTags();
-    }, [currentPage]);
+    }, []);
 
     const fetchGalleries = async () => {
         try {
             const response = await axios.get(
-                `http://localhost:8000/api/galleries?page=${currentPage}`
+                `http://localhost:8000/api/galleries`
             );
             const data = response;
 
             setList(data.data.galleries);
-            setCurrentPage(data.current_page);
-            setLastPage(data.last_page);
         } catch (error) {
             console.error("Error fetching galleries:", error);
         }
@@ -151,10 +146,6 @@ export default function ListGalleries() {
         }
     };
 
-    const handlePageChange = (selected) => {
-        setCurrentPage(selected.selected + 1);
-    };
-
     return (
         <div className="bg-white overflow-hidden shadow-sm rounded p-4">
             <h2 className="font-semibold text-xl text-gray-800 leading-tight mb-4">
@@ -162,41 +153,41 @@ export default function ListGalleries() {
             </h2>
 
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full shadow-sm text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <table className="w-full shadow-sm text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" className="px-6 py-3">
                                 Design Name
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" className="px-6 py-3">
                                 Date
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" className="px-6 py-3">
                                 Description Design (Japanese)
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" className="px-6 py-3">
                                 Description Design (English)
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" className="px-6 py-3">
                                 Description Design (Chinese)
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" className="px-6 py-3">
                                 Tags
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" className="px-6 py-3">
                                 Works Title
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" className="px-6 py-3">
                                 Works Content
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" className="px-6 py-3">
                                 Works Credit
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" className="px-6 py-3">
                                 Works Client
                             </th>
-                            <th scope="col" class="px-6 py-3">
-                                <span class="sr-only">Edit</span>
+                            <th scope="col" className="px-6 py-3">
+                                <span className="sr-only">Edit</span>
                             </th>
                         </tr>
                     </thead>
@@ -204,57 +195,57 @@ export default function ListGalleries() {
                         {list && list.length > 0 ? (
                             list.map((row) => (
                                 <tr
-                                    class="odd:bg-white even:bg-gray-50 border-b"
+                                    className="odd:bg-white even:bg-gray-50 border-b"
                                     key={row.id}
                                 >
                                     <th
                                         scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                                     >
                                         {row.Name}
                                     </th>
-                                    <td class="px-6 py-4">{row.Date}</td>
-                                    <td class="px-6 py-4">
+                                    <td className="px-6 py-4">{row.Date}</td>
+                                    <td className="px-6 py-4">
                                         <p className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
                                             {row.DescriptionJp}
                                         </p>
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td className="px-6 py-4">
                                         <p className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
                                             {row.DescriptionEn}
                                         </p>
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td className="px-6 py-4">
                                         <p className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
                                             {row.DescriptionCh}
                                         </p>
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td className="px-6 py-4">
                                         <p className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
                                             {row.ShortTags}
                                         </p>
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td className="px-6 py-4">
                                         <p className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
                                             {row.WorksTitle}
                                         </p>
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td className="px-6 py-4">
                                         <p className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
                                             {row.WorksContent}
                                         </p>
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td className="px-6 py-4">
                                         <p className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
                                             {row.WorksCredit}
                                         </p>
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td className="px-6 py-4">
                                         <p className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
                                             {row.WorksClient}
                                         </p>
                                     </td>
-                                    <td class="px-6 py-4 text-right flex">
+                                    <td className="px-6 py-4 text-right flex">
                                         <button
                                             type="button"
                                             className="font-medium text-blue-600 hover:underline mr-2"
@@ -266,7 +257,7 @@ export default function ListGalleries() {
                                         </button>
                                         <button
                                             type="button"
-                                            class="font-medium text-blue-600 hover:underline"
+                                            className="font-medium text-blue-600 hover:underline"
                                             onClick={() =>
                                                 deleteGalleriesHandler(row.id)
                                             }
@@ -285,33 +276,6 @@ export default function ListGalleries() {
                         )}
                     </tbody>
                 </table>
-            </div>
-
-            {/* Pagination */}
-            <div className="mt-4 flex justify-end">
-                <ReactPaginate
-                    previousLabel={"< Previous"}
-                    nextLabel={"Next >"}
-                    breakLabel={"..."}
-                    pageCount={lastPage}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={handlePageChange}
-                    containerClassName={"pagination gap-1"}
-                    activeClassName={"bg-dark text-black p-2 rounded"}
-                    pageClassName={
-                        "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                    }
-                    breakClassName={
-                        "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                    }
-                    previousClassName={
-                        "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                    }
-                    nextClassName={
-                        "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                    }
-                />
             </div>
 
             {/* Update Modal */}
@@ -366,7 +330,7 @@ export default function ListGalleries() {
                                     })
                                 }
                                 rows="4"
-                                class="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                className="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             ></textarea>
                         </div>
                         <div className="mb-4">
@@ -382,7 +346,7 @@ export default function ListGalleries() {
                                     })
                                 }
                                 rows="4"
-                                class="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                className="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             ></textarea>
                         </div>
                         <div className="mb-4">
@@ -398,7 +362,7 @@ export default function ListGalleries() {
                                     })
                                 }
                                 rows="4"
-                                class="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                className="block p-2.5 w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             ></textarea>
                         </div>
                         <div className="mb-4">

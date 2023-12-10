@@ -146,7 +146,7 @@ export default function ListTags(props) {
                             {!isCollapse ? (
                                 <button
                                     type="button"
-                                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                                    className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                                     onClick={toggleCollapse}
                                 >
                                     <strong>x</strong> Cancel
@@ -154,7 +154,7 @@ export default function ListTags(props) {
                             ) : (
                                 <button
                                     type="button"
-                                    class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                                    className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                                     onClick={toggleCollapse}
                                 >
                                     <strong>+</strong> Add Tags
@@ -167,19 +167,19 @@ export default function ListTags(props) {
 
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 mb-4">
                         <table className="w-full shadow-sm text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" className="px-6 py-3">
                                         Tags Name (English)
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" className="px-6 py-3">
                                         Tags Name (Japanese)
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" className="px-6 py-3">
                                         Tags Name (Chinese)
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        <span class="sr-only">Edit</span>
+                                    <th scope="col" className="px-6 py-3">
+                                        <span className="sr-only">Edit</span>
                                     </th>
                                 </tr>
                             </thead>
@@ -196,17 +196,17 @@ export default function ListTags(props) {
                                             >
                                                 {tag.TagsName}
                                             </th>
-                                            <td class="px-6 py-4">
+                                            <td className="px-6 py-4">
                                                 <p className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
                                                     {tag.TagsNameJp}
                                                 </p>
                                             </td>
-                                            <td class="px-6 py-4">
+                                            <td className="px-6 py-4">
                                                 <p className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
                                                     {tag.TagsNameCh}
                                                 </p>
                                             </td>
-                                            <td class="px-6 py-4">
+                                            <td className="px-6 py-4">
                                                 <p className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
                                                     {tag.ShortTags}
                                                 </p>
