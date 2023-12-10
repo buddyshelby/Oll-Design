@@ -25,7 +25,8 @@ class ImagingController extends Controller
 
         $getListGallery = DB::Table('imagings')
             ->leftJoin('galleries', 'galleries.id', '=', 'imagings.GalleriesID')
-            ->select('galleries.*', 'imagings.Img')
+            ->leftJoin('tags', 'tags.id', '=', 'galleries.TagsID')
+            ->select('galleries.*', 'imagings.Img', 'tags.ShortTags')
             ->orderBy('created_at', 'desc')
             ->get();
 

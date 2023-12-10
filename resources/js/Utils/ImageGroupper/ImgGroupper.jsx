@@ -1,12 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import axios from "axios";
+
 import classes from "./ImgGroupper.module.css";
 
 const ImgGroupper = (props) => {
+    const { i18n } = useTranslation();
     const [isHover, setIsHover] = useState(null);
+    const [isGroup, setIsGroup] = useState([]);
+
+    useEffect(() => {
+        fetchGroupper();
+    }, []);
+
+    const fetchGroupper = async () => {
+        try {
+            const res = await axios.get("http://localhost:8000/api/tags");
+            setIsGroup(res.data);
+        } catch (e) {
+            console.error("Error fetching tags:", e);
+        }
+    };
 
     const onGenerateHoverData = () => {
         const hoverData = {};
-        for (let i = 0; i <= props.data.length; i++) {
+        for (let i = 0; i <= isGroup.length; i++) {
             hoverData[i.toString()] = i;
         }
         return hoverData;
@@ -31,16 +49,23 @@ const ImgGroupper = (props) => {
 
     return (
         <div className={classes["img-groupper"]}>
-            {props.data.map((item) => (
-                <div className={classes["img-groupper-item"]} key={item.id}>
+            {isGroup.map((i) => (
+                <div className={classes["img-groupper-item"]} key={i.id}>
                     <a
-                        href={item.navigate}
-                        id={item.id}
+                        href={i.ShortTags}
+                        id={i.id}
                         onClick={getValueGroupper}
                         onMouseOver={handleMouseOver}
                         onMouseOut={handleMouseOut}
                     >
-                        {isHover === item.id ? item.badge_hover.toUpperCase() : item.badge.toUpperCase()}
+                        {isHover === i.id
+                            ? i18n.language === "jp"
+                                ? i.TagsName.toUpperCase()
+                                : i.TagsNameJp.toUpperCase()
+                            : (i18n.language === "jp"
+                                  ? i.TagsNameJp
+                                  : i.TagsName
+                              ).toUpperCase()}
                     </a>
                 </div>
             ))}

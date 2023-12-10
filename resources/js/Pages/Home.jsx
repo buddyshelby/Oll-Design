@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import axios from "axios";
 
 import ImgGroupper from "@/Utils/ImageGroupper/ImgGroupper";
@@ -11,25 +10,22 @@ import GalleryDetail from "@/Pages/Gallery/Detail/GalleryDetail";
 import HomeSkeleton from "@/Components/HomeSkeleton";
 
 const Home = () => {
-    const { i18n } = useTranslation();
     const [isData, setIsData] = useState([]);
     const [isPageId, setIsPageId] = useState(0);
     const [filter, setFilter] = useState("#all");
     const [isLoading, setIsLoading] = useState(true);
-    const [isLanguage, setIsLanguage] = useState(
-        i18n.store.data.jp.translation
-    );
+    const [filteredData, setFilteredData] = useState([]);
 
     useEffect(() => {
         fetchData();
-        if (i18n.language === "jp") {
-            setIsLanguage(i18n.store.data.jp.translation);
-        } else if (i18n.language === "en") {
-            setIsLanguage(i18n.store.data.en.translation);
-        } else {
-            setIsLanguage(i18n.store.data.ch.translation);
-        }
-    }, [i18n.language]);
+    }, []);
+
+    useEffect(() => {
+        const newFilteredData = isData.filter((item) => {
+            return filter === "#all" || item.ShortTags === filter;
+        });
+        setFilteredData(newFilteredData);
+    }, [isData, filter]);
 
     const fetchData = async () => {
         try {
@@ -51,14 +47,6 @@ const Home = () => {
         setFilter(selected);
     };
 
-    const filterImg = isData.filter((imgFilter) => {
-        if (filter === "#all") {
-            return isData;
-        } else {
-            return imgFilter.navigate === filter;
-        }
-    });
-
     const onDetailPageId = isData.filter((pages) => {
         return pages.id === parseInt(isPageId);
     });
@@ -68,20 +56,17 @@ const Home = () => {
             {({ matches }) => (
                 <Page>
                     {matches ? (
-                        <p>obile view.</p>
+                        <p>Mobile view.</p>
                     ) : (
                         <>
                             {isPageId === 0 ? (
                                 <>
-                                    <ImgGroupper
-                                        data={isLanguage.gallery_groups}
-                                        onGetFilter={getFilter}
-                                    />
+                                    <ImgGroupper onGetFilter={getFilter} />
                                     {isLoading ? (
                                         <HomeSkeleton count={isData.length} />
                                     ) : (
                                         <Gallery
-                                            imgData={filterImg}
+                                            imgData={filteredData}
                                             onGetDetailId={getDetailId}
                                         />
                                     )}
