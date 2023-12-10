@@ -42,13 +42,13 @@ export default function CreateGalleries() {
             Swal.fire({
                 icon: "success",
                 text: response.data.message,
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
             });
-            
             setTimeout(() => {
                 window.location.reload();
             }, 2000);
-
-            // Lakukan sesuatu setelah berhasil, misalnya mengosongkan form atau navigasi ke halaman lain
         } catch (error) {
             if (error.response && error.response.status === 422) {
                 setValidationError(error.response.data.errors);

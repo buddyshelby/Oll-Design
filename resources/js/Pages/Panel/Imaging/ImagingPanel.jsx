@@ -64,6 +64,9 @@ export default function ImagingPanel(props) {
                 Swal.fire({
                     icon: "success",
                     text: "Imaging created successfully!",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
                 });
                 fetchImagings();
                 // Reset form fields
@@ -103,6 +106,9 @@ export default function ImagingPanel(props) {
             Swal.fire({
                 icon: "success",
                 text: "Imaging deleted successfully!",
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
             });
             fetchImagings();
         } catch (error) {
@@ -240,28 +246,6 @@ export default function ImagingPanel(props) {
                                 )}
                             </tbody>
                         </table>
-                        {/* <ul>
-                            {imagings.map((imaging) => (
-                                <li key={imaging.id} className="flex">
-                                    {imaging.Img.map((img) => (
-                                        <img
-                                            src={`storage/${img}`}
-                                            alt={img}
-                                            className="w-[250px]"
-                                        />
-                                    ))}{" "}
-                                    <button
-                                        type="button"
-                                        class="font-medium text-blue-600 hover:underline"
-                                        onClick={() =>
-                                            deleteImaging(imaging.id)
-                                        }
-                                    >
-                                        Delete
-                                    </button>
-                                </li>
-                            ))}
-                        </ul> */}
                     </div>
                 </div>
             </div>

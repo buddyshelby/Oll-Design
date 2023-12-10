@@ -60,6 +60,9 @@ export default function ListGalleries() {
                 Swal.fire({
                     icon: "success",
                     text: data.message,
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
                 });
                 fetchGalleries();
             })
@@ -108,6 +111,9 @@ export default function ListGalleries() {
             Swal.fire({
                 icon: "success",
                 text: "Gallery updated successfully!",
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
             });
 
             fetchGalleries();
