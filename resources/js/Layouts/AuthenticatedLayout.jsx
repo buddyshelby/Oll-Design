@@ -27,6 +27,9 @@ export default function Authenticated({ auth, header, children }) {
                                 <NavLink href={route('imaging')} active={route().current('imaging')}>
                                     Galleries
                                 </NavLink>
+                                <NavLink href={route('tags')} active={route().current('tags')}>
+                                    Tags
+                                </NavLink>
                             </div>
                         </div>
 

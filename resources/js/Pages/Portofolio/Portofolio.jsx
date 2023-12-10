@@ -4,7 +4,7 @@ import axios from "axios";
 
 import ImgGroupper from "@/Utils/ImageGroupper/ImgGroupper";
 import MediaQuery from "@/Components/MediaQuery";
-import Page from "./Page";
+import Page from "../Page";
 
 import Gallery from "@/Pages/Gallery/Gallery";
 import GalleryDetail from "@/Pages/Gallery/Detail/GalleryDetail";
@@ -68,7 +68,7 @@ const Home = () => {
             {({ matches }) => (
                 <Page>
                     {matches ? (
-                        <p>obile view.</p>
+                        <p>Mobile view.</p>
                     ) : (
                         <>
                             {isPageId === 0 ? (

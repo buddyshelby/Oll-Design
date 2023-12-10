@@ -28,6 +28,10 @@ Route::get('/business-introduction', function () {
     return Inertia::render('Business/Business');
 });
 
+Route::get('/portofolio', function () {
+    return Inertia::render('Portofolio/Portofolio');
+});
+
 Route::get('/contact-us', function () {
     return Inertia::render('Contact/Contact');
 });
@@ -48,6 +52,10 @@ Route::get('/admin', function () {
 Route::get('/imaging', function () {
     return Inertia::render('Panel/Imaging/ImagingPanel');
 })->middleware(['auth', 'verified'])->name('imaging');
+
+Route::get('/tags', function () {
+    return Inertia::render('Panel/Tags/ListTags');
+})->middleware(['auth', 'verified'])->name('tags');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

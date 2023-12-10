@@ -73,32 +73,11 @@ const Business = () => {
                                                             text="Offering a new dimension to architectural vision, our Perspective service provides innovative visualizations that bring your projects to life. Experience a comprehensive view with detailed renderings and immersive presentations that capture the essence of your design before it's built."
                                                         />
                                                         <div
-                                                            className="flex justify-end absolute right-3 bottom-3"
+                                                            className="flex justify-end absolute right-3 bottom-3 cursor-pointer"
                                                             onClick={
                                                                 toggleCollapse
                                                             }
                                                         >
-                                                            <svg
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-circle-chevron-down"
-                                                                width="44"
-                                                                height="44"
-                                                                viewBox="0 0 24 24"
-                                                                strokeWidth="1.5"
-                                                                stroke="#2c3e50"
-                                                                fill="none"
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                            >
-                                                                {" "}
-                                                                <path
-                                                                    stroke="none"
-                                                                    d="M0 0h24v24H0z"
-                                                                    fill="none"
-                                                                />{" "}
-                                                                <path d="M15 11l-3 3l-3 -3" />{" "}
-                                                                <path d="M12 3a9 9 0 1 0 0 18a9 9 0 0 0 0 -18z" />{" "}
-                                                            </svg>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -147,32 +126,11 @@ const Business = () => {
                                                             text="We specialize in creating bespoke and top-notch designs tailored to your specific requirements, professional and high quality results that exceed your expectations."
                                                         />
                                                         <div
-                                                            className="flex justify-end absolute right-3 bottom-3"
+                                                            className="flex justify-end absolute right-3 bottom-3 cursor-pointer"
                                                             onClick={
                                                                 toggleCollapse
                                                             }
                                                         >
-                                                            <svg
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-circle-chevron-down"
-                                                                width="44"
-                                                                height="44"
-                                                                viewBox="0 0 24 24"
-                                                                strokeWidth="1.5"
-                                                                stroke="#2c3e50"
-                                                                fill="none"
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                            >
-                                                                {" "}
-                                                                <path
-                                                                    stroke="none"
-                                                                    d="M0 0h24v24H0z"
-                                                                    fill="none"
-                                                                />{" "}
-                                                                <path d="M15 11l-3 3l-3 -3" />{" "}
-                                                                <path d="M12 3a9 9 0 1 0 0 18a9 9 0 0 0 0 -18z" />{" "}
-                                                            </svg>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -221,32 +179,11 @@ const Business = () => {
                                                             text="Crafting visual stories, our Graphic service delivers striking graphic solutions that embody your brand's identity. From logos to layouts, we blend art and strategy to create graphic elements that are not only visually captivating but also communicate your message effectively."
                                                         />
                                                         <div
-                                                            className="flex justify-end absolute right-3 bottom-3"
+                                                            className="flex justify-end absolute right-3 bottom-3 cursor-pointer"
                                                             onClick={
                                                                 toggleCollapse
                                                             }
                                                         >
-                                                            <svg
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-circle-chevron-down"
-                                                                width="44"
-                                                                height="44"
-                                                                viewBox="0 0 24 24"
-                                                                strokeWidth="1.5"
-                                                                stroke="#2c3e50"
-                                                                fill="none"
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                            >
-                                                                {" "}
-                                                                <path
-                                                                    stroke="none"
-                                                                    d="M0 0h24v24H0z"
-                                                                    fill="none"
-                                                                />{" "}
-                                                                <path d="M15 11l-3 3l-3 -3" />{" "}
-                                                                <path d="M12 3a9 9 0 1 0 0 18a9 9 0 0 0 0 -18z" />{" "}
-                                                            </svg>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -300,27 +237,6 @@ const Business = () => {
                                                                 toggleCollapse
                                                             }
                                                         >
-                                                            <svg
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-circle-chevron-down"
-                                                                width="44"
-                                                                height="44"
-                                                                viewBox="0 0 24 24"
-                                                                strokeWidth="1.5"
-                                                                stroke="#2c3e50"
-                                                                fill="none"
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                            >
-                                                                {" "}
-                                                                <path
-                                                                    stroke="none"
-                                                                    d="M0 0h24v24H0z"
-                                                                    fill="none"
-                                                                />{" "}
-                                                                <path d="M15 11l-3 3l-3 -3" />{" "}
-                                                                <path d="M12 3a9 9 0 1 0 0 18a9 9 0 0 0 0 -18z" />{" "}
-                                                            </svg>
                                                         </div>
                                                     </div>
                                                 </div>
