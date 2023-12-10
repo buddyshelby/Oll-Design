@@ -20,6 +20,7 @@ class Galleries extends Model
         'WorksTitle',
         'WorksContent',
         'WorksCredit',
-        'WorksClient'
+        'WorksClient',
+        'TagsID'
     ];
 }

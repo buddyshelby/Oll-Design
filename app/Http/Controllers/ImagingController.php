@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
-
 class ImagingController extends Controller
 {
     public function index()

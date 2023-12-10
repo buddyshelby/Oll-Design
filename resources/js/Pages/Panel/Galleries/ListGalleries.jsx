@@ -5,6 +5,7 @@ import ReactPaginate from "react-paginate";
 
 export default function ListGalleries() {
     const [list, setList] = useState([]);
+    const [isTags, setIsTag] = useState([]);
     const [selectedGallery, setSelectedGallery] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [updatedData, setUpdatedData] = useState({
@@ -13,6 +14,11 @@ export default function ListGalleries() {
         DescriptionJp: "",
         DescriptionEn: "",
         DescriptionCh: "",
+        WorksTitle: "",
+        WorksContent: "",
+        WorksCredit: "",
+        WorksClient: "",
+        TagsID: "",
     });
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -20,6 +26,7 @@ export default function ListGalleries() {
 
     useEffect(() => {
         fetchGalleries(currentPage);
+        fetchTags();
     }, [currentPage]);
 
     const fetchGalleries = async () => {
@@ -29,11 +36,20 @@ export default function ListGalleries() {
             );
             const data = response;
 
-            setList(data.data);
+            setList(data.data.galleries);
             setCurrentPage(data.current_page);
             setLastPage(data.last_page);
         } catch (error) {
             console.error("Error fetching galleries:", error);
+        }
+    };
+
+    const fetchTags = async () => {
+        try {
+            const res = await axios.get("http://localhost:8000/api/tags");
+            setIsTag(res.data);
+        } catch (e) {
+            console.error("Error fetching galleries:", e);
         }
     };
 
@@ -67,7 +83,6 @@ export default function ListGalleries() {
                 fetchGalleries();
             })
             .catch(({ response: { data } }) => {
-                console.log(data, "error");
                 Swal.fire({
                     text: data.message,
                     icon: "error",
@@ -84,6 +99,11 @@ export default function ListGalleries() {
             DescriptionJp: selected.DescriptionJp,
             DescriptionEn: selected.DescriptionEn,
             DescriptionCh: selected.DescriptionCh,
+            WorksTitle: selected.WorksTitle,
+            WorksContent: selected.WorksContent,
+            WorksCredit: selected.WorksCredit,
+            WorksClient: selected.WorksClient,
+            TagsID: selected.TagsID,
         });
         setIsModalOpen(true);
     };
@@ -96,6 +116,11 @@ export default function ListGalleries() {
             DescriptionJp: "",
             DescriptionEn: "",
             DescriptionCh: "",
+            WorksTitle: "",
+            WorksContent: "",
+            WorksCredit: "",
+            WorksClient: "",
+            TagsID: "",
         });
         setIsModalOpen(false);
     };
@@ -156,6 +181,9 @@ export default function ListGalleries() {
                                 Description Design (Chinese)
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Tags
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Works Title
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -199,6 +227,11 @@ export default function ListGalleries() {
                                     <td class="px-6 py-4">
                                         <p className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
                                             {row.DescriptionCh}
+                                        </p>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <p className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
+                                            {row.ShortTags}
                                         </p>
                                     </td>
                                     <td class="px-6 py-4">
@@ -306,7 +339,7 @@ export default function ListGalleries() {
                         </div>
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Date :
+                                Date:
                             </label>
                             <input
                                 type="date"
@@ -322,7 +355,7 @@ export default function ListGalleries() {
                         </div>
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Description Design (Japanese) :
+                                Description Design (Japanese):
                             </label>
                             <textarea
                                 value={updatedData.DescriptionJp}
@@ -338,7 +371,7 @@ export default function ListGalleries() {
                         </div>
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Description Design (English) :
+                                Description Design (English):
                             </label>
                             <textarea
                                 value={updatedData.DescriptionEn}
@@ -354,7 +387,7 @@ export default function ListGalleries() {
                         </div>
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Description Design (Chinese) :
+                                Description Design (Chinese):
                             </label>
                             <textarea
                                 value={updatedData.DescriptionCh}
@@ -370,7 +403,29 @@ export default function ListGalleries() {
                         </div>
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Works Title :
+                                Tags:
+                            </label>
+                            <select
+                                value={updatedData.TagsID}
+                                onChange={(e) =>
+                                    setUpdatedData({
+                                        ...updatedData,
+                                        TagsID: e.target.value,
+                                    })
+                                }
+                                className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            >
+                                <option value="" disabled>
+                                    Select Tags
+                                </option>
+                                {isTags.map((t) => (
+                                    <option value={t.id}>{t.TagsName}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                Works Title:
                             </label>
                             <input
                                 type="text"
@@ -386,7 +441,7 @@ export default function ListGalleries() {
                         </div>
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Works Content :
+                                Works Content:
                             </label>
                             <input
                                 type="text"
@@ -402,7 +457,7 @@ export default function ListGalleries() {
                         </div>
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Works Credit :
+                                Works Credit:
                             </label>
                             <input
                                 type="text"
@@ -418,7 +473,7 @@ export default function ListGalleries() {
                         </div>
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Works Client :
+                                Works Client:
                             </label>
                             <input
                                 type="text"

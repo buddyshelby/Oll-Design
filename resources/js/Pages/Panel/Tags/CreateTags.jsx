@@ -38,7 +38,6 @@ export default function CreateTags() {
                 window.location.reload();
             }, 2000);
         } catch (e) {
-            console.log(e);
             if (e.response && e.response.status === 422) {
                 setValidationError(e.response.data.errors);
             } else {

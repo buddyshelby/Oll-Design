@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GalleriesController;
 use App\Http\Controllers\ImagingController;
+use App\Http\Controllers\TagsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,8 @@ Route::post('/imagings', [ImagingController::class, 'store']);
 Route::delete('/imagings/{id}', [ImagingController::class, 'destroy']);
 
 Route::get('/galleryList', [ImagingController::class, 'index']);
+
+Route::get('/tags', [TagsController::class, 'index']);
+Route::post('/tags', [TagsController::class, 'store']);
+Route::put('/tags/{id}', [TagsController::class, 'update']);
+Route::delete('/tags/{id}', [TagsController::class, 'destroy']);
