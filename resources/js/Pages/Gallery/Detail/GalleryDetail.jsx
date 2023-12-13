@@ -92,7 +92,7 @@ const GalleryDetail = (props) => {
                     ? detail.DescriptionEn
                     : detail.DescriptionCh}
             </div>
-            <div className="row">
+            <div className="row p-2">
                 <div className={`${classes["contents-images"]} mt-8`}>
                     {detail.Img.map((img, index) => (
                         <div className={classes.images} key={index}>
