@@ -52,33 +52,25 @@ const Home = () => {
     });
 
     return (
-        <MediaQuery query="(max-width: 768px)">
-            {({ matches }) => (
-                <Page>
-                    {matches ? (
-                        <p>Mobile view.</p>
-                    ) : (
-                        <>
-                            {isPageId === 0 ? (
-                                <>
-                                    <ImgGroupper onGetFilter={getFilter} />
-                                    {isLoading ? (
-                                        <HomeSkeleton count={isData.length} />
-                                    ) : (
-                                        <Gallery
-                                            imgData={filteredData}
-                                            onGetDetailId={getDetailId}
-                                        />
-                                    )}
-                                </>
-                            ) : (
-                                <GalleryDetail detailPages={onDetailPageId} />
-                            )}
-                        </>
-                    )}
-                </Page>
-            )}
-        </MediaQuery>
+        <Page>
+            <>
+                {isPageId === 0 ? (
+                    <>
+                        <ImgGroupper onGetFilter={getFilter} />
+                        {isLoading ? (
+                            <HomeSkeleton count={isData.length} />
+                        ) : (
+                            <Gallery
+                                imgData={filteredData}
+                                onGetDetailId={getDetailId}
+                            />
+                        )}
+                    </>
+                ) : (
+                    <GalleryDetail detailPages={onDetailPageId} />
+                )}
+            </>
+        </Page>
     );
 };
 

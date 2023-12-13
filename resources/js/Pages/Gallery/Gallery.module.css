@@ -39,3 +39,20 @@
     from { opacity: 0%; }
     to   { opacity: 100%; }
 }
+
+/***************************** Mobile *****************************/
+.mobile-gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: .5rem;
+}
+
+.mobile-gallery .mobile-gallery-title {
+    font-size: 18px;
+    font-weight: 500;
+
+}

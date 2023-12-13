@@ -8,7 +8,9 @@ import Navbar from "@/Utils/Navbar/Navbar";
 
 const Page = ({ children }) => {
     const { i18n } = useTranslation();
-    const [isLanguage, setIsLanguage] = useState(i18n.store.data.jp.translation);
+    const [isLanguage, setIsLanguage] = useState(
+        i18n.store.data.jp.translation
+    );
 
     useEffect(() => {
         if (i18n.language === "jp") {
@@ -24,12 +26,17 @@ const Page = ({ children }) => {
         <Router>
             <MediaQuery query="(max-width: 768px)">
                 {({ matches }) => (
-                    <>
+                    <div className="container-fluid">
                         <Head title="Oll Design" />
                         {matches ? (
-                            <>{children}</>
+                            <>
+                                <div className="row">
+                                    <Navbar language={isLanguage} />
+                                </div>
+                                <div className="row">{children}</div>
+                            </>
                         ) : (
-                            <div className="container-fluid px-12">
+                            <div className="px-12">
                                 <div className="row">
                                     <div className="col-2 col-md-3">
                                         <Navbar language={isLanguage} />
@@ -40,7 +47,7 @@ const Page = ({ children }) => {
                                 </div>
                             </div>
                         )}
-                    </>
+                    </div>
                 )}
             </MediaQuery>
         </Router>

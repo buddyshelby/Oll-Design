@@ -1,9 +1,9 @@
-// Navbar.jsx
 import React, { useState } from "react";
-import classes from "./Navbar.module.css";
 import { brand, menu, socialMedia, lang } from "../../Static/index";
 import { useTranslation } from "react-i18next";
 import MediaQuery from "@/Components/MediaQuery";
+
+import classes from "./Navbar.module.css";
 
 const Navbar = ({ language }) => {
     const { i18n } = useTranslation();
@@ -58,6 +58,7 @@ const Navbar = ({ language }) => {
                                     }`}
                                     onClick={toggleMobileMenu}
                                 >
+                                    {/* Hamburger */}
                                     <div></div>
                                     <div></div>
                                     <div></div>

@@ -70,13 +70,14 @@
     color: #f6f6f6;
 }
 
-/* MOBILE  */
+/***************************** MOBILE  *****************************/
 
 .mobile-navbar-container {
     background-color: transparent;
     color: #003832;
     padding: 1rem;
-    position: fixed;
+    /* position: fixed; */
+    position: relative;
     top: 0;
     width: 100%;
     z-index: 1000;
@@ -175,9 +176,6 @@
     background: #ffffff;
     color: #003832;
 }
-
-
-
 
 .mobile-menu-overlay {
     position: fixed;
