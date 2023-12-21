@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import ImgGroupper from "@/Utils/ImageGroupper/ImgGroupper";
-import MediaQuery from "@/Components/MediaQuery";
 import Page from "./Page";
 
 import Gallery from "@/Pages/Gallery/Gallery";
@@ -52,7 +51,7 @@ const Home = () => {
     });
 
     return (
-        <Page>
+        <Page onLoad={isLoading}>
             <>
                 {isPageId === 0 ? (
                     <>

@@ -1,22 +1,63 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import ReactPaginate from "react-paginate";
+import styled from "styled-components";
+
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
 import FileUploader from "@/Components/FileUploader";
 import InputLabel from "@/Components/InputLabel";
 
+const ITEMS_PER_PAGE = 10;
+
+const MyPaginate = styled(ReactPaginate).attrs({
+    activeClassName: "active",
+})`
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    list-style-type: none;
+
+    li a {
+        border-radius: 4px;
+        padding: 0.1rem 1rem;
+        cursor: pointer;
+    }
+    li.previous a,
+    li.next a,
+    li.break a {
+        border-color: transparent;
+    }
+    li.active a {
+        background-color: #0366d6;
+        border-color: transparent;
+        color: white;
+        min-width: 32px;
+    }
+    li.disabled a {
+        color: grey;
+    }
+    li.disable,
+    li.disabled a {
+        cursor: default;
+    }
+`;
+
 export default function ImagingPanel(props) {
     const [imagings, setImagings] = useState([]);
     const [galleries, setGalleries] = useState([]);
     const [selectedGallery, setSelectedGallery] = useState("");
     const [image, setImage] = useState(null);
+    const [currentPage, setCurrentPage] = useState(0);
 
     useEffect(() => {
         fetchImagings();
         fetchGalleries();
-    }, []);
+    }, [currentPage]);
 
     const fetchImagings = async () => {
         try {
@@ -34,7 +75,7 @@ export default function ImagingPanel(props) {
             const response = await axios.get(
                 "http://localhost:8000/api/galleries"
             );
-            setGalleries(response.data);
+            setGalleries(response.data.galleries);
         } catch (error) {
             console.error("Error fetching galleries:", error);
         }
@@ -120,6 +161,11 @@ export default function ImagingPanel(props) {
         }
     };
 
+    const displayedList = imagings.slice(
+        currentPage * ITEMS_PER_PAGE,
+        (currentPage + 1) * ITEMS_PER_PAGE
+    );
+
     return (
         <AuthenticatedLayout
             auth={props.auth}
@@ -199,7 +245,7 @@ export default function ImagingPanel(props) {
                             </thead>
                             <tbody>
                                 {imagings && imagings.length > 0 ? (
-                                    imagings.map((row) => (
+                                    displayedList.map((row) => (
                                         <tr
                                             className="odd:bg-white even:bg-gray-50 border-b"
                                             key={row.id}
@@ -224,9 +270,7 @@ export default function ImagingPanel(props) {
                                                     type="button"
                                                     className="font-medium text-blue-600 hover:underline"
                                                     onClick={() =>
-                                                        deleteImaging(
-                                                            row.id
-                                                        )
+                                                        deleteImaging(row.id)
                                                     }
                                                 >
                                                     Delete
@@ -246,6 +290,30 @@ export default function ImagingPanel(props) {
                                 )}
                             </tbody>
                         </table>
+
+                        {/* Pagination */}
+                        <nav
+                            aria-label="Page navigation comments"
+                            className="mt-4"
+                        >
+                            <MyPaginate
+                                previousLabel={"< Previous"}
+                                nextLabel={"Next >"}
+                                breakLabel={"..."}
+                                breakClassName={"break-me"}
+                                pageCount={Math.ceil(
+                                    imagings.length / ITEMS_PER_PAGE
+                                )}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
+                                onPageChange={(data) =>
+                                    setCurrentPage(data.selected)
+                                }
+                                containerClassName={"pagination"}
+                                subContainerClassName={"pages pagination"}
+                                activeClassName={"active"}
+                            />
+                        </nav>
                     </div>
                 </div>
             </div>
