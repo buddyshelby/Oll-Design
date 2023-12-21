@@ -24,6 +24,12 @@
     background: #ffffff;
     width: 100vw;
     padding: 6rem 3rem;
+    margin: 1rem 0;
+    border-radius: 16px;
+}
+
+.gallery-detail .contents-cover {
+    padding: 0;
 }
 
 .gallery-detail .contents-images .images {
@@ -39,4 +45,11 @@
 .gallery-detail .contents-images .images img {
    width: 100%;
    object-fit: cover;
+}
+
+@media only screen and (max-width: 768px) {
+    .gallery-detail .contents-images {
+        padding: 1.5rem;
+        gap: 1.25rem;
+    }
 }

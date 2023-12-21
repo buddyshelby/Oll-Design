@@ -21,9 +21,264 @@ const Business = () => {
                 {({ matches }) => (
                     <>
                         {matches ? (
-                            <p>Mobile view</p>
+                            <>
+                                <div className="mb-2">
+                                    <div className="text-2xl font-black">
+                                        <span>
+                                            GOOD DESIGN MAKES YOU HAPPY.
+                                        </span>
+                                    </div>
+                                    <div className="text-1xl font-normal">
+                                        <span>Here’s what we do:</span>
+                                    </div>
+                                </div>
+                                <div className="container-fluid">
+                                    <Card
+                                        color={"bg-[#b1b1b1]"}
+                                        rounded={"rounded-[16px]"}
+                                        padding={"p-4"}
+                                    >
+                                        <div className={classes["card-list"]}>
+                                            <div
+                                                className={`${classes["card-placement"]} drop-shadow-xl`}
+                                            >
+                                                <div
+                                                    className={
+                                                        classes[
+                                                            "card-component"
+                                                        ]
+                                                    }
+                                                >
+                                                    <div
+                                                        className={
+                                                            classes[
+                                                                "card-sub-component"
+                                                            ]
+                                                        }
+                                                    >
+                                                        <div
+                                                            className={
+                                                                classes[
+                                                                    "component-front"
+                                                                ]
+                                                            }
+                                                        >
+                                                            <div
+                                                                className={
+                                                                    classes[
+                                                                        "card-section"
+                                                                    ]
+                                                                }
+                                                            >
+                                                                Perspective
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            className={`${classes["component-back"]} flex flex-column gap-3 relative`}
+                                                        >
+                                                            <span className="text-4xl font-bold">
+                                                                Perspective
+                                                            </span>
+                                                            <EllipsisText
+                                                                expand={
+                                                                    collapse
+                                                                }
+                                                                text="Offering a new dimension to architectural vision, our Perspective service provides innovative visualizations that bring your projects to life. Experience a comprehensive view with detailed renderings and immersive presentations that capture the essence of your design before it's built."
+                                                            />
+                                                            <div
+                                                                className="flex justify-end absolute right-3 bottom-3 cursor-pointer"
+                                                                onClick={
+                                                                    toggleCollapse
+                                                                }
+                                                            ></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                className={`${classes["card-placement"]} drop-shadow-xl`}
+                                            >
+                                                <div
+                                                    className={
+                                                        classes[
+                                                            "card-component"
+                                                        ]
+                                                    }
+                                                >
+                                                    <div
+                                                        className={
+                                                            classes[
+                                                                "card-sub-component"
+                                                            ]
+                                                        }
+                                                    >
+                                                        <div
+                                                            className={
+                                                                classes[
+                                                                    "component-front"
+                                                                ]
+                                                            }
+                                                        >
+                                                            <div
+                                                                className={
+                                                                    classes[
+                                                                        "card-section"
+                                                                    ]
+                                                                }
+                                                            >
+                                                                Design
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            className={`${classes["component-back"]} flex flex-column gap-3 relative`}
+                                                        >
+                                                            <span className="text-4xl font-bold">
+                                                                Design
+                                                            </span>
+                                                            <EllipsisText
+                                                                expand={
+                                                                    collapse
+                                                                }
+                                                                text="We specialize in creating bespoke and top-notch designs tailored to your specific requirements, professional and high quality results that exceed your expectations."
+                                                            />
+                                                            <div
+                                                                className="flex justify-end absolute right-3 bottom-3 cursor-pointer"
+                                                                onClick={
+                                                                    toggleCollapse
+                                                                }
+                                                            ></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                className={`${classes["card-placement"]} drop-shadow-xl`}
+                                            >
+                                                <div
+                                                    className={
+                                                        classes[
+                                                            "card-component"
+                                                        ]
+                                                    }
+                                                >
+                                                    <div
+                                                        className={
+                                                            classes[
+                                                                "card-sub-component"
+                                                            ]
+                                                        }
+                                                    >
+                                                        <div
+                                                            className={
+                                                                classes[
+                                                                    "component-front"
+                                                                ]
+                                                            }
+                                                        >
+                                                            <div
+                                                                className={
+                                                                    classes[
+                                                                        "card-section"
+                                                                    ]
+                                                                }
+                                                            >
+                                                                Graphic
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            className={`${classes["component-back"]} flex flex-column gap-3 relative`}
+                                                        >
+                                                            <span className="text-4xl font-bold">
+                                                                Graphic
+                                                            </span>
+                                                            <EllipsisText
+                                                                expand={
+                                                                    collapse
+                                                                }
+                                                                text="Crafting visual stories, our Graphic service delivers striking graphic solutions that embody your brand's identity. From logos to layouts, we blend art and strategy to create graphic elements that are not only visually captivating but also communicate your message effectively."
+                                                            />
+                                                            <div
+                                                                className="flex justify-end absolute right-3 bottom-3 cursor-pointer"
+                                                                onClick={
+                                                                    toggleCollapse
+                                                                }
+                                                            ></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                className={`${classes["card-placement"]} drop-shadow-xl`}
+                                            >
+                                                <div
+                                                    className={
+                                                        classes[
+                                                            "card-component"
+                                                        ]
+                                                    }
+                                                >
+                                                    <div
+                                                        className={
+                                                            classes[
+                                                                "card-sub-component"
+                                                            ]
+                                                        }
+                                                    >
+                                                        <div
+                                                            className={
+                                                                classes[
+                                                                    "component-front"
+                                                                ]
+                                                            }
+                                                        >
+                                                            <div
+                                                                className={
+                                                                    classes[
+                                                                        "card-section"
+                                                                    ]
+                                                                }
+                                                            >
+                                                                Consultation
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            className={`${classes["component-back"]} flex flex-column gap-3 relative`}
+                                                        >
+                                                            <span className="text-4xl font-bold">
+                                                                Consultation
+                                                            </span>
+                                                            <EllipsisText
+                                                                expand={
+                                                                    collapse
+                                                                }
+                                                                text="Guiding you through the maze of design decisions, our Consultation service offers expert advice tailored to your unique needs. We listen, analyze, and provide strategic recommendations to ensure your architectural and design projects are both aesthetically pleasing and functionally sound."
+                                                            />
+                                                            <div
+                                                                className="flex justify-end absolute right-3 bottom-3 cursor-pointer"
+                                                                onClick={
+                                                                    toggleCollapse
+                                                                }
+                                                            ></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Card>
+                                </div>
+                            </>
                         ) : (
                             <div className="container-fluid">
+                                <div className="mb-2">
+                                    <div className="text-4xl font-black">
+                                        <span>
+                                            GOOD DESIGN MAKES YOU HAPPY.
+                                        </span>
+                                    </div>
+                                    <div className="text-3xl font-normal">
+                                        <span>Here’s what we do:</span>
+                                    </div>
+                                </div>
                                 <Card
                                     color={"bg-[#b1b1b1]"}
                                     rounded={"rounded-[16px]"}
@@ -77,8 +332,7 @@ const Business = () => {
                                                             onClick={
                                                                 toggleCollapse
                                                             }
-                                                        >
-                                                        </div>
+                                                        ></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -130,8 +384,7 @@ const Business = () => {
                                                             onClick={
                                                                 toggleCollapse
                                                             }
-                                                        >
-                                                        </div>
+                                                        ></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -183,8 +436,7 @@ const Business = () => {
                                                             onClick={
                                                                 toggleCollapse
                                                             }
-                                                        >
-                                                        </div>
+                                                        ></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -236,8 +488,7 @@ const Business = () => {
                                                             onClick={
                                                                 toggleCollapse
                                                             }
-                                                        >
-                                                        </div>
+                                                        ></div>
                                                     </div>
                                                 </div>
                                             </div>

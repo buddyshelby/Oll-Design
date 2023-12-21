@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import ImgGroupper from "@/Utils/ImageGroupper/ImgGroupper";
-import MediaQuery from "@/Components/MediaQuery";
 import Page from "./Page";
 
 import Gallery from "@/Pages/Gallery/Gallery";
@@ -52,33 +51,25 @@ const Home = () => {
     });
 
     return (
-        <MediaQuery query="(max-width: 768px)">
-            {({ matches }) => (
-                <Page>
-                    {matches ? (
-                        <p>Mobile view.</p>
-                    ) : (
-                        <>
-                            {isPageId === 0 ? (
-                                <>
-                                    <ImgGroupper onGetFilter={getFilter} />
-                                    {isLoading ? (
-                                        <HomeSkeleton count={isData.length} />
-                                    ) : (
-                                        <Gallery
-                                            imgData={filteredData}
-                                            onGetDetailId={getDetailId}
-                                        />
-                                    )}
-                                </>
-                            ) : (
-                                <GalleryDetail detailPages={onDetailPageId} />
-                            )}
-                        </>
-                    )}
-                </Page>
-            )}
-        </MediaQuery>
+        <Page onLoad={isLoading}>
+            <>
+                {isPageId === 0 ? (
+                    <>
+                        <ImgGroupper onGetFilter={getFilter} />
+                        {isLoading ? (
+                            <HomeSkeleton count={isData.length} />
+                        ) : (
+                            <Gallery
+                                imgData={filteredData}
+                                onGetDetailId={getDetailId}
+                            />
+                        )}
+                    </>
+                ) : (
+                    <GalleryDetail detailPages={onDetailPageId} />
+                )}
+            </>
+        </Page>
     );
 };
 

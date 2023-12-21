@@ -5,10 +5,12 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import MediaQuery from "@/Components/MediaQuery";
 import Navbar from "@/Utils/Navbar/Navbar";
+import WebLoader from "@/Components/WebLoader";
 
-const Page = ({ children }) => {
+const Page = ({ onLoad = false, children }) => {
     const { i18n } = useTranslation();
     const [isLanguage, setIsLanguage] = useState(i18n.store.data.jp.translation);
+    const [isLoader, setIsLoader] = useState();
 
     useEffect(() => {
         if (i18n.language === "jp") {
@@ -18,7 +20,15 @@ const Page = ({ children }) => {
         } else {
             setIsLanguage(i18n.store.data.ch.translation);
         }
-    }, [i18n.language]);
+
+        if (onLoad === true) {
+            setTimeout(() => {
+                setIsLoader(false)
+            }, 2000);
+
+            setIsLoader(true);
+        }
+    }, [i18n.language, onLoad]);
 
     return (
         <Router>
@@ -27,18 +37,33 @@ const Page = ({ children }) => {
                     <>
                         <Head title="Oll Design" />
                         {matches ? (
-                            <>{children}</>
-                        ) : (
-                            <div className="container-fluid px-12">
+                            <div className="container-fluid">
                                 <div className="row">
-                                    <div className="col-2 col-md-3">
-                                        <Navbar language={isLanguage} />
-                                    </div>
-                                    <div className="col-10 col-md-9 mt-16 mb-6">
-                                        {children}
-                                    </div>
+                                    <Navbar language={isLanguage} />
                                 </div>
+                                <div className="row">{children}</div>
                             </div>
+                        ) : (
+                            <>
+                                {isLoader ? (
+                                    <WebLoader />
+                                ) : (
+                                    <div className="container-fluid">
+                                        <div className="px-12">
+                                            <div className="row">
+                                                <div className="col-2 col-md-3">
+                                                    <Navbar
+                                                        language={isLanguage}
+                                                    />
+                                                </div>
+                                                <div className="col-10 col-md-9 mt-16 mb-6">
+                                                    {children}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </>
                         )}
                     </>
                 )}

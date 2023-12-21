@@ -60,3 +60,14 @@
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+
+@media only screen and (max-width: 768px) {
+    .card-list .card-placement .card-component {
+        width: 80vw;
+        height: 350px;
+    }
+
+    .card-component .card-sub-component .component-back {
+        font-weight: 600;
+    }
+}

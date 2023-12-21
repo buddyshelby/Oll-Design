@@ -16,3 +16,10 @@
     height: 100%;
     object-fit: cover;
 }
+
+@media only screen and (max-width: 768px) {
+    .swiper {
+        width: 350px;
+        height: 420px;
+    }
+}
