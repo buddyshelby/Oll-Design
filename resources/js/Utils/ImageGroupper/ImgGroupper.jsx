@@ -79,7 +79,7 @@ const ImgGroupper = (props) => {
                                     </div>
                                 )}
                             </div>
-                            <div className={`${isSortCollapsed && 'flex flex-column gap-2 absolute right-0 top-[1.75rem] block bg-white p-2 rounded-sm z-10'}`}>
+                            <div className={`${isSortCollapsed && 'flex flex-column gap-2 absolute right-0 top-[1.75rem] bg-white p-2 rounded-sm z-10'}`}>
                                 {isSortCollapsed && (
                                     <>
                                         {isGroup.map((i) => (
