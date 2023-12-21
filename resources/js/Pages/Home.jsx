@@ -8,6 +8,8 @@ import Gallery from "@/Pages/Gallery/Gallery";
 import GalleryDetail from "@/Pages/Gallery/Detail/GalleryDetail";
 import HomeSkeleton from "@/Components/HomeSkeleton";
 
+const ITEMS_PER_PAGE = 10;
+
 const Home = () => {
     const [isData, setIsData] = useState([]);
     const [isPageId, setIsPageId] = useState(0);
@@ -50,6 +52,11 @@ const Home = () => {
         return pages.id === parseInt(isPageId);
     });
 
+    const dislayList = filteredData.slice(
+        0 * ITEMS_PER_PAGE,
+        (0 + 1) * ITEMS_PER_PAGE
+    )
+
     return (
         <Page onLoad={isLoading}>
             <>
@@ -60,7 +67,7 @@ const Home = () => {
                             <HomeSkeleton count={isData.length} />
                         ) : (
                             <Gallery
-                                imgData={filteredData}
+                                imgData={dislayList}
                                 onGetDetailId={getDetailId}
                             />
                         )}
