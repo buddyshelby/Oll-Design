@@ -26,7 +26,7 @@
     <style>
         body {
             font-family: 'Figtree', serif;
-            background: #f0f5f7;
+            background: #DFDFDF;
         }
     </style>
 </head>

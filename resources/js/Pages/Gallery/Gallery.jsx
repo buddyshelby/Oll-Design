@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import MediaQuery from "@/Components/MediaQuery";
 
@@ -13,6 +15,40 @@ const Gallery = (props) => {
 
     useEffect(() => {
         setIsData(props.imgData);
+
+        // Initialize ScrollTrigger after the component mounts
+        gsap.registerPlugin(ScrollTrigger);
+
+        // ScrollTrigger animations
+        gsap.defaults({ ease: "power3" });
+
+        // Function to animate each gallery item
+        const animateGalleryItem = (item) => {
+            gsap.to(item, {
+                opacity: 1,
+                y: 0,
+                stagger: { each: 0.15, grid: [1, 3] },
+                overwrite: true,
+            });
+        };
+
+        // Function to set initial state for gallery items
+        const setInitialGalleryState = (item) => {
+            gsap.set(item, { opacity: 0, y: -100, overwrite: true });
+        };
+
+        // Batch the gallery items with ScrollTrigger
+        ScrollTrigger.batch(`.${classes["gallery-item"]}`, {
+            onEnter: (batch) => batch.forEach(animateGalleryItem),
+            onLeave: (batch) => batch.forEach(setInitialGalleryState),
+            onEnterBack: (batch) => batch.forEach(animateGalleryItem),
+            onLeaveBack: (batch) => batch.forEach(setInitialGalleryState),
+        });
+
+        // Refresh ScrollTrigger when the component updates
+        ScrollTrigger.addEventListener("refreshInit", () => {
+            gsap.set(`.${classes["gallery-item"]}`, { opacity: 0, y: -100 });
+        });
     }, [props.imgData]);
 
     const onGetPageIdHandler = (e) => {

@@ -158,7 +158,6 @@ const Navbar = ({ language }) => {
                                     {isLanguage.navbar_jp.map((m, index) => (
                                         <a
                                             href={m.url}
-                                            className="text-sm"
                                             id={m.id}
                                             key={m.id}
                                             onMouseOver={handleMouseOver}

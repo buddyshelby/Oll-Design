@@ -27,6 +27,9 @@ export default function CreateTags() {
                 formData
             );
 
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
             Swal.fire({
                 icon: "success",
                 text: res.data.message,
@@ -34,9 +37,6 @@ export default function CreateTags() {
                 timer: 2000,
                 timerProgressBar: true,
             });
-            setTimeout(() => {
-                window.location.reload();
-            }, 2000);
         } catch (e) {
             if (e.response && e.response.status === 422) {
                 setValidationError(e.response.data.errors);
