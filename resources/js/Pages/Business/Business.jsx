@@ -34,7 +34,7 @@ const Business = () => {
                                 </div>
                                 <div className="container-fluid">
                                     <Card
-                                        color={"bg-[#b1b1b1]"}
+                                        color={"bg-[#F4F3F3]"}
                                         rounded={"rounded-[16px]"}
                                         padding={"p-4"}
                                     >
@@ -280,8 +280,8 @@ const Business = () => {
                                     </div>
                                 </div>
                                 <Card
-                                    color={"bg-[#b1b1b1]"}
-                                    rounded={"rounded-[16px]"}
+                                    color={"bg-[#F4F3F3]"}
+                                    rounded={"rounded-[12px]"}
                                     padding={"p-4"}
                                 >
                                     <div className={classes["card-list"]}>

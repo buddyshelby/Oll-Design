@@ -9,7 +9,9 @@ import WebLoader from "@/Components/WebLoader";
 
 const Page = ({ onLoad = false, children }) => {
     const { i18n } = useTranslation();
-    const [isLanguage, setIsLanguage] = useState(i18n.store.data.jp.translation);
+    const [isLanguage, setIsLanguage] = useState(
+        i18n.store.data.jp.translation
+    );
     const [isLoader, setIsLoader] = useState();
 
     useEffect(() => {
@@ -23,7 +25,7 @@ const Page = ({ onLoad = false, children }) => {
 
         if (onLoad === true) {
             setTimeout(() => {
-                setIsLoader(false)
+                setIsLoader(false);
             }, 2000);
 
             setIsLoader(true);
@@ -48,15 +50,11 @@ const Page = ({ onLoad = false, children }) => {
                                 {isLoader ? (
                                     <WebLoader />
                                 ) : (
-                                    <div className="container-fluid">
-                                        <div className="px-12">
+                                    <div className="flex">
+                                        <Navbar language={isLanguage} />
+                                        <div className="container-fluid">
                                             <div className="row">
-                                                <div className="col-2 col-md-3">
-                                                    <Navbar
-                                                        language={isLanguage}
-                                                    />
-                                                </div>
-                                                <div className="col-10 col-md-9 mt-16 mb-6">
+                                                <div className="col-12 mt-16 mb-6">
                                                     {children}
                                                 </div>
                                             </div>

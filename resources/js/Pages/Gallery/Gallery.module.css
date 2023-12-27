@@ -4,7 +4,7 @@
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
-    gap: 4rem;
+    gap: 1rem;
 }
 
 .gallery .gallery-item {
@@ -24,7 +24,7 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 1366px) {
+/* @media screen and (max-width: 1366px) {
     .gallery {
         display: flex;
         flex-direction: row;
@@ -33,7 +33,7 @@
         flex-wrap: wrap;
         gap: 1.5rem;
     }
-}
+} */
 
 @keyframes fade {
     from { opacity: 0%; }

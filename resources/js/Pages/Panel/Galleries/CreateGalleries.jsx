@@ -3,6 +3,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 import InputLabel from "@/Components/InputLabel";
+import FileUploader from "@/Components/FileUploader";
 
 export default function CreateGalleries() {
     const [isTag, setIsTag] = useState([]);
@@ -18,6 +19,7 @@ export default function CreateGalleries() {
     const [workscredit, setWorksCredit] = useState("");
     const [worksclient, setWorksClient] = useState("");
     const [validationError, setValidationError] = useState({});
+    const [image, setImage] = useState(null);
 
     useEffect(() => {
         fetchTags();
@@ -36,9 +38,7 @@ export default function CreateGalleries() {
         setIsSelectedTag(e.target.value);
     };
 
-    const createGallery = async (e) => {
-        e.preventDefault();
-
+    const createGallery = async () => {
         const formData = new FormData();
 
         formData.append("Name", name);
@@ -54,21 +54,11 @@ export default function CreateGalleries() {
         formData.append("TagsID", isSelectedTag);
 
         try {
-            const response = await axios.post(
+            await axios.post(
                 `http://localhost:8000/api/galleries`,
                 formData
             );
 
-            Swal.fire({
-                icon: "success",
-                text: response.data.message,
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true,
-            });
-            setTimeout(() => {
-                window.location.reload();
-            }, 2000);
         } catch (error) {
             if (error.response && error.response.status === 422) {
                 setValidationError(error.response.data.errors);
@@ -80,6 +70,53 @@ export default function CreateGalleries() {
                         : "Something went wrong",
                 });
             }
+        }
+    };
+
+    // Change the createImaging function to append an array of files
+    const createImaging = async () => {
+        const res = await axios.get("http://localhost:8000/api/galleries");
+        const resSort = res.data.galleries.sort((a, b) => b.id - a.id);
+
+        const formData = new FormData();
+        formData.append("GalleriesID", resSort[0].id);
+
+        // Ensure image is an array before iterating
+        if (Array.isArray(image)) {
+            // Append an array of files
+            for (const file of image) {
+                formData.append("Img[]", file);
+            }
+
+            try {
+                await axios.post(
+                    "http://localhost:8000/api/imagings",
+                    formData
+                );
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+                Swal.fire({
+                    icon: "success",
+                    text: "Imaging created successfully!",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                });
+
+                // Set image to null or an empty array
+                setImage(null);
+            } catch (error) {
+                console.error("Error creating imaging:", error);
+                Swal.fire({
+                    icon: "error",
+                    text: "Something went wrong while creating imaging!",
+                });
+            }
+        } else {
+            // Handle the case where image is not an array (optional)
+            console.error("Selected files are not in the expected format.");
         }
     };
 
@@ -100,7 +137,13 @@ export default function CreateGalleries() {
                     </div>
                 </div>
             )}
-            <form action="" method="post" onSubmit={createGallery}>
+            <form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    createGallery();
+                    createImaging();
+                }}
+            >
                 <div className="m-4">
                     <InputLabel>Design Name :</InputLabel>
                     <input
@@ -236,6 +279,15 @@ export default function CreateGalleries() {
                         onChange={(e) => {
                             setWorksClient(e.target.value);
                         }}
+                    />
+                </div>
+                <div className="m-4">
+                    {/* Replace the file input with FileUploader */}
+                    <InputLabel>Image:</InputLabel>
+                    <FileUploader
+                        onFilesSelected={(selectedFiles) =>
+                            setImage(selectedFiles)
+                        }
                     />
                 </div>
                 <div className="m-4">

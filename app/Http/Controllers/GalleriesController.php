@@ -17,9 +17,16 @@ class GalleriesController extends Controller
     {
         $galleries = DB::table('galleries')
             ->leftJoin('tags', 'tags.id', '=', 'galleries.TagsID')
-            ->select('galleries.id', 'galleries.Name', 'galleries.Date', 'galleries.DescriptionEn', 'galleries.DescriptionJp', 'galleries.DescriptionCh', 'galleries.WorksTitle', 'galleries.WorksContent', 'galleries.WorksCredit', 'galleries.WorksClient', 'galleries.TagsID', 'tags.ShortTags')
-            ->orderBy('Date', 'desc')
+            ->leftJoin('imagings', 'imagings.GalleriesID', '=', 'galleries.id')
+            ->select('galleries.id', 'galleries.Name', 'galleries.Date', 'galleries.DescriptionEn', 'galleries.DescriptionJp', 'galleries.DescriptionCh', 'galleries.WorksTitle', 'galleries.WorksContent', 'galleries.WorksCredit', 'galleries.WorksClient', 'galleries.TagsID', 'tags.ShortTags', 'imagings.Img', 'imagings.id AS imagingsID', 'galleries.created_at')
+            ->orderBy('galleries.Date', 'desc')
+            ->orderBy('galleries.created_at', 'desc')
             ->get();
+
+        $galleries = $galleries->map(function ($item) {
+            $item->Img = json_decode($item->Img, true);
+            return $item;
+        });
 
         $tags = DB::table('tags')->select('tags.*')->orderBy('created_at', 'desc')->get();
 

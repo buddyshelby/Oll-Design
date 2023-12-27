@@ -59,6 +59,7 @@ export default function ListGalleries() {
         TagsID: "",
     });
     const [currentPage, setCurrentPage] = useState(0);
+    // const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
     useEffect(() => {
         fetchGalleries();
@@ -85,43 +86,6 @@ export default function ListGalleries() {
         } catch (e) {
             console.error("Error fetching galleries:", e);
         }
-    };
-
-    const deleteGalleriesHandler = async (id) => {
-        const isConfirm = await Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
-        }).then((result) => {
-            return result.isConfirmed;
-        });
-
-        if (!isConfirm) {
-            return;
-        }
-
-        await axios
-            .delete(`http://localhost:8000/api/galleries/${id}`)
-            .then(({ data }) => {
-                Swal.fire({
-                    icon: "success",
-                    text: data.message,
-                    showConfirmButton: false,
-                    timer: 2000,
-                    timerProgressBar: true,
-                });
-                fetchGalleries();
-            })
-            .catch(({ response: { data } }) => {
-                Swal.fire({
-                    text: data.message,
-                    icon: "error",
-                });
-            });
     };
 
     const openUpdateModal = (id) => {
@@ -185,6 +149,77 @@ export default function ListGalleries() {
         }
     };
 
+    const deleteGalleriesHandler = async (id) => {
+        const isConfirm = await Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            return result.isConfirmed;
+        });
+
+        if (!isConfirm) {
+            return;
+        }
+
+        await axios
+            .delete(`http://localhost:8000/api/galleries/${id}`)
+            .then(({ data }) => {
+                Swal.fire({
+                    icon: "success",
+                    text: data.message,
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                });
+                fetchGalleries();
+            })
+            .catch(({ response: { data } }) => {
+                Swal.fire({
+                    text: data.message,
+                    icon: "error",
+                });
+            });
+    };
+
+    const deleteImaging = async (id) => {
+        const isConfirmed = await Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => result.isConfirmed);
+
+        if (!isConfirmed) {
+            return;
+        }
+
+        try {
+            await axios.delete(`http://localhost:8000/api/imagings/${id}`);
+            Swal.fire({
+                icon: "success",
+                text: "Imaging deleted successfully!",
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+            });
+            fetchImagings();
+        } catch (error) {
+            console.error("Error deleting imaging:", error);
+            Swal.fire({
+                icon: "error",
+                text: "Something went wrong while deleting imaging!",
+            });
+        }
+    };
+
     // Add pagination logic to map only the items for the current page
     const displayedList = list.slice(
         currentPage * ITEMS_PER_PAGE,
@@ -230,6 +265,9 @@ export default function ListGalleries() {
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Works Client
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Images
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 <span className="sr-only">Edit</span>
@@ -290,7 +328,61 @@ export default function ListGalleries() {
                                             {row.WorksClient}
                                         </p>
                                     </td>
-                                    <td className="px-6 py-4 text-right flex">
+                                    <td className="px-6 py-4 max-w-[500px]">
+                                        <div className="flex flex-row justify-start align-middle gap-2 overflow-x-auto">
+                                            {row.Img !== null ? (
+                                                row.Img.map((img, index) => (
+                                                    <div>
+                                                        <img
+                                                            src={`storage/${img}`}
+                                                            alt={img}
+                                                            className="w-[200px] h-[200px] object-fill object-top max-w-none"
+                                                            key={index}
+                                                        />
+                                                    </div>
+                                                ))
+                                            ) : (
+                                                <p className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
+                                                    No Images
+                                                </p>
+                                            )}
+                                        </div>
+                                    </td>
+                                    <td className="px-6 py-4 text-right flex gap-1">
+                                        {row.Img !== null && (
+                                            <button
+                                                onClick={() =>
+                                                    deleteImaging(
+                                                        row.imagingsID
+                                                    )
+                                                }
+                                                className="block bg-transparant p-[3px] text-red-500 transition hover:text-slate-100 hover:scale-110 hover:bg-red-500 hover:rounded-sm duration-300"
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-trash"
+                                                    width="20"
+                                                    height="20"
+                                                    viewBox="0 0 24 24"
+                                                    stroke-width="2"
+                                                    stroke="currentColor"
+                                                    fill="none"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                >
+                                                    <path
+                                                        stroke="none"
+                                                        d="M0 0h24v24H0z"
+                                                        fill="none"
+                                                    />
+                                                    <path d="M4 7l16 0" />
+                                                    <path d="M10 11l0 6" />
+                                                    <path d="M14 11l0 6" />
+                                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                                </svg>
+                                            </button>
+                                        )}
                                         <button
                                             type="button"
                                             className="font-medium text-blue-600 hover:underline mr-2"
