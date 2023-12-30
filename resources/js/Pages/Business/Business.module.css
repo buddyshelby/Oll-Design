@@ -12,7 +12,8 @@
 }
 
 .card-list .card-placement .card-component {
-    width: clamp(150px, 31vw, 50vw);
+    /* width: clamp(150px, 31vw, 50vw); */
+    width: 420px;
     height: 270px;
 }
 

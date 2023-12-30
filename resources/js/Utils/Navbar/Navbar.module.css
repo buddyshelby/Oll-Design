@@ -31,7 +31,7 @@
 }
 
 .sidebar .language button:hover {
-    background: #DFDFDF;
+    background: #d1d1d1;
     color: #003832;
     text-decoration: underline;
     transition: 0.15s ease;
@@ -52,7 +52,7 @@
 
 .sidebar .sidebar-title a:hover {
     transition: .15s ease;
-    background: #DFDFDF;
+    background: #d1d1d1;
     border-radius: 4px;
 }
 
@@ -72,7 +72,7 @@
 
 .sidebar .sidebar-socialmedia a:hover {
     transition: 0.15s ease;
-    background: #DFDFDF;
+    background: #d1d1d1;
 }
 
 /***************************** MOBILE  *****************************/
