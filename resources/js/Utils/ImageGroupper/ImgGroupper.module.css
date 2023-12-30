@@ -14,8 +14,9 @@
 }
 
 .img-groupper .img-groupper-item a:hover {
-    color: #f6f6f6;
-    background: #003832;
+    color: #003832;
+    background: #d1d1d1;
     transition: .2s ease;
     border-radius: 4px;
+    transition: .15s ease-in;
 }

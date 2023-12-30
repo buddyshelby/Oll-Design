@@ -336,7 +336,7 @@ export default function ListGalleries() {
                                                         <img
                                                             src={`storage/${img}`}
                                                             alt={img}
-                                                            className="w-[200px] h-[200px] object-fill object-top max-w-none"
+                                                            className="w-[125px] h-[125px] object-fill object-top max-w-none"
                                                             key={index}
                                                         />
                                                     </div>
