@@ -283,7 +283,7 @@ const Business = () => {
                                     color={"bg-transparent"}
                                     rounded={"rounded-[12px]"}
                                     padding={"p-4"}
-                                    className="max-w-[950px] my-0 mx-auto"
+                                    className="max-w-full my-0 mx-auto"
                                 >
                                     <div className={classes["card-list"]}>
                                         <div
