@@ -27,7 +27,7 @@ export default function CreateGalleries() {
 
     const fetchTags = async () => {
         try {
-            const res = await axios.get("http://localhost:8000/api/galleries");
+            const res = await axios.get("https://olldesign.jp/api/galleries");
             setIsTag(res.data.tags);
         } catch (e) {
             console.error("Error fetching tags:", error);
@@ -55,7 +55,7 @@ export default function CreateGalleries() {
 
         try {
             await axios.post(
-                `http://localhost:8000/api/galleries`,
+                `https://olldesign.jp/api/galleries`,
                 formData
             );
 
@@ -75,7 +75,7 @@ export default function CreateGalleries() {
 
     // Change the createImaging function to append an array of files
     const createImaging = async () => {
-        const res = await axios.get("http://localhost:8000/api/galleries");
+        const res = await axios.get("https://olldesign.jp/api/galleries");
         const resSort = res.data.galleries.sort((a, b) => b.id - a.id);
 
         const formData = new FormData();
@@ -90,7 +90,7 @@ export default function CreateGalleries() {
 
             try {
                 await axios.post(
-                    "http://localhost:8000/api/imagings",
+                    "https://olldesign.jp/api/imagings",
                     formData
                 );
 
