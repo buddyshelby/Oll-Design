@@ -21,8 +21,10 @@ const Page = ({ onLoad = false, children }) => {
             setIsLanguage(i18n.store.data.en.translation);
         } else if (i18n.language === "en-US") {
             setIsLanguage(i18n.store.data.en.translation);
-        } else {
+        } else if (i18n.language === "en") {
             setIsLanguage(i18n.store.data.ch.translation);
+        } else {
+            setIsLanguage(i18n.store.data.en.translation);
         }
 
         if (onLoad === true) {
