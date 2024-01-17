@@ -9,10 +9,9 @@ import WebLoader from "@/Components/WebLoader";
 
 const Page = ({ onLoad = false, children }) => {
     const { i18n } = useTranslation();
-    const [isLanguage, setIsLanguage] = useState(
-        i18n.store.data.jp.translation
-    );
+    const [isLanguage, setIsLanguage] = useState(Object.values(i18n.store.data)[0].translation);
     const [isLoader, setIsLoader] = useState();
+
 
     useEffect(() => {
         if (i18n.language === "jp") {
@@ -26,7 +25,7 @@ const Page = ({ onLoad = false, children }) => {
         } else if (i18n.language === "en") {
             setIsLanguage(i18n.store.data.ch.translation);
         } else {
-            setIsLanguage(i18n.store.data.jp.translation);
+            setIsLanguage(Object.values(i18n.store.data)[0].translation);
         }
 
         if (onLoad === true) {
