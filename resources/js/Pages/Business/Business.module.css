@@ -62,6 +62,22 @@
     transform: translate(-50%, -50%);
 }
 
+.box-component {
+    width: 40vw;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.box-component .box-icon {
+    background: #fff;
+    padding: 30px;
+    width: 100%;
+}
+
 @media only screen and (min-width: 1920px) {
     .card-list .card-placement .card-component {
         height: 330px;
