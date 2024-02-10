@@ -11,8 +11,11 @@ import Page from "../Page";
 import classes from "./Business.module.css";
 
 const Business = () => {
+
     const [collapse, setCollapse] = useState(true);
     const elementRef = useRef(null);
+    const titleRef = useRef(null);
+    const [programTransformation, setProgramTransformation] = useState(true)
     // const [scrollPercentage, setScrollPercentage] = useState(0);
 
     // const toggleCollapse = () => {
@@ -41,7 +44,50 @@ const Business = () => {
 
     // console.log(scrollPercentage.toFixed());
 
-    
+    const checkTitlePosition = () => {
+        if (titleRef.current) {
+            return titleRef.current.offsetTop + titleRef.current.clientHeight + 170;
+        }
+    }
+
+    const wheelControl = (e) => {
+        e.isDefaultPrevented()
+        const topOfViewport = window.scrollY
+        const bottomOfViewport = window.scrollY + window.innerHeight
+        const titleTrigger = checkTitlePosition()
+        const boxDiv = document.getElementsByClassName(classes["box-component"])
+        const boxDivTransform = document.getElementsByClassName(classes["box-component--transform"])
+        const checkDirectMouse = e.deltaY
+
+        const handleAnimation = (element) => {
+
+            for (let index = 0; index < boxDivTransform.length; index++) {
+                const element = boxDivTransform[index];
+                element.style.display = 'flex'
+
+                setTimeout(() => {
+                    element.style.opacity = '1'
+                    element.style.transform = 'translate(0)'
+                    element.style.transition = '.5s'
+                }, 1500);
+            }
+
+            element.offsetWidth
+            element.classList.add(classes["hide"]);
+            setTimeout(() => {
+                if (boxDivTransform[0].parentElement.parentElement.previousSibling)
+                boxDivTransform[0].parentElement.parentElement.previousSibling.remove()
+            }, 1500);
+        }
+
+        
+        if (bottomOfViewport > titleTrigger) {
+            for (let index = 0; index < boxDiv.length; index++) {
+                const element = boxDiv[index];
+                element.addEventListener('animationstart', handleAnimation(element, 'notTransform'))
+            }
+        }
+    }
 
     return (
         <Page>
@@ -296,18 +342,8 @@ const Business = () => {
                                 </div>
                             </>
                         ) : (
-                            <div className="container">
+                            <div className="container" onWheel={wheelControl} onTouchMove={wheelControl}>
                                 <div className="my-4">
-                                    <div
-                                        ref={elementRef}
-                                        style={{ marginTop: "300vh" }}
-                                    >
-                                        {/* Konten elemen yang akan diberi animasi */}
-                                        <h1>
-                                            Fade Out Up on Scroll with GSAP
-                                            ScrollTrigger
-                                        </h1>
-                                    </div>
                                     <div className="text-6xl font-black text-center mb-10">
                                         <span>
                                             GOOD DESIGN <br /> MAKES YOU HAPPY.
@@ -370,74 +406,80 @@ const Business = () => {
                                         </span>
                                     </div>
                                 </div>
-                                <div className="text-2xl font-black text-center mb-6">
+                                <div className="text-2xl font-black text-center mb-6" ref={titleRef}>
                                     - What we do -
                                 </div>
-                                <div className="flex gap-2">
-                                    <div className={classes["box-component"]}>
-                                        <div className={classes["box-icon"]}>
-                                            Logo Prespective
+                                <div className="w-full relative">
+                                    <div className="w-full flex gap-2 absolute">
+                                        <div className={classes["box-component"]}>
+                                            <div className={classes["box-icon"]}>
+                                                LP
+                                            </div>
+                                            <div className={classes["box-title"]}>
+                                                Prespective
+                                            </div>
                                         </div>
-                                        <div className={classes["box-title"]}>
-                                            Prespective
+                                        <div className={classes["box-component"]}>
+                                            <div className={classes["box-icon"]}>
+                                                LSD
+                                            </div>
+                                            <div className={classes["box-title"]}>
+                                                Store Design
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className={classes["box-component"]}>
-                                        <div className={classes["box-icon"]}>
-                                            Logo Store Design
+                                        <div className={classes["box-component"]}>
+                                            <div className={classes["box-icon"]}>
+                                                LGD
+                                            </div>
+                                            <div className={classes["box-title"]}>
+                                                Graphic Design
+                                            </div>
                                         </div>
-                                        <div className={classes["box-title"]}>
-                                            Store Design
-                                        </div>
-                                    </div>
-                                    <div className={classes["box-component"]}>
-                                        <div className={classes["box-icon"]}>
-                                            Logo Graphic Design
-                                        </div>
-                                        <div className={classes["box-title"]}>
-                                            Graphic Design
-                                        </div>
-                                    </div>
-                                    <div className={classes["box-component"]}>
-                                        <div className={classes["box-icon"]}>
-                                            Logo Design Consult
-                                        </div>
-                                        <div className={classes["box-title"]}>
-                                            Design Consult
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="flex gap-2">
-                                    <div className={classes["box-component"]}>
-                                        <div className={classes["box-icon"]}>
-                                            Logo Prespective
-                                        </div>
-                                        <div className={classes["box-title"]}>
-                                            Prespective
+                                        <div className={classes["box-component"]}>
+                                            <div className={classes["box-icon"]}>
+                                                LDC
+                                            </div>
+                                            <div className={classes["box-title"]}>
+                                                Design Consult
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className={classes["box-component"]}>
-                                        <div className={classes["box-icon"]}>
-                                            Logo Store Design
+                                    <div className="w-full flex flex-col absolute">
+                                        <div className="flex gap-2">
+                                            <div className={classes["box-component--transform"]}>
+                                                <div className={classes["box-icon--transform"]}>
+                                                    Logo Prespective
+                                                </div>
+                                                <div className={classes["box-title--transform"]}>
+                                                    Prespective
+                                                </div>
+                                            </div>
+                                            <div className={classes["box-component--transform"]}>
+                                                <div className={classes["box-icon--transform"]}>
+                                                    Logo Store Design
+                                                </div>
+                                                <div className={classes["box-title--transform"]}>
+                                                    Store Design
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className={classes["box-title"]}>
-                                            Store Design
-                                        </div>
-                                    </div>
-                                    <div className={classes["box-component"]}>
-                                        <div className={classes["box-icon"]}>
-                                            Logo Graphic Design
-                                        </div>
-                                        <div className={classes["box-title"]}>
-                                            Graphic Design
-                                        </div>
-                                    </div>
-                                    <div className={classes["box-component"]}>
-                                        <div className={classes["box-icon"]}>
-                                            Logo Design Consult
-                                        </div>
-                                        <div className={classes["box-title"]}>
-                                            Design Consult
+                                        <div className="flex gap-2">
+                                            <div className={classes["box-component--transform"]}>
+                                                <div className={classes["box-icon--transform"]}>
+                                                    Logo Graphic Design
+                                                </div>
+                                                <div className={classes["box-title--transform"]}>
+                                                    Graphic Design
+                                                </div>
+                                            </div>
+                                            <div className={classes["box-component--transform"]}>
+                                                <div className={classes["box-icon--transform"]}>
+                                                    Logo Design Consult
+                                                </div>
+                                                <div className={classes["box-title--transform"]}>
+                                                    Design Consult
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
