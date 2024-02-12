@@ -1,6 +1,8 @@
 import React, { useState, useEffect , useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import listIcon from '/public/assets/icon/Pages/Business/IconStorage'
+
 
 import Card from "@/Components/Card";
 import EllipsisText from "@/Components/Ellipsis";
@@ -413,15 +415,15 @@ const Business = () => {
                                     <div className="w-full flex gap-2 absolute">
                                         <div className={classes["box-component"]}>
                                             <div className={classes["box-icon"]}>
-                                                LP
+                                                <img src={listIcon('perspective')} alt="" className="w-full h-full" />
                                             </div>
                                             <div className={classes["box-title"]}>
-                                                Prespective
+                                                Perspective
                                             </div>
                                         </div>
                                         <div className={classes["box-component"]}>
                                             <div className={classes["box-icon"]}>
-                                                LSD
+                                                <img src={listIcon('storeDesign')} alt="" className="w-full h-full" />
                                             </div>
                                             <div className={classes["box-title"]}>
                                                 Store Design
@@ -429,7 +431,7 @@ const Business = () => {
                                         </div>
                                         <div className={classes["box-component"]}>
                                             <div className={classes["box-icon"]}>
-                                                LGD
+                                                <img src={listIcon('graphDesign')} alt="" className="w-full h-full" />
                                             </div>
                                             <div className={classes["box-title"]}>
                                                 Graphic Design
@@ -437,7 +439,7 @@ const Business = () => {
                                         </div>
                                         <div className={classes["box-component"]}>
                                             <div className={classes["box-icon"]}>
-                                                LDC
+                                                <img src={listIcon('designConsult')} alt="" className="w-full h-full" />
                                             </div>
                                             <div className={classes["box-title"]}>
                                                 Design Consult
@@ -448,7 +450,7 @@ const Business = () => {
                                         <div className="flex gap-2">
                                             <div className={classes["box-component--transform"]}>
                                                 <div className={classes["box-icon--transform"]}>
-                                                    Logo Prespective
+                                                    <img src={listIcon('perspective')} alt="" className="w-full h-full" />
                                                 </div>
                                                 <div className={classes["box-title--transform"]}>
                                                     Prespective
@@ -456,7 +458,7 @@ const Business = () => {
                                             </div>
                                             <div className={classes["box-component--transform"]}>
                                                 <div className={classes["box-icon--transform"]}>
-                                                    Logo Store Design
+                                                    <img src={listIcon('storeDesign')} alt="" className="w-full h-full" />
                                                 </div>
                                                 <div className={classes["box-title--transform"]}>
                                                     Store Design
@@ -466,7 +468,7 @@ const Business = () => {
                                         <div className="flex gap-2">
                                             <div className={classes["box-component--transform"]}>
                                                 <div className={classes["box-icon--transform"]}>
-                                                    Logo Graphic Design
+                                                    <img src={listIcon('graphDesign')} alt="" className="w-full h-full" />
                                                 </div>
                                                 <div className={classes["box-title--transform"]}>
                                                     Graphic Design
@@ -474,7 +476,7 @@ const Business = () => {
                                             </div>
                                             <div className={classes["box-component--transform"]}>
                                                 <div className={classes["box-icon--transform"]}>
-                                                    Logo Design Consult
+                                                    <img src={listIcon('designConsult')} alt="" className="w-full h-full" />
                                                 </div>
                                                 <div className={classes["box-title--transform"]}>
                                                     Design Consult
