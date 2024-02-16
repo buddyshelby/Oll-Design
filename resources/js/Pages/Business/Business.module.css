@@ -22,7 +22,7 @@
     background: #f0f0f0;
     width: 100%;
     height: 100%;
-    transition: transform 0.5s;
+    transition: transform 01.5s;
     transform-style: preserve-3d;
     border-radius: 16px;
 }
@@ -63,6 +63,23 @@
 }
 
 .box-component {
+    animation: notTransformAnimate 1.5s reverse;
+}
+
+.box-component--transform {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: 1.5s;
+}
+
+.box-component.hide {
+    transform: translateY(-100px);
+    opacity: 0;
+    transition: 1.5s;
+}
+
+.box-component,
+.box-component--transform {
     width: 40vw;
     height: 40vh;
     display: flex;
@@ -72,10 +89,16 @@
     gap: 10px;
 }
 
-.box-component .box-icon {
+.box-component .box-icon,
+.box-component--transform .box-icon--transform {
     background: #fff;
     padding: 30px;
-    width: 100%;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media only screen and (min-width: 1920px) {
@@ -92,5 +115,19 @@
 
     .card-component .card-sub-component .component-back {
         font-weight: 600;
+    }
+}
+
+@keyframes notTransformAnimate {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    80% {
+        opacity: .5;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100px);
     }
 }
