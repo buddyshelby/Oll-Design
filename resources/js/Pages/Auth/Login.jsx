@@ -54,6 +54,7 @@ export default function Login({ status, canResetPassword }) {
                     // Handle response jika permintaan berhasil
                     console.log("Login berhasil!");
                     // Misalnya, Anda bisa melakukan redirect atau menampilkan pesan sukses
+                    window.location = route('admin');
                 } else {
                     // Jika respons tidak berhasil (status code bukan 2xx)
                     // Anda bisa menangani kasus-kasus khusus seperti 404 atau 500
