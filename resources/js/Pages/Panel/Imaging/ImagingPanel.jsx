@@ -186,6 +186,7 @@ export default function ImagingPanel(props) {
                                 createImaging();
                             }}
                         >
+                            @csrf
                             <div className="m-4">
                                 <InputLabel>Select Gallery:</InputLabel>
                                 <input

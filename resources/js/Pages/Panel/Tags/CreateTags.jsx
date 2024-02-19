@@ -15,7 +15,7 @@ export default function CreateTags() {
         e.preventDefault();
 
         const formData = new FormData();
-        
+
         formData.append("TagsName", tag);
         formData.append("ShortTags", shortTag);
         formData.append("TagsNameJp", tagJp);
@@ -70,6 +70,7 @@ export default function CreateTags() {
             )}
             <div className="m-4">
                 <form action="" method="post" onSubmit={createdTags}>
+                    @csrf
                     <div className="m-4">
                         <InputLabel>Tags Name (English):</InputLabel>
                         <input
@@ -80,7 +81,12 @@ export default function CreateTags() {
                             value={tag}
                             onChange={(e) => {
                                 setTag(e.target.value);
-                                setShortTag("#" + e.target.value.replaceAll(" ", "_").toLowerCase());
+                                setShortTag(
+                                    "#" +
+                                        e.target.value
+                                            .replaceAll(" ", "_")
+                                            .toLowerCase()
+                                );
                             }}
                         />
                     </div>
