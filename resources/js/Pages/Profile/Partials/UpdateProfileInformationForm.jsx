@@ -37,7 +37,6 @@ export default function UpdateProfileInformation({
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
-                @csrf
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
 

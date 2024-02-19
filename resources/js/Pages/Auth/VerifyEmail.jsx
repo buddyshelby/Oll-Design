@@ -30,7 +30,6 @@ export default function VerifyEmail({ status }) {
             )}
 
             <form onSubmit={submit}>
-                @csrf
                 <div className="mt-4 flex items-center justify-between">
                     <PrimaryButton disabled={processing}>
                         Resend Verification Email

@@ -140,7 +140,6 @@ export default function CreateGalleries() {
                     createImaging();
                 }}
             >
-                @csrf
                 <div className="m-4">
                     <InputLabel>Design Name :</InputLabel>
                     <input

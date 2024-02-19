@@ -8,6 +8,10 @@ import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
 
 export default function Login({ status, canResetPassword }) {
+    const csrfToken = document.head.querySelector(
+        'meta[name="csrf-token"]'
+    ).content;
+
     const { data, setData, post, processing, errors, reset } = useForm({
         email: "",
         password: "",
@@ -29,10 +33,38 @@ export default function Login({ status, canResetPassword }) {
         );
     };
 
+    // const submit = (e) => {
+    //     e.preventDefault();
+
+    //     post(route("login"));
+    // };
     const submit = (e) => {
         e.preventDefault();
 
-        post(route("login"));
+        fetch(route("login"), {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": csrfToken, // Menggunakan token CSRF di sini
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => {
+                if (response.ok) {
+                    // Handle response jika permintaan berhasil
+                    console.log("Login berhasil!");
+                    // Misalnya, Anda bisa melakukan redirect atau menampilkan pesan sukses
+                } else {
+                    // Jika respons tidak berhasil (status code bukan 2xx)
+                    // Anda bisa menangani kasus-kasus khusus seperti 404 atau 500
+                    console.error("Login gagal!");
+                }
+            })
+            .catch((error) => {
+                // Handle error jika permintaan gagal
+                console.error("Terjadi kesalahan:", error);
+                // Misalnya, Anda bisa menampilkan pesan kesalahan kepada pengguna
+            });
     };
 
     return (
@@ -46,7 +78,6 @@ export default function Login({ status, canResetPassword }) {
             )}
 
             <form onSubmit={submit}>
-                @csrf
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
 

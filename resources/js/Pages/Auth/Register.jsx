@@ -40,7 +40,6 @@ export default function Register() {
             <Head title="Register" />
 
             <form onSubmit={submit}>
-                @csrf
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
 

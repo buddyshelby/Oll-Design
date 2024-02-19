@@ -15,7 +15,6 @@ class ContactUs extends Component {
                         padding={"p-4"}
                     >
                         <form>
-                            @csrf
                             <div className="mb-8">
                                 <label htmlFor="name" className="form-label">
                                     お名前 / NAME

@@ -36,7 +36,6 @@ export default function ForgotPassword({ status }) {
             )}
 
             <form onSubmit={submit}>
-                @csrf
                 <TextInput
                     id="email"
                     type="email"

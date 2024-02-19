@@ -70,7 +70,6 @@ export default function CreateTags() {
             )}
             <div className="m-4">
                 <form action="" method="post" onSubmit={createdTags}>
-                    @csrf
                     <div className="m-4">
                         <InputLabel>Tags Name (English):</InputLabel>
                         <input

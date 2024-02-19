@@ -58,7 +58,6 @@ export default function UpdatePasswordForm({ className }) {
             </header>
 
             <form onSubmit={updatePassword} className="mt-6 space-y-6">
-                @csrf
                 <div>
                     <InputLabel
                         htmlFor="current_password"

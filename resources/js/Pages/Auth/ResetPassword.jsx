@@ -35,7 +35,6 @@ export default function ResetPassword({ token, email }) {
             <Head title="Reset Password" />
 
             <form onSubmit={submit}>
-                @csrf
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
 
