@@ -15,7 +15,7 @@ export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: "",
         password: "",
-        remember: "",
+        remember: false,
     });
 
     useEffect(() => {
@@ -38,6 +38,7 @@ export default function Login({ status, canResetPassword }) {
 
     //     post(route("login"));
     // };
+
     const submit = (e) => {
         e.preventDefault();
 
@@ -53,8 +54,9 @@ export default function Login({ status, canResetPassword }) {
                 if (response.ok) {
                     // Handle response jika permintaan berhasil
                     console.log("Login berhasil!");
-                    // Misalnya, Anda bisa melakukan redirect atau menampilkan pesan sukses
-                    window.location = route('admin');
+                    // Redirect ke halaman dashboard setelah login berhasil
+                    // post(route("admin"));
+                    window.location = route("admin");
                 } else {
                     // Jika respons tidak berhasil (status code bukan 2xx)
                     // Anda bisa menangani kasus-kasus khusus seperti 404 atau 500
@@ -114,7 +116,7 @@ export default function Login({ status, canResetPassword }) {
                     <label className="flex items-center">
                         <Checkbox
                             name="remember"
-                            value={data.remember}
+                            checked={data.remember}
                             onChange={handleOnChange}
                         />
                         <span className="ml-2 text-sm text-gray-600">
