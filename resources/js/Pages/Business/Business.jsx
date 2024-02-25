@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslation } from "react-i18next";
 import listIcon from "/public/assets/icon/Pages/Business/IconStorage";
 
 import Card from "@/Components/Card";
@@ -12,37 +11,26 @@ import Page from "../Page";
 import classes from "./Business.module.css";
 
 const Business = () => {
+    const { i18n } = useTranslation();
+    const [isLanguage, setIsLanguage] = useState(Object.values(i18n.store.data)[0].translation);
     const [collapse, setCollapse] = useState(true);
-    const elementRef = useRef(null);
     const titleRef = useRef(null);
-    const [programTransformation, setProgramTransformation] = useState(true);
-    // const [scrollPercentage, setScrollPercentage] = useState(0);
 
-    // const toggleCollapse = () => {
-    //     setCollapse(!collapse);
-    // };
-
-    // useEffect(() => {
-    //     const handleScroll = () => {
-    //         const scrollPosition = window.scrollY;
-    //         const windowHeight = window.innerHeight;
-    //         const fullHeight = document.body.scrollHeight;
-
-    //         const totalPageScroll = fullHeight - windowHeight;
-    //         const currentScrollPercentage =
-    //             (scrollPosition / totalPageScroll) * 100;
-
-    //         setScrollPercentage(currentScrollPercentage);
-    //     };
-
-    //     window.addEventListener("scroll", handleScroll);
-
-    //     return () => {
-    //         window.removeEventListener("scroll", handleScroll);
-    //     };
-    // }, []);
-
-    // console.log(scrollPercentage.toFixed());
+    useEffect(() => {
+        if (i18n.language === "jp") {
+            setIsLanguage(i18n.store.data.jp.translation);
+        } else if (i18n.language === "ja") {
+            setIsLanguage(i18n.store.data.jp.translation);
+        } else if (i18n.language === "en") {
+            setIsLanguage(i18n.store.data.en.translation);
+        } else if (i18n.language === "en-US") {
+            setIsLanguage(i18n.store.data.en.translation);
+        } else if (i18n.language === "en") {
+            setIsLanguage(i18n.store.data.ch.translation);
+        } else {
+            setIsLanguage(Object.values(i18n.store.data)[0].translation);
+        }
+    }, [i18n.language]);
 
     const checkTitlePosition = () => {
         if (titleRef.current) {
@@ -365,58 +353,12 @@ const Business = () => {
                                     </div>
                                     <div className="text-base font-normal text-center">
                                         <span>
-                                            Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit. Sint
-                                            maiores inventore corrupti culpa,
-                                            aperiam amet voluptate minus
-                                            eligendi quos, distinctio fugiat
-                                            reiciendis provident perspiciatis
-                                            veritatis possimus quidem nobis.
-                                            Repellat labore perferendis
-                                            explicabo eum, ea asperiores et quia
-                                            veniam nihil deserunt assumenda ut
-                                            placeat, vero minima voluptas
-                                            similique sapiente nobis accusantium
-                                            impedit dignissimos error laboriosam
-                                            ullam eaque tenetur. Eius architecto
-                                            similique provident ipsam nihil
-                                            doloremque fugit a quidem sint
-                                            velit, voluptate tempora repellat
-                                            eveniet id modi? Aliquam nesciunt
-                                            quae amet exercitationem suscipit
-                                            enim adipisci veritatis blanditiis
-                                            repellendus, facilis quod. Iure
-                                            ipsa, labore necessitatibus nobis
-                                            quaerat ad magnam! Dolor impedit
-                                            exercitationem sunt!
+                                            {isLanguage.business.description1}
                                         </span>
                                     </div>
                                     <div className="text-base font-normal text-center">
                                         <span>
-                                            Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit. Sint
-                                            maiores inventore corrupti culpa,
-                                            aperiam amet voluptate minus
-                                            eligendi quos, distinctio fugiat
-                                            reiciendis provident perspiciatis
-                                            veritatis possimus quidem nobis.
-                                            Repellat labore perferendis
-                                            explicabo eum, ea asperiores et quia
-                                            veniam nihil deserunt assumenda ut
-                                            placeat, vero minima voluptas
-                                            similique sapiente nobis accusantium
-                                            impedit dignissimos error laboriosam
-                                            ullam eaque tenetur. Eius architecto
-                                            similique provident ipsam nihil
-                                            doloremque fugit a quidem sint
-                                            velit, voluptate tempora repellat
-                                            eveniet id modi? Aliquam nesciunt
-                                            quae amet exercitationem suscipit
-                                            enim adipisci veritatis blanditiis
-                                            repellendus, facilis quod. Iure
-                                            ipsa, labore necessitatibus nobis
-                                            quaerat ad magnam! Dolor impedit
-                                            exercitationem sunt!
+                                            {isLanguage.business.description2}
                                         </span>
                                     </div>
                                 </div>
@@ -549,17 +491,7 @@ const Business = () => {
                                                         ]
                                                     }
                                                 >
-                                                    Offering a new dimension to
-                                                    architectural vision, our
-                                                    Perspective service provides
-                                                    innovative visualization
-                                                    that bring your projects to
-                                                    life Experience a
-                                                    comprehensive view with
-                                                    detailed renderings and
-                                                    immersive presentations that
-                                                    capture the essence of your
-                                                    design berofe it's built.
+                                                    {isLanguage.business.prespective}
                                                 </div>
                                             </div>
                                             <div
@@ -600,13 +532,7 @@ const Business = () => {
                                                         ]
                                                     }
                                                 >
-                                                    We specialize in creating
-                                                    bespoke and top-notch
-                                                    designs tailored to your
-                                                    specific requirements,
-                                                    delivering professional and
-                                                    high quality results that
-                                                    exceed your expectations.
+                                                    {isLanguage.business.storedesign}
                                                 </div>
                                             </div>
                                         </div>
@@ -649,17 +575,7 @@ const Business = () => {
                                                         ]
                                                     }
                                                 >
-                                                    Crafting visual stories, our
-                                                    Graphic service delivers
-                                                    striking graphic solutions
-                                                    that embody your brand's
-                                                    identity. From logos to
-                                                    layouts, we blend art and
-                                                    strategy to create graphic
-                                                    elements that are not only
-                                                    visually captivating but
-                                                    also communicate your
-                                                    message effectively.
+                                                    {isLanguage.business.graphicdesign}
                                                 </div>
                                             </div>
                                             <div
@@ -700,17 +616,7 @@ const Business = () => {
                                                         ]
                                                     }
                                                 >
-                                                    Guiding you through the maze
-                                                    of design decisions, our
-                                                    Consultation service offers
-                                                    expert advice tailored to
-                                                    your unique needs. We
-                                                    listen, analyze, and provide
-                                                    strategic recomendations to
-                                                    ensure your architectural
-                                                    and design projects are both
-                                                    aesthetically pleasing and
-                                                    functionally sound.
+                                                    {isLanguage.business.designconsult}
                                                 </div>
                                             </div>
                                         </div>
