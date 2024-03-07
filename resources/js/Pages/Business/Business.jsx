@@ -12,7 +12,9 @@ import classes from "./Business.module.css";
 
 const Business = () => {
     const { i18n } = useTranslation();
-    const [isLanguage, setIsLanguage] = useState(Object.values(i18n.store.data)[0].translation);
+    const [isLanguage, setIsLanguage] = useState(
+        Object.values(i18n.store.data)[0].translation
+    );
     const [collapse, setCollapse] = useState(true);
     const titleRef = useRef(null);
 
@@ -340,12 +342,12 @@ const Business = () => {
                                 </div>
                             </>
                         ) : (
-                            <div
-                                className="container"
-                                onWheel={wheelControl}
-                                onTouchMove={wheelControl}
-                            >
-                                <div className="my-4">
+                            <div className="my-4 px-10" style={{ maxWidth: '75vw' }}>
+                                <div
+                                    className="container"
+                                    onWheel={wheelControl}
+                                    onTouchMove={wheelControl}
+                                >
                                     <div className="text-6xl font-black text-center mb-10">
                                         <span>
                                             GOOD DESIGN <br /> MAKES YOU HAPPY.
@@ -451,7 +453,7 @@ const Business = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="w-full flex flex-col absolute">
+                                    <div className="w-full flex flex-col sticky">
                                         <div className="flex gap-2">
                                             <div
                                                 className={
@@ -491,7 +493,10 @@ const Business = () => {
                                                         ]
                                                     }
                                                 >
-                                                    {isLanguage.business.prespective}
+                                                    {
+                                                        isLanguage.business
+                                                            .prespective
+                                                    }
                                                 </div>
                                             </div>
                                             <div
@@ -532,7 +537,10 @@ const Business = () => {
                                                         ]
                                                     }
                                                 >
-                                                    {isLanguage.business.storedesign}
+                                                    {
+                                                        isLanguage.business
+                                                            .storedesign
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
@@ -575,7 +583,10 @@ const Business = () => {
                                                         ]
                                                     }
                                                 >
-                                                    {isLanguage.business.graphicdesign}
+                                                    {
+                                                        isLanguage.business
+                                                            .graphicdesign
+                                                    }
                                                 </div>
                                             </div>
                                             <div
@@ -616,7 +627,10 @@ const Business = () => {
                                                         ]
                                                     }
                                                 >
-                                                    {isLanguage.business.designconsult}
+                                                    {
+                                                        isLanguage.business
+                                                            .designconsult
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
