@@ -9,9 +9,43 @@ import WebLoader from "@/Components/WebLoader";
 
 const Page = ({ onLoad = false, children }) => {
     const { i18n } = useTranslation();
-    const [isLanguage, setIsLanguage] = useState(Object.values(i18n.store.data)[0].translation);
+    const [isLanguage, setIsLanguage] = useState(
+        Object.values(i18n.store.data)[0].translation
+    );
     const [isLoader, setIsLoader] = useState();
+    const currentPath = window.location.pathname;
 
+    let content = (
+        <div className="flex">
+            <Navbar language={isLanguage} />
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-12 mt-16 mb-6">{children}</div>
+                </div>
+            </div>
+        </div>
+    );
+
+    if (currentPath === "/") {
+        content = (
+            <div className="flex-column">
+                <div className="relative flex items-center justify-center h-screen overflow-hidden">
+                    <video autoPlay loop muted className="absolute z-10">
+                        <source src="assets/video/video.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div className="flex">
+                    <Navbar language={isLanguage} />
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-12 mt-16 mb-6">{children}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     useEffect(() => {
         if (i18n.language === "jp") {
@@ -55,16 +89,7 @@ const Page = ({ onLoad = false, children }) => {
                                 {isLoader ? (
                                     <WebLoader />
                                 ) : (
-                                    <div className="flex">
-                                        <Navbar language={isLanguage} />
-                                        <div className="container-fluid">
-                                            <div className="row">
-                                                <div className="col-12 mt-16 mb-6">
-                                                    {children}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    content
                                 )}
                             </>
                         )}
