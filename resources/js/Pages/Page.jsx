@@ -78,29 +78,38 @@ const Page = ({ onLoad = false, children }) => {
                     <>
                         <Head title="Oll Design" />
                         {matches ? (
-                            <div className="flex-column">
-                                <div className="relative h-screen">
-                                    <video
-                                        autoPlay
-                                        loop
-                                        muted
-                                        className="absolute inset-0 w-full h-full object-cover object-left"
-                                    >
-                                        <source
-                                            src="assets/video/video.mp4"
-                                            type="video/mp4"
-                                        />
-                                        Your browser does not support the video
-                                        tag.
-                                    </video>
+                            currentPath === "/" ? (
+                                <div className="flex-column">
+                                    <div className="relative h-screen">
+                                        <video
+                                            autoPlay
+                                            loop
+                                            muted
+                                            className="absolute inset-0 w-full h-full object-cover object-left"
+                                        >
+                                            <source
+                                                src="assets/video/video.mp4"
+                                                type="video/mp4"
+                                            />
+                                            Your browser does not support the
+                                            video tag.
+                                        </video>
+                                    </div>
+                                    <div className="container-fluid">
+                                        <div className="row">
+                                            <Navbar language={isLanguage} />
+                                        </div>
+                                        <div className="row">{children}</div>
+                                    </div>
                                 </div>
+                            ) : (
                                 <div className="container-fluid">
                                     <div className="row">
                                         <Navbar language={isLanguage} />
                                     </div>
                                     <div className="row">{children}</div>
                                 </div>
-                            </div>
+                            )
                         ) : (
                             <>{isLoader ? <WebLoader /> : content}</>
                         )}

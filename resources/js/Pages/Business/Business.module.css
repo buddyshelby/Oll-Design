@@ -122,6 +122,15 @@
     .card-component .card-sub-component .component-back {
         font-weight: 600;
     }
+    
+    .box-component {
+        width: 90vw;
+        margin-bottom: 1.75rem;
+    }
+
+    .box-component .box-desc {
+        text-align: justify;
+    }
 }
 
 @keyframes notTransformAnimate {
