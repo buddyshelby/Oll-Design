@@ -7,6 +7,8 @@ import MediaQuery from "@/Components/MediaQuery";
 import Navbar from "@/Utils/Navbar/Navbar";
 import WebLoader from "@/Components/WebLoader";
 
+import classes from "./Page.module.css";
+
 const Page = ({ onLoad = false, children }) => {
     const { i18n } = useTranslation();
     const [isLanguage, setIsLanguage] = useState(
@@ -34,8 +36,13 @@ const Page = ({ onLoad = false, children }) => {
                         <source src="assets/video/video.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
+                    <div className="absolute bottom-16">
+                        <a href="#section-scroll">
+                            <div className={classes["scroll-down"]}></div>
+                        </a>
+                    </div>
                 </div>
-                <div className="flex">
+                <div className="flex" id="section-scroll">
                     <Navbar language={isLanguage} />
                     <div className="container-fluid">
                         <div className="row">
@@ -94,6 +101,15 @@ const Page = ({ onLoad = false, children }) => {
                                             Your browser does not support the
                                             video tag.
                                         </video>
+                                        <div className="absolute bottom-8 w-full h-full object-cover left-1/2 transform -translate-x-1/2">
+                                            <a href="#section-scroll">
+                                                <div
+                                                    className={
+                                                        classes["scroll-down"]
+                                                    }
+                                                ></div>
+                                            </a>
+                                        </div>
                                     </div>
                                     <div className="container-fluid">
                                         <div className="row">
