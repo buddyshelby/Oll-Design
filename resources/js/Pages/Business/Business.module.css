@@ -22,7 +22,7 @@
     background: #f0f0f0;
     width: 100%;
     height: 100%;
-    transition: transform 01.5s;
+    transition: transform 1.5s;
     transform-style: preserve-3d;
     border-radius: 16px;
 }
@@ -63,25 +63,25 @@
 }
 
 .box-component {
-    animation: notTransformAnimate 1.5s reverse;
+    animation: notTransformAnimate .5s reverse;
 }
 
 .box-component--transform {
     opacity: 0;
     transform: translateY(100px);
-    transition: 1.5s;
+    transition: .5s ease-in-out;
 }
 
 .box-component.hide {
     transform: translateY(-100px);
     opacity: 0;
-    transition: 1.5s;
+    transition: .5s ease-in-out;
 }
 
 .box-component,
 .box-component--transform {
     width: 40vw;
-    height: 40vh;
+    /* height: 40vh; */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -101,6 +101,12 @@
     align-items: center;
 }
 
+.box-component .box-title,
+.box-component--transform .box-title--transform {
+    font-size: 20px;
+    font-weight: bold;
+}
+
 @media only screen and (min-width: 1920px) {
     .card-list .card-placement .card-component {
         height: 330px;
@@ -115,6 +121,15 @@
 
     .card-component .card-sub-component .component-back {
         font-weight: 600;
+    }
+    
+    .box-component {
+        width: 90vw;
+        margin-bottom: 1.75rem;
+    }
+
+    .box-component .box-desc {
+        text-align: justify;
     }
 }
 

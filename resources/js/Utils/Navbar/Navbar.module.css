@@ -1,6 +1,7 @@
 .sidebar {
     color: #003832;
     width: clamp(20%, 30%, 40%);
+    min-width: 20vw;
     min-height: 100vh;
     padding: 4rem 2rem;
     background-color: #F4F3F3;

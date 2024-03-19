@@ -7,11 +7,52 @@ import MediaQuery from "@/Components/MediaQuery";
 import Navbar from "@/Utils/Navbar/Navbar";
 import WebLoader from "@/Components/WebLoader";
 
+import classes from "./Page.module.css";
+
 const Page = ({ onLoad = false, children }) => {
     const { i18n } = useTranslation();
-    const [isLanguage, setIsLanguage] = useState(Object.values(i18n.store.data)[0].translation);
+    const [isLanguage, setIsLanguage] = useState(
+        Object.values(i18n.store.data)[0].translation
+    );
     const [isLoader, setIsLoader] = useState();
+    const currentPath = window.location.pathname;
 
+    let content = (
+        <div className="flex">
+            <Navbar language={isLanguage} />
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-12 mt-16 mb-6">{children}</div>
+                </div>
+            </div>
+        </div>
+    );
+
+    if (currentPath === "/") {
+        content = (
+            <div className="flex-column">
+                <div className="relative flex items-center justify-center h-screen overflow-hidden">
+                    <video autoPlay loop muted className="absolute z-10">
+                        <source src="assets/video/video.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                    <div className="absolute bottom-16">
+                        <a href="#section-scroll">
+                            <div className={classes["scroll-down"]}></div>
+                        </a>
+                    </div>
+                </div>
+                <div className="flex" id="section-scroll">
+                    <Navbar language={isLanguage} />
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-12 mt-16 mb-6">{children}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     useEffect(() => {
         if (i18n.language === "jp") {
@@ -44,29 +85,49 @@ const Page = ({ onLoad = false, children }) => {
                     <>
                         <Head title="Oll Design" />
                         {matches ? (
-                            <div className="container-fluid">
-                                <div className="row">
-                                    <Navbar language={isLanguage} />
-                                </div>
-                                <div className="row">{children}</div>
-                            </div>
-                        ) : (
-                            <>
-                                {isLoader ? (
-                                    <WebLoader />
-                                ) : (
-                                    <div className="flex">
-                                        <Navbar language={isLanguage} />
-                                        <div className="container-fluid">
-                                            <div className="row">
-                                                <div className="col-12 mt-16 mb-6">
-                                                    {children}
-                                                </div>
-                                            </div>
+                            currentPath === "/" ? (
+                                <div className="flex-column">
+                                    <div className="relative h-screen">
+                                        <video
+                                            autoPlay
+                                            loop
+                                            muted
+                                            className="absolute inset-0 w-full h-full object-cover object-left"
+                                        >
+                                            <source
+                                                src="assets/video/video.mp4"
+                                                type="video/mp4"
+                                            />
+                                            Your browser does not support the
+                                            video tag.
+                                        </video>
+                                        <div className="absolute bottom-8 w-full h-full object-cover left-1/2 transform -translate-x-1/2">
+                                            <a href="#section-scroll">
+                                                <div
+                                                    className={
+                                                        classes["scroll-down"]
+                                                    }
+                                                ></div>
+                                            </a>
                                         </div>
                                     </div>
-                                )}
-                            </>
+                                    <div className="container-fluid">
+                                        <div className="row">
+                                            <Navbar language={isLanguage} />
+                                        </div>
+                                        <div className="row">{children}</div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="container-fluid">
+                                    <div className="row">
+                                        <Navbar language={isLanguage} />
+                                    </div>
+                                    <div className="row">{children}</div>
+                                </div>
+                            )
+                        ) : (
+                            <>{isLoader ? <WebLoader /> : content}</>
                         )}
                     </>
                 )}

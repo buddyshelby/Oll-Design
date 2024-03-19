@@ -54,11 +54,7 @@ export default function CreateGalleries() {
         formData.append("TagsID", isSelectedTag);
 
         try {
-            await axios.post(
-                `http://localhost:8000/api/galleries`,
-                formData
-            );
-
+            await axios.post(`http://localhost:8000/api/galleries`, formData);
         } catch (error) {
             if (error.response && error.response.status === 422) {
                 setValidationError(error.response.data.errors);
