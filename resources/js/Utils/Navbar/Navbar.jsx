@@ -28,12 +28,40 @@ const Navbar = ({ language }) => {
         const targetId = e.target.id;
 
         if (hoverData.hasOwnProperty(targetId)) {
-            setIsHover(hoverData[targetId]);
+            const menuElement = document.getElementById(targetId)
+            menuElement.style.transition = '.2s'
+            menuElement.style.transform = 'translateX(30px)'
+            menuElement.style.opacity = '0'
+            setTimeout(() => {
+                menuElement.style.transition = '0s'
+                menuElement.style.transform = 'translateX(-30px)'
+            }, 200);
+            setTimeout(() => {
+                menuElement.style.transition = '.2s'
+                setIsHover(hoverData[targetId]);
+                menuElement.style.transform = 'translateX(0px)'
+                menuElement.style.opacity = '1'
+            }, 250);
         }
     };
 
-    const handleMouseOut = () => {
-        setIsHover(null);
+    const handleMouseOut = (e) => {
+        const targetId = e.target.id;
+
+        const menuElement = document.getElementById(targetId)
+        menuElement.style.transition = '.2s'
+        menuElement.style.transform = 'translateX(-30px)'
+        menuElement.style.opacity = '0'
+        setTimeout(() => {
+            menuElement.style.transition = '0s'
+            menuElement.style.transform = 'translateX(30px)'
+        }, 200);
+        setTimeout(() => {
+            menuElement.style.transition = '.2s'
+            setIsHover(null);
+            menuElement.style.transform = 'translateX(0px)'
+            menuElement.style.opacity = '1'
+        }, 250);
     };
 
     const toggleMobileMenu = () => {
