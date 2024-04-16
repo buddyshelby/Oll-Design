@@ -12,6 +12,10 @@
     color: #003832;
 }
 
+.sidebar .sidebar-content {
+    margin-bottom: 95vh;
+}
+
 .sidebar .sidebar-brand h1 {
     font-size: 26px;
     font-weight: 500;
@@ -74,6 +78,12 @@
 .sidebar .sidebar-socialmedia a:hover {
     transition: 0.15s ease;
     background: #d1d1d1;
+}
+
+.sidebar .sidebar-social {
+    position: -ms-page;
+    position: sticky;
+    bottom: 20px;
 }
 
 /***************************** MOBILE  *****************************/
