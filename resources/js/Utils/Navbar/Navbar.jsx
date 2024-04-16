@@ -23,19 +23,6 @@ const Navbar = ({ language }) => {
         i18n.changeLanguage(lng);
     };
 
-    const handleMouseOver = (e) => {
-        const hoverData = generateHoverData();
-        const targetId = e.target.id;
-
-        if (hoverData.hasOwnProperty(targetId)) {
-            setIsHover(hoverData[targetId]);
-        }
-    };
-
-    const handleMouseOut = () => {
-        setIsHover(null);
-    };
-
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
@@ -95,12 +82,6 @@ const Navbar = ({ language }) => {
                                                         className="text-sm"
                                                         id={m.id}
                                                         key={m.id}
-                                                        onMouseOver={
-                                                            handleMouseOver
-                                                        }
-                                                        onMouseOut={
-                                                            handleMouseOut
-                                                        }
                                                     >
                                                         {isHover === m.id
                                                             ? m.title_hover.toUpperCase()
@@ -160,8 +141,6 @@ const Navbar = ({ language }) => {
                                             href={m.url}
                                             id={m.id}
                                             key={m.id}
-                                            onMouseOver={handleMouseOver}
-                                            onMouseOut={handleMouseOut}
                                         >
                                             {isHover === m.id
                                                 ? m.title_hover.toUpperCase()

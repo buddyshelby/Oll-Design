@@ -31,7 +31,7 @@ const Page = ({ onLoad = false, children }) => {
     if (currentPath === "/") {
         content = (
             <div className="flex-column">
-                <div className="relative flex items-center justify-center h-screen overflow-hidden">
+                {/* <div className="relative flex items-center justify-center h-screen overflow-hidden">
                     <video autoPlay loop muted className="absolute z-10">
                         <source src="assets/video/video.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
@@ -41,12 +41,18 @@ const Page = ({ onLoad = false, children }) => {
                             <div className={classes["scroll-down"]}></div>
                         </a>
                     </div>
-                </div>
-                <div className="flex" id="section-scroll">
+                </div> */}
+                <div className="relative flex" id="section-scroll">
                     <Navbar language={isLanguage} />
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-12 mt-16 mb-6">{children}</div>
+                    <div className="w-full h-full relative">
+                        <video autoPlay loop muted className="w-screen h-screen object-cover">
+                            <source src="assets/video/video.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                        <div className="absolute w-full bottom-16">
+                            <a href="#section-scroll">
+                                <div className={classes["scroll-down"]}></div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -68,7 +74,9 @@ const Page = ({ onLoad = false, children }) => {
         } else {
             setIsLanguage(Object.values(i18n.store.data)[0].translation);
         }
+    }, [i18n.language]);
 
+    useEffect(() => {
         if (onLoad === true) {
             setTimeout(() => {
                 setIsLoader(false);
@@ -76,7 +84,7 @@ const Page = ({ onLoad = false, children }) => {
 
             setIsLoader(true);
         }
-    }, [i18n.language, onLoad]);
+    }, [onLoad])
 
     return (
         <Router>
@@ -86,36 +94,22 @@ const Page = ({ onLoad = false, children }) => {
                         <Head title="Oll Design" />
                         {matches ? (
                             currentPath === "/" ? (
-                                <div className="flex-column">
-                                    <div className="relative h-screen">
-                                        <video
-                                            autoPlay
-                                            loop
-                                            muted
-                                            className="absolute inset-0 w-full h-full object-cover object-left"
-                                        >
-                                            <source
-                                                src="assets/video/video.mp4"
-                                                type="video/mp4"
-                                            />
-                                            Your browser does not support the
-                                            video tag.
-                                        </video>
-                                        <div className="absolute bottom-8 w-full h-full object-cover left-1/2 transform -translate-x-1/2">
-                                            <a href="#section-scroll">
-                                                <div
-                                                    className={
-                                                        classes["scroll-down"]
-                                                    }
-                                                ></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="container-fluid">
-                                        <div className="row">
+                                <div className="relative flex-col">
+                                    <div className="relative w-full">
+                                        <div className="absolute row h-fit z-10" style={{ backgroundColor: 'rgba(223,223,223, 0.7)', width: 'calc(100vw + 12px)' }}>
                                             <Navbar language={isLanguage} />
                                         </div>
-                                        <div className="row">{children}</div>
+                                        <div className="w-full h-full relative">
+                                            <video autoPlay loop muted className="w-screen h-screen object-cover">
+                                                <source src="assets/video/video.mp4" type="video/mp4" />
+                                                Your browser does not support the video tag.
+                                            </video>
+                                            <div className="absolute w-full bottom-16">
+                                                <a href="#section-scroll">
+                                                    <div className={classes["scroll-down"]}></div>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             ) : (
