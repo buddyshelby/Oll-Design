@@ -42,17 +42,36 @@ const Page = ({ onLoad = false, children }) => {
                         </a>
                     </div>
                 </div> */}
-                <div className="relative flex" id="section-scroll">
+                <div className="relative flex">
                     <Navbar language={isLanguage} />
-                    <div className="w-full h-full relative">
-                        <video autoPlay loop muted className="w-screen h-screen object-cover">
-                            <source src="assets/video/video.mp4" type="video/mp4" />
-                            Your browser does not support the video tag.
-                        </video>
-                        <div className="absolute w-full bottom-16">
+                    <div className="w-full h-full">
+                        <div className="relative">
                             <a href="#section-scroll">
-                                <div className={classes["scroll-down"]}></div>
+                                <video
+                                    autoPlay
+                                    loop
+                                    muted
+                                    className="w-screen h-screen object-cover"
+                                >
+                                    <source
+                                        src="assets/video/video.mp4"
+                                        type="video/mp4"
+                                    />
+                                    Your browser does not support the video tag.
+                                </video>
+                                <div className="absolute w-full bottom-16">
+                                    <div
+                                        className={classes["scroll-down"]}
+                                    ></div>
+                                </div>
                             </a>
+                        </div>
+                        <div className="container-fluid" id="section-scroll">
+                            <div className="row">
+                                <div className="col-12 mt-16 mb-6">
+                                    {children}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,7 +103,7 @@ const Page = ({ onLoad = false, children }) => {
 
             setIsLoader(true);
         }
-    }, [onLoad])
+    }, [onLoad]);
 
     return (
         <Router>
@@ -96,17 +115,39 @@ const Page = ({ onLoad = false, children }) => {
                             currentPath === "/" ? (
                                 <div className="relative flex-col">
                                     <div className="relative w-full">
-                                        <div className="absolute row h-fit z-10" style={{ backgroundColor: 'rgba(223,223,223, 0.7)', width: 'calc(100vw + 12px)' }}>
+                                        <div
+                                            className="absolute row h-fit z-10"
+                                            style={{
+                                                backgroundColor:
+                                                    "rgba(223,223,223, 0.7)",
+                                                width: "calc(100vw + 12px)",
+                                            }}
+                                        >
                                             <Navbar language={isLanguage} />
                                         </div>
                                         <div className="w-full h-full relative">
-                                            <video autoPlay loop muted className="w-screen h-screen object-cover">
-                                                <source src="assets/video/video.mp4" type="video/mp4" />
-                                                Your browser does not support the video tag.
+                                            <video
+                                                autoPlay
+                                                loop
+                                                muted
+                                                className="w-screen h-screen object-cover"
+                                            >
+                                                <source
+                                                    src="assets/video/video.mp4"
+                                                    type="video/mp4"
+                                                />
+                                                Your browser does not support
+                                                the video tag.
                                             </video>
                                             <div className="absolute w-full bottom-16">
                                                 <a href="#section-scroll">
-                                                    <div className={classes["scroll-down"]}></div>
+                                                    <div
+                                                        className={
+                                                            classes[
+                                                                "scroll-down"
+                                                            ]
+                                                        }
+                                                    ></div>
                                                 </a>
                                             </div>
                                         </div>

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import classes from "./SocialCard.module.css";
 
-const SocialCard = (props) => {
+const SocialCard = () => {
     return (
         <div className={classes["social-card"]}>
             <img
