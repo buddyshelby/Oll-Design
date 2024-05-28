@@ -10,12 +10,42 @@ import WebLoader from "@/Components/WebLoader";
 import classes from "./Page.module.css";
 
 const Page = ({ onLoad = false, children }) => {
+
+    const [width, setWidth] = useState(0)
+    const [height, setHeight] = useState(0)
+
+    const resizeHandler = () => {
+        setWidth(window.innerWidth)
+        setHeight(window.innerHeight)
+    }
+
+    useEffect(() => {
+        resizeHandler()
+        window.addEventListener('resize', resizeHandler)
+
+        return () => window.removeEventListener('resize', resizeHandler)
+    }, [])
+
+    useEffect(() => {
+        console.log(width, height);
+    }, [width, height])
+
+
     const { i18n } = useTranslation();
     const [isLanguage, setIsLanguage] = useState(
         Object.values(i18n.store.data)[0].translation
     );
-    const [isLoader, setIsLoader] = useState();
+    // const [isLoader, setIsLoader] = useState();
     const currentPath = window.location.pathname;
+    const [imageShow, setImageShow] = useState(false)
+    const [hideLoad, setHideLoad] = useState(false)
+    const [scrollToGallery, setScrollToGallery] = useState(false)
+
+    const videoClickHandle = () => {
+        setScrollToGallery(true)
+    }
+
+
 
     let content = (
         <div className="flex">
@@ -44,29 +74,38 @@ const Page = ({ onLoad = false, children }) => {
                 </div> */}
                 <div className="relative flex">
                     <Navbar language={isLanguage} />
-                    <div className="w-full h-full">
-                        <div className="relative">
-                            <a href="#section-scroll">
-                                <video
-                                    autoPlay
-                                    loop
-                                    muted
-                                    className="w-screen h-screen object-cover"
-                                >
-                                    <source
-                                        src="assets/video/video.mp4"
-                                        type="video/mp4"
-                                    />
-                                    Your browser does not support the video tag.
-                                </video>
-                                <div className="absolute w-full bottom-16">
-                                    <div
-                                        className={classes["scroll-down"]}
-                                    ></div>
+                    <div className={`relative w-full h-full ${!scrollToGallery ? 'overflow-hidden' : ''}`}>
+                        <div className="relative w-full h-full z-10 cursor-pointer transition-all duration-1000" onClick={videoClickHandle} style={{ transform: `translateY(-${scrollToGallery ? height + 'px' : '0px'})` }}>
+                            <video
+                                autoPlay
+                                loop
+                                muted
+                                className={`w-screen h-screen object-cover ${!imageShow ? 'opacity-0' : 'opacity-100' } transition-all duration-1000`}
+                                onLoadedData={(e) => {
+                                    setHideLoad(true)
+                                    setTimeout(() => {
+                                        setImageShow(true)
+                                    }, 500)
+                                }}
+                            >
+                                <source
+                                    src="assets/video/video.mp4"
+                                    type="video/mp4"
+                                />
+                                Your browser does not support the video tag.
+                            </video>
+                            <div className={`absolute w-full bottom-16 ${!imageShow ? 'opacity-0' : 'opacity-100' } transition-all duration-1000`}>
+                                <div
+                                    className={classes["scroll-down"]}
+                                ></div>
+                            </div>
+                            {!imageShow && (
+                                <div className={`w-full h-full absolute flex top-0 left-0 justify-center items-center ${!hideLoad ? 'opacity-100' : 'opacity-0' } transition-all duration-1000`}>
+                                    <div className="w-16 h-16 border-4 border-transparent border-t-gray-600 rounded-full animate-spin"></div>
                                 </div>
-                            </a>
+                            )}
                         </div>
-                        <div className="container-fluid" id="section-scroll">
+                        <div className={`container-fluid absolute top-0 w-full h-full ${scrollToGallery ? 'opacity-100' : 'opacity-0'}`} id="section-scroll">
                             <div className="row">
                                 <div className="col-12 mt-16 mb-6">
                                     {children}
@@ -95,15 +134,18 @@ const Page = ({ onLoad = false, children }) => {
         }
     }, [i18n.language]);
 
-    useEffect(() => {
-        if (onLoad === true) {
-            setTimeout(() => {
-                setIsLoader(false);
-            }, 2000);
+    // useEffect(() => {
+    //     if (onLoad === true) {
+    //         setIsLoader(true);
+    //     }
+    // }, [onLoad]);
 
-            setIsLoader(true);
-        }
-    }, [onLoad]);
+    // useEffect(() => {
+    //     if (imageShow)
+    //         setTimeout(() => {
+    //             setIsLoader(false);
+    //         }, 2000);
+    // }, [imageShow])
 
     return (
         <Router>
@@ -114,9 +156,9 @@ const Page = ({ onLoad = false, children }) => {
                         {matches ? (
                             currentPath === "/" ? (
                                 <div className="relative flex-col">
-                                    <div className="relative w-full">
+                                    <div className={`relative w-full ${!scrollToGallery ? 'overflow-hidden' : ''}`}>
                                         <div
-                                            className="absolute row h-fit z-10"
+                                            className="absolute row h-fit z-20"
                                             style={{
                                                 backgroundColor:
                                                     "rgba(223,223,223, 0.7)",
@@ -125,12 +167,18 @@ const Page = ({ onLoad = false, children }) => {
                                         >
                                             <Navbar language={isLanguage} />
                                         </div>
-                                        <div className="w-full h-full relative">
+                                        <div className="w-full h-full relative z-10 cursor-pointer transition-all duration-1000"  onClick={videoClickHandle} style={{ transform: `translateY(-${scrollToGallery ? height + 'px' : '0px'})` }}>
                                             <video
                                                 autoPlay
                                                 loop
                                                 muted
                                                 className="w-screen h-screen object-cover"
+                                                onLoadedData={(e) => {
+                                                    setHideLoad(true)
+                                                    setTimeout(() => {
+                                                        setImageShow(true)
+                                                    }, 500)
+                                                }}
                                             >
                                                 <source
                                                     src="assets/video/video.mp4"
@@ -150,6 +198,18 @@ const Page = ({ onLoad = false, children }) => {
                                                     ></div>
                                                 </a>
                                             </div>
+                                            {!imageShow && (
+                                                <div className={`w-full h-full absolute flex top-0 left-0 justify-center items-center ${!hideLoad ? 'opacity-100' : 'opacity-0' } transition-all duration-1000`}>
+                                                    <div className="w-16 h-16 border-4 border-transparent border-t-gray-600 rounded-full animate-spin"></div>
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className={`container-fluid absolute top-0 w-full h-full ${scrollToGallery ? 'opacity-100' : 'opacity-0'}`} id="section-scroll">
+                                        <div className="row">
+                                                <div className="col-12 mt-16 mb-6">
+                                                    {children}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -162,7 +222,7 @@ const Page = ({ onLoad = false, children }) => {
                                 </div>
                             )
                         ) : (
-                            <>{isLoader ? <WebLoader /> : content}</>
+                            <>{content}</>
                         )}
                     </>
                 )}

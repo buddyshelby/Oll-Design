@@ -1,10 +1,9 @@
 .gallery {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 1rem;
 }
 
 .gallery .gallery-item {

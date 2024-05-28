@@ -12,6 +12,7 @@ import classes from "./Gallery.module.css";
 
 const Gallery = (props) => {
     const [isData, setIsData] = useState([]);
+    const [imageHovered, setImageHovered] = useState(false)
 
     useEffect(() => {
         setIsData(props.imgData);
@@ -60,8 +61,15 @@ const Gallery = (props) => {
             {({ matches }) => (
                 <>
                     {matches ? (
-                        <div className={classes["mobile-gallery"]}>
-                            {isData.map((img) => (
+                        <div className={`${classes["mobile-gallery"]}`}>
+                            {isData.map((img) => {
+                                
+                                const dateObject = new Date(img.Date);
+                                const year = dateObject.getFullYear();
+                                const month = (dateObject.getMonth() + 1).toString();
+                                const readableDate = `${year}.${month}`;
+                                
+                                return (
                                 <div
                                     id={img.id}
                                     key={img.id}
@@ -85,19 +93,30 @@ const Gallery = (props) => {
                                             </SwiperSlide>
                                         ))}
                                     </Swiper>
-                                    <div
-                                        className={`${classes["mobile-gallery-title"]} mt-2`}
-                                    >
-                                        {img.Name}
+                                    <div className="w-full flex items-center justify-center">
+                                        <div className="w-11/12 h-fit relative gallery-title">
+                                            <div className="w-full relative border-b-2 border-slate-600 mb-2">
+                                                { img.Name }
+                                                <span className="right-0 absolute">{ readableDate }</span>
+                                            </div>
+                                            <h2>{img.Name}</h2>
+                                        </div>
                                     </div>
                                 </div>
-                            ))}
+                            )})}
                         </div>
                     ) : (
                         <div className={`${classes.gallery} mt-6`}>
-                            {isData.map((img) => (
+                            {isData.map((img) => {
+                                
+                                const dateObject = new Date(img.Date);
+                                const year = dateObject.getFullYear();
+                                const month = (dateObject.getMonth() + 1).toString();
+                                const readableDate = `${year}.${month}`;
+
+                                return (
                                 <div
-                                    className={classes["gallery-item"]}
+                                    className={`${classes["gallery-item"]} flex-col items-center justify-center`}
                                     id={img.id}
                                     key={img.id}
                                     onClick={onGetPageIdHandler}
@@ -113,18 +132,27 @@ const Gallery = (props) => {
                                     >
                                         {img.Img.map((i, index) => (
                                             <SwiperSlide key={index}>
-                                                <img
-                                                    src={`storage/` + i}
-                                                    alt="images"
-                                                />
+                                                <div className="w-full h-full relative flex items-center justify-center">
+                                                    <div className="w-full h-full absolute z-20 cursor-pointer" onMouseEnter={() => setImageHovered(i)} onMouseLeave={() => setImageHovered(false)}></div>
+                                                    <div className="w-full h-full absolute bg-white transition-all duration-500" style={{ opacity: imageHovered === i ? '.6' : '0' }}></div>
+                                                    <span className={`w-1/2 absolute z-10 text-4xl text-center text-white ${imageHovered === i ? 'opacity-100' : 'opacity-0'} transition-all duration-500`}>{ img.Name }</span>
+                                                    <img
+                                                        src={`storage/` + i}
+                                                        alt="images"
+                                                    />
+                                                </div>
                                             </SwiperSlide>
                                         ))}
                                     </Swiper>
-                                    <div className="gallery-title">
+                                    <div className="w-11/12 h-fit relative gallery-title">
+                                        <div className="w-full relative border-b-2 border-slate-600 mb-2">
+                                            { img.Name }
+                                            <span className="right-0 absolute">{ readableDate }</span>
+                                        </div>
                                         <h2>{img.Name}</h2>
                                     </div>
                                 </div>
-                            ))}
+                            )})}
                         </div>
                     )}
                 </>

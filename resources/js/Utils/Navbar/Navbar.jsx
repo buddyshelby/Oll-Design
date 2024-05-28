@@ -207,11 +207,11 @@ const Navbar = ({ language }) => {
                                     ))}
                                 </div> */}
                             </div>
-                            {isSocial && (
+                            {/* {isSocial && (
                                 <div className={classes["sidebar-social"]}>
                                     <SocialCard hover={isSocial} />
                                 </div>
-                            )}
+                            )} */}
                         </div>
                     )}
                 </>
