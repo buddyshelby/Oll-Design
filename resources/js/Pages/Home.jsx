@@ -16,14 +16,32 @@ const Home = () => {
     const [filter, setFilter] = useState("#all");
     const [isLoading, setIsLoading] = useState(true);
     const [filteredData, setFilteredData] = useState([]);
+    const [navDate, setNavDate] = useState([])
+    const [galleryDetailView, setGalleryDetailView] = useState(false)
 
     useEffect(() => {
         fetchData();
     }, []);
 
     useEffect(() => {
+        const fill = ['all']
+        isData.forEach(item => {
+
+            const dateObject = new Date(item.Date);
+            const year = dateObject.getFullYear();
+
+            fill.push(year)
+        })
+        setNavDate([...new Set (fill)])
+    }, [isData])
+
+    useEffect(() => {
         const newFilteredData = isData.filter((item) => {
-            return filter === "#all" || item.ShortTags === filter;
+
+            const dateObject = new Date(item.Date);
+            const year = dateObject.getFullYear();
+
+            return filter === "#all" || `#${year}` === filter;
         });
         setFilteredData(newFilteredData);
     }, [isData, filter]);
@@ -58,17 +76,18 @@ const Home = () => {
     )
 
     return (
-        <Page onLoad={isLoading}>
+        <Page onLoad={isLoading} galleryDetailView={galleryDetailView}>
             <>
                 {isPageId === 0 ? (
                     <>
-                        <ImgGroupper onGetFilter={getFilter} />
+                        <ImgGroupper onGetFilter={getFilter} navDate={navDate} />
                         {isLoading ? (
                             <HomeSkeleton count={isData.length} />
                         ) : (
                             <Gallery
                                 imgData={dislayList}
                                 onGetDetailId={getDetailId}
+                                setGalleryDetailView={setGalleryDetailView}
                             />
                         )}
                     </>

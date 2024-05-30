@@ -112,26 +112,27 @@ const ImgGroupper = (props) => {
                         </div>
                     ) : (
                         <div className={classes["img-groupper"]}>
-                            {isGroup.map((i) => (
+                            {props.navDate.map((item, index) => (
                                 <div
                                     className={classes["img-groupper-item"]}
-                                    key={i.id}
+                                    key={index}
                                 >
                                     <a
-                                        href={i.ShortTags}
-                                        id={i.id}
+                                        href={`#${item}`}
+                                        id={index}
                                         onClick={getValueGroupper}
                                         onMouseOver={handleMouseOver}
                                         onMouseOut={handleMouseOut}
-                                    >
-                                        {isHover === i.id
+                                    >{String(item).toUpperCase()}
+                                        {/* {JSON.stringify(props.imgData[0].Date)} */}
+                                        {/* {isHover === i.id
                                             ? i18n.language === "jp"
                                                 ? i.TagsName.toUpperCase()
                                                 : i.TagsNameJp.toUpperCase()
                                             : (i18n.language === "jp"
                                                   ? i.TagsNameJp
                                                   : i.TagsName
-                                              ).toUpperCase()}
+                                              ).toUpperCase()} */}
                                     </a>
                                 </div>
                             ))}

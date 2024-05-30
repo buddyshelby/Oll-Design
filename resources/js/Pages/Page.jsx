@@ -9,7 +9,7 @@ import WebLoader from "@/Components/WebLoader";
 
 import classes from "./Page.module.css";
 
-const Page = ({ onLoad = false, children }) => {
+const Page = ({ onLoad = false, children, galleryDetailView }) => {
 
     const [width, setWidth] = useState(0)
     const [height, setHeight] = useState(0)
@@ -25,10 +25,6 @@ const Page = ({ onLoad = false, children }) => {
 
         return () => window.removeEventListener('resize', resizeHandler)
     }, [])
-
-    useEffect(() => {
-        console.log(width, height);
-    }, [width, height])
 
 
     const { i18n } = useTranslation();
@@ -105,12 +101,14 @@ const Page = ({ onLoad = false, children }) => {
                                 </div>
                             )}
                         </div>
-                        <div className={`container-fluid absolute top-0 w-full h-full ${scrollToGallery ? 'opacity-100' : 'opacity-0'}`} id="section-scroll">
-                            <div className="row">
+                        <div className={`${ galleryDetailView ? 'overflow-x-hidden' : 'container-fluid'} absolute top-0 w-full h-full ${scrollToGallery ? 'opacity-100' : 'opacity-0'}`} id="section-scroll">
+                            {!galleryDetailView ? <div className="row">
                                 <div className="col-12 mt-16 mb-6">
                                     {children}
                                 </div>
                             </div>
+                            :
+                            children}
                         </div>
                     </div>
                 </div>
