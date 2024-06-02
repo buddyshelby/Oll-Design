@@ -8,6 +8,7 @@ import Navbar from "@/Utils/Navbar/Navbar";
 import WebLoader from "@/Components/WebLoader";
 
 import classes from "./Page.module.css";
+import Loading from "./Loading/Loading";
 
 const Page = ({ onLoad = false, children, galleryDetailView }) => {
 
@@ -69,7 +70,7 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                     </div>
                 </div> */}
                 <div className="relative flex">
-                    <Navbar language={isLanguage} />
+                    {!galleryDetailView && <Navbar language={isLanguage} />}
                     <div className={`relative w-full h-full ${!scrollToGallery ? 'overflow-hidden' : ''}`}>
                         <div className="relative w-full h-full z-10 cursor-pointer transition-all duration-1000" onClick={videoClickHandle} style={{ transform: `translateY(-${scrollToGallery ? height + 'px' : '0px'})` }}>
                             <video
@@ -97,11 +98,11 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                             </div>
                             {!imageShow && (
                                 <div className={`w-full h-full absolute flex top-0 left-0 justify-center items-center ${!hideLoad ? 'opacity-100' : 'opacity-0' } transition-all duration-1000`}>
-                                    <div className="w-16 h-16 border-4 border-transparent border-t-gray-600 rounded-full animate-spin"></div>
+                                    <Loading />
                                 </div>
                             )}
                         </div>
-                        <div className={`${ galleryDetailView ? 'overflow-x-hidden' : 'container-fluid'} absolute top-0 w-full h-full ${scrollToGallery ? 'opacity-100' : 'opacity-0'}`} id="section-scroll">
+                        <div className={`${ galleryDetailView ? 'overflow-hidden' : 'container-fluid'} absolute top-0 w-full h-full ${scrollToGallery ? 'opacity-100' : 'opacity-0'}`} id="section-scroll">
                             {!galleryDetailView ? <div className="row">
                                 <div className="col-12 mt-16 mb-6">
                                     {children}
@@ -155,16 +156,16 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                             currentPath === "/" ? (
                                 <div className="relative flex-col">
                                     <div className={`relative w-full ${!scrollToGallery ? 'overflow-hidden' : ''}`}>
-                                        <div
+                                        {/* <div
                                             className="absolute row h-fit z-20"
                                             style={{
                                                 backgroundColor:
                                                     "rgba(223,223,223, 0.7)",
                                                 width: "calc(100vw + 12px)",
                                             }}
-                                        >
-                                            <Navbar language={isLanguage} />
-                                        </div>
+                                        > */}
+                                            {!galleryDetailView && <Navbar language={isLanguage} />}
+                                        {/* </div> */}
                                         <div className="w-full h-full relative z-10 cursor-pointer transition-all duration-1000"  onClick={videoClickHandle} style={{ transform: `translateY(-${scrollToGallery ? height + 'px' : '0px'})` }}>
                                             <video
                                                 autoPlay
@@ -202,9 +203,9 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                                                 </div>
                                             )}
                                         </div>
-                                        <div className={`container-fluid absolute top-0 w-full h-full ${scrollToGallery ? 'opacity-100' : 'opacity-0'}`} id="section-scroll">
+                                        <div className={`${ galleryDetailView ? 'overflow-hidden' : 'container-fluid'} absolute top-0 w-full h-full ${scrollToGallery ? 'opacity-100' : 'opacity-0'}`} id="section-scroll">
                                         <div className="row">
-                                                <div className="col-12 mt-16 mb-6">
+                                                <div className={`col-12 ${galleryDetailView ? '' : 'mt-16'} mb-6`}>
                                                     {children}
                                                 </div>
                                             </div>

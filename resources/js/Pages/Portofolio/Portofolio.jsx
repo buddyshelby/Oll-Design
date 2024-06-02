@@ -8,20 +8,40 @@ import Gallery from "@/Pages/Gallery/Gallery";
 import GalleryDetail from "@/Pages/Gallery/Detail/GalleryDetail";
 import HomeSkeleton from "@/Components/HomeSkeleton";
 
+const ITEMS_PER_PAGE = 9;
+
 const Portofolio = () => {
     const [isData, setIsData] = useState([]);
     const [isPageId, setIsPageId] = useState(0);
     const [filter, setFilter] = useState("#all");
     const [isLoading, setIsLoading] = useState(true);
     const [filteredData, setFilteredData] = useState([]);
+    const [navDate, setNavDate] = useState([])
+    const [galleryDetailView, setGalleryDetailView] = useState(false)
 
     useEffect(() => {
         fetchData();
     }, []);
 
     useEffect(() => {
+        const fill = ['all']
+        isData.forEach(item => {
+
+            const dateObject = new Date(item.Date);
+            const year = dateObject.getFullYear();
+
+            fill.push(year)
+        })
+        setNavDate([...new Set (fill)])
+    }, [isData])
+
+    useEffect(() => {
         const newFilteredData = isData.filter((item) => {
-            return filter === "#all" || item.ShortTags === filter;
+
+            const dateObject = new Date(item.Date);
+            const year = dateObject.getFullYear();
+
+            return filter === "#all" || `#${year}` === filter;
         });
         setFilteredData(newFilteredData);
     }, [isData, filter]);
@@ -50,25 +70,31 @@ const Portofolio = () => {
         return pages.id === parseInt(isPageId);
     });
 
+    const dislayList = filteredData.slice(
+        0 * ITEMS_PER_PAGE,
+        (0 + 1) * ITEMS_PER_PAGE
+    )
+
     return (
-        <Page>
-            <>
+        <Page onLoad={isLoading} galleryDetailView={galleryDetailView}>
+            <div>
                 {isPageId === 0 ? (
                     <>
-                        <ImgGroupper onGetFilter={getFilter} />
+                        <ImgGroupper onGetFilter={getFilter} navDate={navDate} />
                         {isLoading ? (
                             <HomeSkeleton count={isData.length} />
                         ) : (
                             <Gallery
-                                imgData={filteredData}
+                                imgData={dislayList}
                                 onGetDetailId={getDetailId}
+                                setGalleryDetailView={setGalleryDetailView}
                             />
                         )}
                     </>
                 ) : (
-                    <GalleryDetail detailPages={onDetailPageId} />
+                    <GalleryDetail detailPages={onDetailPageId} getDetailId={getDetailId} setGalleryDetailView={setGalleryDetailView} />
                 )}
-            </>
+            </div>
         </Page>
     );
 };

@@ -1,15 +1,15 @@
 .bg-jumbotron {
-    animation: BGScaleUp 180s infinite;
+    animation: BGScaleUp 70s infinite;
 }
 
 @keyframes BGScaleUp {
     0% {
-        background-size: 100%;
+        scale: 1;
     }
     90% {
-        background-size: 150%;
+        scale: 1.5;
     }
     100% {
-        background-size: 100%;
+        scale: 1;
     }
 }

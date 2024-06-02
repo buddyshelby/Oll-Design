@@ -77,7 +77,7 @@ const Home = () => {
 
     return (
         <Page onLoad={isLoading} galleryDetailView={galleryDetailView}>
-            <>
+            <div>
                 {isPageId === 0 ? (
                     <>
                         <ImgGroupper onGetFilter={getFilter} navDate={navDate} />
@@ -92,9 +92,9 @@ const Home = () => {
                         )}
                     </>
                 ) : (
-                    <GalleryDetail detailPages={onDetailPageId} />
+                    <GalleryDetail detailPages={onDetailPageId} getDetailId={getDetailId} setGalleryDetailView={setGalleryDetailView} />
                 )}
-            </>
+            </div>
         </Page>
     );
 };

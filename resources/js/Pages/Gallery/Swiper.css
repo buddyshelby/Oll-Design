@@ -1,11 +1,12 @@
 .swiper {
     --calc-value: calc(100 / 30);
-    width: calc(400px + 16px * var(--calc-value));
+    width: calc(600px + 16px * var(--calc-value));
     height: 235px;
     overflow: hidden;
 }
 
 .swiper .swiper-slide {
+    width: 470px !important;
     display: flex;
     justify-content: center;
     align-items: center;

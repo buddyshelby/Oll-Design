@@ -129,6 +129,7 @@ const Gallery = (props) => {
                                         modules={[Autoplay]}
                                         className="mySwiper"
                                         key={img.id}
+                                        style={{ width: '470px' }}
                                     >
                                         {img.Img.map((i, index) => (
                                             <SwiperSlide key={index}>
