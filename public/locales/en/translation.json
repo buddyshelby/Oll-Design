@@ -206,63 +206,61 @@
         "profile": [
             {
                 "id": 1,
-                "title": "商号",
+                "title": "Company Name",
                 "desc": [
                     {
                         "id": 1,
-                        "address": "OLLDESIGN株式会社( OLLDESIGN CO., Ltd. )",
-                        "telp": null,
-                        "fax": null
+                        "address": "OLLDESIGN Co., Ltd."
                     }
                 ]
             },
             {
                 "id": 2,
-                "title": "Head Office",
+                "title": "CEO",
                 "desc": [
                     {
                         "id": 1,
-                        "address": "〒659-0067 兵庫県芦屋市茶屋之町11-11（2017年４月事務所移転）",
-                        "telp": "TEL : 0797-35-8806",
-                        "fax": "FAX : 0797-35-8807"
+                        "address": "Yoshinori Ohnishi"
                     }
                 ]
             },
             {
                 "id": 3,
-                "title": "Tokyo Office",
+                "title": "Established",
                 "desc": [
                     {
                         "id": 1,
-                        "address": "〒166-0012 東京都杉並区和田3-60-13 ｾﾞﾝﾌﾋﾞﾙ401号",
-                        "telp": "TEL : 03-5929-8727",
-                        "fax": "FAX : 03-5929-8728"
+                        "address": "October 10, 2010"
                     }
                 ]
             },
             {
                 "id": 4,
+                "title": "Main Business Activities",
+                "desc": [
+                    {
+                        "id": 1,
+                        "address": "▼Store Production (Domestic & International)|Store design and supervision|Store planning and production|Property introduction, investigation, and sales forecasting|Store renovations and new business development|Consulting for overseas store openings|Production and sales of imported overseas goods (furniture, fixtures, kitchen equipment, etc.)||▼Graphic Design|Logo and web design|Print design (flyers, business cards, menus, etc.) to printing||▼Original Goods Planning, Creation, and Sales|Amusement prizes|Apparel, stationery, miscellaneous goods"
+                    }
+                ]
+            },
+            {
+                "id": 8,
+                "title": "Company Location",
+                "desc": [
+                    {
+                        "id": 1,
+                        "address": "11-11 Chayanocho, Ashiya City, Hyogo Prefecture"
+                    }
+                ]
+            },
+            {
+                "id": 9,
                 "title": "Group Company",
                 "desc": [
                     {
                         "id": 1,
-                        "name": "上海事務所",
-                        "address": "ZIP 200041 上海市静安区陕西北路173号车间8"
-                    },
-                    {
-                        "id": 2,
-                        "name": "家具工場",
-                        "address": "ZIP 201613 上海市松江工業区開明路268号"
-                    },
-                    {
-                        "id": 3,
-                        "name": "看板工場",
-                        "address": "ZIP 201615 上海市松江区九鎮高科技園区九径路119弄225号"
-                    },
-                    {
-                        "id": 4,
-                        "name": "厨房工場",
-                        "address": "ZIP 529100 江門市新会区江会路菜甲村北中国工並区"
+                        "address": "Shanghai Onishi Group Architectural Design Consulting Co., Ltd.|No. 2 Warehouse, 1098 Jiangyang South Road, Baoshan District, Shanghai"
                     }
                 ]
             }

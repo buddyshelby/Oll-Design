@@ -20,7 +20,7 @@ const Company = () => {
             setIsLanguage(i18n.store.data.en.translation);
         } else if (i18n.language === "en-US") {
             setIsLanguage(i18n.store.data.en.translation);
-        } else if (i18n.language === "en") {
+        } else if (i18n.language === "ch") {
             setIsLanguage(i18n.store.data.ch.translation);
         } else {
             setIsLanguage(Object.values(i18n.store.data)[0].translation);
@@ -232,7 +232,7 @@ const Company = () => {
                                                             }
                                                             key={d.id}
                                                         >
-                                                            {d.address}
+                                                            {d.address.split('|').map(item => <>{item}<br /></>)}
                                                         </div>
                                                         <div
                                                             className={

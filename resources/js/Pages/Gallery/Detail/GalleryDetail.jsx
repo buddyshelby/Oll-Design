@@ -36,6 +36,10 @@ const GalleryDetail = (props) => {
     const [scrollLength1, setScrollLength1] = useState(0)
     const [waitRender, setWaitRender] = useState(false)
     const [backState, setBackState] = useState('')
+    const [translation, setTranslation] = useState({
+        set: 'En',
+        choice: ['Jp', 'Ch']
+    })
 
     const dateObject = new Date(detailPages.Date);
     const year = dateObject.getFullYear();
@@ -135,9 +139,7 @@ const GalleryDetail = (props) => {
                     return ((heightPage - height))
     
             }
-    
-            console.log(splitedImage);
-    
+
             scrollLength = calculateScroll()
             setScrollLength1(scrollLength);
     }
@@ -163,6 +165,18 @@ const GalleryDetail = (props) => {
         }
     }
 
+    const translationHandler = (lang) => {
+        const tempCurrentLang = translation.set
+        const filterChoice = translation.choice.filter(e => e !== lang)[0]
+        const setChoice = [filterChoice, tempCurrentLang]
+
+        setTranslation({
+            set: lang,
+            choice: setChoice
+        })
+
+    }
+
     return (
         <>
             {!waitRender && <div className="w-full h-screen absolute top-0 left-0 flex justify-center items-center">
@@ -182,6 +196,15 @@ const GalleryDetail = (props) => {
                     <div className="mx-3 sm:mx-0" style={{ maxWidth: '640px' }}>
                         <div className="my-6 flex flex-col">
                             <span>JAPAN {year}</span>
+                        </div>
+                        <div className="mb-5 flex">
+                            {translation.choice.map((item, index) => (
+                                <span key={index} onClick={() => translationHandler(item)} className="mx-1 border-b-2 cursor-pointer duration-500 border-slate-500 hover:border-slate-950 border-opacity-50 hover:border-opacity-100 text-slate-500 hover:text-slate-950">
+                                    {item.toUpperCase()}
+                                </span>
+                            ))}
+                        </div>
+                        <div className="mb-5 flex flex-col">
                             <span>{`${year}.${month}`}</span>
                         </div>
                         <div className="mb-5 flex flex-col">
@@ -190,7 +213,7 @@ const GalleryDetail = (props) => {
                         </div>
 
                         <div className="mb-6">
-                            <span>{detailPages.DescriptionEn}</span>
+                            <span>{detailPages[`Description${translation['set']}`]}</span>
                         </div>
 
                         {/* Image Showup */}

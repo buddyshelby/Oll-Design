@@ -126,7 +126,7 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
             setIsLanguage(i18n.store.data.en.translation);
         } else if (i18n.language === "en-US") {
             setIsLanguage(i18n.store.data.en.translation);
-        } else if (i18n.language === "en") {
+        } else if (i18n.language === "ch") {
             setIsLanguage(i18n.store.data.ch.translation);
         } else {
             setIsLanguage(Object.values(i18n.store.data)[0].translation);
