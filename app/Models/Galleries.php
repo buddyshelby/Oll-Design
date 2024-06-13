@@ -12,6 +12,7 @@ class Galleries extends Model
 
     protected $fillable = [
         'Name',
+        'City_Name',
         'Date',
         'DescriptionJp',
         'DescriptionEn',

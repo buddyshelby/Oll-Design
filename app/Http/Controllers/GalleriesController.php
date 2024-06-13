@@ -18,7 +18,7 @@ class GalleriesController extends Controller
         $galleries = DB::table('galleries')
             ->leftJoin('tags', 'tags.id', '=', 'galleries.TagsID')
             ->leftJoin('imagings', 'imagings.GalleriesID', '=', 'galleries.id')
-            ->select('galleries.id', 'galleries.Name', 'galleries.Date', 'galleries.DescriptionEn', 'galleries.DescriptionJp', 'galleries.DescriptionCh', 'galleries.WorksTitle', 'galleries.WorksContent', 'galleries.WorksCredit', 'galleries.WorksClient', 'galleries.TagsID', 'tags.ShortTags', 'imagings.Img', 'imagings.id AS imagingsID', 'galleries.created_at')
+            ->select('galleries.id', 'galleries.Name', 'galleries.City_Name', 'galleries.Date', 'galleries.DescriptionEn', 'galleries.DescriptionJp', 'galleries.DescriptionCh', 'galleries.WorksTitle', 'galleries.WorksContent', 'galleries.WorksCredit', 'galleries.WorksClient', 'galleries.TagsID', 'tags.ShortTags', 'imagings.Img', 'imagings.id AS imagingsID', 'galleries.created_at')
             ->orderBy('galleries.Date', 'desc')
             ->orderBy('galleries.created_at', 'desc')
             ->get();
@@ -58,6 +58,7 @@ class GalleriesController extends Controller
     {
         $request->validate([
             'Name' => 'required|string',
+            'City_Name' => 'required|string',
             'Date' => 'required|date',
             'DescriptionJp' => 'required|string',
             'DescriptionEn' => 'required|string',
@@ -73,6 +74,7 @@ class GalleriesController extends Controller
         try {
             Galleries::create([
                 'Name' => $request->input('Name'),
+                'City_Name' => $request->input('City_Name'),
                 'Date' => $request->input('Date'),
                 'DescriptionJp' => $request->input('DescriptionJp'),
                 'DescriptionEn' => $request->input('DescriptionEn'),
@@ -93,7 +95,7 @@ class GalleriesController extends Controller
             \Log::error($e->getTraceAsString());
 
             return response()->json([
-                'message' => 'Something went wrong while creating gallery!',
+                'message' => 'aSomething went wrong while creating gallery!',
             ], 500);
         }
     }

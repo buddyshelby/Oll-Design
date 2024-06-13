@@ -4,10 +4,12 @@ import Swal from "sweetalert2";
 
 import InputLabel from "@/Components/InputLabel";
 import FileUploader from "@/Components/FileUploader";
+import Loading from "@/Pages/Loading/Loading";
 
 export default function CreateGalleries() {
     const [isTag, setIsTag] = useState([]);
     const [name, setName] = useState("");
+    const [cityName, setCityName] = useState("");
     const [date, setDate] = useState("");
     const [descriptionJp, setDescriptionJp] = useState("");
     const [descriptionEn, setDescriptionEn] = useState("");
@@ -19,7 +21,10 @@ export default function CreateGalleries() {
     const [workscredit, setWorksCredit] = useState("");
     const [worksclient, setWorksClient] = useState("");
     const [validationError, setValidationError] = useState({});
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const allField = ["Name", "City_Name", "Date", "DescriptionJp", "DescriptionEn", "DescriptionCh", "WorksTitle", "WorksContent", "WorksCredit", "WorksClient"]
 
     useEffect(() => {
         fetchTags();
@@ -27,7 +32,7 @@ export default function CreateGalleries() {
 
     const fetchTags = async () => {
         try {
-            const res = await axios.get("http://localhost:8000/api/galleries");
+            const res = await axios.get("http://olldesign.jp/api/galleries");
             setIsTag(res.data.tags);
         } catch (e) {
             console.error("Error fetching tags:", error);
@@ -38,23 +43,21 @@ export default function CreateGalleries() {
         setIsSelectedTag(e.target.value);
     };
 
-    const createGallery = async () => {
-        const formData = new FormData();
+    const createGallery = async (eventForm) => {
+        const formData = eventForm.target.elements;
+	const theBody = {}
 
-        formData.append("Name", name);
-        formData.append("Date", date);
-        formData.append("DescriptionJp", descriptionJp);
-        formData.append("DescriptionEn", descriptionEn);
-        formData.append("DescriptionCh", descriptionCh);
-        formData.append("UpdateByUser", updateByUser);
-        formData.append("WorksTitle", workstitle);
-        formData.append("WorksContent", workscontent);
-        formData.append("WorksCredit", workscredit);
-        formData.append("WorksClient", worksclient);
-        formData.append("TagsID", isSelectedTag);
+        allField.forEach(item => {
+          theBody[item] = formData[item].value
+	})
+
+	theBody["TagsID"] = "4"
+	theBody["UpdateByUser"] = "admin"
 
         try {
-            await axios.post(`http://localhost:8000/api/galleries`, formData);
+	    setLoading(true)
+            const res = await axios.post(`http://olldesign.jp/api/galleries`, theBody);
+	    createImaging(eventForm)
         } catch (error) {
             if (error.response && error.response.status === 422) {
                 setValidationError(error.response.data.errors);
@@ -70,25 +73,31 @@ export default function CreateGalleries() {
     };
 
     // Change the createImaging function to append an array of files
-    const createImaging = async () => {
-        const res = await axios.get("http://localhost:8000/api/galleries");
+    const createImaging = async (eventForm) => {
+        const res = await axios.get("http://olldesign.jp/api/galleries");
         const resSort = res.data.galleries.sort((a, b) => b.id - a.id);
 
         const formData = new FormData();
+	const theBody = eventForm.target.elements
         formData.append("GalleriesID", resSort[0].id);
 
         // Ensure image is an array before iterating
         if (Array.isArray(image)) {
             // Append an array of files
-            for (const file of image) {
-                formData.append("Img[]", file);
+
+            for (let i = 0; i < theBody['file-input'].files.length; i++) {
+              formData.append(`Img[${i}]`, theBody['file-input'].files[i]);
             }
 
             try {
                 await axios.post(
-                    "http://localhost:8000/api/imagings",
-                    formData
-                );
+                    "http://olldesign.jp/api/imagings",
+                    formData, {
+                      headers: {
+                        'Content-Type': 'multipart/form-data'
+                      }
+		});
+	        setLoading(false)
 
                 setTimeout(() => {
                     window.location.reload();
@@ -104,6 +113,7 @@ export default function CreateGalleries() {
                 // Set image to null or an empty array
                 setImage(null);
             } catch (error) {
+	        setLoading(false)
                 console.error("Error creating imaging:", error);
                 Swal.fire({
                     icon: "error",
@@ -118,6 +128,11 @@ export default function CreateGalleries() {
 
     return (
         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 mb-4">
+	    {loading && <div className="absolute">
+		    <div className="w-screen h-screen top-0 left-0 fixed flex justify-center items-center z-20 bg-black bg-opacity-25">
+		      <Loading />
+                    </div>
+	    </div>}
             {Object.keys(validationError).length > 0 && (
                 <div className="row">
                     <div className="col-12">
@@ -136,8 +151,7 @@ export default function CreateGalleries() {
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
-                    createGallery();
-                    createImaging();
+                    createGallery(e);
                 }}
             >
                 <div className="m-4">
@@ -145,11 +159,24 @@ export default function CreateGalleries() {
                     <input
                         type="text"
                         className="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-100"
-                        name="name"
+                        name="Name"
                         id="name"
                         value={name}
                         onChange={(e) => {
                             setName(e.target.value);
+                        }}
+                    />
+                </div>
+	        <div className="m-4">
+                    <InputLabel>City Name :</InputLabel>
+                    <input
+                        type="text"
+                        className="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-100"
+                        name="City_Name"
+                        id="cityName"
+                        value={cityName}
+                        onChange={(e) => {
+                            setCityName(e.target.value);
                         }}
                     />
                 </div>
@@ -158,7 +185,7 @@ export default function CreateGalleries() {
                     <input
                         type="date"
                         className="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                        name="date"
+                        name="Date"
                         id="date"
                         value={date}
                         onChange={(e) => {
@@ -170,7 +197,7 @@ export default function CreateGalleries() {
                     <InputLabel>Description Design (Japanese) :</InputLabel>
                     <textarea
                         id="descJp"
-                        name="descJp"
+                        name="DescriptionJp"
                         value={descriptionJp}
                         onChange={(e) => {
                             setDescriptionJp(e.target.value);
@@ -184,7 +211,7 @@ export default function CreateGalleries() {
                     <InputLabel>Description Design (English) :</InputLabel>
                     <textarea
                         id="descEn"
-                        name="descEn"
+                        name="DescriptionEn"
                         value={descriptionEn}
                         onChange={(e) => {
                             setDescriptionEn(e.target.value);
@@ -198,7 +225,7 @@ export default function CreateGalleries() {
                     <InputLabel>Description Design (Chinese) :</InputLabel>
                     <textarea
                         id="descCh"
-                        name="descCh"
+                        name="DescriptionCh"
                         value={descriptionCh}
                         onChange={(e) => {
                             setDescriptionCh(e.target.value);
@@ -209,28 +236,11 @@ export default function CreateGalleries() {
                     ></textarea>
                 </div>
                 <div className="m-4">
-                    <InputLabel>Select Tag:</InputLabel>
-                    <select
-                        value={isSelectedTag}
-                        onChange={onChangeSelectedTags}
-                        className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    >
-                        <option value="" disabled>
-                            Select Tags
-                        </option>
-                        {isTag.map((tg) => (
-                            <option key={tg.id} value={tg.id}>
-                                {tg.ShortTags}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div className="m-4">
                     <InputLabel>Works Title :</InputLabel>
                     <input
                         type="text"
                         className="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-100"
-                        name="workstitle"
+                        name="WorksTitle"
                         id="workstitle"
                         value={workstitle}
                         onChange={(e) => {
@@ -243,7 +253,7 @@ export default function CreateGalleries() {
                     <input
                         type="text"
                         className="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-100"
-                        name="workscontent"
+                        name="WorksContent"
                         id="workscontent"
                         value={workscontent}
                         onChange={(e) => {
@@ -256,7 +266,7 @@ export default function CreateGalleries() {
                     <input
                         type="text"
                         className="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-100"
-                        name="workscredit"
+                        name="WorksCredit"
                         id="workscredit"
                         value={workscredit}
                         onChange={(e) => {
@@ -269,7 +279,7 @@ export default function CreateGalleries() {
                     <input
                         type="text"
                         className="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-100"
-                        name="worksclient"
+                        name="WorksClient"
                         id="worksclient"
                         value={worksclient}
                         onChange={(e) => {
@@ -282,7 +292,7 @@ export default function CreateGalleries() {
                     <InputLabel>Image:</InputLabel>
                     <FileUploader
                         onFilesSelected={(selectedFiles) =>
-                            setImage(selectedFiles)
+                            setImage([...image])
                         }
                     />
                 </div>
