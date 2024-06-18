@@ -23,7 +23,7 @@ export default function CreateTags() {
 
         try {
             const res = await axios.post(
-                `http://olldesign.jp/api/tags`,
+                `http://localhost:8000/api/tags`,
                 formData
             );
 

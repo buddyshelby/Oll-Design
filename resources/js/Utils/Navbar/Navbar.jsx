@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { brand, menu, socialMedia, lang } from "../../Static/index";
 import { useTranslation } from "react-i18next";
 import MediaQuery from "@/Components/MediaQuery";
@@ -6,12 +6,13 @@ import MediaQuery from "@/Components/MediaQuery";
 import classes from "./Navbar.module.css";
 import SocialCard from "../SocialCard/SocialCard";
 
-const Navbar = ({ language }) => {
+const Navbar = ({ language, setDeskNavWidth }) => {
     const { i18n } = useTranslation();
     const [isHover, setIsHover] = useState(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isSocial, setIsSocial] = useState(false);
     const isLanguage = language;
+    const deskNavRef = useRef(null)
 
     // Fungsi untuk menghitung persentase scroll
     const calculateScrollPercentage = () => {
@@ -49,8 +50,12 @@ const Navbar = ({ language }) => {
         return hoverData;
     };
 
-    const changeLanguage = (lng) => {
-        i18n.changeLanguage(lng);
+    const changeLanguage = async (lng) => {
+        i18n.changeLanguage(lng)
+        if (setDeskNavWidth)
+            setTimeout(() => {
+                setDeskNavWidth(deskNavRef.current.clientWidth)
+            }, 200);
     };
 
     const toggleMobileMenu = () => {
@@ -98,9 +103,9 @@ const Navbar = ({ language }) => {
                                         <div
                                             className={`${classes.language} mt-2`}
                                         >
-                                            {lang.map((item) => (
+                                            {lang.map((item, index) => (
                                                 <button
-                                                    key={item.id}
+                                                    key={index}
                                                     onClick={() =>
                                                         changeLanguage(
                                                             item.lang
@@ -124,7 +129,7 @@ const Navbar = ({ language }) => {
                                                         href={m.url}
                                                         className="text-sm"
                                                         id={m.id}
-                                                        key={m.id}
+                                                        key={index}
                                                     >
                                                         {isHover === m.id
                                                             ? m.title_hover.toUpperCase()
@@ -140,10 +145,10 @@ const Navbar = ({ language }) => {
                                                 ]
                                             }
                                         >
-                                            {socialMedia.map((sm) => (
+                                            {socialMedia.map((sm, index) => (
                                                 <a
                                                     href={sm.url}
-                                                    key={sm.id}
+                                                    key={index}
                                                     target="_blank"
                                                 >
                                                     {sm.icon}
@@ -157,7 +162,7 @@ const Navbar = ({ language }) => {
                     )}
                     {!matches && (
                         // Tampilan Desktop
-                        <div className={classes.sidebar}>
+                        <div className={classes.sidebar} ref={deskNavRef}>
                             <div className={classes["sidebar-content"]}>
                                 <div className={classes["sidebar-brand"]}>
                                     <a href="/">
@@ -165,9 +170,9 @@ const Navbar = ({ language }) => {
                                     </a>
                                 </div>
                                 <div className={`${classes.language} mt-2`}>
-                                    {lang.map((item) => (
+                                    {lang.map((item, index) => (
                                         <button
-                                            key={item.id}
+                                            key={index}
                                             onClick={() =>
                                                 changeLanguage(
                                                     item.lang
@@ -185,7 +190,7 @@ const Navbar = ({ language }) => {
                                         <a
                                             href={m.url}
                                             id={m.id}
-                                            key={m.id}
+                                            key={index}
                                         >
                                             {isHover === m.id
                                                 ? m.title_hover.toUpperCase()

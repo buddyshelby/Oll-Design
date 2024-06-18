@@ -8,7 +8,7 @@ import Gallery from "@/Pages/Gallery/Gallery";
 import GalleryDetail from "@/Pages/Gallery/Detail/GalleryDetail";
 import HomeSkeleton from "@/Components/HomeSkeleton";
 
-const ITEMS_PER_PAGE = 9;
+const ITEMS_PER_PAGE = 9999999;
 
 const Home = () => {
     const [isData, setIsData] = useState([]);
@@ -49,7 +49,7 @@ const Home = () => {
     const fetchData = async () => {
         try {
             const res = await axios.get(
-                "http://olldesign.jp/api/galleryList"
+                "http://localhost:8000/api/galleryList"
             );
             setIsData(res.data.galleryList);
             setIsLoading(false);

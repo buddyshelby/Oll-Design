@@ -69,7 +69,7 @@ export default function ListGalleries() {
     const fetchGalleries = async () => {
         try {
             const response = await axios.get(
-                `http://olldesign.jp/api/galleries`
+                `http://localhost:8000/api/galleries`
             );
             const data = response;
 
@@ -81,7 +81,7 @@ export default function ListGalleries() {
 
     const fetchTags = async () => {
         try {
-            const res = await axios.get("http://olldesign.jp/api/tags");
+            const res = await axios.get("http://localhost:8000/api/tags");
             setIsTag(res.data);
         } catch (e) {
             console.error("Error fetching galleries:", e);
@@ -127,7 +127,7 @@ export default function ListGalleries() {
         try {
             const { id } = selectedGallery;
 
-            await axios.put(`http://olldesign.jp/api/galleries/${id}`, {
+            await axios.put(`http://localhost:8000/api/galleries/${id}`, {
                 ...updatedData,
             });
 
@@ -167,7 +167,7 @@ export default function ListGalleries() {
         }
 
         await axios
-            .delete(`http://olldesign.jp/api/galleries/${id}`)
+            .delete(`http://localhost:8000/api/galleries/${id}`)
             .then(({ data }) => {
                 Swal.fire({
                     icon: "success",
@@ -202,7 +202,7 @@ export default function ListGalleries() {
         }
 
         try {
-            await axios.delete(`http://olldesign.jp/api/imagings/${id}`);
+            await axios.delete(`http://localhost:8000/api/imagings/${id}`);
             Swal.fire({
                 icon: "success",
                 text: "Imaging deleted successfully!",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Head } from "@inertiajs/react";
 import { useTranslation } from "react-i18next";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -37,19 +37,27 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
     const [imageShow, setImageShow] = useState(false)
     const [hideLoad, setHideLoad] = useState(false)
     const [scrollToGallery, setScrollToGallery] = useState(false)
+    const mobileNavRef = useRef(null)
+    const deskNavRef = useRef(null)
+    const [deskNavWidth, setDeskNavWidth] = useState(0)
 
     const videoClickHandle = () => {
         setScrollToGallery(true)
     }
 
-
+    useEffect(() => {
+        if (deskNavRef.current)
+            setDeskNavWidth(deskNavRef.current?.children[0].clientWidth)
+    }, [deskNavRef.current, deskNavRef.current?.children[0]])
 
     let content = (
         <div className="flex">
-            <Navbar language={isLanguage} />
-            <div className="container-fluid">
+            <div ref={deskNavRef} style={{ width: `${deskNavWidth}px`, transition: '.2s' }}>
+                <Navbar language={isLanguage} setDeskNavWidth={setDeskNavWidth} />
+            </div>
+            <div className="container-fluid" style={{ width: `calc(100% - ${deskNavWidth}px)`, transition: '.2s' }}>
                 <div className="row">
-                    <div className="col-12 mt-16 mb-6">{children}</div>
+                    <div>{children}</div>
                 </div>
             </div>
         </div>
@@ -70,14 +78,17 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                     </div>
                 </div> */}
                 <div className="relative flex">
-                    {!galleryDetailView && <Navbar language={isLanguage} />}
-                    <div className={`relative w-full h-full ${!scrollToGallery ? 'overflow-hidden' : ''}`}>
+                    {!galleryDetailView && <div ref={deskNavRef} style={{ width: `${deskNavWidth}px`, transition: '.2s' }}>
+                        <Navbar language={isLanguage} setDeskNavWidth={setDeskNavWidth} />
+                    </div>}
+                    <div className={`relative h-full ${!scrollToGallery ? 'overflow-hidden' : ''}`} style={{ width: !galleryDetailView ? `calc(100% - ${deskNavWidth}px)` : `100%`, transition: '.2s' }}>
                         <div className="relative w-full h-full z-10 cursor-pointer transition-all duration-1000" onClick={videoClickHandle} style={{ transform: `translateY(-${scrollToGallery ? height + 'px' : '0px'})` }}>
                             <video
                                 autoPlay
                                 loop
                                 muted
-                                className={`w-screen h-screen object-cover ${!imageShow ? 'opacity-0' : 'opacity-100' } transition-all duration-1000`}
+                                className={`w-full h-screen object-cover ${!imageShow ? 'opacity-0' : 'opacity-100' } transition-all duration-1000`}
+                                style={{ objectPosition: '0' }}
                                 onLoadedData={(e) => {
                                     setHideLoad(true)
                                     setTimeout(() => {
@@ -154,7 +165,7 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                         <Head title="Oll Design" />
                         {matches ? (
                             currentPath === "/" ? (
-                                <div className="relative flex-col">
+                                <div className={`flex-col ${galleryDetailView ? 'fixed' : ''}`}>
                                     <div className={`relative w-full ${!scrollToGallery ? 'overflow-hidden' : ''}`}>
                                         {/* <div
                                             className="absolute row h-fit z-20"
@@ -164,14 +175,17 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                                                 width: "calc(100vw + 12px)",
                                             }}
                                         > */}
-                                            {!galleryDetailView && <Navbar language={isLanguage} />}
+                                            {!galleryDetailView && <div ref={mobileNavRef}>
+                                                <Navbar language={isLanguage} />
+                                            </div>}
                                         {/* </div> */}
-                                        <div className="w-full h-full relative z-10 cursor-pointer transition-all duration-1000"  onClick={videoClickHandle} style={{ transform: `translateY(-${scrollToGallery ? height + 'px' : '0px'})` }}>
+                                        <div className="w-full h-full relative z-10 cursor-pointer transition-all duration-1000"  onClick={videoClickHandle} style={{ transform: `translateY(-${scrollToGallery ? (height + mobileNavRef.current?.offsetHeight) + 'px' : '0px'})` }}>
                                             <video
                                                 autoPlay
                                                 loop
                                                 muted
                                                 className="w-screen h-screen object-cover"
+                                                style={{ objectPosition: '-100px' }}
                                                 onLoadedData={(e) => {
                                                     setHideLoad(true)
                                                     setTimeout(() => {
@@ -203,7 +217,7 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                                                 </div>
                                             )}
                                         </div>
-                                        <div className={`${ galleryDetailView ? 'overflow-hidden' : 'container-fluid'} absolute top-0 w-full h-full ${scrollToGallery ? 'opacity-100' : 'opacity-0'}`} id="section-scroll">
+                                        <div className={`${ galleryDetailView ? '' : 'container-fluid'} absolute top-0 w-full h-full ${scrollToGallery ? 'opacity-100' : 'opacity-0'}`} id="section-scroll">
                                         <div className="row">
                                                 <div className={`col-12 ${galleryDetailView ? '' : 'mt-16'} mb-6`}>
                                                     {children}

@@ -49,7 +49,7 @@ const Portofolio = () => {
     const fetchData = async () => {
         try {
             const res = await axios.get(
-                "http://olldesign.jp/api/galleryList"
+                "http://localhost:8000/api/galleryList"
             );
             setIsData(res.data.galleryList);
             setIsLoading(false);
@@ -77,7 +77,7 @@ const Portofolio = () => {
 
     return (
         <Page onLoad={isLoading} galleryDetailView={galleryDetailView}>
-            <div>
+            <div className="col-12 mt-16 mb-6">
                 {isPageId === 0 ? (
                     <>
                         <ImgGroupper onGetFilter={getFilter} navDate={navDate} />

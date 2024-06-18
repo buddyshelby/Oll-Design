@@ -349,12 +349,33 @@
             }
         ]
     },
-    "business": {
-        "description1": "At OLL DESIGN, we understand the power of collaboration in bringing retail spaces to life. Our design ethos goes beyond mere aesthetics, delving into the realms of functionality and cost-effectiveness, with our client's smile being the true measure of our success. We employ a dual-design strategy, where 'unconscious design' seamlessly blends into the ambiance for comfort, and 'conscious design' boldly underscores a shop's character, stimulating dialogue. Our unique touch ensures each project stands out, avoiding the mundane.",
-        "description2": "From the initial business cards to the various shop tools required post-launch, such as menus and flyers, we maintain a consistent design narrative. By overseeing the entire process from planning to execution, we craft designs that not only reflect the essence of each shop but also resonate with and captivate the audience. For us, a cool design is one that becomes synonymous with the store or product it represents.",
-        "prespective": "Our perspectives offer a new dimension to architectural vision, providing innovative visualizations and materializing projects. Experience a comprehensive perspective capturing the essence of pre-construction design through detailed renderings and immersive presentations.",
-        "storedesign": "We specialize in providing top-quality designs specially tailored to meet our clients' specific requirements. Our professional and high-quality outputs exceed the expectations of our clients.",
-        "graphicdesign": "Our graphic services, which create visual stories, offer captivating graphic solutions that embody our clients' brand identity. From logos to layouts, we blend art and strategy to create graphic elements that are visually appealing while effectively conveying messages.",
-        "designconsult": "Our consultation services navigate the maze of design, offering expert advice tailored to our clients' unique needs. We listen, analyze, and provide strategic recommendations to ensure that our clients' architectural and design projects are aesthetically satisfying and functionally excellent."
-    }
+    "business": [
+        {
+            "header": "We build stores that sell.|||It's what we do.",
+            "desc" : "OLLDESIGN is a store design company.|||Utilizing chain store theories studied in the United States, we aim to create successful stores across various business types. Once a client secures a property, we develop the blueprints and design, supporting the process up to the store's opening.||||||We also offer marketing consulting, handling operations when customers visit the store. For example, we discuss specifics like the ideal product delivery speed and layout when serving multiple customers. Our detailed consulting approach means projects typically take six months to a year to complete.||||||Rather than focusing solely on aesthetic design, our priority is creating stores that consistently generate sales. We strive to build efficient stores that delight customers"
+        },
+        {
+            "header": "Design based on numerical evidence from IE (industrial engineering)",
+            "desc" : "A scientific method that quantifies every problem and event, logically improving and reforming them.||||||Believing that competitors are not limited to domestic ones, we conduct store comparisons worldwide. Through this process, we have developed unique expertise, information, and knowledge that make us strong in chain stores.",
+            "graphic" : {
+                "Competitiveness": ["blue", "Design and buzz"],
+                "Profitability": ["green", "ROI on opening costs"],
+                "Growth": ["red", "Sustainable multi-store expansion"]
+            }
+        },
+        {
+            "header": "Strategic design tailored to store objectives and conditions",
+            "select": [
+                "Store design",
+                "Chain store design",
+                "Multi-store expansion"
+            ],
+            "desc": "We propose a comprehensive review and standardization of your store opening process to maximize cost savings and profitability. Our approach goes beyond just reducing opening costs. We focus on shortening construction timelines (boosting sales by opening sooner), optimizing workflow plans (reducing labor costs), and creating highly appealing and strategically located store designs (increasing customer traffic).",
+            "select_2": [
+                "Extensive expertise in chain store design.",
+                "Store openings in Japan and overseas, with consulting in Asia.",
+                "Outsourcing (cost reduction, original items, systematization)."
+            ]
+        }
+    ]
 }

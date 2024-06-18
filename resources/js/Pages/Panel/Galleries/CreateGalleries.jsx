@@ -32,7 +32,7 @@ export default function CreateGalleries() {
 
     const fetchTags = async () => {
         try {
-            const res = await axios.get("http://olldesign.jp/api/galleries");
+            const res = await axios.get("http://localhost:8000/api/galleries");
             setIsTag(res.data.tags);
         } catch (e) {
             console.error("Error fetching tags:", error);
@@ -56,7 +56,7 @@ export default function CreateGalleries() {
 
         try {
 	    setLoading(true)
-            const res = await axios.post(`http://olldesign.jp/api/galleries`, theBody);
+            const res = await axios.post(`http://localhost:8000/api/galleries`, theBody);
 	    createImaging(eventForm)
         } catch (error) {
             if (error.response && error.response.status === 422) {
@@ -74,7 +74,7 @@ export default function CreateGalleries() {
 
     // Change the createImaging function to append an array of files
     const createImaging = async (eventForm) => {
-        const res = await axios.get("http://olldesign.jp/api/galleries");
+        const res = await axios.get("http://localhost:8000/api/galleries");
         const resSort = res.data.galleries.sort((a, b) => b.id - a.id);
 
         const formData = new FormData();
@@ -91,7 +91,7 @@ export default function CreateGalleries() {
 
             try {
                 await axios.post(
-                    "http://olldesign.jp/api/imagings",
+                    "http://localhost:8000/api/imagings",
                     formData, {
                       headers: {
                         'Content-Type': 'multipart/form-data'

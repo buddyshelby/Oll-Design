@@ -1,12 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import listIcon from "/public/assets/icon/Pages/Business/IconStorage";
-
-import Card from "@/Components/Card";
-import EllipsisText from "@/Components/Ellipsis";
-import MediaQuery from "@/Components/MediaQuery";
 
 import Page from "../Page";
+import Graph from "./Graph";
 
 import classes from "./Business.module.css";
 
@@ -15,8 +11,10 @@ const Business = () => {
     const [isLanguage, setIsLanguage] = useState(
         Object.values(i18n.store.data)[0].translation
     );
-    const [collapse, setCollapse] = useState(true);
-    const titleRef = useRef(null);
+
+    const desc2ndRef = useRef(null)
+
+    const dataGraph = Object.keys(isLanguage.business[1].graphic)
 
     useEffect(() => {
         if (i18n.language === "jp") {
@@ -34,506 +32,77 @@ const Business = () => {
         }
     }, [i18n.language]);
 
-    const checkTitlePosition = () => {
-        if (titleRef.current) {
-            return (
-                titleRef.current.offsetTop + titleRef.current.clientHeight + 170
-            );
-        }
-    };
-
-    const wheelControl = (e) => {
-        e.isDefaultPrevented();
-        const topOfViewport = window.scrollY;
-        const bottomOfViewport = window.scrollY + window.innerHeight;
-        const titleTrigger = checkTitlePosition();
-        const boxDiv = document.getElementsByClassName(
-            classes["box-component"]
-        );
-        const boxDivTransform = document.getElementsByClassName(
-            classes["box-component--transform"]
-        );
-        const checkDirectMouse = e.deltaY;
-
-        const handleAnimation = (element) => {
-            for (let index = 0; index < boxDivTransform.length; index++) {
-                const element = boxDivTransform[index];
-                element.style.display = "flex";
-
-                setTimeout(() => {
-                    element.style.opacity = "1";
-                    element.style.transform = "translate(0)";
-                    element.style.transition = ".5s";
-                }, 1500);
-            }
-
-            element.offsetWidth;
-            element.classList.add(classes["hide"]);
-            setTimeout(() => {
-                if (
-                    boxDivTransform[0].parentElement.parentElement
-                        .previousSibling
-                )
-                    boxDivTransform[0].parentElement.parentElement.previousSibling.remove();
-            }, 1500);
-        };
-
-        if (bottomOfViewport > titleTrigger) {
-            for (let index = 0; index < boxDiv.length; index++) {
-                const element = boxDiv[index];
-                element.addEventListener(
-                    "animationstart",
-                    handleAnimation(element, "notTransform")
-                );
-            }
-        }
-    };
-
     return (
         <Page>
-            <MediaQuery query="(max-width: 768px)">
-                {({ matches }) => (
-                    <>
-                        {matches ? (
-                            <div className="my-4 px-4">
-                                <div className="text-4xl font-black text-center mb-6">
-                                    <span>
-                                        GOOD DESIGN <br /> MAKES YOU HAPPY.
-                                    </span>
-                                </div>
-                                <div className="text-base font-normal text-center mb-4">
-                                    <span>
-                                        {isLanguage.business.description1}
-                                    </span>
-                                </div>
-                                <div className="text-base font-normal text-center mb-4">
-                                    <span>
-                                        {isLanguage.business.description2}
-                                    </span>
-                                </div>
-                                <div className="text-xl font-black text-center mb-4">
-                                    - What we do -
-                                </div>
-                                <div className="relative">
-                                    <div className="w-full flex flex-column items-center">
-                                        <div
-                                            className={classes["box-component"]}
-                                        >
-                                            <div
-                                                className={classes["box-icon"]}
-                                            >
-                                                <img
-                                                    src={listIcon(
-                                                        "perspective"
-                                                    )}
-                                                    alt=""
-                                                    className="w-full h-full"
-                                                />
-                                            </div>
-                                            <div
-                                                className={classes["box-title"]}
-                                            >
-                                                Perspective
-                                            </div>
-                                            <div
-                                                className={classes["box-desc"]}
-                                            >
-                                                {
-                                                    isLanguage.business
-                                                        .prespective
-                                                }
-                                            </div>
-                                        </div>
-                                        <div
-                                            className={classes["box-component"]}
-                                        >
-                                            <div
-                                                className={classes["box-icon"]}
-                                            >
-                                                <img
-                                                    src={listIcon(
-                                                        "storeDesign"
-                                                    )}
-                                                    alt=""
-                                                    className="w-full h-full"
-                                                />
-                                            </div>
-                                            <div
-                                                className={classes["box-title"]}
-                                            >
-                                                Store Design
-                                            </div>
-                                            <div
-                                                className={classes["box-desc"]}
-                                            >
-                                                {
-                                                    isLanguage.business
-                                                        .storedesign
-                                                }
-                                            </div>
-                                        </div>
-                                        <div
-                                            className={classes["box-component"]}
-                                        >
-                                            <div
-                                                className={classes["box-icon"]}
-                                            >
-                                                <img
-                                                    src={listIcon(
-                                                        "graphDesign"
-                                                    )}
-                                                    alt=""
-                                                    className="w-full h-full"
-                                                />
-                                            </div>
-                                            <div
-                                                className={classes["box-title"]}
-                                            >
-                                                Graphic Design
-                                            </div>
-                                            <div
-                                                className={classes["box-desc"]}
-                                            >
-                                                {
-                                                    isLanguage.business
-                                                        .graphicdesign
-                                                }
-                                            </div>
-                                        </div>
-                                        <div
-                                            className={classes["box-component"]}
-                                        >
-                                            <div
-                                                className={classes["box-icon"]}
-                                            >
-                                                <img
-                                                    src={listIcon(
-                                                        "designConsult"
-                                                    )}
-                                                    alt=""
-                                                    className="w-full h-full"
-                                                />
-                                            </div>
-                                            <div
-                                                className={classes["box-title"]}
-                                            >
-                                                Design Consult
-                                            </div>
-                                            <div
-                                                className={classes["box-desc"]}
-                                            >
-                                                {
-                                                    isLanguage.business
-                                                        .designconsult
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+            <div className="w-full flex flex-col items-center">
+                <div className="w-9/12" style={{ maxWidth: '895px' }}>
+                    <div className="w-full h-max relative flex flex-col justify-center items-center text-center">
+                        <img className="w-full" src="/assets/images/Background.png" alt="" />
+                        <div className="absolute top-0 mt-14 flex flex-col justify-center items-center">
+                            <span className="font-normal text-3xl xl:text-5xl 2xl:text-6xl text-pink-600" style={{ fontFamily: '"Archivo Black", sans-serif', fontStyle: 'normal' }}>{ isLanguage.business[0].header.split('|||')[0] }</span>
+                            <span className="font-semibold text-2xl xl:text-4xl 2xl:text-5xl text-pink-500 mt-2" style={{ fontFamily: '"Noto Sans Gothic", sans-serif', fontStyle: 'normal' }}>{ isLanguage.business[0].header.split('|||')[1] }</span>
+                        </div>
+                    </div>
+                    <div className="w-full h-max relative flex flex-col justify-center text-sm 2xl:text-base mt-4" style={{ fontFamily: '"Onest", sans-serif', fontStyle: 'normal' }}>
+                        {isLanguage.business[0].desc.split('|||').map((item, index) => (
+                            <Fragment key={index} >{ item } <br /></Fragment>
+                        ))}
+                    </div>
+                    <div className="w-full h-max xl:text-lg 2xl:text-2xl relative flex flex-col mt-14 justify-center font-semibold text-pink-500" style={{ fontFamily: '"Onest", sans-serif', fontStyle: 'normal' }}>
+                        <div>{ isLanguage.business[1].header }</div>
+                        <hr className="w-full opacity-50 text-black mt-2" style={{ height: '2px' }} />
+                        <hr className="w-full opacity-50 text-black mt-1" style={{ height: '2px' }} />
+                    </div>
+                    <div className="w-full h-max relative flex flex-col md:flex-row justify-center text-sm 2xl:text-base mt-4" style={{ fontFamily: '"Onest", sans-serif', fontStyle: 'normal' }}>
+                        <div className="w-full md:w-1/2 h-fit mr-0 md:mr-4" ref={desc2ndRef}>
+                            {isLanguage.business[1].desc.split('|||').map((item, index) => (
+                                <Fragment key={index} >{ item } <br /></Fragment>
+                            ))}
+                        </div>
+                        <div className="w-full md:w-1/2 relative flex flex-col items-center">
+                            <div className="mt-4 md:mt-0">
+                                <Graph dataGraph={dataGraph} />
                             </div>
-                        ) : (
-                            <div
-                                className="my-4 px-10"
-                                style={{ maxWidth: "75vw" }}
-                            >
-                                <div
-                                    className="container"
-                                    onWheel={wheelControl}
-                                    onTouchMove={wheelControl}
-                                >
-                                    <div className="text-6xl font-black text-center mb-10">
-                                        <span>
-                                            GOOD DESIGN <br /> MAKES YOU HAPPY.
-                                        </span>
-                                    </div>
-                                    <div className="text-base font-normal text-center">
-                                        <span>
-                                            {isLanguage.business.description1}
-                                        </span>
-                                    </div>
-                                    <div className="text-base font-normal text-center">
-                                        <span>
-                                            {isLanguage.business.description2}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div
-                                    className="text-2xl font-black text-center mb-6"
-                                    ref={titleRef}
-                                >
-                                    - What we do -
-                                </div>
-                                <div className="w-full relative">
-                                    <div className="w-full flex gap-2 absolute">
-                                        <div
-                                            className={classes["box-component"]}
-                                        >
-                                            <div
-                                                className={classes["box-icon"]}
-                                            >
-                                                <img
-                                                    src={listIcon(
-                                                        "perspective"
-                                                    )}
-                                                    alt=""
-                                                    className="w-full h-full"
-                                                />
-                                            </div>
-                                            <div
-                                                className={classes["box-title"]}
-                                            >
-                                                Perspective
-                                            </div>
-                                        </div>
-                                        <div
-                                            className={classes["box-component"]}
-                                        >
-                                            <div
-                                                className={classes["box-icon"]}
-                                            >
-                                                <img
-                                                    src={listIcon(
-                                                        "storeDesign"
-                                                    )}
-                                                    alt=""
-                                                    className="w-full h-full"
-                                                />
-                                            </div>
-                                            <div
-                                                className={classes["box-title"]}
-                                            >
-                                                Store Design
-                                            </div>
-                                        </div>
-                                        <div
-                                            className={classes["box-component"]}
-                                        >
-                                            <div
-                                                className={classes["box-icon"]}
-                                            >
-                                                <img
-                                                    src={listIcon(
-                                                        "graphDesign"
-                                                    )}
-                                                    alt=""
-                                                    className="w-full h-full"
-                                                />
-                                            </div>
-                                            <div
-                                                className={classes["box-title"]}
-                                            >
-                                                Graphic Design
-                                            </div>
-                                        </div>
-                                        <div
-                                            className={classes["box-component"]}
-                                        >
-                                            <div
-                                                className={classes["box-icon"]}
-                                            >
-                                                <img
-                                                    src={listIcon(
-                                                        "designConsult"
-                                                    )}
-                                                    alt=""
-                                                    className="w-full h-full"
-                                                />
-                                            </div>
-                                            <div
-                                                className={classes["box-title"]}
-                                            >
-                                                Design Consult
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="w-full flex flex-col sticky">
-                                        <div className="flex gap-2">
-                                            <div
-                                                className={
-                                                    classes[
-                                                        "box-component--transform"
-                                                    ]
-                                                }
-                                            >
-                                                <div
-                                                    className={
-                                                        classes[
-                                                            "box-icon--transform"
-                                                        ]
-                                                    }
-                                                >
-                                                    <img
-                                                        src={listIcon(
-                                                            "perspective"
-                                                        )}
-                                                        alt=""
-                                                        className="w-full h-full"
-                                                    />
-                                                </div>
-                                                <div
-                                                    className={
-                                                        classes[
-                                                            "box-title--transform"
-                                                        ]
-                                                    }
-                                                >
-                                                    Prespective
-                                                </div>
-                                                <div
-                                                    className={
-                                                        classes[
-                                                            "box-desc--transform"
-                                                        ]
-                                                    }
-                                                >
-                                                    {
-                                                        isLanguage.business
-                                                            .prespective
-                                                    }
-                                                </div>
-                                            </div>
-                                            <div
-                                                className={
-                                                    classes[
-                                                        "box-component--transform"
-                                                    ]
-                                                }
-                                            >
-                                                <div
-                                                    className={
-                                                        classes[
-                                                            "box-icon--transform"
-                                                        ]
-                                                    }
-                                                >
-                                                    <img
-                                                        src={listIcon(
-                                                            "storeDesign"
-                                                        )}
-                                                        alt=""
-                                                        className="w-full h-full"
-                                                    />
-                                                </div>
-                                                <div
-                                                    className={
-                                                        classes[
-                                                            "box-title--transform"
-                                                        ]
-                                                    }
-                                                >
-                                                    Store Design
-                                                </div>
-                                                <div
-                                                    className={
-                                                        classes[
-                                                            "box-desc--transform"
-                                                        ]
-                                                    }
-                                                >
-                                                    {
-                                                        isLanguage.business
-                                                            .storedesign
-                                                    }
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="flex gap-2">
-                                            <div
-                                                className={
-                                                    classes[
-                                                        "box-component--transform"
-                                                    ]
-                                                }
-                                            >
-                                                <div
-                                                    className={
-                                                        classes[
-                                                            "box-icon--transform"
-                                                        ]
-                                                    }
-                                                >
-                                                    <img
-                                                        src={listIcon(
-                                                            "graphDesign"
-                                                        )}
-                                                        alt=""
-                                                        className="w-full h-full"
-                                                    />
-                                                </div>
-                                                <div
-                                                    className={
-                                                        classes[
-                                                            "box-title--transform"
-                                                        ]
-                                                    }
-                                                >
-                                                    Graphic Design
-                                                </div>
-                                                <div
-                                                    className={
-                                                        classes[
-                                                            "box-desc--transform"
-                                                        ]
-                                                    }
-                                                >
-                                                    {
-                                                        isLanguage.business
-                                                            .graphicdesign
-                                                    }
-                                                </div>
-                                            </div>
-                                            <div
-                                                className={
-                                                    classes[
-                                                        "box-component--transform"
-                                                    ]
-                                                }
-                                            >
-                                                <div
-                                                    className={
-                                                        classes[
-                                                            "box-icon--transform"
-                                                        ]
-                                                    }
-                                                >
-                                                    <img
-                                                        src={listIcon(
-                                                            "designConsult"
-                                                        )}
-                                                        alt=""
-                                                        className="w-full h-full"
-                                                    />
-                                                </div>
-                                                <div
-                                                    className={
-                                                        classes[
-                                                            "box-title--transform"
-                                                        ]
-                                                    }
-                                                >
-                                                    Design Consult
-                                                </div>
-                                                <div
-                                                    className={
-                                                        classes[
-                                                            "box-desc--transform"
-                                                        ]
-                                                    }
-                                                >
-                                                    {
-                                                        isLanguage.business
-                                                            .designconsult
-                                                    }
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div className="w-fit mt-4 flex flex-col justify-center">
+                                {dataGraph.map((item, index) => (
+                                    <span key={index}>
+                                        <span style={{ color: isLanguage.business[1].graphic[item][0] }}>{item}</span> : {isLanguage.business[1].graphic[item][1]}
+                                    </span>
+                                ))}
                             </div>
-                        )}
-                    </>
-                )}
-            </MediaQuery>
+                        </div>
+                    </div>
+                    <div className="w-full h-max xl:text-lg 2xl:text-2xl relative flex flex-col mt-14 justify-center font-semibold text-pink-500" style={{ fontFamily: '"Onest", sans-serif', fontStyle: 'normal' }}>
+                        <div>{ isLanguage.business[2].header }</div>
+                        <hr className="w-full opacity-50 text-black mt-2" style={{ height: '2px' }} />
+                        <hr className="w-full opacity-50 text-black mt-1" style={{ height: '2px' }} />
+                    </div>
+                    <div className="w-full h-max xl:text-lg 2xl:text-2xl relative flex flex-col md:flex-row mt-4 font-extralight text-pink-500 space-y-2 md:space-y-0 md:space-x-2" style={{ fontFamily: '"Onest", sans-serif', fontStyle: 'normal' }}>
+                        {isLanguage.business[2].select.map((item, index) => (
+                            <div className="text-white rounded-3xl p-2 flex justify-center items-center text-center" key={index} style={{ backgroundColor: '#231f20' }}>
+                                {item}
+                            </div>
+                        ))}
+                    </div>
+                    <div className="w-full h-max relative flex flex-col justify-center text-sm 2xl:text-base mt-4" style={{ fontFamily: '"Onest", sans-serif', fontStyle: 'normal' }}>
+                        {isLanguage.business[2].desc.split('|||').map((item, index) => (
+                            <Fragment key={index} >{ item } <br /></Fragment>
+                        ))}
+                    </div>
+                    <div className="w-full h-max relative flex flex-col text-sm 2xl:text-base my-4 space-y-4" style={{ fontFamily: '"Onest", sans-serif', fontStyle: 'normal' }}>
+                        {isLanguage.business[2].select_2.map((item, index) => (
+                            <div key={index} className="flex items-center">
+                                <div className="w-7 h-7 border-2 border-black rounded-sm">
+                                    <span class="material-icons text-pink-600" style={{ scale: '2.1' }}>
+                                        done
+                                    </span>
+                                </div>
+                                <span className="ml-3 text-lg md:text-lg xl:text-2xl font-semibold text-slate-900">{ item }</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
         </Page>
     );
 };

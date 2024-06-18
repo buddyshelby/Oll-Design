@@ -8,7 +8,7 @@ class ContactUs extends Component {
     render() {
         return (
             <Page>
-                <div className="container">
+                <div className="container col-12 mt-16 mb-6">
                     <Card
                         rounded={"rounded-[12px]"}
                         color={"bg-[#F4F3F3]"}

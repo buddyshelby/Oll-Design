@@ -189,7 +189,7 @@ const GalleryDetail = (props) => {
                         <span className="material-icons transition-all duration-700" style={{ fontSize: (backState === 'mouseEnter') ? '118px' : '80px' }}> arrow_circle_left </span>
                     </div>
                     <img className={`absolute w-full h-full object-cover ${classes['bg-jumbotron']}`} src={`storage/${detailPages.Img[0]}`} alt="" />
-                    <span className="text-6xl sm:text-9xl font-bold text-center" style={{ transition: '500ms', transform: `translateY(${scrollLength1}px)` }}>{detailPages.Name}</span>
+                    <span className="text-6xl sm:text-9xl font-bold text-center" style={{ transition: '500ms', maxWidth: width + 'px', transform: `translateY(${scrollLength1}px)` }}>{detailPages.Name}</span>
                 </div>
 
                 <div className="w-full relative flex flex-col items-center z-10" style={{ backgroundColor: '#e0dcdc', transition: '500ms', transform: `translateY(-${scrollLength1}px)` }}>
@@ -228,10 +228,10 @@ const GalleryDetail = (props) => {
                             return (
                                 <div className="w-full flex flex-col sm:flex-row justify-center items-center" key={index}>
                                     <div className="w-full sm:w-1/2 mr-0 sm:mr-1 mb-2 overflow-hidden" onMouseEnter={() => imageHandler('mouseEnter', image1)} onMouseLeave={() => imageHandler('', image1)}>
-                                        <img className="w-full object-cover" style={{ transition: '20s', maxHeight: '350px', scale: viewImage === image1 ? '1.5' : '1' }} src={`storage/${image1}`} alt="" />
+                                        <img className="w-full object-cover obj" style={{ transition: '20s', maxHeight: '350px', scale: viewImage === image1 ? '1.5' : '1' }} src={`storage/${image1}`} alt="" />
                                     </div>
                                     {image2 && <div className="w-full sm:w-1/2 ml-0 sm:ml-1 mb-2 overflow-hidden" onMouseEnter={() => imageHandler('mouseEnter', image2)} onMouseLeave={() => imageHandler('', image2)}>
-                                        <img className="w-full object-cover" style={{ transition: '20s', maxHeight: '350px', scale: viewImage === image2 ? '1.5' : '1' }} src={`storage/${image2}`} alt="" />
+                                        <img className="w-full object-cover obj" style={{ transition: '20s', maxHeight: '350px', scale: viewImage === image2 ? '1.5' : '1' }} src={`storage/${image2}`} alt="" />
                                     </div>}
                                 </div>
                             )
