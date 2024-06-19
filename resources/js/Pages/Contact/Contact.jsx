@@ -8,14 +8,15 @@ class ContactUs extends Component {
     render() {
         return (
             <Page>
-                <div className="container col-12 mt-16 mb-6">
+                <div className="container mt-4" style={{ width: 'calc(90vh)' }}>
                     <Card
                         rounded={"rounded-[12px]"}
                         color={"bg-[#F4F3F3]"}
                         padding={"p-4"}
+                        className="w-full"
                     >
-                        <form>
-                            <div className="mb-8">
+                        <form className="w-full ">
+                            <div className="w-full mb-8">
                                 <label htmlFor="name" className="form-label">
                                     お名前 / NAME
                                 </label>

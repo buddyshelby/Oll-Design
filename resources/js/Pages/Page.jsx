@@ -55,9 +55,9 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
             <div ref={deskNavRef} style={{ width: `${deskNavWidth}px`, transition: '.2s' }}>
                 <Navbar language={isLanguage} setDeskNavWidth={setDeskNavWidth} />
             </div>
-            <div className="container-fluid" style={{ width: `calc(100% - ${deskNavWidth}px)`, transition: '.2s' }}>
+            <div className="container-fluid relative" style={{ width: `calc(100% - ${deskNavWidth}px)`, transition: '.2s' }}>
                 <div className="row">
-                    <div>{children}</div>
+                    <div className="">{children}</div>
                 </div>
             </div>
         </div>
