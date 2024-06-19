@@ -185,7 +185,7 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                                                 loop
                                                 muted
                                                 className="w-screen h-screen object-cover"
-                                                style={{ objectPosition: '-100px' }}
+                                                style={{ objectPosition: '-200px' }}
                                                 onLoadedData={(e) => {
                                                     setHideLoad(true)
                                                     setTimeout(() => {

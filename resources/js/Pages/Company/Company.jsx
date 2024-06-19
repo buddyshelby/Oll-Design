@@ -8,8 +8,18 @@ import Page from "../Page";
 import classes from "./Company.module.css";
 
 const Company = () => {
+    let wordLength = 0
     const { i18n } = useTranslation();
     const [isLanguage, setIsLanguage] = useState(Object.values(i18n.store.data)[0].translation);
+
+    const [maxSizeDiv, setMaxSizeDiv] = useState(0)
+    const elementAll = document.querySelectorAll('div');
+
+    useEffect(() => {
+        const checkWord = Array.from(elementAll).find(item => item.innerHTML === maxSizeDiv)
+        if (checkWord !== undefined)
+            setMaxSizeDiv(checkWord.clientWidth)
+    }, [maxSizeDiv])
 
     useEffect(() => {
         if (i18n.language === "jp") {
@@ -36,57 +46,66 @@ const Company = () => {
                             {matches ? (
                                 <div className="mobile-Container p-2">
                                     <div
-                                        className={`${classes.mobileContainer} bg-white rounded-md p-4`}
+                                        className={`${classes.mobileContainer} relative bg-white rounded-md p-4`}
                                     >
-                                        {isLanguage.company.profile.map((c) => (
-                                            <div
-                                                className={classes.company}
-                                                key={c.id}
-                                            >
+                                    <div className="top-0 absolute h-full" style={{ width: '1px', left: maxSizeDiv === 0 ? 0 : `${maxSizeDiv}px`, backgroundColor: '#003832' }}/>
+                                        {isLanguage.company.profile.map((c) => {
+
+                                            if (c.title.length > wordLength) {
+                                                wordLength = c.title.length
+                                                setMaxSizeDiv(c.title)
+                                            }
+
+                                            return (
                                                 <div
-                                                    className={
-                                                        classes[
-                                                            "mobile-company-title"
-                                                        ]
-                                                    }
+                                                    className={classes.company}
+                                                    key={c.id}
                                                 >
-                                                    {c.title}
+                                                    <div
+                                                        className={
+                                                            classes[
+                                                                "mobile-company-title"
+                                                            ]
+                                                        }
+                                                    >
+                                                        {c.title}
+                                                    </div>
+                                                    <div
+                                                        className={
+                                                            classes[
+                                                                "mobile-company-content"
+                                                            ]
+                                                        }
+                                                    >
+                                                        {c.desc.map((d) => (
+                                                            <React.Fragment key={d.id}>
+                                                                <div
+                                                                    className={
+                                                                        classes.content
+                                                                    }
+                                                                >
+                                                                    {d.address}
+                                                                </div>
+                                                                <div
+                                                                    className={
+                                                                        classes.content
+                                                                    }
+                                                                >
+                                                                    {d.telp}
+                                                                </div>
+                                                                <div
+                                                                    className={
+                                                                        classes.content
+                                                                    }
+                                                                >
+                                                                    {d.fax}
+                                                                </div>
+                                                            </React.Fragment>
+                                                        ))}
+                                                    </div>
                                                 </div>
-                                                <div
-                                                    className={
-                                                        classes[
-                                                            "mobile-company-content"
-                                                        ]
-                                                    }
-                                                >
-                                                    {c.desc.map((d) => (
-                                                        <React.Fragment key={d.id}>
-                                                            <div
-                                                                className={
-                                                                    classes.content
-                                                                }
-                                                            >
-                                                                {d.address}
-                                                            </div>
-                                                            <div
-                                                                className={
-                                                                    classes.content
-                                                                }
-                                                            >
-                                                                {d.telp}
-                                                            </div>
-                                                            <div
-                                                                className={
-                                                                    classes.content
-                                                                }
-                                                            >
-                                                                {d.fax}
-                                                            </div>
-                                                        </React.Fragment>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        ))}
+                                            )
+                                        })}
                                         <div className={`${classes.company} my-6`}>
                                             <div
                                                 className={
@@ -207,52 +226,45 @@ const Company = () => {
                                 </div>
                             ) : (
                                 <div className="container-fluid">
-                                    <div className="bg-white rounded-md p-4">
-                                        {isLanguage.company.profile.map((c) => (
-                                            <div
-                                                className={classes.company}
-                                                key={c.id}
-                                            >
+                                    <div className="bg-white relative rounded-md p-4">
+                                    <div className="top-0 absolute h-full" style={{ width: '1px', left: maxSizeDiv === 0 ? 0 : `${maxSizeDiv}px`, backgroundColor: '#003832' }}/>
+                                        {isLanguage.company.profile.map((c, index) => {
+                                            
+                                            if (c.title.length > wordLength) {
+                                                wordLength = c.title.length
+                                                setMaxSizeDiv(c.title)
+                                            }
+
+                                            return (
                                                 <div
-                                                    className={
-                                                        classes["company-title"]
-                                                    }
+                                                    className={classes.company}
+                                                    key={c.id}
                                                 >
-                                                    {c.title}
+                                                    <div
+                                                        className={
+                                                            classes["company-title"]
+                                                        }
+                                                    >
+                                                        {c.title}
+                                                    </div>
+                                                    <div
+                                                        className={
+                                                            classes["company-content"]
+                                                        }
+                                                    >
+                                                        {c.desc.map((d, index) => (
+                                                            <Fragment key={index}>
+                                                                <div
+                                                                    className={`${classes.content}`}
+                                                                >
+                                                                    {d.address.split('|').map((item, index) => <Fragment key={index}>{item}<br /></Fragment>)}
+                                                                </div>
+                                                            </Fragment>
+                                                        ))}
+                                                    </div>
                                                 </div>
-                                                <div
-                                                    className={
-                                                        classes["company-content"]
-                                                    }
-                                                >
-                                                    {c.desc.map((d, index) => (
-                                                        <Fragment key={index}>
-                                                            <div
-                                                                className={
-                                                                    classes.content
-                                                                }
-                                                            >
-                                                                {d.address.split('|').map((item, index) => <Fragment key={index}>{item}<br /></Fragment>)}
-                                                            </div>
-                                                            <div
-                                                                className={
-                                                                    classes.content
-                                                                }
-                                                            >
-                                                                {d.telp}
-                                                            </div>
-                                                            <div
-                                                                className={
-                                                                    classes.content
-                                                                }
-                                                            >
-                                                                {d.fax}
-                                                            </div>
-                                                        </Fragment>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        ))}
+                                            )
+                                        })}
                                         {/* <div className={`${classes.company} my-6`}>
                                             <div
                                                 className={classes["company-title"]}
