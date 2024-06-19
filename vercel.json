@@ -11,9 +11,6 @@
             "config": { "distDir": "public/build" }
         }
     ],
-    "functions": {
-        "api/index.php": { "runtime": "vercel-php@0.5.4" }
-    },
     "routes": [
         {
             "src": "/(.*)",
@@ -21,6 +18,11 @@
         }
     ],
     "env": {
+        "APP_NAME": "Olldesign",
+        "APP_ENV": "production",
+        "APP_DEBUG": "false",
+        "APP_KEY":"base64:msYpXlKUxsgRSQ58iQR0HV2f/TgXXJFad/KwAxsV66k=",
+        "APP_URL": "https://oll-design.vercel.app/",
 
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
