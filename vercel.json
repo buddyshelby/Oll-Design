@@ -1,8 +1,19 @@
 {
-    "rewrites": [
-      {
-        "source": "/(.*)",
-        "destination": "/resources/js/app.jsx"
-      }
+    "version": 2,
+    "builds": [
+        {
+            "src": "resources/js/app.jsx",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "public/index.php",
+            "use": "@vercel/php"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/public/$1"
+        }
     ]
-  }
+}
