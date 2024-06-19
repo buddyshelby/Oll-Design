@@ -100,7 +100,7 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                                     src="assets/video/video.mp4"
                                     type="video/mp4"
                                 />
-                                Your browser does not support the video tags.
+                                Your browser does not support the video tag.
                             </video>
                             <div className={`absolute w-full bottom-16 ${!imageShow ? 'opacity-0' : 'opacity-100' } transition-all duration-1000`}>
                                 <div
