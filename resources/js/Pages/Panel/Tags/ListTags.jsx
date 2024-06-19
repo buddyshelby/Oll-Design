@@ -25,7 +25,7 @@ export default function ListTags(props) {
 
     const fetchTags = async () => {
         try {
-            const res = await axios.get("http://localhost:8000/api/tags");
+            const res = await axios.get("https://localhost:8000/api/tags");
             setIsTags(res.data);
         } catch (e) {
             console.error("Error fetching imagings:", e);
@@ -48,7 +48,7 @@ export default function ListTags(props) {
         }
 
         try {
-            await axios.delete(`http://localhost:8000/api/tags/${id}`);
+            await axios.delete(`https://localhost:8000/api/tags/${id}`);
             Swal.fire({
                 icon: "success",
                 text: "Imaging deleted successfully!",
@@ -99,7 +99,7 @@ export default function ListTags(props) {
             updatedData.ShortTags =
                 "#" + updatedData.TagsName.replaceAll(" ", "_").toLowerCase();
 
-            await axios.put(`http://localhost:8000/api/tags/${id}`, {
+            await axios.put(`https://localhost:8000/api/tags/${id}`, {
                 ...updatedData,
             });
 
