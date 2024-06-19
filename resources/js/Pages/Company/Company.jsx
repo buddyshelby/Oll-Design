@@ -18,7 +18,7 @@ const Company = () => {
     useEffect(() => {
         const checkWord = Array.from(elementAll).find(item => item.innerHTML === maxSizeDiv)
         if (checkWord !== undefined)
-            setMaxSizeDiv(checkWord.clientWidth + 16)
+            setMaxSizeDiv(checkWord.clientWidth)
     }, [maxSizeDiv])
 
     useEffect(() => {
@@ -37,10 +37,6 @@ const Company = () => {
         }
     }, [i18n.language]);
 
-    const instagracmClick = () => {
-        window.open('https://www.instagram.com/olldesign_1010', '_blank')
-    }
-
     return (
         <Page>
             <div className="col-12 mt-16 mb-6">
@@ -52,7 +48,7 @@ const Company = () => {
                                     <div
                                         className={`${classes.mobileContainer} relative bg-white rounded-md p-4`}
                                     >
-                                    {/* <div className="top-0 absolute h-full" style={{ width: '1px', left: maxSizeDiv === 0 ? 0 : `${maxSizeDiv}px`, backgroundColor: '#003832' }}/> */}
+                                    <div className="top-0 absolute h-full" style={{ width: '1px', left: maxSizeDiv === 0 ? 0 : `${maxSizeDiv}px`, backgroundColor: '#003832' }}/>
                                         {isLanguage.company.profile.map((c) => {
 
                                             if (c.title.length > wordLength) {
@@ -62,32 +58,55 @@ const Company = () => {
 
                                             return (
                                                 <div
-                                                    className={`${classes.company}`}
+                                                    className={classes.company}
                                                     key={c.id}
                                                 >
                                                     <div
-                                                        style={{ borderRightColor: '#C4C4C4' }}
-                                                        className={`${classes["mobile-company-title"]} flex items-center w-full h-full text-wrap border-r`}
+                                                        className={
+                                                            classes[
+                                                                "mobile-company-title"
+                                                            ]
+                                                        }
                                                     >
                                                         {c.title}
                                                     </div>
                                                     <div
-                                                        className={`${classes["mobile-company-content"]}`}
+                                                        className={
+                                                            classes[
+                                                                "mobile-company-content"
+                                                            ]
+                                                        }
                                                     >
-                                                        {c.desc.map((d, index) => (
-                                                            <Fragment key={index}>
+                                                        {c.desc.map((d) => (
+                                                            <React.Fragment key={d.id}>
                                                                 <div
-                                                                    className={`${classes.content} pl-3`}
+                                                                    className={
+                                                                        classes.content
+                                                                    }
                                                                 >
-                                                                    {d.address.split('|').map((item, index) => <Fragment key={index}>{item}<br /></Fragment>)}
+                                                                    {d.address}
                                                                 </div>
-                                                            </Fragment>
+                                                                <div
+                                                                    className={
+                                                                        classes.content
+                                                                    }
+                                                                >
+                                                                    {d.telp}
+                                                                </div>
+                                                                <div
+                                                                    className={
+                                                                        classes.content
+                                                                    }
+                                                                >
+                                                                    {d.fax}
+                                                                </div>
+                                                            </React.Fragment>
                                                         ))}
                                                     </div>
                                                 </div>
                                             )
                                         })}
-                                        {/* <div className={`${classes.company} my-6`}>
+                                        <div className={`${classes.company} my-6`}>
                                             <div
                                                 className={
                                                     classes["mobile-company-title"]
@@ -134,8 +153,8 @@ const Company = () => {
                                                     )
                                                 )}
                                             </div>
-                                        </div> */}
-                                        {/* {isLanguage.company.contact.map((con) => (
+                                        </div>
+                                        {isLanguage.company.contact.map((con) => (
                                             <div
                                                 className={classes.company}
                                                 key={con.id}
@@ -163,7 +182,7 @@ const Company = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        ))} */}
+                                        ))}
                                     </div>
                                     <div className="mt-4 d-flex flex-wrap">
                                         <div className="col-8">
@@ -174,7 +193,6 @@ const Company = () => {
                                                     style={{
                                                         borderRadius: "8px",
                                                         width: "100%",
-                                                        height: "100%",
                                                     }}
                                                     allowFullScreen=""
                                                     aria-hidden="false"
@@ -190,10 +208,15 @@ const Company = () => {
                                                     ]
                                                 }
                                             >
-                                                <div className={`${classes.images} cursor-pointer`} onClick={instagracmClick}>
+                                                <div className={classes.images}>
                                                     <img
-                                                        className="w-full h-full rounded-2xl"
-                                                        src="assets/images/instagram.jpeg"
+                                                        src="https://olldesign.jp/images/company/img3.gif"
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                <div className={classes.images}>
+                                                    <img
+                                                        src="https://olldesign.jp/images/company/img4.gif"
                                                         alt=""
                                                     />
                                                 </div>
@@ -204,7 +227,7 @@ const Company = () => {
                             ) : (
                                 <div className="container-fluid">
                                     <div className="bg-white relative rounded-md p-4">
-                                    {/* <div className="top-0 absolute h-full" style={{ width: '1px', left: maxSizeDiv === 0 ? 0 : `${maxSizeDiv}px`, backgroundColor: '#003832' }}/> */}
+                                    <div className="top-0 absolute h-full" style={{ width: '1px', left: maxSizeDiv === 0 ? 0 : `${maxSizeDiv}px`, backgroundColor: '#003832' }}/>
                                         {isLanguage.company.profile.map((c, index) => {
                                             
                                             if (c.title.length > wordLength) {
@@ -214,12 +237,13 @@ const Company = () => {
 
                                             return (
                                                 <div
-                                                className={`${classes.company}`}
+                                                    className={classes.company}
                                                     key={c.id}
                                                 >
                                                     <div
-                                                        style={{ borderRightColor: '#C4C4C4' }}
-                                                        className={`${classes["company-title"]} flex items-center h-full border-r border-r-black`}
+                                                        className={
+                                                            classes["company-title"]
+                                                        }
                                                     >
                                                         {c.title}
                                                     </div>
@@ -231,7 +255,7 @@ const Company = () => {
                                                         {c.desc.map((d, index) => (
                                                             <Fragment key={index}>
                                                                 <div
-                                                                    className={`${classes.content} pl-4`}
+                                                                    className={`${classes.content}`}
                                                                 >
                                                                     {d.address.split('|').map((item, index) => <Fragment key={index}>{item}<br /></Fragment>)}
                                                                 </div>
@@ -330,12 +354,19 @@ const Company = () => {
                                         </div>
                                         <div className="col-4">
                                             <div
-                                                className={`${classes["small-gallery-company"]}`}
+                                                className={
+                                                    classes["small-gallery-company"]
+                                                }
                                             >
-                                                <div className={`${classes.images} w-full h-full cursor-pointer`} onClick={instagracmClick}>
+                                                <div className={classes.images}>
                                                     <img
-                                                        className="w-full h-full rounded-2xl"
-                                                        src="assets/images/instagram.jpeg"
+                                                        src="https://olldesign.jp/images/company/img3.gif"
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                <div className={classes.images}>
+                                                    <img
+                                                        src="https://olldesign.jp/images/company/img4.gif"
                                                         alt=""
                                                     />
                                                 </div>

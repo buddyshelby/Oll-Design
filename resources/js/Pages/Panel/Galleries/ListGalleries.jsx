@@ -48,7 +48,6 @@ export default function ListGalleries() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [updatedData, setUpdatedData] = useState({
         Name: "",
-        City_Name: "",
         Date: "",
         DescriptionJp: "",
         DescriptionEn: "",
@@ -94,7 +93,6 @@ export default function ListGalleries() {
         setSelectedGallery(selected);
         setUpdatedData({
             Name: selected.Name,
-            City_Name: selected.City_Name,
             Date: selected.Date,
             DescriptionJp: selected.DescriptionJp,
             DescriptionEn: selected.DescriptionEn,
@@ -112,7 +110,6 @@ export default function ListGalleries() {
         setSelectedGallery(null);
         setUpdatedData({
             Name: "",
-            City_Name: "",
             Date: "",
             DescriptionJp: "",
             DescriptionEn: "",
@@ -243,9 +240,6 @@ export default function ListGalleries() {
                                 Design Name
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                City Name
-                            </th>
-                            <th scope="col" className="px-6 py-3">
                                 Date
                             </th>
                             <th scope="col" className="px-6 py-3">
@@ -292,12 +286,6 @@ export default function ListGalleries() {
                                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                                     >
                                         {row.Name}
-                                    </th>
-                                    <th
-                                        scope="row"
-                                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-                                    >
-                                        {row.City_Name}
                                     </th>
                                     <td className="px-6 py-4">{row.Date}</td>
                                     <td className="px-6 py-4">
@@ -463,22 +451,6 @@ export default function ListGalleries() {
                                     setUpdatedData({
                                         ...updatedData,
                                         Name: e.target.value,
-                                    })
-                                }
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2">
-                                City Name :
-                            </label>
-                            <input
-                                type="text"
-                                className="w-full p-2 border rounded"
-                                value={updatedData.City_Name}
-                                onChange={(e) =>
-                                    setUpdatedData({
-                                        ...updatedData,
-                                        City_Name: e.target.value,
                                     })
                                 }
                             />
