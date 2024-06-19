@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
 //     server: {
-// 	host: 'olldesign.jp'
+// 	host: 'olldesign.jp'a
 // },
     plugins: [
         laravel({
