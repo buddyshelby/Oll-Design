@@ -6,6 +6,7 @@ export default defineConfig({
 //     server: {
 // 	host: 'olldesign.jp'
 // },
+    base: '/',
     plugins: [
         laravel({
             input: 'resources/js/app.jsx',
