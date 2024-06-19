@@ -1,5 +1,16 @@
 {
     "version": 2,
+    "builds": [
+        {
+            "src": "api/index.php",
+            "use": "@vercel/php"
+        },
+        {
+            "src": "resources/js/app.jsx",
+            "use": "@vercel/static-build",
+            "config": { "distDir": "public/build" }
+        }
+    ],
     "functions": {
         "api/index.php": { "runtime": "vercel-php@0.5.4" }
     },
