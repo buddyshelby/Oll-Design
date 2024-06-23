@@ -18,7 +18,7 @@ const Company = () => {
     useEffect(() => {
         const checkWord = Array.from(elementAll).find(item => item.innerHTML === maxSizeDiv)
         if (checkWord !== undefined)
-            setMaxSizeDiv(checkWord.clientWidth)
+            setMaxSizeDiv(checkWord.clientWidth + 16)
     }, [maxSizeDiv])
 
     useEffect(() => {
