@@ -145,6 +145,7 @@ class GalleriesController extends Controller
 
             $request->validate([
                 'Name' => 'required|string',
+                'City_Name' => 'required|string',
                 'Date' => 'required|date',
                 'DescriptionJp' => 'required|string',
                 'DescriptionEn' => 'required|string',
@@ -159,6 +160,7 @@ class GalleriesController extends Controller
 
             $gallery->update([
                 'Name' => $request->input('Name'),
+                'City_Name' => $request->input('City_Name'),
                 'Date' => $request->input('Date'),
                 'DescriptionJp' => $request->input('DescriptionJp'),
                 'DescriptionEn' => $request->input('DescriptionEn'),
