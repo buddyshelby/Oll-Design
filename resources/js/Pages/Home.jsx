@@ -49,7 +49,7 @@ const Home = () => {
     const fetchData = async () => {
         try {
             const res = await axios.get(
-                "https://localhost:8000/api/galleryList"
+                "http://localhost:8000/api/galleryList"
             );
             setIsData(res.data.galleryList);
             setIsLoading(false);

@@ -62,7 +62,7 @@ export default function ImagingPanel(props) {
     const fetchImagings = async () => {
         try {
             const response = await axios.get(
-                "https://localhost:8000/api/imagings"
+                "http://localhost:8000/api/imagings"
             );
             setImagings(response.data.imagings);
         } catch (error) {
@@ -73,7 +73,7 @@ export default function ImagingPanel(props) {
     const fetchGalleries = async () => {
         try {
             const response = await axios.get(
-                "https://localhost:8000/api/galleries"
+                "http://localhost:8000/api/galleries"
             );
             setGalleries(response.data.galleries);
         } catch (error) {
@@ -99,7 +99,7 @@ export default function ImagingPanel(props) {
 
             try {
                 await axios.post(
-                    "https://localhost:8000/api/imagings",
+                    "http://localhost:8000/api/imagings",
                     formData
                 );
                 Swal.fire({
@@ -143,7 +143,7 @@ export default function ImagingPanel(props) {
         }
 
         try {
-            await axios.delete(`https://localhost:8000/api/imagings/${id}`);
+            await axios.delete(`http://localhost:8000/api/imagings/${id}`);
             Swal.fire({
                 icon: "success",
                 text: "Imaging deleted successfully!",

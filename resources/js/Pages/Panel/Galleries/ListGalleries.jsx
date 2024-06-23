@@ -48,6 +48,7 @@ export default function ListGalleries() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [updatedData, setUpdatedData] = useState({
         Name: "",
+        City_Name: "",
         Date: "",
         DescriptionJp: "",
         DescriptionEn: "",
@@ -69,7 +70,7 @@ export default function ListGalleries() {
     const fetchGalleries = async () => {
         try {
             const response = await axios.get(
-                `https://localhost:8000/api/galleries`
+                `http://localhost:8000/api/galleries`
             );
             const data = response;
 
@@ -81,7 +82,7 @@ export default function ListGalleries() {
 
     const fetchTags = async () => {
         try {
-            const res = await axios.get("https://localhost:8000/api/tags");
+            const res = await axios.get("http://localhost:8000/api/tags");
             setIsTag(res.data);
         } catch (e) {
             console.error("Error fetching galleries:", e);
@@ -93,6 +94,7 @@ export default function ListGalleries() {
         setSelectedGallery(selected);
         setUpdatedData({
             Name: selected.Name,
+            City_Name: selected.City_Name,
             Date: selected.Date,
             DescriptionJp: selected.DescriptionJp,
             DescriptionEn: selected.DescriptionEn,
@@ -110,6 +112,7 @@ export default function ListGalleries() {
         setSelectedGallery(null);
         setUpdatedData({
             Name: "",
+            City_Name: "",
             Date: "",
             DescriptionJp: "",
             DescriptionEn: "",
@@ -127,7 +130,7 @@ export default function ListGalleries() {
         try {
             const { id } = selectedGallery;
 
-            await axios.put(`https://localhost:8000/api/galleries/${id}`, {
+            await axios.put(`http://localhost:8000/api/galleries/${id}`, {
                 ...updatedData,
             });
 
@@ -167,7 +170,7 @@ export default function ListGalleries() {
         }
 
         await axios
-            .delete(`https://localhost:8000/api/galleries/${id}`)
+            .delete(`http://localhost:8000/api/galleries/${id}`)
             .then(({ data }) => {
                 Swal.fire({
                     icon: "success",
@@ -202,7 +205,7 @@ export default function ListGalleries() {
         }
 
         try {
-            await axios.delete(`https://localhost:8000/api/imagings/${id}`);
+            await axios.delete(`http://localhost:8000/api/imagings/${id}`);
             Swal.fire({
                 icon: "success",
                 text: "Imaging deleted successfully!",
@@ -238,6 +241,9 @@ export default function ListGalleries() {
                         <tr>
                             <th scope="col" className="px-6 py-3">
                                 Design Name
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                City Name
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Date
@@ -286,6 +292,12 @@ export default function ListGalleries() {
                                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                                     >
                                         {row.Name}
+                                    </th>
+                                    <th
+                                        scope="row"
+                                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                                    >
+                                        {row.City_Name}
                                     </th>
                                     <td className="px-6 py-4">{row.Date}</td>
                                     <td className="px-6 py-4">
@@ -359,7 +371,7 @@ export default function ListGalleries() {
                                                 className="block bg-transparant p-[3px] text-red-500 transition hover:text-slate-100 hover:scale-110 hover:bg-red-500 hover:rounded-sm duration-300"
                                             >
                                                 <svg
-                                                    xmlns="https://www.w3.org/2000/svg"
+                                                    xmlns="http://www.w3.org/2000/svg"
                                                     class="icon icon-tabler icon-tabler-trash"
                                                     width="20"
                                                     height="20"
@@ -451,6 +463,22 @@ export default function ListGalleries() {
                                     setUpdatedData({
                                         ...updatedData,
                                         Name: e.target.value,
+                                    })
+                                }
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                City Name :
+                            </label>
+                            <input
+                                type="text"
+                                className="w-full p-2 border rounded"
+                                value={updatedData.City_Name}
+                                onChange={(e) =>
+                                    setUpdatedData({
+                                        ...updatedData,
+                                        City_Name: e.target.value,
                                     })
                                 }
                             />

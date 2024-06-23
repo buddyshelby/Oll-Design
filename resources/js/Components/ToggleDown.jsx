@@ -11,7 +11,7 @@ export default function ToggleDown() {
                 `}
             </style> */}
             <svg
-                xmlns="https://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
                 className="icon icon-tabler icon-tabler-circle-chevron-down"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
