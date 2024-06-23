@@ -93,6 +93,7 @@ export default function ListGalleries() {
         setSelectedGallery(selected);
         setUpdatedData({
             Name: selected.Name,
+            Name: selected.Name,
             Date: selected.Date,
             DescriptionJp: selected.DescriptionJp,
             DescriptionEn: selected.DescriptionEn,
