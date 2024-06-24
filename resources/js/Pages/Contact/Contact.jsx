@@ -53,7 +53,7 @@ class ContactUs extends Component {
                                         className="mr-2"
                                     />
                                     <label htmlFor="checkbox1">
-                                        デザインのご依頼
+                                        店舗出店について
                                     </label>
                                 </div>
                                 <div className="d-flex align-items-center mb-2">
@@ -64,7 +64,7 @@ class ContactUs extends Component {
                                         className="mr-2"
                                     />
                                     <label htmlFor="checkbox2">
-                                        気軽にご相談
+                                        グラフィックデザインについて
                                     </label>
                                 </div>
                                 <div className="d-flex align-items-center">
@@ -75,7 +75,18 @@ class ContactUs extends Component {
                                         className="mr-2"
                                     />
                                     <label htmlFor="checkbox3">
-                                        その他のご質問
+                                        コンサル・講演・セミナーについて
+                                    </label>
+                                </div>
+                                <div className="d-flex align-items-center">
+                                    <input
+                                        type="checkbox"
+                                        id="checkbox3"
+                                        name="checkbox3"
+                                        className="mr-2"
+                                    />
+                                    <label htmlFor="checkbox3">
+                                        その他
                                     </label>
                                 </div>
                             </div>

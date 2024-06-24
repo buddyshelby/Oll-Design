@@ -134,7 +134,7 @@ const Business = () => {
                     <div className="w-full h-max relative flex flex-col justify-center items-center text-center">
                         <img className="w-full" src="/assets/images/Background.png" alt="" onLoad={imageLoadHandler} />
                         <div className="absolute top-0 mt-14 flex flex-col justify-center items-center">
-                            <span className="font-normal text-3xl xl:text-5xl 2xl:text-6xl text-pink-600" style={{ fontFamily: '"Archivo Black", sans-serif', fontStyle: 'normal' }}>{ isLanguage.business[0].header.split('|||')[0] }</span>
+                            <span className="font-semibold text-3xl xl:text-5xl 2xl:text-6xl text-pink-500" style={{ fontFamily: '"Noto Sans Gothic", sans-serif', fontStyle: 'normal' }}>{ isLanguage.business[0].header.split('|||')[0] }</span>
                             <span className="font-semibold text-2xl xl:text-4xl 2xl:text-5xl text-pink-500 mt-2" style={{ fontFamily: '"Noto Sans Gothic", sans-serif', fontStyle: 'normal' }}>{ isLanguage.business[0].header.split('|||')[1] }</span>
                         </div>
                     </div>

@@ -50,6 +50,10 @@ const Navbar = ({ language, setDeskNavWidth }) => {
         return hoverData;
     };
 
+    const instagracmClick = () => {
+        window.open('https://www.instagram.com/olldesign_1010', '_blank')
+    }
+
     const changeLanguage = async (lng) => {
         i18n.changeLanguage(lng)
         if (setDeskNavWidth)
@@ -80,9 +84,10 @@ const Navbar = ({ language, setDeskNavWidth }) => {
                     {matches && (
                         <div className={classes["mobile-navbar-container"]}>
                             <div className={classes["mobile-navbar"]}>
-                                <div className={classes["mobile-brand"]}>
+                                <div className={`${classes["mobile-brand"]} relative w-max`}>
                                     <a href="/">
-                                        <h1>{brand}</h1>
+                                        <h1 className="text-transparent">{brand}</h1>
+                                        <img className="w-full h-full absolute left-0 top-0 object-contain" src="/assets/images/OLL_DESIGN.png" alt="" />
                                     </a>
                                 </div>
                                 <button
@@ -163,60 +168,70 @@ const Navbar = ({ language, setDeskNavWidth }) => {
                     {!matches && (
                         // Tampilan Desktop
                         <div className={classes.sidebar} ref={deskNavRef}>
-                            <div className={classes["sidebar-content"]}>
-                                <div className={classes["sidebar-brand"]}>
-                                    <a href="/">
-                                        <h1>{brand}</h1>
-                                    </a>
-                                </div>
-                                <div className={`${classes.language} mt-2`}>
-                                    {lang.map((item, index) => (
-                                        <button
-                                            key={index}
-                                            onClick={() =>
-                                                changeLanguage(
-                                                    item.lang
-                                                        .toString()
-                                                        .toLowerCase()
-                                                )
-                                            }
-                                        >
-                                            {item.lang}
-                                        </button>
-                                    ))}
-                                </div>
-                                <div className={classes["sidebar-title"]}>
-                                    {isLanguage.navbar_jp.map((m, index) => (
-                                        <a
-                                            href={m.url}
-                                            id={m.id}
-                                            key={index}
-                                        >
-                                            {isHover === m.id
-                                                ? m.title_hover.toUpperCase()
-                                                : m.title.toUpperCase()}
+                            <div className="relative w-full h-full flex justify-center">
+                                <div className={classes["sidebar-content"]}>
+                                    <div className={`${classes["sidebar-brand"]} relative w-max`}>
+                                        <a href="/">
+                                            <h1 className="text-transparent">{brand}</h1>
+                                            <img className="w-full h-full absolute left-0 top-0 object-contain" src="/assets/images/OLL_DESIGN.png" alt="" />
                                         </a>
-                                    ))}
+                                    </div>
+                                    <div className={`${classes.language} mt-2`}>
+                                        {lang.map((item, index) => (
+                                            <button
+                                                key={index}
+                                                onClick={() =>
+                                                    changeLanguage(
+                                                        item.lang
+                                                            .toString()
+                                                            .toLowerCase()
+                                                    )
+                                                }
+                                            >
+                                                {item.lang}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <div className={classes["sidebar-title"]}>
+                                        {isLanguage.navbar_jp.map((m, index) => (
+                                            <a
+                                                href={m.url}
+                                                id={m.id}
+                                                key={index}
+                                            >
+                                                {isHover === m.id
+                                                    ? m.title_hover.toUpperCase()
+                                                    : m.title.toUpperCase()}
+                                            </a>
+                                        ))}
+                                    </div>
+                                    {/* <div
+                                        className={classes["sidebar-socialmedia"]}
+                                    >
+                                        {socialMedia.map((sm) => (
+                                            <a
+                                                href={sm.url}
+                                                key={sm.id}
+                                                target="_blank"
+                                            >
+                                                {sm.icon}
+                                            </a>
+                                        ))}
+                                    </div> */}
                                 </div>
-                                {/* <div
-                                    className={classes["sidebar-socialmedia"]}
-                                >
-                                    {socialMedia.map((sm) => (
-                                        <a
-                                            href={sm.url}
-                                            key={sm.id}
-                                            target="_blank"
-                                        >
-                                            {sm.icon}
-                                        </a>
-                                    ))}
-                                </div> */}
-                            </div>
                             {/* {isSocial && (
                                 <div className={classes["sidebar-social"]}>
                                     <SocialCard hover={isSocial} />
                                 </div>
                             )} */}
+                                <div className={`absolute w-full h-auto bottom-0 cursor-pointer`} onClick={instagracmClick}>
+                                    <img
+                                        className="w-full h-full rounded-2xl"
+                                        src="assets/images/instagram.jpeg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
                         </div>
                     )}
                 </>
