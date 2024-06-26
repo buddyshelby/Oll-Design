@@ -1,11 +1,35 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 
 import Card from "@/Components/Card";
 
 import Page from "../Page";
 import "./Contact.css";
-class ContactUs extends Component {
-    render() {
+const ContactUs = () => {
+    const [isLoading, setIsLoading] = useState(false);
+
+
+        const sendEmail = async () => {
+            setIsLoading(true);
+            const bodyEmail = {
+                email: 'mtegar057@gmail.com',
+                name: 'Budi Tampan',
+                question: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius dolorum ut itaque dolores, velit neque quam assumenda tenetur vitae ratione quo incidunt vel voluptates, nisi omnis. Facere vel unde aliquid?',
+            }
+            try {
+                const res = await axios.get(
+                    "http://localhost:8000/api/sendEmail"
+                );
+                setIsLoading(false);
+            } catch (e) {
+                console.error("Error Sent Email:", e);
+            }
+        };
+
+        const clickHandler = (e) => {
+            e.preventDefault()
+            sendEmail()
+        }
+
         return (
             <Page>
                 <div className="container mt-4" style={{ width: 'calc(90vh)' }}>
@@ -100,15 +124,20 @@ class ContactUs extends Component {
                                     ></textarea>
                                 </div>
                             </div>
-                            <button type="submit" className="btn btn-black">
-                                Submit
-                            </button>
+                            <div className="flex align-items-end">
+                                <button type="submit" onClick={clickHandler} className="btn btn-black">
+                                    Submit
+                                </button>
+                                <div>
+                                    <div className="pl-5">※営業目的のお問い合わせはお断りいたします</div>
+                                    <div className="pl-5">※(We do not accept inquiries for commercial purposes.)</div>
+                                </div>
+                            </div>
                         </form>
                     </Card>
                 </div>
             </Page>
         );
-    }
 }
 
 export default ContactUs;

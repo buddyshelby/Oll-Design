@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GalleriesController;
 use App\Http\Controllers\ImagingController;
 use App\Http\Controllers\TagsController;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,6 @@ Route::get('/tags', [TagsController::class, 'index']);
 Route::post('/tags', [TagsController::class, 'store']);
 Route::put('/tags/{id}', [TagsController::class, 'update']);
 Route::delete('/tags/{id}', [TagsController::class, 'destroy']);
+
+
+Route::get('/sendEmail', [MailController::class, 'sendEmail']);
