@@ -36,4 +36,4 @@ Route::put('/tags/{id}', [TagsController::class, 'update']);
 Route::delete('/tags/{id}', [TagsController::class, 'destroy']);
 
 
-Route::get('/sendEmail', [MailController::class, 'sendEmail']);
+Route::post('/sendEmail', [MailController::class, 'sendEmail']);
