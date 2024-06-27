@@ -4,20 +4,19 @@ import Card from "@/Components/Card";
 import Loading from "../Loading/Loading";
 import Swal from "sweetalert2";
 
-import tempDataContact from './contact.json'
+import dataContact from './contact.json'
 
 import Page from "../Page";
 import "./Contact.css";
 import { useTranslation } from "react-i18next";
 const ContactUs = () => {
-    const dataContact = tempDataContact
     const { i18n } = useTranslation();
-    const [isLanguage, setIsLanguage] = useState(i18n['language'])
+    const [isLanguage, setIsLanguage] = useState(false)
 
     useEffect(() => {
-        if (i18n['language'] === "en-us") {
+        if (i18n['language'].toLowerCase() === "en-us") {
             setIsLanguage("en")
-        } else if (i18n['language'] === "ja") {
+        } else if (i18n['language'].toLowerCase() === "ja") {
             setIsLanguage("jp")
         } else {
             setIsLanguage(i18n['language'])
@@ -33,13 +32,12 @@ const ContactUs = () => {
             createSturucture[item.key] = ''
         })
         setDataInput(createSturucture)
-        dataContact[1][isLanguage]?.warn
         
     }, [])
 
     useEffect(() => {
-        console.log(isLanguage);
-    }, [isLanguage])
+        console.log(dataInput);
+    }, [dataInput])
 
     const onChangeHandler = (e, type) => {
         const updatedData = dataContact[0].reduce((acc, item) => {
@@ -92,7 +90,7 @@ const ContactUs = () => {
         sendEmail()
     }
 
-    return (isLanguage && dataContact) && (
+    return isLanguage && (
         <Page>
             {isLoading && <div className="absolute w-full h-screen top-0 left-0 flex justify-center items-center bg-slate-50 bg-opacity-50">
                 <Loading />
@@ -127,7 +125,7 @@ const ContactUs = () => {
                                     >
                                         {item['label']}
                                     </label>
-                                    {item['option'][isLanguage]?.map((item2, index2) => {
+                                    {item['option'][isLanguage].map((item2, index2) => {
                                         return (
                                             <div key={index2} className="d-flex align-items-center mb-2">
                                                 <input
@@ -164,7 +162,7 @@ const ContactUs = () => {
                                 Submit
                             </button>
                             <div>
-                                {/* <div className="pl-5">※{dataContact[1][isLanguage]?.warn}</div> */}
+                                <div className="pl-5">※{dataContact[1][isLanguage]['warn']}</div>
                             </div>
                         </div>
                     </form>
