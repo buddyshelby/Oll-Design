@@ -33,6 +33,7 @@ const ContactUs = () => {
             createSturucture[item.key] = ''
         })
         setDataInput(createSturucture)
+        dataContact[1][isLanguage]?.warn
         
     }, [])
 
@@ -163,7 +164,7 @@ const ContactUs = () => {
                                 Submit
                             </button>
                             <div>
-                                <div className="pl-5">※{dataContact[1][isLanguage]['warn']}</div>
+                                {/* <div className="pl-5">※{dataContact[1][isLanguage]?.warn}</div> */}
                             </div>
                         </div>
                     </form>
