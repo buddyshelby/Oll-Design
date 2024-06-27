@@ -49,6 +49,7 @@ const GalleryDetail = (props) => {
             let currentTouch = eventStart.changedTouches[0].clientY
     
             const touchMoveHandler = (eventMove) => {
+                eventStart.preventDefault()
                 
                 const moveTouch = eventMove.changedTouches[0].clientY
                 

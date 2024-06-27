@@ -218,7 +218,7 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                                                 </div>
                                             )}
                                         </div>
-                                        <div className={`${ galleryDetailView ? '' : 'container-fluid'} absolute top-0 w-full h-full ${scrollToGallery ? 'opacity-100' : 'opacity-0'}`} id="section-scroll">
+                                        <div className={`${ galleryDetailView ? 'fixed' : 'container-fluid'} absolute top-0 w-full h-full ${scrollToGallery ? 'opacity-100' : 'opacity-0'}`} id="section-scroll">
                                         <div className="row">
                                                 <div className={`col-12 ${galleryDetailView ? '' : 'mt-16'} mb-6`}>
                                                     {children}
