@@ -180,7 +180,7 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                                                 <Navbar language={isLanguage} />
                                             </div>}
                                         {/* </div> */}
-                                        <div className="w-full h-full relative z-10 cursor-pointer transition-all duration-1000"  onClick={videoClickHandle} style={{ transform: `translateY(-${scrollToGallery ? (height + mobileNavRef.current?.offsetHeight) + 'px' : '0px'})` }}>
+                                        <div className="w-full h-full relative z-10 cursor-pointer transition-all duration-1000"  onClick={videoClickHandle} style={{ transform: `translateY(-${scrollToGallery ? (height + mobileNavRef.current?.offsetHeight + 50) + 'px' : '0px'})` }}>
                                             <video
                                                 autoPlay
                                                 loop
@@ -218,13 +218,13 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                                                 </div>
                                             )}
                                         </div>
-                                        <div className={`${ galleryDetailView ? 'fixed' : 'container-fluid'} absolute top-0 w-full h-full ${scrollToGallery ? 'opacity-100' : 'opacity-0'}`} id="section-scroll">
-                                        <div className="row">
-                                                <div className={`col-12 ${galleryDetailView ? '' : 'mt-16'} mb-6`}>
-                                                    {children}
+                                            <div className={`${ galleryDetailView ? 'fixed' : 'container-fluid'} absolute top-0 w-full h-full ${scrollToGallery ? 'opacity-100' : 'opacity-0'}`} id="section-scroll">
+                                                <div className="row">
+                                                    <div className={`col-12 ${galleryDetailView ? '' : 'mt-16'} mb-6`}>
+                                                        {children}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
                             ) : (
