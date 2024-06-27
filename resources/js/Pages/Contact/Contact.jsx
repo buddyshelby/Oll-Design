@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 const ContactUs = () => {
     const dataContact = tempDataContact
     const { i18n } = useTranslation();
-    const [isLanguage, setIsLanguage] = useState(false)
+    const [isLanguage, setIsLanguage] = useState(i18n['language'])
 
     useEffect(() => {
         if (i18n['language'] === "en-us") {
