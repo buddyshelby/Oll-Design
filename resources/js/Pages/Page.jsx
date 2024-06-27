@@ -46,8 +46,9 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
     }
 
     useEffect(() => {
-        if (deskNavRef.current)
+        if (deskNavRef.current){
             setDeskNavWidth(deskNavRef.current?.children[0].clientWidth)
+        }
     }, [deskNavRef.current, deskNavRef.current?.children[0]])
 
     let content = (

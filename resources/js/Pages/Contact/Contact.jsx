@@ -95,12 +95,13 @@ const ContactUs = () => {
             {isLoading && <div className="absolute w-full h-screen top-0 left-0 flex justify-center items-center bg-slate-50 bg-opacity-50">
                 <Loading />
             </div>}
-            <div className="container my-4 w-full">
+            <div className="container my-4 w-full flex flex-col items-center">
                 <Card
                     rounded={"rounded-[12px]"}
                     color={"bg-[#F4F3F3]"}
                     padding={"p-4"}
                     className="w-full"
+                    style={{ maxWidth: '600px' }}
                 >
                     <form>
                         {dataContact[0].map((item, index) => {
