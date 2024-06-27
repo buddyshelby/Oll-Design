@@ -1,0 +1,63 @@
+[
+    [
+        {
+            "key": "company",
+            "type": "text",
+            "label": "御社名 / Company Name :"
+        },
+        {
+            "key": "name",
+            "type": "text",
+            "label": "ご担当者様名 / Contact Person :"
+        },
+        {
+            "key": "phone",
+            "type": "phone",
+            "label": "電話番号 / Contact Number :"
+        },
+        {
+            "key": "email",
+            "type": "email",
+            "label": "メールアドレス / Email Address :"
+        },
+        {
+            "key": "question",
+            "type": "select",
+            "label": "お問い合わせ / QUESTION",
+            "option": {
+                "en": [
+                    "About stores opening", 
+                    "About graphic design", 
+                    "Consults, lectures, and seminars",
+                    "Other"
+                ],
+                "jp": [
+                    "店舗出店について",
+                    "グラフィックデザインについて",
+                    "コンサル・講演・セミナーについて",
+                    "その他"
+                ],
+                "ch": [
+                    "关于商店开业",
+                    "关于平面设计",
+                    "咨询、讲座和研讨会",
+                    "其他"
+                ]
+            }
+        }
+    ],
+    {
+        "en": {
+            "success": "Thank you for your inquiry.|||We will be in touch with you shortly.",
+            "warn": "We do not accept inquiries for commercial purposes."
+        },
+        "jp": {
+            "success": "お問い合わせありがとうございます。|||近日中に担当者よりご連絡いたします。",
+            "warn": "営業目的のお問い合わせはお断りいたします。"
+        },
+        "ch": {
+            "success": "感谢您的询问。|||我们会尽快与您联系。",
+            "warn": "我们不接受商业目的的查询。"
+        }
+    }
+]

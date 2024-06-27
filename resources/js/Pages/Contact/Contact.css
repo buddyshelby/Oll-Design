@@ -1,7 +1,28 @@
 
 .form-control {
-    width: 100%; 
+    width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    border-color: #6b7280;
+    border-width: 1px;
+    border-radius: 0px;
+    padding-top: 0.5rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    --tw-shadow: 0 0 #0000;
 }
+
+.form-control:focus {
+    border-color: rgba(21, 63, 232, 0.5); /* Lighter border color for focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 0 1px rgba(21, 63, 232, 0.5); /* Add a subtle focus shadow */
+}
+
 .message-box {
     border: 1px solid #000000; 
     padding: 8px;

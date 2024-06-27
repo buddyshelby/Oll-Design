@@ -52,10 +52,10 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
 
     let content = (
         <div className="flex">
-            <div ref={deskNavRef} style={{ width: `${deskNavWidth}px`, transition: '.2s' }}>
+            {!galleryDetailView && <div ref={deskNavRef} style={{ width: `${deskNavWidth}px`, transition: '.2s' }}>
                 <Navbar language={isLanguage} setDeskNavWidth={setDeskNavWidth} />
-            </div>
-            <div className="container-fluid relative" style={{ width: `calc(100% - ${deskNavWidth}px)`, transition: '.2s' }}>
+            </div>}
+            <div className={`${galleryDetailView ? 'overflow-hidden fixed' : 'container-fluid relative'} `} style={{ width: !galleryDetailView ? `calc(100% - ${deskNavWidth}px)` : '100%', transition: '.2s' }}>
                 <div className="row">
                     <div className="">{children}</div>
                 </div>
@@ -113,7 +113,7 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                                 </div>
                             )}
                         </div>
-                        <div className={`${ galleryDetailView ? 'overflow-hidden' : 'container-fluid'} absolute top-0 w-full h-full ${scrollToGallery ? 'opacity-100' : 'opacity-0'}`} id="section-scroll">
+                        <div className={`${galleryDetailView ? 'overflow-hidden' : 'container-fluid'} absolute top-0 w-full h-full ${scrollToGallery ? 'opacity-100' : 'opacity-0'}`} id="section-scroll">
                             {!galleryDetailView ? <div className="row">
                                 <div className="col-12 mt-16 mb-6">
                                     {children}

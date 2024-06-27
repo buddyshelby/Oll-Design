@@ -4,32 +4,59 @@ import Card from "@/Components/Card";
 import Loading from "../Loading/Loading";
 import Swal from "sweetalert2";
 
+import dataContact from './contact.json'
+
 import Page from "../Page";
 import "./Contact.css";
+import { useTranslation } from "react-i18next";
 const ContactUs = () => {
+    const { i18n } = useTranslation();
+    const [isLanguage, setIsLanguage] = useState(false)
+
+    useEffect(() => {
+        if (i18n['language'] === "en-us") {
+            setIsLanguage("en")
+        } else if (i18n['language'] === "ja") {
+            setIsLanguage("jp")
+        } else {
+            setIsLanguage(i18n['language'])
+        }
+    }, [i18n['language']])
+
     const [isLoading, setIsLoading] = useState(false)
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [question, setQuestion] = useState('')
+    const [dataInput, setDataInput] = useState({})
+
+    useEffect(() => {
+        let createSturucture = { option: '' }
+        dataContact[0].forEach(item => {
+            createSturucture[item.key] = ''
+        })
+        setDataInput(createSturucture)
+        
+    }, [])
+
+    useEffect(() => {
+        console.log(dataInput);
+    }, [dataInput])
 
     const onChangeHandler = (e, type) => {
-        if (type === "name")
-            setName(e.target.value)
-        if (type === "email")
-            setEmail(e.target.value)
-        if (type === "question")
-            setQuestion(e.target.value)
+        const updatedData = dataContact[0].reduce((acc, item) => {
+            if (type === item.key) {
+                acc[item.key] = e.target.value;
+            }
+            return acc;
+        }, {});
+        setDataInput(prev => ({...prev, ...updatedData}))
+    }
+
+    const optionHandler = (e) => {
+        setDataInput(prev => ({...prev, option: e.target.value}))
     }
 
     const sendEmail = async () => {
         setIsLoading(true);
-        const bodyEmail = {
-            email: email,
-            name: name,
-            question: question,
-        }
         try {
-            await axios.post("http://localhost:8000/api/sendEmail", bodyEmail, {
+            await axios.post("http://localhost:8000/api/sendEmail", dataInput, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -37,15 +64,20 @@ const ContactUs = () => {
             setIsLoading(false);
             setTimeout(() => {
                 window.location.reload();
-            }, 2000);
+            }, 10000);
             Swal.fire({
                 icon: "success",
-                text: "Thanks for The Question!",
-                showConfirmButton: false,
-                timer: 2000,
+                html: `<div>
+                    ${dataContact[1][isLanguage]['success'].split('|||')[0]}
+                    <br />
+                    ${dataContact[1][isLanguage]['success'].split('|||')[1]}
+                </div>`,
+                timer: 10000,
                 timerProgressBar: true,
+                preConfirm: () => window.location.reload()
             });
         } catch (e) {
+            console.log(e);
             setIsLoading(false);
             Swal.fire({
                 icon: "error",
@@ -59,95 +91,62 @@ const ContactUs = () => {
         sendEmail()
     }
 
-    return (
+    return isLanguage && (
         <Page>
             {isLoading && <div className="absolute w-full h-screen top-0 left-0 flex justify-center items-center bg-slate-50 bg-opacity-50">
                 <Loading />
             </div>}
-            <div className="container mt-4" style={{ width: 'calc(90vh)' }}>
+            <div className="container my-4 w-full">
                 <Card
                     rounded={"rounded-[12px]"}
                     color={"bg-[#F4F3F3]"}
                     padding={"p-4"}
                     className="w-full"
                 >
-                    <form className="w-full ">
-                        <div className="w-full mb-8">
-                            <label htmlFor="name" className="form-label">
-                                お名前 / NAME
-                            </label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="name"
-                                name="name"
-                                onChange={(e) => onChangeHandler(e, "name")}
-                            />
-                        </div>
-                        <div className="mb-8">
-                            <label htmlFor="email" className="form-label">
-                                メールアドレス / MAIL ADDRESS
-                            </label>
-                            <input
-                                type="email"
-                                className="form-control"
-                                id="email"
-                                name="email"
-                                onChange={(e) => onChangeHandler(e, "email")}
-                            />
-                        </div>
-                        <div className="mb-8 text-left">
-                            <label
-                                htmlFor="question"
-                                className="form-label"
-                            >
-                                お問い合わせ / QUESTION
-                            </label>
-                            <div className="d-flex align-items-center mb-2">
-                                <input
-                                    type="checkbox"
-                                    id="checkbox1"
-                                    name="checkbox1"
-                                    className="mr-2"
-                                />
-                                <label htmlFor="checkbox1">
-                                    店舗出店について
-                                </label>
-                            </div>
-                            <div className="d-flex align-items-center mb-2">
-                                <input
-                                    type="checkbox"
-                                    id="checkbox2"
-                                    name="checkbox2"
-                                    className="mr-2"
-                                />
-                                <label htmlFor="checkbox2">
-                                    グラフィックデザインについて
-                                </label>
-                            </div>
-                            <div className="d-flex align-items-center">
-                                <input
-                                    type="checkbox"
-                                    id="checkbox3"
-                                    name="checkbox3"
-                                    className="mr-2"
-                                />
-                                <label htmlFor="checkbox3">
-                                    コンサル・講演・セミナーについて
-                                </label>
-                            </div>
-                            <div className="d-flex align-items-center">
-                                <input
-                                    type="checkbox"
-                                    id="checkbox3"
-                                    name="checkbox3"
-                                    className="mr-2"
-                                />
-                                <label htmlFor="checkbox3">
-                                    その他
-                                </label>
-                            </div>
-                        </div>
+                    <form>
+                        {dataContact[0].map((item, index) => {
+                            return item['type'] !== "select" ? (
+                                <div className="w-full mb-8" key={index}>
+                                    <label htmlFor={item['key']} className="form-label">
+                                        {item['label']}
+                                    </label>
+                                    <input
+                                        type={item['type']}
+                                        className="form-control"
+                                        id={item['key']}
+                                        name={item['key']}
+                                        onChange={(e) => onChangeHandler(e, item['key'])}
+                                    />
+                                </div>
+                            ) : (
+                                <div className="mb-8 text-left" key={index}>
+                                    <label
+                                        htmlFor="question"
+                                        className="form-label"
+                                    >
+                                        {item['label']}
+                                    </label>
+                                    {item['option'][isLanguage].map((item2, index2) => {
+                                        return (
+                                            <div key={index2} className="d-flex align-items-center mb-2">
+                                                <input
+                                                    type="radio"
+                                                    name="radio"
+                                                    className="mr-2"
+                                                    id={item2}
+                                                    value={item2}
+                                                    onChange={optionHandler}
+                                                />
+                                                <label htmlFor={item2}>
+                                                    {item2}
+                                                </label>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            )
+                        })}
+                        
                         <div className="mb-3 text-left">
                             <div className="mb-3 text-left">
                                 <textarea
@@ -164,8 +163,7 @@ const ContactUs = () => {
                                 Submit
                             </button>
                             <div>
-                                <div className="pl-5">※営業目的のお問い合わせはお断りいたします</div>
-                                <div className="pl-5">※(We do not accept inquiries for commercial purposes.)</div>
+                                <div className="pl-5">※{dataContact[1][isLanguage]['warn']}</div>
                             </div>
                         </div>
                     </form>

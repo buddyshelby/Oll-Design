@@ -10,22 +10,28 @@ class SendToCompany extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $email;
+    public $company;
     public $name;
+    public $phone;
+    public $email;
+    public $option;
     public $question;
 
 
-    public function __construct($email, $name, $question)
+    public function __construct($company, $name, $phone, $email, $option, $question)
     {
-        $this->email = $email;
+        $this->company = $company;
         $this->name = $name;
+        $this->phone = $phone;
+        $this->email = $email;
+        $this->option = $option;
         $this->question = $question;
     }
 
     public function build()
     {
         return $this->from($this->email, $this->name) // Optional: set the sender's email and name
-                    ->subject('Question from: ' . $this->name) // Optional: set the email subject
+                    ->subject('Question from: ' . $this->name . ' (' . $this->company . ')') // Optional: set the email subject
                     ->view('emails.bodyEmailCompany'); // Ensure this view exists
     }
 }

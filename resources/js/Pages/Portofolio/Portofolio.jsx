@@ -8,7 +8,7 @@ import Gallery from "@/Pages/Gallery/Gallery";
 import GalleryDetail from "@/Pages/Gallery/Detail/GalleryDetail";
 import HomeSkeleton from "@/Components/HomeSkeleton";
 
-const ITEMS_PER_PAGE = 9;
+const ITEMS_PER_PAGE = 999999;
 
 const Portofolio = () => {
     const [isData, setIsData] = useState([]);
@@ -77,7 +77,7 @@ const Portofolio = () => {
 
     return (
         <Page onLoad={isLoading} galleryDetailView={galleryDetailView}>
-            <div className="col-12 mt-16 mb-6">
+            <div className={`${!galleryDetailView ? 'mt-16' : ''}`}>
                 {isPageId === 0 ? (
                     <>
                         <ImgGroupper onGetFilter={getFilter} navDate={navDate} />

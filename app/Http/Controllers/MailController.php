@@ -13,16 +13,22 @@ class MailController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'email' => 'required|email',
+                'company' => 'required|string',
                 'name' => 'required|string|max:255',
+                'phone' => 'required|string',
+                'email' => 'required|email',
+                'option' => 'required|string',
                 'question' => 'required|string',
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
         }
     
-        $email = $request->input('email');
+        $company = $request->input('company');
         $name = $request->input('name');
+        $phone = $request->input('phone');
+        $email = $request->input('email');
+        $option = $request->input('option');
         $question = $request->input('question');
 
         $recipientEmail = $email;
@@ -35,7 +41,7 @@ class MailController extends Controller
         $recipientName = "Oll-Design";
 
         Mail::to($recipientEmail, $recipientName)
-            ->send(new SendToCompany($email, $name, $question));
+            ->send(new SendToCompany($company, $name, $phone, $email, $option, $question));
 
         return response()->json(['message' => 'Email sent successfully.'], 200);
     }

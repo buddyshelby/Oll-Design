@@ -6,7 +6,7 @@
 <tbody>
 <tr>
 <td align="left" valign="middle">
-<a href="https://www.olldesign.jp/">
+<a href="https://olldesign.jp/">
 <img alt="ol-design" src="	https://olldesign.jp/assets/images/OLL_DESIGN.png" style="outline:none;text-decoration:none;display:block;width:100%;height:100%;object-fit: cover;"
 </a>
 </td>
@@ -22,7 +22,7 @@
 <tbody>
 <tr>
 <td style="border-width:0;border-bottom-width:1px;border-style:solid;border-color:#e6e6e6;padding:24px">
-<a href="https://www.olldesign.jp/" style="color:#0a66c2;display:inline-block;text-decoration:none;width:100%" target="_blank">
+<a href="https://olldesign.jp/" style="color:#0a66c2;display:inline-block;text-decoration:none;width:100%" target="_blank">
 <table role="presentation" valign="top" border="0" cellspacing="0" cellpadding="0" width="100%">
 <tbody>
 <tr>
@@ -31,7 +31,7 @@
 <tbody>
 <tr>
 <td>
-<a href="https://www.olldesign.jp/" style="color:#0a66c2;text-decoration:none;vertical-align:top;text-decoration-line:none;width:100%!important;display:block!important" target="_blank">
+<a href="https://olldesign.jp/" style="color:#0a66c2;text-decoration:none;vertical-align:top;text-decoration-line:none;width:100%!important;display:block!important" target="_blank">
 <table role="presentation" valign="top" border="0" cellspacing="0" cellpadding="0" width="100%">
 <tbody>
 <tr>
@@ -47,7 +47,13 @@
 <td align="center" style="font-size:16px;font-weight:600;line-height:1.25;color:#282828;padding-top:12px;">{{ $name }}</td>
 </tr>
 <tr>
-<td align="center" style="font-size:12px;font-weight:400;line-height:1.25;color:#282828;">{{ $email }}</td>
+<td align="center" style="font-size:13px;font-weight:600;line-height:1.25;color:#282828;padding-top:12px;">Company : {{ $company }}</td>
+</tr>
+<tr>
+<td align="center" style="font-size:12px;font-weight:400;line-height:1.25;color:#282828;padding-top:4px;">Email : {{ $email }}</td>
+</tr>
+<tr>
+<td align="center" style="font-size:12px;font-weight:400;line-height:1.25;color:#282828;padding-top:4px;">Number : {{ $phone }}</td>
 </tr>
 </tbody>
 </table>
@@ -59,7 +65,10 @@
 </td>
 </tr>
 <tr>
-<td colspan="1" style="padding-top:16px;font-size:16px;line-height:1.25;color:#282828;text-align: center;">
+<td align="center" style="padding-top:12px;font-size:13px;font-weight:400;line-height:1.25;color:#282828;">({{ $option }})</td>
+</tr>
+<tr>
+<td colspan="1" style="padding-top:4px;font-size:16px;line-height:1.25;color:#282828;text-align: center;">
 <span>{{ $question }}</span>
 </td>
 </tr>
@@ -69,12 +78,12 @@
 <tbody>
 <tr>
 <td valign="middle" align="middle">
-<a href="https://www.olldesign.jp/" style="color:#0a66c2;text-decoration:none;vertical-align:top;text-decoration-line:none;width:100%!important;display:block!important" target="_blank">
+<a href="https://olldesign.jp/" style="color:#0a66c2;text-decoration:none;vertical-align:top;text-decoration-line:none;width:100%!important;display:block!important" target="_blank">
 <table role="presentation" valign="top" border="0" cellspacing="0" cellpadding="0" width="100%" style="border-collapse:separate;width:100%!important">
 <tbody>
 <tr>
 <td style="height:min-content;border-radius:24px;padding-top:12px;padding-bottom:12px;padding-left:24px;padding-right:24px;text-align:center;font-size:16px;font-weight:600;text-decoration-line:none;background-color:rgba(0,0,0,0);color:#0a66c2;border-width:1px;border-style:solid;border-color:#0a66c2;line-height:1.25;min-height:auto!important">
-<a href="https://www.olldesign.jp/" style="color:#0a66c2;text-decoration:none;vertical-align:top;text-decoration-line:none;width:100%!important;display:block!important" target="_blank">
+<a href="https://mail.google.com/" style="color:#0a66c2;text-decoration:none;vertical-align:top;text-decoration-line:none;width:100%!important;display:block!important" target="_blank">
 <span style="color:#0a66c2;text-decoration-line:none"> Contact {{ $name }} </span>
 </a>
 </td>
