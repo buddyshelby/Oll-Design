@@ -4,12 +4,13 @@ import Card from "@/Components/Card";
 import Loading from "../Loading/Loading";
 import Swal from "sweetalert2";
 
-import dataContact from './contact.json'
+import tempDataContact from './contact.json'
 
 import Page from "../Page";
 import "./Contact.css";
 import { useTranslation } from "react-i18next";
 const ContactUs = () => {
+    const dataContact = tempDataContact
     const { i18n } = useTranslation();
     const [isLanguage, setIsLanguage] = useState(false)
 
@@ -77,7 +78,6 @@ const ContactUs = () => {
                 preConfirm: () => window.location.reload()
             });
         } catch (e) {
-            console.log(e);
             setIsLoading(false);
             Swal.fire({
                 icon: "error",
@@ -91,7 +91,7 @@ const ContactUs = () => {
         sendEmail()
     }
 
-    return isLanguage && (
+    return (isLanguage && dataContact) && (
         <Page>
             {isLoading && <div className="absolute w-full h-screen top-0 left-0 flex justify-center items-center bg-slate-50 bg-opacity-50">
                 <Loading />
@@ -126,7 +126,7 @@ const ContactUs = () => {
                                     >
                                         {item['label']}
                                     </label>
-                                    {item['option'][isLanguage] && item['option'][isLanguage].map((item2, index2) => {
+                                    {item['option'][isLanguage].map((item2, index2) => {
                                         return (
                                             <div key={index2} className="d-flex align-items-center mb-2">
                                                 <input
