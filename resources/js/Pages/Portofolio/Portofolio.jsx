@@ -77,7 +77,7 @@ const Portofolio = () => {
 
     return (
         <Page onLoad={isLoading} galleryDetailView={galleryDetailView}>
-            <div className={`${!galleryDetailView ? 'mt-16' : ''}`}>
+            <div className={`${!galleryDetailView ? 'md:mt-16' : ''}`}>
                 {isPageId === 0 ? (
                     <>
                         <ImgGroupper onGetFilter={getFilter} navDate={navDate} />

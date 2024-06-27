@@ -228,10 +228,10 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                                     </div>
                                 </div>
                             ) : (
-                                <div className="container-fluid">
-                                    <div className="row">
+                                <div className={`${ galleryDetailView ? 'fixed' : 'container-fluid'}`}>
+                                    {!galleryDetailView && <div className="row">
                                         <Navbar language={isLanguage} />
-                                    </div>
+                                    </div>}
                                     <div className="row">{children}</div>
                                 </div>
                             )
