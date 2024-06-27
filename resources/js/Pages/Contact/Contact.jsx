@@ -37,8 +37,8 @@ const ContactUs = () => {
     }, [])
 
     useEffect(() => {
-        console.log(dataInput);
-    }, [dataInput])
+        console.log(isLanguage);
+    }, [isLanguage])
 
     const onChangeHandler = (e, type) => {
         const updatedData = dataContact[0].reduce((acc, item) => {
@@ -126,7 +126,7 @@ const ContactUs = () => {
                                     >
                                         {item['label']}
                                     </label>
-                                    {item['option'][isLanguage].map((item2, index2) => {
+                                    {item['option'][isLanguage]?.map((item2, index2) => {
                                         return (
                                             <div key={index2} className="d-flex align-items-center mb-2">
                                                 <input
