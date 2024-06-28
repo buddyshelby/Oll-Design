@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component, useEffect, useRef, useState } from "react";
 
 import Card from "@/Components/Card";
 import Loading from "../Loading/Loading";
@@ -25,6 +25,7 @@ const ContactUs = () => {
 
     const [isLoading, setIsLoading] = useState(false)
     const [dataInput, setDataInput] = useState({})
+    const refCheckbox = useRef([])
 
     useEffect(() => {
         let createSturucture = { option: '' }
@@ -35,9 +36,11 @@ const ContactUs = () => {
         
     }, [])
 
-    useEffect(() => {
-        console.log(dataInput);
-    }, [dataInput])
+    const wrapRef = (element, key) => {
+        if (refCheckbox.current) {
+            refCheckbox.current[key] = element
+        }
+    }
 
     const onChangeHandler = (e, type) => {
         const updatedData = dataContact[0].reduce((acc, item) => {
@@ -49,9 +52,31 @@ const ContactUs = () => {
         setDataInput(prev => ({...prev, ...updatedData}))
     }
 
-    const optionHandler = (e) => {
-        setDataInput(prev => ({...prev, option: e.target.value}))
+    const optionHandler = (e, index) => {
+        let inc = 0
+        refCheckbox.current.forEach(item => {
+            if (index !== inc) {
+                item.checked = false
+            }
+            inc++
+        })
+        if (dataInput['option'] === e.target.value)
+            refCheckbox.current[index].checked = true
+        else
+            setDataInput(prev => ({...prev, option: e.target.value}))
     }
+
+    useEffect(() => {
+        refCheckbox.current.forEach(item => {
+            item.checked = false
+        })
+
+        const lengthCheckbox = refCheckbox.current.length - 1
+        if (refCheckbox.current[lengthCheckbox]) {
+            refCheckbox.current[lengthCheckbox].checked = true
+            setDataInput(prev => ({...prev, option: refCheckbox.current[lengthCheckbox].value}))
+        }
+    }, [refCheckbox.current[0], i18n['language']])
 
     const sendEmail = async () => {
         setIsLoading(true);
@@ -130,12 +155,13 @@ const ContactUs = () => {
                                         return (
                                             <div key={index2} className="d-flex align-items-center mb-2">
                                                 <input
-                                                    type="radio"
-                                                    name="radio"
+                                                    ref={e => wrapRef(e,index2)}
+                                                    type="checkbox"
+                                                    name="checkbox"
                                                     className="mr-2"
                                                     id={item2}
                                                     value={item2}
-                                                    onChange={optionHandler}
+                                                    onChange={e => optionHandler(e, index2)}
                                                 />
                                                 <label htmlFor={item2}>
                                                     {item2}
