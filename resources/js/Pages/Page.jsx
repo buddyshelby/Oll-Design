@@ -9,6 +9,7 @@ import WebLoader from "@/Components/WebLoader";
 
 import classes from "./Page.module.css";
 import Loading from "./Loading/Loading";
+import gifPathTmp from "/public/assets/video/video.gif"
 
 const Page = ({ onLoad = false, children, galleryDetailView }) => {
 
@@ -41,6 +42,9 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
     const deskNavRef = useRef(null)
     const [deskNavWidth, setDeskNavWidth] = useState(0)
 
+    const [isIphone, setIsIphone] = useState(null)
+    const [gifPath, setGifPath] = useState(false)
+
     const videoClickHandle = () => {
         setScrollToGallery(true)
     }
@@ -50,6 +54,30 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
             setDeskNavWidth(deskNavRef.current?.children[0].clientWidth)
         }
     }, [deskNavRef.current, deskNavRef.current?.children[0]])
+
+    useEffect(() => {
+        const checkIfIphone = () => {
+            return /iPhone/.test(navigator.userAgent) && !window.MSStream
+        }
+    
+        setIsIphone(checkIfIphone())
+    }, [])
+
+    useEffect(() => {
+        console.log(isIphone);
+    }, [isIphone])
+
+    useEffect(() => {
+        var img = new Image();
+        img.onload = () => {
+            setGifPath(gifPathTmp)
+            setHideLoad(true)
+            setTimeout(() => {
+                setImageShow(true)
+            }, 500)
+        };
+        img.src = gifPathTmp;
+    }, [])
 
     let content = (
         <div className="flex">
@@ -158,7 +186,7 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
     //         }, 2000);
     // }, [imageShow])
 
-    return (
+    return isIphone !== null && (
         <Router>
             <MediaQuery query="(max-width: 768px)">
                 {({ matches }) => (
@@ -180,8 +208,8 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                                                 <Navbar language={isLanguage} />
                                             </div>}
                                         {/* </div> */}
-                                        <div className="w-full h-full relative z-10 cursor-pointer transition-all duration-1000"  onClick={videoClickHandle} style={{ transform: `translateY(-${scrollToGallery ? (height + mobileNavRef.current?.offsetHeight + 50) + 'px' : '0px'})` }}>
-                                            <video
+                                        <div className="w-screen h-screen relative z-10 cursor-pointer transition-all duration-1000"  onClick={videoClickHandle} style={{ transform: `translateY(-${scrollToGallery ? (height + mobileNavRef.current?.offsetHeight + 50) + 'px' : '0px'})` }}>
+                                        {isIphone === false ? <video
                                                 autoPlay
                                                 loop
                                                 muted
@@ -201,6 +229,25 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                                                 Your browser does not support
                                                 the video tag.
                                             </video>
+                                            :
+                                            gifPath && <div
+                                                className="w-screen h-screen"
+                                                style={{ 
+                                                    width: '100%',
+                                                    height: '100vh',
+                                                    backgroundImage: `url(${gifPath})`,
+                                                    backgroundPosition: '-200px center',
+                                                    backgroundRepeat: 'no-repeat',
+                                                    backgroundSize: 'cover'
+                                                }}
+                                                onLoad={(e) => {
+                                                    setHideLoad(true)
+                                                    setTimeout(() => {
+                                                        setImageShow(true)
+                                                    }, 500)
+                                                }}
+                                               />
+                                            }
                                             <div className="absolute w-full bottom-16">
                                                 <a href="#section-scroll">
                                                     <div
