@@ -47,7 +47,7 @@ class ImagingController extends Controller
     {
         $request->validate([
             'GalleriesID' => 'required|exists:galleries,id',
-            'Img.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
+            'Img.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:100240',
         ]);
 
         $imagePaths = [];
