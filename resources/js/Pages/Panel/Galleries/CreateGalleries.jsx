@@ -126,6 +126,10 @@ export default function CreateGalleries() {
         }
     };
 
+    useEffect(() => {
+        console.log(image);
+    }, [image])
+
     return (
         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 mb-4">
 	    {loading && <div className="absolute">
