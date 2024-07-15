@@ -169,6 +169,17 @@ export default function ListGalleries() {
             return;
         }
 
+        try {
+            await axios.delete(`http://localhost:8000/api/imagings/${id}`);
+        } catch (error) {
+            console.error("Error deleting imaging:", error);
+            Swal.fire({
+                icon: "error",
+                text: "Something went wrong while deleting imaging!",
+            });
+            return;
+        }
+
         await axios
             .delete(`http://localhost:8000/api/galleries/${id}`)
             .then(({ data }) => {
