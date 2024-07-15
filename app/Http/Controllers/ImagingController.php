@@ -68,13 +68,16 @@ class ImagingController extends Controller
     {
         $imaging = Imaging::findOrFail($id);
 
+        $imagePaths = [];
+
         // Delete each image from storage
         foreach ($imaging->Img as $imagePath) {
             Storage::disk('public')->delete($imagePath);
+            $imagePaths[] = $imagePath;
         }
 
         $imaging->delete();
 
-        return response()->json(['message' => 'Imaging deleted successfully']);
+        return response()->json(['message' => 'Imaging '. $imagePaths . ' deleted successfully']);
     }
 }
