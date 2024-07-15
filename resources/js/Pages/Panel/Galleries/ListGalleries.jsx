@@ -152,7 +152,7 @@ export default function ListGalleries() {
         }
     };
 
-    const deleteGalleriesHandler = async (id) => {
+    const deleteGalleriesHandler = async (id, idImage) => {
         const isConfirm = await Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -170,7 +170,7 @@ export default function ListGalleries() {
         }
 
         try {
-            await axios.delete(`http://localhost:8000/api/imagings/${id}`);
+            await axios.delete(`http://localhost:8000/api/imagings/${idImage}`);
         } catch (error) {
             console.error("Error deleting imaging:", error);
             Swal.fire({
@@ -419,7 +419,7 @@ export default function ListGalleries() {
                                             type="button"
                                             className="font-medium text-blue-600 hover:underline"
                                             onClick={() =>
-                                                deleteGalleriesHandler(row.id)
+                                                deleteGalleriesHandler(row.id, row.imagingsID)
                                             }
                                         >
                                             Delete
