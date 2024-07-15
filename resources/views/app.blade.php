@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title inertia>{{ config('app.name', 'Laravel') }}</title>
-    <meta name="description" content='We are a design firm that creates "profitable stores" through calculated design, extensive experience, and know-how, offering total support for increasing sales, chain expansion, and overseas openings.'>
+    <meta name="description" content='We are a design firm that creates "profitable stores"...'>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
