@@ -50,14 +50,15 @@ export default function Login({ status, canResetPassword }) {
 
         
         try {
-            const res = await axios.post(
-                    route("login"),
-                    data, {
-                      headers: {
-                        'Content-Type': 'multipart/form-data'
-                      }
-		            }
-                );
+            await axios.post(
+                route("login"),
+                data, {
+                    headers: {
+                    'Content-Type': 'multipart/form-data'
+                    }
+                }
+            );
+            window.location = route("admin");
         } catch (e) {
             console.error("Terjadi kesalahan:", e);
         }
