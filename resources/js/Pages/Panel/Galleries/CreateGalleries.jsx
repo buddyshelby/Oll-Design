@@ -39,25 +39,34 @@ export default function CreateGalleries() {
         }
     };
 
-    const onChangeSelectedTags = (e) => {
-        setIsSelectedTag(e.target.value);
+    const onChangeImage = (e) => {
+        const wrapAll = []
+
+        e.forEach(item => {
+            wrapAll.push(item)
+        })
+
+        setImage(wrapAll)
     };
 
     const createGallery = async (eventForm) => {
+        // eventForm.preventDefault();
+        // createImaging(eventForm)
+        // return;
         const formData = eventForm.target.elements;
-	const theBody = {}
+        const theBody = {}
 
-        allField.forEach(item => {
-          theBody[item] = formData[item].value
-	})
+            allField.forEach(item => {
+            theBody[item] = formData[item].value
+        })
 
-	theBody["TagsID"] = "4"
-	theBody["UpdateByUser"] = "admin"
+        theBody["TagsID"] = "4"
+        theBody["UpdateByUser"] = "admin"
 
         try {
-	    setLoading(true)
-            const res = await axios.post(`http://localhost:8000/api/galleries`, theBody);
-	    createImaging(eventForm)
+            setLoading(true)
+            await axios.post(`http://localhost:8000/api/galleries`, theBody);
+            createImaging(eventForm)
         } catch (error) {
             if (error.response && error.response.status === 422) {
                 setValidationError(error.response.data.errors);
@@ -78,15 +87,15 @@ export default function CreateGalleries() {
         const resSort = res.data.galleries.sort((a, b) => b.id - a.id);
 
         const formData = new FormData();
-	const theBody = eventForm.target.elements
         formData.append("GalleriesID", resSort[0].id);
+
+        
 
         // Ensure image is an array before iterating
         if (Array.isArray(image)) {
             // Append an array of files
-
-            for (let i = 0; i < theBody['file-input'].files.length; i++) {
-              formData.append(`Img[${i}]`, theBody['file-input'].files[i]);
+            for (let i = 0; i < image.length; i++) {
+              formData.append(`Img[${i}]`, image[i]);
             }
 
             try {
@@ -96,8 +105,9 @@ export default function CreateGalleries() {
                       headers: {
                         'Content-Type': 'multipart/form-data'
                       }
-		});
-	        setLoading(false)
+		            }
+                );
+	            setLoading(false)
 
                 setTimeout(() => {
                     window.location.reload();
@@ -295,9 +305,7 @@ export default function CreateGalleries() {
                     {/* Replace the file input with FileUploader */}
                     <InputLabel>Image:</InputLabel>
                     <FileUploader
-                        onFilesSelected={(selectedFiles) =>
-                            setImage([...image])
-                        }
+                        onFilesSelected={onChangeImage}
                     />
                 </div>
                 <div className="m-4">
