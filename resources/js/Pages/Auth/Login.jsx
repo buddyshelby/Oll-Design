@@ -47,7 +47,7 @@ export default function Login({ status, canResetPassword }) {
         e.preventDefault();
 
         try {
-            res = await fetch(route("login"), {
+            const res = await fetch(route("login"), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
