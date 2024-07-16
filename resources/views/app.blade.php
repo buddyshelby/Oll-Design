@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title inertia>{{ config('app.name', 'Laravel') }}</title>
+    <title inertia>OLLDESIGN | 売れる店を創るデザイン・設計・アドバイス</title>
     <meta name="description" content='売上げUP、チェーン店化、海外出店を計算されたデザイン、豊富な経験とノウハウでトータルサポートする、「売れる店」を創るデザイン設計企業です。 We are a design firm that creates "profitable stores" through calculated design, extensive experience, and know-how, offering total support for increasing sales, chain expansion, and overseas openings.'>
 
     <!-- Fonts -->
