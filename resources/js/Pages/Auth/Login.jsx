@@ -24,6 +24,10 @@ export default function Login({ status, canResetPassword }) {
         };
     }, []);
 
+    const route = (data) => {
+        return `https://olldesign.jp/${data}`
+    }
+
     const handleOnChange = (event) => {
         setData(
             event.target.name,
