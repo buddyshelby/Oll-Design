@@ -57,7 +57,7 @@ export default function Login({ status, canResetPassword }) {
             .then((response) => {
                 if (response.ok) {
                     // Handle response jika permintaan berhasil
-                    console.log(response);
+                    console.log(response.body);
                     // Redirect ke halaman dashboard setelah login berhasil
                     // post(route("admin"));
                     // window.location = route("admin");
