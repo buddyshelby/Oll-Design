@@ -57,10 +57,10 @@ export default function Login({ status, canResetPassword }) {
             .then((response) => {
                 if (response.ok) {
                     // Handle response jika permintaan berhasil
-                    console.log("Login berhasil!");
+                    console.log(response);
                     // Redirect ke halaman dashboard setelah login berhasil
                     // post(route("admin"));
-                    window.location = route("admin");
+                    // window.location = route("admin");
                 } else {
                     // Jika respons tidak berhasil (status code bukan 2xx)
                     // Anda bisa menangani kasus-kasus khusus seperti 404 atau 500
