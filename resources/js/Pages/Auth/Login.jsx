@@ -7,6 +7,8 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
 
+import axios from "axios";
+
 export default function Login({ status, canResetPassword }) {
     const csrfToken = document.head.querySelector(
         'meta[name="csrf-token"]'
@@ -24,10 +26,6 @@ export default function Login({ status, canResetPassword }) {
         };
     }, []);
 
-    const route = (data) => {
-        return `https://olldesign.jp/${data}`
-    }
-
     const handleOnChange = (event) => {
         setData(
             event.target.name,
@@ -36,6 +34,10 @@ export default function Login({ status, canResetPassword }) {
                 : event.target.value
         );
     };
+
+    const route = (data) => {
+        return `https://olldesign.jp/${data}`
+    }
 
     // const submit = (e) => {
     //     e.preventDefault();
@@ -46,37 +48,46 @@ export default function Login({ status, canResetPassword }) {
     const submit = async (e) => {
         e.preventDefault();
 
+        
         try {
-            const res = await fetch(route("login"), {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": csrfToken, // Menggunakan token CSRF di sini
-                },
-                body: JSON.stringify(data),
-            })
-            console.log({ r1: res.json(), r2: res.text(), r3: res.blob() });
-        } catch (error) {
-            console.error("Terjadi kesalahan:", error);
+            const res = await axios.post(
+                    route("login"),
+                    data, {
+                      headers: {
+                        'Content-Type': 'multipart/form-data'
+                      }
+		            }
+                );
+        } catch (e) {
+            console.error("Terjadi kesalahan:", e);
         }
-            // .then((response) => {
-            //     if (response.ok) {
-            //         // Handle response jika permintaan berhasil
-            //         console.log(response.json());
-            //         // Redirect ke halaman dashboard setelah login berhasil
-            //         // post(route("admin"));
-            //         // window.location = route("admin");
-            //     } else {
-            //         // Jika respons tidak berhasil (status code bukan 2xx)
-            //         // Anda bisa menangani kasus-kasus khusus seperti 404 atau 500
-            //         console.error("Login gagal!");
-            //     }
-            // })
-            // .catch((error) => {
-            //     // Handle error jika permintaan gagal
-            //     console.error("Terjadi kesalahan:", error);
-            //     // Misalnya, Anda bisa menampilkan pesan kesalahan kepada pengguna
-            // });
+
+        // fetch(route("login"), {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         "X-CSRF-TOKEN": csrfToken, // Menggunakan token CSRF di sini
+        //     },
+        //     body: JSON.stringify(data),
+        // })
+        //     .then((response) => {
+        //         if (response.ok) {
+        //             // Handle response jika permintaan berhasil
+        //             console.log("Login berhasil!");
+        //             // Redirect ke halaman dashboard setelah login berhasil
+        //             // post(route("admin"));
+        //             window.location = route("admin");
+        //         } else {
+        //             // Jika respons tidak berhasil (status code bukan 2xx)
+        //             // Anda bisa menangani kasus-kasus khusus seperti 404 atau 500
+        //             console.error("Login gagal!");
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         // Handle error jika permintaan gagal
+        //         console.error("Terjadi kesalahan:", error);
+        //         // Misalnya, Anda bisa menampilkan pesan kesalahan kepada pengguna
+        //     });
     };
 
     return (
