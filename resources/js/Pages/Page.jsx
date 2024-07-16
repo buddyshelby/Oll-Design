@@ -191,7 +191,7 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
             <MediaQuery query="(max-width: 768px)">
                 {({ matches }) => (
                     <>
-                        <Head title="OLLDESIVE" />
+                        <Head title="OLLDESIGN" />
                         {matches ? (
                             currentPath === "/" ? (
                                 <div className={`flex-col ${galleryDetailView ? 'fixed' : ''}`}>
