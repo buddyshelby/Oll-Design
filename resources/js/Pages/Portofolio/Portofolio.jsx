@@ -32,6 +32,8 @@ const Portofolio = () => {
 
             fill.push(year)
         })
+        fill.push('Graphic Design')
+        fill.sort((a, b) => b - a)
         setNavDate([...new Set (fill)])
     }, [isData])
 
@@ -40,8 +42,9 @@ const Portofolio = () => {
 
             const dateObject = new Date(item.Date);
             const year = dateObject.getFullYear();
+            const graphicDesign = item.TagsID === "2"
 
-            return filter === "#all" || `#${year}` === filter;
+            return filter === "#all" || graphicDesign || `#${year}` === filter;
         });
         setFilteredData(newFilteredData);
     }, [isData, filter]);
