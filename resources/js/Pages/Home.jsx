@@ -28,7 +28,7 @@ const Home = () => {
         isData.forEach(item => {
 
             const dateObject = new Date(item.Date);
-            const year = dateObject.getFullYear();
+            const year = Number(dateObject.getFullYear()) < 2021 ? 2021 : dateObject.getFullYear()
 
             fill.push(year)
         })
@@ -40,14 +40,17 @@ const Home = () => {
     useEffect(() => {
         const newFilteredData = isData.filter((item) => {
 
-            const dateObject = new Date(item.Date);
-            const year = dateObject.getFullYear();
-            const graphicDesign = item.TagsID === "2"
-
-            return filter === "#all" || graphicDesign || `#${year}` === filter;
+            const dateObject = new Date(item.Date)
+            const year = filter === '#Graphic%20Design'
+                ? (item.TagsID === "2"
+                    ? `Graphic%20Design`
+                    : dateObject.getFullYear())
+                : (Number(dateObject.getFullYear()) < 2021 
+                    ? 2021 
+                    : dateObject.getFullYear())
+            
+            return filter === "#all" || `#${year}` === filter;
         });
-        console.log(filter);
-        
         setFilteredData(newFilteredData);
     }, [isData, filter]);
 
@@ -62,6 +65,10 @@ const Home = () => {
             console.error("Error fetching imagings:", e);
         }
     };
+    
+    // useEffect(() => {
+    //     console.log(filteredData);
+    // }, [filteredData])
 
     const getDetailId = (selected) => {
         setIsPageId(selected);
