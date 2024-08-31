@@ -20,6 +20,7 @@ const Home = () => {
     const [galleryDetailView, setGalleryDetailView] = useState(false)
     const [imageShow, setImageShow] = useState(false)
     const [hideLoad, setHideLoad] = useState(false)
+    const [loadPercent, setLoadPercent] = useState(0)
 
     useEffect(() => {
         fetchData();
@@ -86,7 +87,7 @@ const Home = () => {
     )
 
     return (
-        <Page imageShow={imageShow} hideLoad={hideLoad} galleryDetailView={galleryDetailView}>
+        <Page imageShow={imageShow} hideLoad={hideLoad} loadPercent={loadPercent} galleryDetailView={galleryDetailView}>
             <div>
                 {isPageId === 0 ? (
                     <>
@@ -97,6 +98,7 @@ const Home = () => {
                             <Gallery
                                 setImageShow={setImageShow}
                                 setHideLoad={setHideLoad}
+                                setLoadPercent={setLoadPercent}
                                 imgData={dislayList}
                                 onGetDetailId={getDetailId}
                                 setGalleryDetailView={setGalleryDetailView}

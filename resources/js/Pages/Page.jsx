@@ -11,7 +11,7 @@ import classes from "./Page.module.css";
 import Loading from "./Loading/Loading";
 import gifPathTmp from "/public/assets/video/video.gif"
 
-const Page = ({ children, galleryDetailView, imageShow, hideLoad }) => {
+const Page = ({ children, galleryDetailView, imageShow, hideLoad, loadPercent }) => {
 
     const [width, setWidth] = useState(0)
     const [height, setHeight] = useState(0)
@@ -124,6 +124,7 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad }) => {
                                 <div className={`w-full h-full absolute flex flex-col top-0 left-0 justify-center items-center ${!hideLoad ? 'opacity-100' : 'opacity-0' } transition-all duration-1000`}>
                                     <Loading />
                                     <span className="mt-4">Wait for a moment, it will take longer than usual...</span>
+                                    <span className="mt-2 text-xl" style={{ color: '#b4b5b8' }}>{loadPercent}%</span>
                                 </div>
                             )}
                         </div>
@@ -236,6 +237,7 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad }) => {
                                                 <div className={`w-full h-full absolute flex flex-col top-0 left-0 justify-center items-center ${!hideLoad ? 'opacity-100' : 'opacity-0' } transition-all duration-1000`}>
                                                     <div className="w-16 h-16 border-4 border-transparent border-t-gray-600 rounded-full animate-spin"></div>
                                                     <span className="mt-4 text-white">Wait for a moment, it will take longer than usual...</span>
+                                                    <span className="mt-2 text-xl text-white">{loadPercent}%</span>
                                                 </div>
                                             )}
                                         </div>
