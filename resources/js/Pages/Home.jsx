@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
 import ImgGroupper from "@/Utils/ImageGroupper/ImgGroupper";
@@ -18,6 +18,8 @@ const Home = () => {
     const [filteredData, setFilteredData] = useState([]);
     const [navDate, setNavDate] = useState([])
     const [galleryDetailView, setGalleryDetailView] = useState(false)
+    const [imageShow, setImageShow] = useState(false)
+    const [hideLoad, setHideLoad] = useState(false)
 
     useEffect(() => {
         fetchData();
@@ -59,16 +61,12 @@ const Home = () => {
             const res = await axios.get(
                 "http://localhost:8000/api/galleryList"
             );
-            setIsData(res.data.galleryList);
             setIsLoading(false);
+            setIsData(res.data.galleryList);
         } catch (e) {
             console.error("Error fetching imagings:", e);
         }
     };
-    
-    // useEffect(() => {
-    //     console.log(filteredData);
-    // }, [filteredData])
 
     const getDetailId = (selected) => {
         setIsPageId(selected);
@@ -88,7 +86,7 @@ const Home = () => {
     )
 
     return (
-        <Page onLoad={isLoading} galleryDetailView={galleryDetailView}>
+        <Page imageShow={imageShow} hideLoad={hideLoad} galleryDetailView={galleryDetailView}>
             <div>
                 {isPageId === 0 ? (
                     <>
@@ -97,6 +95,8 @@ const Home = () => {
                             <HomeSkeleton count={isData.length} />
                         ) : (
                             <Gallery
+                                setImageShow={setImageShow}
+                                setHideLoad={setHideLoad}
                                 imgData={dislayList}
                                 onGetDetailId={getDetailId}
                                 setGalleryDetailView={setGalleryDetailView}

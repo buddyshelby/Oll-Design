@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { CollectImage } from "@/Components/CollectImage";
 
 import MediaQuery from "@/Components/MediaQuery";
 
@@ -13,6 +14,31 @@ import classes from "./Gallery.module.css";
 const Gallery = (props) => {
     const [isData, setIsData] = useState([]);
     const [imageHovered, setImageHovered] = useState(false)
+    const [checkAllImage, setCheckAllImage] = useState([])
+    const allImageRef = useRef([])
+
+    useEffect(() => {
+        setTimeout(() => {
+            if (allImageRef.current) {
+                allImageRef.current.map(item => {
+                    item.onload = () => {
+                        setCheckAllImage(prev => [...prev, item])
+                    }
+                })
+            }
+        }, 500);
+    }, [])
+
+    useEffect(() => {
+        if (allImageRef.current.length !== 0) {
+            const totalImage = allImageRef.current.length
+            const totalLoad = checkAllImage.length
+            if (totalImage === totalLoad) {
+                props.setImageShow(true)
+                props.setHideLoad(true)
+            }
+        }
+    }, [checkAllImage])
 
     useEffect(() => {
         setIsData(props.imgData);
@@ -88,6 +114,7 @@ const Gallery = (props) => {
                                         {img.Img.map((i, index) => (
                                             <SwiperSlide key={index}>
                                                 <img
+                                                    ref={(e) => CollectImage(allImageRef, index, e)}
                                                     src={`storage/` + i}
                                                     alt="images"
                                                 />
@@ -138,6 +165,7 @@ const Gallery = (props) => {
                                                     <div className="w-full h-full absolute bg-white transition-all duration-500" style={{ opacity: imageHovered === i ? '.6' : '0' }}></div>
                                                     <span className={`w-1/2 absolute z-10 text-4xl text-center text-white ${imageHovered === i ? 'opacity-100' : 'opacity-0'} transition-all duration-500`}>{ img.Name }</span>
                                                     <img
+                                                        ref={(e) => CollectImage(allImageRef, index, e)}
                                                         src={`storage/` + i}
                                                         alt="images"
                                                     />

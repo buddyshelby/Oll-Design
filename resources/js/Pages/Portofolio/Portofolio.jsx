@@ -18,6 +18,8 @@ const Portofolio = () => {
     const [filteredData, setFilteredData] = useState([]);
     const [navDate, setNavDate] = useState([])
     const [galleryDetailView, setGalleryDetailView] = useState(false)
+    const [imageShow, setImageShow] = useState(false)
+    const [hideLoad, setHideLoad] = useState(false)
 
     useEffect(() => {
         fetchData();
@@ -84,7 +86,7 @@ const Portofolio = () => {
     )
 
     return (
-        <Page onLoad={isLoading} galleryDetailView={galleryDetailView}>
+        <Page imageShow={imageShow} hideLoad={hideLoad} galleryDetailView={galleryDetailView}>
             <div className={`${!galleryDetailView ? 'md:mt-16' : ''}`}>
                 {isPageId === 0 ? (
                     <>
@@ -93,6 +95,8 @@ const Portofolio = () => {
                             <HomeSkeleton count={isData.length} />
                         ) : (
                             <Gallery
+                                setImageShow={setImageShow}
+                                setHideLoad={setHideLoad}
                                 imgData={dislayList}
                                 onGetDetailId={getDetailId}
                                 setGalleryDetailView={setGalleryDetailView}

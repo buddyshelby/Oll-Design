@@ -11,7 +11,7 @@ import classes from "./Page.module.css";
 import Loading from "./Loading/Loading";
 import gifPathTmp from "/public/assets/video/video.gif"
 
-const Page = ({ onLoad = false, children, galleryDetailView }) => {
+const Page = ({ children, galleryDetailView, imageShow, hideLoad }) => {
 
     const [width, setWidth] = useState(0)
     const [height, setHeight] = useState(0)
@@ -35,8 +35,6 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
     );
     // const [isLoader, setIsLoader] = useState();
     const currentPath = window.location.pathname;
-    const [imageShow, setImageShow] = useState(false)
-    const [hideLoad, setHideLoad] = useState(false)
     const [scrollToGallery, setScrollToGallery] = useState(false)
     const mobileNavRef = useRef(null)
     const deskNavRef = useRef(null)
@@ -64,17 +62,9 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
     }, [])
 
     useEffect(() => {
-        console.log(isIphone);
-    }, [isIphone])
-
-    useEffect(() => {
         var img = new Image();
         img.onload = () => {
             setGifPath(gifPathTmp)
-            setHideLoad(true)
-            setTimeout(() => {
-                setImageShow(true)
-            }, 500)
         };
         img.src = gifPathTmp;
     }, [])
@@ -94,7 +84,7 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
 
     if (currentPath === "/") {
         content = (
-            <div className="flex-column">
+            <div className={`flex-column ${!imageShow ? 'pointer-events-none' : ''}`}>
                 {/* <div className="relative flex items-center justify-center h-screen overflow-hidden">
                     <video autoPlay loop muted className="absolute z-10">
                         <source src="assets/video/video.mp4" type="video/mp4" />
@@ -118,12 +108,6 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                                 muted
                                 className={`w-full h-screen object-cover ${!imageShow ? 'opacity-0' : 'opacity-100' } transition-all duration-1000`}
                                 style={{ objectPosition: '0' }}
-                                onLoadedData={(e) => {
-                                    setHideLoad(true)
-                                    setTimeout(() => {
-                                        setImageShow(true)
-                                    }, 500)
-                                }}
                             >
                                 <source
                                     src="assets/video/video.mp4"
@@ -194,7 +178,7 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                         <Head title="OLLDESIGN" />
                         {matches ? (
                             currentPath === "/" ? (
-                                <div className={`flex-col ${galleryDetailView ? 'fixed' : ''}`}>
+                                <div className={`flex-col ${galleryDetailView ? 'fixed' : ''} ${!imageShow ? 'pointer-events-none' : ''}`}>
                                     <div className={`relative w-full ${!scrollToGallery ? 'overflow-hidden' : ''}`}>
                                         {/* <div
                                             className="absolute row h-fit z-20"
@@ -215,12 +199,6 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                                                 muted
                                                 className="w-screen h-screen object-cover"
                                                 style={{ objectPosition: '-200px' }}
-                                                onLoadedData={(e) => {
-                                                    setHideLoad(true)
-                                                    setTimeout(() => {
-                                                        setImageShow(true)
-                                                    }, 500)
-                                                }}
                                             >
                                                 <source
                                                     src="assets/video/video.mp4"
@@ -239,12 +217,6 @@ const Page = ({ onLoad = false, children, galleryDetailView }) => {
                                                     backgroundPosition: '-200px center',
                                                     backgroundRepeat: 'no-repeat',
                                                     backgroundSize: 'cover'
-                                                }}
-                                                onLoad={(e) => {
-                                                    setHideLoad(true)
-                                                    setTimeout(() => {
-                                                        setImageShow(true)
-                                                    }, 500)
                                                 }}
                                                />
                                             }

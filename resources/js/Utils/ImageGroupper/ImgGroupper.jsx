@@ -82,28 +82,25 @@ const ImgGroupper = (props) => {
                             <div className={`${isSortCollapsed && 'flex flex-column gap-2 absolute right-0 top-[1.75rem] bg-white p-2 rounded-sm z-10'}`}>
                                 {isSortCollapsed && (
                                     <>
-                                        {isGroup.map((i) => (
-                                            <div className="" key={i.id}>
+                                        {props.navDate.map((item, index) => (
+                                            <div className="" key={index}>
                                                 <a
-                                                    href={i.ShortTags}
-                                                    id={i.id}
-                                                    onClick={getValueGroupper}
-                                                    onMouseOver={
-                                                        handleMouseOver
-                                                    }
-                                                    onMouseOut={handleMouseOut}
-                                                    className="mx-4 my-6"
-                                                >
-                                                    {isHover === i.id
-                                                        ? i18n.language === "jp"
-                                                            ? i.TagsName.toUpperCase()
-                                                            : i.TagsNameJp.toUpperCase()
-                                                        : (i18n.language ===
-                                                          "jp"
-                                                              ? i.TagsNameJp
-                                                              : i.TagsName
-                                                          ).toUpperCase()}
-                                                </a>
+                                        href={`#${item}`}
+                                        id={index}
+                                        onClick={getValueGroupper}
+                                        onMouseOver={handleMouseOver}
+                                        onMouseOut={handleMouseOut}
+                                    >{String(item).toUpperCase()}
+                                        {/* {JSON.stringify(props.imgData[0].Date)} */}
+                                        {/* {isHover === i.id
+                                            ? i18n.language === "jp"
+                                                ? i.TagsName.toUpperCase()
+                                                : i.TagsNameJp.toUpperCase()
+                                            : (i18n.language === "jp"
+                                                  ? i.TagsNameJp
+                                                  : i.TagsName
+                                              ).toUpperCase()} */}
+                                    </a>
                                             </div>
                                         ))}
                                     </>
