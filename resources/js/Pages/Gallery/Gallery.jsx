@@ -34,7 +34,7 @@ const Gallery = (props) => {
             const totalImage = allImageRef.current.length
             const totalLoad = checkAllImage.length
             const calcPercentage = Math.round(((checkAllImage.length + (totalImage * 0.1)) * 100) / totalImage)
-            props.setLoadPercent(calcPercentage)
+            props.setLoadPercent(calcPercentage > 100 ? 100 : calcPercentage)
             if (totalImage === totalLoad) {
                 props.setImageShow(true)
                 props.setHideLoad(true)
