@@ -84,7 +84,7 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad }) => {
 
     if (currentPath === "/") {
         content = (
-            <div className={`flex-column ${!imageShow ? 'pointer-events-none' : ''}`}>
+            <div className={`flex-column`}>
                 {/* <div className="relative flex items-center justify-center h-screen overflow-hidden">
                     <video autoPlay loop muted className="absolute z-10">
                         <source src="assets/video/video.mp4" type="video/mp4" />
@@ -100,7 +100,7 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad }) => {
                     {!galleryDetailView && <div ref={deskNavRef} style={{ width: `${deskNavWidth}px`, transition: '.2s' }}>
                         <Navbar language={isLanguage} setDeskNavWidth={setDeskNavWidth} />
                     </div>}
-                    <div className={`relative h-full ${!scrollToGallery ? 'overflow-hidden' : ''}`} style={{ width: !galleryDetailView ? `calc(100% - ${deskNavWidth}px)` : `100%`, transition: '.2s' }}>
+                    <div className={`relative h-full ${!scrollToGallery ? 'overflow-hidden' : ''} ${!imageShow ? 'pointer-events-none' : ''}`} style={{ width: !galleryDetailView ? `calc(100% - ${deskNavWidth}px)` : `100%`, transition: '.2s' }}>
                         <div className="relative w-full h-full z-10 cursor-pointer transition-all duration-1000" onClick={videoClickHandle} style={{ transform: `translateY(-${scrollToGallery ? height + 'px' : '0px'})` }}>
                             <video
                                 autoPlay
@@ -121,8 +121,9 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad }) => {
                                 ></div>
                             </div>
                             {!imageShow && (
-                                <div className={`w-full h-full absolute flex top-0 left-0 justify-center items-center ${!hideLoad ? 'opacity-100' : 'opacity-0' } transition-all duration-1000`}>
+                                <div className={`w-full h-full absolute flex flex-col top-0 left-0 justify-center items-center ${!hideLoad ? 'opacity-100' : 'opacity-0' } transition-all duration-1000`}>
                                     <Loading />
+                                    <span className="mt-4">Wait for a moment, it will take longer than usual...</span>
                                 </div>
                             )}
                         </div>
@@ -178,8 +179,8 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad }) => {
                         <Head title="OLLDESIGN" />
                         {matches ? (
                             currentPath === "/" ? (
-                                <div className={`flex-col ${galleryDetailView ? 'fixed' : ''} ${!imageShow ? 'pointer-events-none' : ''}`}>
-                                    <div className={`relative w-full ${!scrollToGallery ? 'overflow-hidden' : ''}`}>
+                                <div className={`flex-col ${galleryDetailView ? 'fixed' : ''}`}>
+                                    <div className={`relative w-full ${!scrollToGallery ? 'overflow-hidden' : ''} ${!imageShow ? 'pointer-events-none' : ''}`}>
                                         {/* <div
                                             className="absolute row h-fit z-20"
                                             style={{
@@ -232,8 +233,9 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad }) => {
                                                 </a>
                                             </div>
                                             {!imageShow && (
-                                                <div className={`w-full h-full absolute flex top-0 left-0 justify-center items-center ${!hideLoad ? 'opacity-100' : 'opacity-0' } transition-all duration-1000`}>
+                                                <div className={`w-full h-full absolute flex flex-col top-0 left-0 justify-center items-center ${!hideLoad ? 'opacity-100' : 'opacity-0' } transition-all duration-1000`}>
                                                     <div className="w-16 h-16 border-4 border-transparent border-t-gray-600 rounded-full animate-spin"></div>
+                                                    <span className="mt-4 text-white">Wait for a moment, it will take longer than usual...</span>
                                                 </div>
                                             )}
                                         </div>
