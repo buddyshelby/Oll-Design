@@ -57,7 +57,7 @@ export default function CreateGalleries() {
         const theBody = {}
 
         allField.forEach(item => {
-            theBody[item] = formData[item].value
+            theBody[item] = formData[item]?.value
         })
 
         theBody["UpdateByUser"] = "admin"
@@ -68,8 +68,10 @@ export default function CreateGalleries() {
             createImaging(eventForm)
         } catch (error) {
             if (error.response && error.response.status === 422) {
+                setLoading(false)
                 setValidationError(error.response.data.errors);
             } else {
+                setLoading(false)
                 Swal.fire({
                     icon: "error",
                     text: error.response
@@ -141,11 +143,11 @@ export default function CreateGalleries() {
 
     return (
         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 mb-4">
-	    {loading && <div className="absolute">
-		    <div className="w-screen h-screen top-0 left-0 fixed flex justify-center items-center z-20 bg-black bg-opacity-25">
-		      <Loading />
-                    </div>
-	    </div>}
+            {loading && <div className="absolute">
+                <div className="w-screen h-screen top-0 left-0 fixed flex justify-center items-center z-20 bg-black bg-opacity-25">
+                    <Loading />
+                </div>
+            </div>}
             {Object.keys(validationError).length > 0 && (
                 <div className="row">
                     <div className="col-12">
@@ -251,7 +253,7 @@ export default function CreateGalleries() {
                 <div className="m-4">
                     <InputLabel>Select Tag:</InputLabel>
                     <select
-                        name="TagsID"
+                        name="TagsiD"
                         value={isSelectedTag}
                         onChange={onChangeSelectedTags}
                         className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
