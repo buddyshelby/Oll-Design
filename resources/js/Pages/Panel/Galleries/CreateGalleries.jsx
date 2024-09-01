@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 import InputLabel from "@/Components/InputLabel";
 import FileUploader from "@/Components/FileUploader";
 import Loading from "@/Pages/Loading/Loading";
+import { ErrValidation } from "@/Components/Modal";
 
 export default function CreateGalleries() {
     const [isTag, setIsTag] = useState([]);
@@ -70,6 +71,9 @@ export default function CreateGalleries() {
             if (error.response && error.response.status === 422) {
                 setLoading(false)
                 setValidationError(error.response.data.errors);
+                setTimeout(() => {
+                    setValidationError({})
+                }, 4000);
             } else {
                 setLoading(false)
                 Swal.fire({
@@ -149,18 +153,18 @@ export default function CreateGalleries() {
                 </div>
             </div>}
             {Object.keys(validationError).length > 0 && (
-                <div className="row">
-                    <div className="col-12">
-                        <div className="alert alert-danger">
-                            <ul className="mb-0">
+                <div className="fixed row left-0 top-0 w-full flex flex-col justify-center items-center mt-20 z-50">
                                 {Object.entries(validationError).map(
-                                    ([key, value]) => (
-                                        <li key={key}>{value}</li>
-                                    )
+                                    ([key, value], index) => {
+                                        const modIndex = index + 1
+                                        return (
+                                        // <li key={key}>{value}</li>
+                                        <Fragment key={key}>
+                                            <ErrValidation text={value} duration={300 * modIndex} />
+                                        </Fragment>
+                                        )
+                                    }
                                 )}
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             )}
             <form

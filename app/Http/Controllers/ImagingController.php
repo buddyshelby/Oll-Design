@@ -27,7 +27,7 @@ class ImagingController extends Controller
             ->leftJoin('galleries', 'galleries.id', '=', 'imagings.GalleriesID')
             ->leftJoin('tags', 'tags.id', '=', 'galleries.TagsID')
             ->select('galleries.*', 'imagings.Img', 'tags.ShortTags')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('galleries.Date', 'desc')
             ->get();
 
         $getListGallery = $getListGallery->map(function ($item) {

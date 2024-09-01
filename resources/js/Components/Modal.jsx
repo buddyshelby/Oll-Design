@@ -1,5 +1,31 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+
+export const ErrValidation = ({ text, duration }) => {
+    const containerRef = useRef(null)
+
+    useEffect(() => {
+        if (containerRef.current) {
+            setTimeout(() => {
+                containerRef.current.style.transition = `${duration}ms`
+                containerRef.current.style.opacity = '1'
+                containerRef.current.style.transform = 'translateY(0)'
+            }, 70);
+            setTimeout(() => {
+                containerRef.current.style.opacity = '0'
+                containerRef.current.style.transform = 'translateY(700px)'
+            }, 3000);
+        }
+    }, [containerRef])
+
+    return (
+        <div ref={containerRef} className='w-4/5 h-10 my-2 rounded-xl text-white bg-red-500 bg-opacity-60' style={{ opacity: '0', transform: 'translateY(700px)' }}>
+            <div className='w-full h-full flex flex-col justify-center items-center text-center'>
+                {text}
+            </div>
+        </div>
+    )
+}
 
 export default function Modal({ children, show = false, maxWidth = '2xl', closeable = true, onClose = () => {} }) {
     const close = () => {
