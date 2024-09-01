@@ -157,10 +157,14 @@ export default function CreateGalleries() {
                                 {Object.entries(validationError).map(
                                     ([key, value], index) => {
                                         const modIndex = index + 1
+                                        const modValue = value[0].replace('  ', ' ').replace(/tags i d/, 'tag name').replace(/.*The /, '').replace(/ field.*/, '').split(' ').map(word => 
+                                            word.charAt(0).toUpperCase() + word.slice(1)
+                                        ).join(' ');
+                                        
                                         return (
                                         // <li key={key}>{value}</li>
                                         <Fragment key={key}>
-                                            <ErrValidation text={value} duration={300 * modIndex} />
+                                            <ErrValidation text={`The ${modValue} field is required`} duration={300 * modIndex} />
                                         </Fragment>
                                         )
                                     }

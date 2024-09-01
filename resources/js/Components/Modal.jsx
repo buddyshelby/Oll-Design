@@ -19,7 +19,7 @@ export const ErrValidation = ({ text, duration }) => {
     }, [containerRef])
 
     return (
-        <div ref={containerRef} className='w-4/5 h-10 my-2 rounded-xl text-white bg-red-500 bg-opacity-60' style={{ opacity: '0', transform: 'translateY(700px)' }}>
+        <div ref={containerRef} className='w-max px-5 py-2 my-2 rounded-xl text-white bg-red-500 bg-opacity-60' style={{ opacity: '0', transform: 'translateY(700px)' }}>
             <div className='w-full h-full flex flex-col justify-center items-center text-center'>
                 {text}
             </div>
