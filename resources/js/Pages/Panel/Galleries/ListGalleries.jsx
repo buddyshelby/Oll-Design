@@ -293,10 +293,10 @@ export default function ListGalleries() {
                     </thead>
                     <tbody>
                         {list && list.length > 0 ? (
-                            displayedList.map((row) => (
+                            displayedList.map((row, index) => (
                                 <tr
                                     className="odd:bg-white even:bg-gray-50 border-b"
-                                    key={row.id}
+                                    key={index}
                                 >
                                     <th
                                         scope="row"
@@ -355,7 +355,7 @@ export default function ListGalleries() {
                                         <div className="flex flex-row justify-start align-middle gap-2 overflow-x-auto">
                                             {row.Img !== null ? (
                                                 row.Img.map((img, index) => (
-                                                    <div>
+                                                    <div key={index}>
                                                         <img
                                                             src={`storage/${img}`}
                                                             alt={img}
@@ -383,15 +383,15 @@ export default function ListGalleries() {
                                             >
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
-                                                    class="icon icon-tabler icon-tabler-trash"
+                                                    className="icon icon-tabler icon-tabler-trash"
                                                     width="20"
                                                     height="20"
                                                     viewBox="0 0 24 24"
-                                                    stroke-width="2"
+                                                    strokeWidth="2"
                                                     stroke="currentColor"
                                                     fill="none"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 >
                                                     <path
                                                         stroke="none"
@@ -575,8 +575,8 @@ export default function ListGalleries() {
                                 <option value="" disabled>
                                     Select Tags
                                 </option>
-                                {isTags.map((t) => (
-                                    <option value={t.id}>{t.TagsName}</option>
+                                {isTags.map((t, index) => (
+                                    <option key={index} value={t.id}>{t.TagsName}</option>
                                 ))}
                             </select>
                         </div>

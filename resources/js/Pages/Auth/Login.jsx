@@ -36,7 +36,7 @@ export default function Login({ status, canResetPassword }) {
     };
 
     const route = (data) => {
-        return `https://olldesign.jp/${data}`
+        return `http://localhost:8000/${data}`
     }
 
     // const submit = (e) => {

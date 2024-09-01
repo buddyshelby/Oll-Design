@@ -16,7 +16,7 @@ export default function CreateGalleries() {
     const [descriptionCh, setDescriptionCh] = useState("");
     const [isSelectedTag, setIsSelectedTag] = useState("");
     const [updateByUser, setUpdateByUser] = useState("admin");
-    const [workstitle, setWotksTitle] = useState("");
+    const [workstitle, setWorksTitle] = useState("");
     const [workscontent, setWorksContent] = useState("");
     const [workscredit, setWorksCredit] = useState("");
     const [worksclient, setWorksClient] = useState("");
@@ -24,11 +24,7 @@ export default function CreateGalleries() {
     const [image, setImage] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const allField = ["Name", "City_Name", "Date", "DescriptionJp", "DescriptionEn", "DescriptionCh", "WorksTitle", "WorksContent", "WorksCredit", "WorksClient"]
-
-    useEffect(() => {
-        fetchTags();
-    }, []);
+    const allField = ["Name", "City_Name", "Date", "DescriptionJp", "DescriptionEn", "DescriptionCh", "TagsID", "WorksTitle", "WorksContent", "WorksCredit", "WorksClient"]
 
     const fetchTags = async () => {
         try {
@@ -49,6 +45,10 @@ export default function CreateGalleries() {
         setImage(wrapAll)
     };
 
+    const onChangeSelectedTags = (e) => {
+        setIsSelectedTag(e.target.value);
+    };
+
     const createGallery = async (eventForm) => {
         // eventForm.preventDefault();
         // createImaging(eventForm)
@@ -56,11 +56,10 @@ export default function CreateGalleries() {
         const formData = eventForm.target.elements;
         const theBody = {}
 
-            allField.forEach(item => {
+        allField.forEach(item => {
             theBody[item] = formData[item].value
         })
 
-        theBody["TagsID"] = "4"
         theBody["UpdateByUser"] = "admin"
 
         try {
@@ -137,8 +136,8 @@ export default function CreateGalleries() {
     };
 
     useEffect(() => {
-        console.log(image);
-    }, [image])
+        fetchTags();
+    }, []);
 
     return (
         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 mb-4">
@@ -250,6 +249,24 @@ export default function CreateGalleries() {
                     ></textarea>
                 </div>
                 <div className="m-4">
+                    <InputLabel>Select Tag:</InputLabel>
+                    <select
+                        name="TagsID"
+                        value={isSelectedTag}
+                        onChange={onChangeSelectedTags}
+                        className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    >
+                        <option value="" disabled>
+                            Select Tags
+                        </option>
+                        {isTag.map((tg) => (
+                            <option key={tg.id} value={tg.id}>
+                                {tg.ShortTags}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className="m-4">
                     <InputLabel>Works Title :</InputLabel>
                     <input
                         type="text"
@@ -258,7 +275,7 @@ export default function CreateGalleries() {
                         id="workstitle"
                         value={workstitle}
                         onChange={(e) => {
-                            setWotksTitle(e.target.value);
+                            setWorksTitle(e.target.value);
                         }}
                     />
                 </div>

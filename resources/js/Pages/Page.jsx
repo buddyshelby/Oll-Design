@@ -199,7 +199,7 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad, loadPercent })
                                                 autoPlay
                                                 loop
                                                 muted
-                                                className="w-screen h-screen object-cover"
+                                                className={`w-screen h-screen object-cover transition-all duration-1000 ${!imageShow ? 'opacity-0' : 'opacity-100' }`}
                                                 style={{ objectPosition: '-200px' }}
                                             >
                                                 <source
@@ -211,7 +211,7 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad, loadPercent })
                                             </video>
                                             :
                                             gifPath && <div
-                                                className="w-screen h-screen"
+                                                className={`w-screen h-screen transition-all duration-1000 ${!imageShow ? 'opacity-0' : 'opacity-100' }`}
                                                 style={{ 
                                                     width: '100%',
                                                     height: '100vh',
@@ -235,9 +235,9 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad, loadPercent })
                                             </div>
                                             {!imageShow && (
                                                 <div className={`w-full h-full absolute flex flex-col top-0 left-0 justify-center items-center ${!hideLoad ? 'opacity-100' : 'opacity-0' } transition-all duration-1000`}>
-                                                    <div className="w-16 h-16 border-4 border-transparent border-t-gray-600 rounded-full animate-spin"></div>
-                                                    <span className="mt-4 text-white">Wait for a moment, it will take longer than usual...</span>
-                                                    <span className="mt-2 text-xl text-white"> {loadPercent}% </span>
+                                                    <Loading />
+                                                    <span className="mt-4">Wait for a moment, it will take longer than usual...</span>
+                                                    <span className="mt-2 text-xl" style={{ color: '#b4b5b8' }}>{loadPercent}%</span>
                                                 </div>
                                             )}
                                         </div>
