@@ -261,7 +261,7 @@ export default function CreateGalleries() {
                 <div className="m-4">
                     <InputLabel>Select Tag:</InputLabel>
                     <select
-                        name="TagsiD"
+                        name="TagsID"
                         value={isSelectedTag}
                         onChange={onChangeSelectedTags}
                         className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
