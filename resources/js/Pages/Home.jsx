@@ -18,8 +18,8 @@ const Home = () => {
     const [filteredData, setFilteredData] = useState([]);
     const [navDate, setNavDate] = useState([])
     const [galleryDetailView, setGalleryDetailView] = useState(false)
-    const [imageShow, setImageShow] = useState(false)
-    const [hideLoad, setHideLoad] = useState(false)
+    const [imageShow, setImageShow] = useState(true)
+    const [hideLoad, setHideLoad] = useState(true)
     const [loadPercent, setLoadPercent] = useState(0)
 
     useEffect(() => {
@@ -60,7 +60,7 @@ const Home = () => {
     const fetchData = async () => {
         try {
             const res = await axios.get(
-                "http://localhost:8000/api/galleryList"
+                "http://olldesign.jp/api/galleryList"
             );
             setIsLoading(false);
             setIsData(res.data.galleryList);

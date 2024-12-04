@@ -81,7 +81,7 @@ const ContactUs = () => {
     const sendEmail = async () => {
         setIsLoading(true);
         try {
-            await axios.post("http://localhost:8000/api/sendEmail", dataInput, {
+            await axios.post("http://olldesign.jp/api/sendEmail", dataInput, {
                 headers: {
                     'Content-Type': 'application/json'
                 }

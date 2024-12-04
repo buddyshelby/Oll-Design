@@ -8,7 +8,8 @@ resources/js/Pages/Panel/Tags/ListTags.jsx
 resources/js/Pages/Panel/Tags/CreateTags.jsx
 resources/js/Pages/Portofolio/Portofolio.jsx
 resources/js/Utils/ImageGroupper/ImgGroupper.jsx
-resources/js/Pages/Contact/Contact.jsx"
+resources/js/Pages/Contact/Contact.jsx
+resources/js/Pages/Auth/Login.jsx"
 
 
 for xy in `echo "${filenames}"`;do
