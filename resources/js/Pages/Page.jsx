@@ -144,20 +144,48 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad, loadPercent })
     }
 
     useEffect(() => {
-        if (i18n.language === "jp") {
+
+        const jpRegex = /^j/
+        const enRegex = /^en/
+        const chRegex = /^ch/
+        
+
+        if (jpRegex.test(i18n.language.toLowerCase())) {
             setIsLanguage(i18n.store.data.jp.translation);
-        } else if (i18n.language === "ja") {
-            setIsLanguage(i18n.store.data.jp.translation);
-        } else if (i18n.language === "en") {
+        } else if (enRegex.test(i18n.language.toLowerCase())) {
             setIsLanguage(i18n.store.data.en.translation);
-        } else if (i18n.language === "en-US") {
-            setIsLanguage(i18n.store.data.en.translation);
-        } else if (i18n.language === "ch") {
+        } else if (chRegex.test(i18n.language.toLowerCase())) {
             setIsLanguage(i18n.store.data.ch.translation);
         } else {
-            setIsLanguage(Object.values(i18n.store.data)[0].translation);
+            setIsLanguage(i18n.store.data.jp.translation);
         }
+        
     }, [i18n.language]);
+
+    useEffect(() => {
+        const jpRegex = /^j/
+        const enRegex = /^en/
+        const chRegex = /^ch/
+        const userLocale = navigator.language || navigator.userLanguage;
+
+        const changeLanguage = async (lng) => {
+            i18n.changeLanguage(lng)
+            if (setDeskNavWidth)
+                setTimeout(() => {
+                    setDeskNavWidth(deskNavRef.current.clientWidth)
+                }, 200);
+        };
+
+        if (jpRegex.test(userLocale.toLowerCase())) {
+            changeLanguage('jp');
+        } else if (enRegex.test(userLocale.toLowerCase())) {
+            changeLanguage('en');
+        } else if (chRegex.test(userLocale.toLowerCase())) {
+            changeLanguage('ch');
+        } else {
+            changeLanguage('en');
+        }
+    }, [])
 
     // useEffect(() => {
     //     if (onLoad === true) {
