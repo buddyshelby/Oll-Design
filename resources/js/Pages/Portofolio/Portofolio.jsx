@@ -59,7 +59,7 @@ const Portofolio = () => {
     const fetchData = async () => {
         try {
             const res = await axios.get(
-                "http://olldesign.jp/api/galleryList"
+                "https://olldesign.jp/api/galleryList"
             );
             setIsData(res.data.galleryList);
             setIsLoading(false);

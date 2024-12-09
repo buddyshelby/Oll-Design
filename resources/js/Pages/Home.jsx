@@ -60,7 +60,7 @@ const Home = () => {
     const fetchData = async () => {
         try {
             const res = await axios.get(
-                "http://olldesign.jp/api/galleryList"
+                "https://olldesign.jp/api/galleryList"
             );
             setIsLoading(false);
             setIsData(res.data.galleryList);
