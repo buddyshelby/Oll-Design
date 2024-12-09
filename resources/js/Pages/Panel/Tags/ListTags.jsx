@@ -25,7 +25,7 @@ export default function ListTags(props) {
 
     const fetchTags = async () => {
         try {
-            const res = await axios.get("http://olldesign.jp/api/tags");
+            const res = await axios.get("https://olldesign.jp/api/tags");
             setIsTags(res.data);
         } catch (e) {
             console.error("Error fetching imagings:", e);
@@ -48,7 +48,7 @@ export default function ListTags(props) {
         }
 
         try {
-            await axios.delete(`http://olldesign.jp/api/tags/${id}`);
+            await axios.delete(`https://olldesign.jp/api/tags/${id}`);
             Swal.fire({
                 icon: "success",
                 text: "Imaging deleted successfully!",
@@ -99,7 +99,7 @@ export default function ListTags(props) {
             updatedData.ShortTags =
                 "#" + updatedData.TagsName.replaceAll(" ", "_").toLowerCase();
 
-            await axios.put(`http://olldesign.jp/api/tags/${id}`, {
+            await axios.put(`https://olldesign.jp/api/tags/${id}`, {
                 ...updatedData,
             });
 

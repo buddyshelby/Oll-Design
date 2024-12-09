@@ -18,7 +18,7 @@ const ImgGroupper = (props) => {
 
     const fetchGroupper = async () => {
         try {
-            const res = await axios.get("http://olldesign.jp/api/tags");
+            const res = await axios.get("https://olldesign.jp/api/tags");
             setIsGroup(res.data);
         } catch (e) {
             console.error("Error fetching tags:", e);

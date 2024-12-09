@@ -70,7 +70,7 @@ export default function ListGalleries() {
     const fetchGalleries = async () => {
         try {
             const response = await axios.get(
-                `http://olldesign.jp/api/galleries`
+                `https://olldesign.jp/api/galleries`
             );
             const data = response;
 
@@ -82,7 +82,7 @@ export default function ListGalleries() {
 
     const fetchTags = async () => {
         try {
-            const res = await axios.get("http://olldesign.jp/api/tags");
+            const res = await axios.get("https://olldesign.jp/api/tags");
             setIsTag(res.data);
         } catch (e) {
             console.error("Error fetching galleries:", e);
@@ -130,7 +130,7 @@ export default function ListGalleries() {
         try {
             const { id } = selectedGallery;
 
-            await axios.put(`http://olldesign.jp/api/galleries/${id}`, {
+            await axios.put(`https://olldesign.jp/api/galleries/${id}`, {
                 ...updatedData,
             });
 
@@ -170,7 +170,7 @@ export default function ListGalleries() {
         }
 
         try {
-            await axios.delete(`http://olldesign.jp/api/imagings/${idImage}`);
+            await axios.delete(`https://olldesign.jp/api/imagings/${idImage}`);
         } catch (error) {
             console.error("Error deleting imaging:", error);
             Swal.fire({
@@ -181,7 +181,7 @@ export default function ListGalleries() {
         }
 
         await axios
-            .delete(`http://olldesign.jp/api/galleries/${id}`)
+            .delete(`https://olldesign.jp/api/galleries/${id}`)
             .then(({ data }) => {
                 Swal.fire({
                     icon: "success",
@@ -216,7 +216,7 @@ export default function ListGalleries() {
         }
 
         try {
-            await axios.delete(`http://olldesign.jp/api/imagings/${id}`);
+            await axios.delete(`https://olldesign.jp/api/imagings/${id}`);
             Swal.fire({
                 icon: "success",
                 text: "Imaging deleted successfully!",
@@ -382,7 +382,7 @@ export default function ListGalleries() {
                                                 className="block bg-transparant p-[3px] text-red-500 transition hover:text-slate-100 hover:scale-110 hover:bg-red-500 hover:rounded-sm duration-300"
                                             >
                                                 <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns="https://www.w3.org/2000/svg"
                                                     className="icon icon-tabler icon-tabler-trash"
                                                     width="20"
                                                     height="20"
