@@ -90,6 +90,28 @@ const Navbar = ({ language, setDeskNavWidth }) => {
                                         <img className="w-full h-full absolute left-0 top-0 object-contain" src="/assets/images/OLL_DESIGN.png" alt="" />
                                     </a>
                                 </div>
+                                {/* <div className="border-1 border-black w-5 h-5">
+
+                                </div> */}
+                                <div
+                                    className={`${classes.language} space-x-2`}
+                                >
+                                    {lang.map((item, index) => (
+                                        <button
+                                            key={index}
+                                            className="border-1 border-black w-8 h-8"
+                                            onClick={() =>
+                                                changeLanguage(
+                                                    item.lang
+                                                        .toString()
+                                                        .toLowerCase()
+                                                )
+                                            }
+                                        >
+                                            {item.lang}
+                                        </button>
+                                    ))}
+                                </div>
                                 <button
                                     className={`${
                                         classes["mobile-menu-toggle"]
@@ -105,7 +127,7 @@ const Navbar = ({ language, setDeskNavWidth }) => {
                                 </button>
                                 {isMobileMenuOpen && (
                                     <div className={classes["mobile-menu"]}>
-                                        <div
+                                        {/* <div
                                             className={`${classes.language} mt-2`}
                                         >
                                             {lang.map((item, index) => (
@@ -122,7 +144,7 @@ const Navbar = ({ language, setDeskNavWidth }) => {
                                                     {item.lang}
                                                 </button>
                                             ))}
-                                        </div>
+                                        </div> */}
                                         <div
                                             className={
                                                 classes["mobile-sidebar-title"]
