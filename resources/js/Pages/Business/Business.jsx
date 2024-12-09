@@ -188,9 +188,7 @@ const Business = () => {
                         {isLanguage.business[2].select_2.map((item, index) => (
                             <div key={index} className="flex items-center">
                                 <div className="w-7 h-7 border-2 border-black rounded-sm">
-                                    <span className="material-icons text-pink-600" style={{ scale: '2.1' }}>
-                                        done
-                                    </span>
+                                    <img src="/assets/icon/Pages/Business/check.svg" alt="" />
                                 </div>
                                 <span className="ml-3 text-lg md:text-lg xl:text-2xl font-bold text-slate-900">{ item }</span>
                             </div>
