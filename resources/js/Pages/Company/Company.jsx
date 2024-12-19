@@ -41,6 +41,15 @@ const Company = () => {
         window.open('https://www.instagram.com/olldesign_1010', '_blank')
     }
 
+    useEffect(() => {
+        isLanguage.company.profile.forEach(c => {
+            if (c.title.length > wordLength) {
+                wordLength = c.title.length
+                setMaxSizeDiv(c.title)
+            }
+        })
+    }, [isLanguage.company.profile, wordLength])
+
     return (
         <Page>
             <div className="col-12 mt-16 mb-6">
@@ -54,11 +63,6 @@ const Company = () => {
                                     >
                                     {/* <div className="top-0 absolute h-full" style={{ width: '1px', left: maxSizeDiv === 0 ? 0 : `${maxSizeDiv}px`, backgroundColor: '#003832' }}/> */}
                                         {isLanguage.company.profile.map((c) => {
-
-                                            if (c.title.length > wordLength) {
-                                                wordLength = c.title.length
-                                                setMaxSizeDiv(c.title)
-                                            }
 
                                             return (
                                                 <div
@@ -206,11 +210,6 @@ const Company = () => {
                                     <div className="bg-white relative rounded-md p-4">
                                     {/* <div className="top-0 absolute h-full" style={{ width: '1px', left: maxSizeDiv === 0 ? 0 : `${maxSizeDiv}px`, backgroundColor: '#003832' }}/> */}
                                         {isLanguage.company.profile.map((c, index) => {
-                                            
-                                            if (c.title.length > wordLength) {
-                                                wordLength = c.title.length
-                                                setMaxSizeDiv(c.title)
-                                            }
 
                                             return (
                                                 <div

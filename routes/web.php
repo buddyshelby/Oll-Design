@@ -37,6 +37,10 @@ Route::get('/contact-us', function () {
     return Inertia::render('Contact/Contact');
 });
 
+Route::get('/homepage', function () {
+    return Inertia::render('Homepage/Homepage');
+});
+
 // Route::get('/admin', function () {
 //     return Inertia::render('Welcome', [
 //         'canLogin' => Route::has('login'),

@@ -69,9 +69,14 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad, loadPercent })
         img.src = gifPathTmp;
     }, [])
 
+    useEffect(() => {
+        console.log(deskNavWidth);
+        
+    }, [deskNavWidth])
+
     let content = (
         <div className="flex">
-            {!galleryDetailView && <div ref={deskNavRef} style={{ width: `${deskNavWidth}px`, transition: '.2s' }}>
+            {!galleryDetailView && <div ref={deskNavRef} style={{ width: `${deskNavWidth === 0 ? 'fit-content' : deskNavWidth}px`, transition: '.2s' }}>
                 <Navbar language={isLanguage} setDeskNavWidth={setDeskNavWidth} />
             </div>}
             <div className={`${galleryDetailView ? 'overflow-hidden fixed' : 'container-fluid relative'} `} style={{ width: !galleryDetailView ? `calc(100% - ${deskNavWidth}px)` : '100%', transition: '.2s' }}>
@@ -170,10 +175,10 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad, loadPercent })
 
         const changeLanguage = async (lng) => {
             i18n.changeLanguage(lng)
-            if (setDeskNavWidth)
-                setTimeout(() => {
-                    setDeskNavWidth(deskNavRef.current.clientWidth)
-                }, 200);
+            // if (setDeskNavWidth)
+            //     setTimeout(() => {
+            //         setDeskNavWidth(deskNavRef.current.clientWidth)
+            //     }, 200);
         };
 
         if (jpRegex.test(userLocale.toLowerCase())) {

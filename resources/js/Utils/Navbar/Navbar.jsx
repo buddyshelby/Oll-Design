@@ -56,10 +56,6 @@ const Navbar = ({ language, setDeskNavWidth }) => {
 
     const changeLanguage = async (lng) => {
         i18n.changeLanguage(lng)
-        if (setDeskNavWidth)
-            setTimeout(() => {
-                setDeskNavWidth(deskNavRef.current.clientWidth)
-            }, 200);
     };
 
     const toggleMobileMenu = () => {
@@ -76,6 +72,12 @@ const Navbar = ({ language, setDeskNavWidth }) => {
             window.removeEventListener("scroll", handleScroll);
         };
     }, []);
+
+    useEffect(() => {
+        if (setDeskNavWidth)
+            if (deskNavRef.current)
+                    setDeskNavWidth(deskNavRef.current.clientWidth)
+    }, [deskNavRef.current?.clientWidth])
 
     return (
         <MediaQuery query="(max-width: 768px)">
