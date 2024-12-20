@@ -160,6 +160,9 @@ const Homepage = () => {
         } else {
             clearTimeout(timeoutLoading)
             const totalData = imageLoaded.length / imageSlideData.length * 100
+
+            console.log(totalData);
+            
     
             const loopLoading = async () => {
                 for (let index = loadingText; index <= totalData; index++) {
@@ -197,9 +200,9 @@ const Homepage = () => {
                 {matches ?
                 
                 <div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center overflow-hidden" style={{ padding: '10vw 0 0 0', opacity: firstQuestionDesc === 0 ? '0' : '1', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
-                    <div ref={loadingRef} className="absolute left-0 top-0 w-full h-screen flex justify-center items-center text-slate-800 z-20 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
+                    {/* <div ref={loadingRef} className="fixed left-0 top-0 w-full h-screen flex justify-center items-center text-slate-800 z-20 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
                         {loadingText}
-                    </div>
+                    </div> */}
                     <div className="first w-fit flex h-max" style={{ marginBottom: '4vw' }}>
                         <div className="relative flex justify-center items-center z-10" style={{ width: '15vw', height: '15vw', padding: '0 2vw 0 0', fontSize: '8vw', color: '#10643C' }}>
                             <img className={`w-full h-full object-contain`} src={isLanguage.homepage[0]['QMark']} alt="" />
@@ -348,9 +351,9 @@ const Homepage = () => {
                 :
 
                 <div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center" style={{ padding: '4vw 0 0 0', opacity: firstQuestionDesc === 0 ? '0' : '1', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
-                    <div ref={loadingRef} className="absolute left-0 top-0 w-full h-screen flex justify-center items-center text-slate-800 z-20 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
+                    {/* <div ref={loadingRef} className="fixed top-0 w-full h-screen flex justify-center items-center text-slate-800 z-20 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
                         {loadingText}
-                    </div>
+                    </div> */}
                     <div className="first w-fit flex h-max" style={{ marginBottom: '2vw' }}>
                         <div className="relative flex justify-center items-center z-10" style={{ width: '10vw', height: '10vw', padding: '0 2vw 0 0', fontSize: '8vw', color: '#10643C' }}>
                             <img className={`w-full h-full object-contain`} src={isLanguage.homepage[0]['QMark']} alt="" />
