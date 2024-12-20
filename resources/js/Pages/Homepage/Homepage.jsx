@@ -9,6 +9,39 @@ import { sleep } from "@/Utils/Sleep/sleep";
 import { useTranslation } from "react-i18next";
 // import DownArrow from '/public/assets/icon/Pages/Homepage/arrow_down.jsx'
 
+const displayInterest = [
+    {
+        img: 'assets/homepage/Icon A.png',
+        title: 'ブランディング',
+        header: '会社やお店の商品、サービスのイメージの構築',
+        desc: '■ロゴデザイン　■パッケージデザイン　■ウェブデザイン　■イラスト作成|||■パンフレット　■会社案内　■ポスター　■名刺　■診察券　■ポイントカードなど|||■ユニフォーム　■オリジナルグッズ作成'
+    },
+    {
+        img: 'assets/homepage/Icon B.png',
+        title: 'サインデザイン',
+        header: 'お店のイメージを最大限に訴求する効果的なサインデザイン',
+        desc: '■ファサードサイン　■壁面看板　■突き出し看板（袖看板）　■自立看板（ポール看板）　■スタンド看板|||■窓面看板（ウィンドウサイン）　■ネオンサイン　■LED看板　■パネル看板　■旗看板（フラッグサイン）|||■屋上看板　■A型看板　■箱型看板（チャンネルサイン）　■垂れ幕・横断幕'
+    },
+    {
+        img: 'assets/homepage/Icon C.png',
+        title: 'WEBサイトの制作',
+        header: '最新技術を活用したWEBデザインサービスのご提案',
+        desc: '私たちの協力会社と共に、最新技術を駆使した革新的なWEBデザインサービスを提供します。 レスポンシブデザイン、インタラクティブ要素、AIを活用したパーソナライズなど、ユーザー体験を最大化。 SEO最適化や高速表示、直感的なUI設計で、訪問者に優れた体験を提供します。 また、最新のセキュリティ技術を導入し、安全なサイト運営を実現。 デジタルプレゼンスを強化し、ブランド力をアップさせます。'
+    },
+    {
+        img: 'assets/homepage/Icon D.png',
+        title: '広 告・販 促 デ ザ イ ン',
+        header: '視覚的に訴求力のあるデザインでメッセージを効果的に伝えます。',
+        desc: '弊社の広告・販促デザインは、多様な広告デザインに対応できる強みがあります。 多くの協力会社との連携により、ワンストップでの提案が可能です。 また、印刷やグッズ制作の知識と経験が豊富で、クオリティの高い仕上がりを提供しています。 お客様のニーズに合わせた最適な広告・販促戦略をデザインから印刷まで一貫してサポートいたします'
+    },
+    {
+        img: 'assets/homepage/Icon E.png',
+        title: '撮 影・映 像 制 作',
+        header: '高品質な映像と技術でブランドを引き立てる',
+        desc: '私たちの撮影・映像制作サービスは、ブランドの魅力を引き出す高品質な映像を提供します。 最新の撮影技術を駆使し、ストーリーテリングを重視したコンテンツ作成が可能です。 宣伝用動画や商品紹介など、さまざまなニーズに対応し、編集から仕上げまで一貫してサポートします。'
+    },
+]
+
 const Homepage = () => {
 
     const { i18n } = useTranslation();
@@ -90,7 +123,6 @@ const Homepage = () => {
 
     useEffect(() => {
         setImageSlideData(isData.filter(item => item.TagsID === '2').slice(0, 2))
-        console.log(isData);
         
     }, [isData])
 
@@ -192,7 +224,7 @@ const Homepage = () => {
                             <img className={`object-contain`} style={{ width: '50vw' }} src="assets/homepage/Top JP.png" alt="" />
                         </div>
                     </div>
-                    <div className="third border-2 border-black" style={{ padding: '0.5vw', marginBottom: '2vw' }}>
+                    <div className="third" style={{  border: '0.1vw solid black', padding: '0.5vw', marginBottom: '2vw' }}>
                         <div style={{ width: '47vw' }} className="flex h-auto">
                             <div className="w-full h-full flex">
                                 {imageSlideData.map((item, index) => {
@@ -216,7 +248,7 @@ const Homepage = () => {
                                                             {year}.{month}
                                                         </div>
                                                     </div>
-                                                    <div className="border-slate-600" style={{ border: '0.1vw solid' }} />
+                                                    <div className="border-slate-600" style={{ borderTop: '0.1vw solid' }} />
                                                     <div>
                                                         {item.City_Name}
                                                     </div>
@@ -228,30 +260,103 @@ const Homepage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="third border-2 border-black" style={{ padding: '0.5vw', marginBottom: '2vw' }}>
-                        <div style={{ width: '47vw', height: '14vw' }} className="flex">
-
+                    <div className="fourth relative" style={{ border: '0.1vw solid black', marginBottom: '2vw', padding: '2vw 0 0 0' }}>
+                        <div style={{ width: '48vw', height: '14vw' }} className="flex">
+                            <div className="w-full h-full absolute left-0 top-0">
+                                <img className={`w-full  h-full object-cover`} src="assets/homepage/Background.png" alt="" />
+                            </div>
+                            <div className="w-1/4 h-full relative">
+                                <img className={`w-full  h-full object-contain`} src="assets/homepage/A_1.png" alt="" />
+                            </div>
+                            <div className="w-1/4 h-full relative">
+                                <img className={`w-full  h-full object-contain`} src="assets/homepage/A_2.png" alt="" />
+                            </div>
+                            <div className="w-1/4 h-full relative">
+                                <img className={`w-full  h-full object-contain`} src="assets/homepage/A_3.png" alt="" />
+                            </div>
+                            <div className="w-1/4 h-full relative">
+                                <img className={`w-full  h-full object-contain`} src="assets/homepage/A_4.png" alt="" />
+                            </div>
                         </div>
                     </div>
-                    <div className="fourth w-fit flex flex-col items-center h-max" style={{ marginBottom: '2vw', }}>
+                    <div className="fifth w-fit flex flex-col items-center h-max" style={{ marginBottom: '2vw', }}>
                         <div style={{ fontSize: '1.5vw', fontWeight: '500', letterSpacing: '0.1vw' }}>
                             &nbsp;弊社のグラフィック事業ができること
                         </div>
                         <div className="flex justify-between" style={{ width: '48.5vw', fontSize: '1.1vw', fontWeight: '500' }}>
-                                <div className="flex flex-col justify-center items-center" style={{ width: '23%' }}>
-                                    <div className="w-full h-full flex justify-center items-center" style={{ border: '0.1vw solid black', padding: '0.2vw', marginBottom: '0.6vw' }}>
-                                        ブランディング
-                                    </div>
-                                    <div style={{ width: '1.8vw', height:'auto' }}>
-                                        <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
-                                        {/* <DownArrow /> */}
-                                    </div>
+                            <div className="flex flex-col justify-center items-center" style={{ width: '23%' }}>
+                                <div className="w-full h-full flex justify-center items-center" style={{ border: '0.1vw solid black', padding: '0.2vw', marginBottom: '0.6vw' }}>
+                                    ブランディング
                                 </div>
+                                <div style={{ width: '1.8vw', height:'auto' }}>
+                                    <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
+                                    {/* <DownArrow /> */}
+                                </div>
+                            </div>
+                            <div className="flex flex-col justify-center items-center" style={{ width: '23%' }}>
+                                <div className="w-full h-full flex justify-center items-center" style={{ border: '0.1vw solid black', padding: '0.2vw', marginBottom: '0.6vw' }}>
+                                    サインデザイン
+                                </div>
+                                <div style={{ width: '1.8vw', height:'auto' }}>
+                                    <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
+                                    {/* <DownArrow /> */}
+                                </div>
+                            </div>
+                            <div className="flex flex-col justify-center items-center" style={{ width: '23%' }}>
+                                <div className="w-full h-full flex justify-center items-center" style={{ border: '0.1vw solid black', padding: '0.2vw', marginBottom: '0.6vw' }}>
+                                    WEBサイトの制作
+                                </div>
+                                <div style={{ width: '1.8vw', height:'auto' }}>
+                                    <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
+                                    {/* <DownArrow /> */}
+                                </div>
+                            </div>
+                            <div className="flex flex-col justify-center items-center" style={{ width: '23%' }}>
+                                <div className="w-full h-full flex justify-center items-center" style={{ border: '0.1vw solid black', padding: '0.2vw', marginBottom: '0.6vw' }}>
+                                    撮 影・映 像 制 作
+                                </div>
+                                <div style={{ width: '1.8vw', height:'auto' }}>
+                                    <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
+                                    {/* <DownArrow /> */}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className="sixth w-fit flex h-max" style={{ marginBottom: '2vw', }}>
+                    <div className="sixth w-fit flex h-max" style={{ marginBottom: '4vw', }}>
                         <div style={{ fontSize: '2vw', fontWeight: '500', letterSpacing: '0.5vw' }}>
                             <img className={`object-contain`} style={{ width: '48.5vw' }} src="assets/homepage/Idea JP.png" alt="" />
+                        </div>
+                    </div>
+                    <div className="seventh" style={{ marginBottom: '2vw', }}>
+                        <div style={{ width: '48vw' }}>
+                            {displayInterest.map((item, index) => {
+                                return (
+                                    <div key={`${item}${index}`} className="w-full h-fit flex justify-center items-center" style={{ marginBottom: '2vw' }}>
+                                        <div className="relative flex justify-center items-end" style={{width: '13.8vw', height: '5vw', border: '0.1vw solid black', paddingBottom: '0.3vw', marginRight: '1vw', fontSize: '0.8vw' }}>
+                                            <div className="absolute" style={{ width: '5vw', top: '-2.4vw' }}>
+                                                <img className={`object-contain`} style={{ width: '48.5vw' }} src={item.img} alt="" />
+                                            </div>
+                                            <div className="font-medium">
+                                                {item.title}
+                                            </div>
+                                        </div>
+                                        <div className="w-full flex flex-col">
+                                            <div style={{ fontSize: '1vw', fontWeight: '600' }} className="w-full">
+                                                {item.header}
+                                            </div>
+                                            <div className="font-medium">
+                                                {item.desc.split('|||').map((item2, index2) => {
+                                                    return (
+                                                        <div key={`${item2}${index2}`}>
+                                                            {item2}
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
                 </div>

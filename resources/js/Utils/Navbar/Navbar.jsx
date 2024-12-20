@@ -77,9 +77,6 @@ const Navbar = ({ language, setDeskNavWidth }) => {
         if (setDeskNavWidth)
             if (deskNavRef.current) {
                 setDeskNavWidth(deskNavRef.current.clientWidth)
-
-                console.log(deskNavRef.current?.clientWidth);
-                
             }
     }
 
