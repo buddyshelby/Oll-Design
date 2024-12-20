@@ -156,7 +156,7 @@ const Homepage = () => {
                     loadingRef.current.style.opacity = '0'
                     loadingRef.current.style.display = 'none'
                 }
-            }, 10000);
+            }, 30000);
         } else {
             clearTimeout(timeoutLoading)
             const totalData = imageLoaded.length / imageSlideData.length * 100
