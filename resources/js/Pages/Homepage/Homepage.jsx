@@ -180,18 +180,167 @@ const Homepage = () => {
                 <>
                 {matches ?
                 
-                <div ref={mainContainerRef} className="w-full h-full flex flex-col items-center" style={{ padding: '4vw 2vw 0 2vw', opacity: firstQuestionDesc === 0 ? '0' : '1', backgroundColor: '#D8DC24' }}>
-                    <div className="w-fit flex h-max">
-                        <div className="flex justify-center items-center" style={{ padding: '0 2vw 0 0', fontSize: '15vw', color: '#10643C' }}>
-                            Q
+                <div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center" style={{ padding: '4vw 0 0 0', opacity: firstQuestionDesc === 0 ? '0' : '1', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
+                    <div className="first w-fit flex h-max" style={{ marginBottom: '2vw' }}>
+                        <div className="relative flex justify-center items-center z-10" style={{ width: '10vw', height: '10vw', padding: '0 2vw 0 0', fontSize: '8vw', color: '#10643C' }}>
+                            <img className={`w-full h-full object-contain`} src="assets/homepage/Q Mark.png" alt="" />
                         </div>
-                        <div className="flex flex-col">
-                            <div ref={firstQuestionRef} style={{ fontSize: '4vw', letterSpacing: '0.2vw' }} className="w-fit">グラフィックだけはしてくれないの？</div>
-                            <div className="flex" style={{ width: `${firstQuestionDesc}px`, fontSize: '2.4vw', letterSpacing: '0.2vw' }}>
+                        <div className="flex flex-col justify-center">
+                            <div ref={firstQuestionRef} className="w-fit">
+                                <img className={`object-contain`} style={{ width: '70vw' }} src="assets/homepage/Q title JP.png" alt="" />
+                            </div>
+                            <div className="flex justify-center items-center" style={{ width: `${firstQuestionDesc}px`, fontSize: '2vw' }}>
                             設計業務だけに付随する事業だと思われがちで、よくこの質問をお客様か
                             ら頂きますが応えはもちろん「はい、よろこんで」。
                             それが当グラフィック事業専用ページを開設した経緯です。
                             </div>
+                        </div>
+                    </div>
+                    <div className="second w-fit flex h-max" style={{ marginBottom: '0.5vw' }}>
+                        <div style={{ fontSize: '2.4vw', fontWeight: 'bold', textShadow: '0.1vw 0.2vw 0.4vw rgba(0, 0, 0, 0.5)' }}>
+                            <img className={`object-contain`} style={{ width: '81vw' }} src="assets/homepage/Top JP.png" alt="" />
+                        </div>
+                    </div>
+                    <div className="third" style={{  border: '0.1vw solid black', padding: '0.5vw', marginBottom: '4vw' }}>
+                        <div style={{ width: '76vw' }} className="flex h-auto">
+                            <div className="w-full h-full flex flex-col">
+                                {imageSlideData.map((item, index) => {
+                                    const date = new Date(item.Date)
+                                    date.setMonth(date.getMonth() + 1)
+                                    const month = date.getMonth()
+                                    const year = date.getFullYear()
+                                    return (
+                                        <div key={`${item}${index}`} className="w-full">
+                                            <div ref={imageSlideRef} className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '30vw', marginBottom: '0.5vw' }}>
+                                                <img onLoad={(e) => testOnLoad(e, item.id)} className={`absolute w-full h-full object-cover blur-sm pointer-events-none`} src={`https://olldesign.jp/storage/${item.Img[0]}`} alt="" />
+                                                <img className={`w-fit h-full object-contain pointer-events-none ${classes['imageSlide']}`} src={`https://olldesign.jp/storage/${item.Img[0]}`} alt="" />
+                                            </div>
+                                            <div className="w-full flex justify-center items-center">
+                                                <div className="flex flex-col" style={{ width: '95%', fontSize: '3vw' }}>
+                                                    <div className="relative flex w-full">
+                                                        <div>
+                                                            {item.Name}
+                                                        </div>
+                                                        <div className="absolute right-0">
+                                                            {year}.{month}
+                                                        </div>
+                                                    </div>
+                                                    <div className="border-slate-600" style={{ borderTop: '0.1vw solid' }} />
+                                                    <div>
+                                                        {item.City_Name}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="fourth relative" style={{ border: '0.1vw solid black', marginBottom: '4vw', padding: '2vw 0 0 0' }}>
+                        <div style={{ width: '77vw', height: '14vw' }} className="flex">
+                            <div className="w-full h-full absolute left-0 top-0">
+                                <img className={`w-full  h-full object-cover`} src="assets/homepage/Background.png" alt="" />
+                            </div>
+                            <div className="w-1/4 h-full relative">
+                                <img className={`w-full  h-full object-contain`} src="assets/homepage/A_1.png" alt="" />
+                            </div>
+                            <div className="w-1/4 h-full relative">
+                                <img className={`w-full  h-full object-contain`} src="assets/homepage/A_2.png" alt="" />
+                            </div>
+                            <div className="w-1/4 h-full relative">
+                                <img className={`w-full  h-full object-contain`} src="assets/homepage/A_3.png" alt="" />
+                            </div>
+                            <div className="w-1/4 h-full relative">
+                                <img className={`w-full  h-full object-contain`} src="assets/homepage/A_4.png" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="fifth w-fit flex flex-col items-center h-max" style={{ marginBottom: '2vw', }}>
+                        <div style={{ fontSize: '4.2vw', fontWeight: '500', letterSpacing: '0.1vw' }}>
+                            &nbsp;弊社のグラフィック事業ができること
+                        </div>
+                        <div className="flex flex-col justify-between" style={{ width: '77vw', fontSize: '3vw', fontWeight: '500' }}>
+                            <div className="flex flex-col justify-center items-center" style={{ width: '100%' }}>
+                                <div className="w-full h-full flex justify-center items-center" style={{ border: '0.1vw solid black', padding: '1vw', marginBottom: '2vw' }}>
+                                    ブランディング
+                                </div>
+                                <div style={{ width: '5vw', height:'auto', marginBottom: '2vw' }}>
+                                    <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
+                                </div>
+                            </div>
+                            <div className="flex flex-col justify-center items-center" style={{ width: '100%' }}>
+                                <div className="w-full h-full flex justify-center items-center" style={{ border: '0.1vw solid black', padding: '1vw', marginBottom: '2vw' }}>
+                                    サインデザイン
+                                </div>
+                                <div style={{ width: '5vw', height:'auto', marginBottom: '2vw' }}>
+                                    <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
+                                </div>
+                            </div>
+                            <div className="flex flex-col justify-center items-center" style={{ width: '100%' }}>
+                                <div className="w-full h-full flex justify-center items-center" style={{ border: '0.1vw solid black', padding: '1vw', marginBottom: '2vw' }}>
+                                    WEBサイトの制作
+                                </div>
+                                <div style={{ width: '5vw', height:'auto', marginBottom: '2vw' }}>
+                                    <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
+                                </div>
+                            </div>
+                            <div className="flex flex-col justify-center items-center" style={{ width: '100%' }}>
+                                <div className="w-full h-full flex justify-center items-center" style={{ border: '0.1vw solid black', padding: '1vw', marginBottom: '2vw' }}>
+                                    撮 影・映 像 制 作
+                                </div>
+                                <div style={{ width: '5vw', height:'auto', marginBottom: '2vw' }}>
+                                    <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="sixth w-fit flex h-max" style={{ marginBottom: '8vw', }}>
+                        <div style={{ fontSize: '2vw', fontWeight: '500', letterSpacing: '0.5vw' }}>
+                            <img className={`object-contain`} style={{ width: '77vw' }} src="assets/homepage/Idea JP.png" alt="" />
+                        </div>
+                    </div>
+                    <div className="seventh" style={{ marginBottom: '1vw', }}>
+                        <div style={{ width: '77vw' }}>
+                            {displayInterest.map((item, index) => {
+                                return (
+                                    <div key={`${item}${index}`} className="w-full h-fit flex flex-col justify-center items-center" style={{ marginBottom: '2vw' }}>
+                                        <div className="relative flex justify-center items-end" style={{width: '50vw', height: '15vw', border: '0.1vw solid black', paddingBottom: '0.3vw', marginBottom: '3vw', fontSize: '4vw' }}>
+                                            <div className="absolute" style={{ width: '15vw', top: '-7vw' }}>
+                                                <img className={`object-contain`} style={{ width: '48.5vw' }} src={item.img} alt="" />
+                                            </div>
+                                            <div className="font-medium">
+                                                {item.title}
+                                            </div>
+                                        </div>
+                                        <div className="w-full flex flex-col" style={{ marginBottom: '9vw' }}>
+                                            <div style={{ fontSize: '3vw', fontWeight: '600' }} className="w-full">
+                                                {item.header}
+                                            </div>
+                                            <div className="font-medium">
+                                                {item.desc.split('|||').map((item2, index2) => {
+                                                    return (
+                                                        <div key={`${item2}${index2}`}>
+                                                            {item2}
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                    <div className="eighth" style={{ width: '76vw', marginBottom: '10vw' }}>
+                        <div className="font-bold" style={{ fontSize: '3vw' }}>
+                            実績と言う「成功事例」を活用したデザイン力
+                        </div>
+                        <div style={{ fontSize: '2vw' }}>
+                            設計業務とグラフィックデザインが統合された「総合的なデザイン力」が弊社にはあります。
+                            <br />
+                            つまり、空間デザイン、店舗デザイン、ブランド戦略、そしてグラフィックデザインが一体となった
+                            ワンストップサービスが貴社の最大の強みです。
                         </div>
                     </div>
                 </div>
@@ -208,7 +357,6 @@ const Homepage = () => {
                         </div>
                         <div className="flex flex-col justify-center">
                             <div ref={firstQuestionRef} style={{ fontSize: '2.3vw', letterSpacing: '0.2vw' }} className="w-fit">
-                                {/* グラフィックだけはしてくれないの？ */}
                                 <img className={`object-contain`} style={{ width: '40vw' }} src="assets/homepage/Q title JP.png" alt="" />
                             </div>
                             <div className="flex justify-center items-center" style={{ width: `${firstQuestionDesc}px`, fontSize: '1.4vw' }}>
@@ -220,7 +368,6 @@ const Homepage = () => {
                     </div>
                     <div className="second w-fit flex h-max" style={{ marginBottom: '0.5vw' }}>
                         <div style={{ fontSize: '2.4vw', fontWeight: 'bold', textShadow: '0.1vw 0.2vw 0.4vw rgba(0, 0, 0, 0.5)' }}>
-                            {/* &nbsp;&nbsp;設計企業の「グラフィックデザイン事務所」 */}
                             <img className={`object-contain`} style={{ width: '50vw' }} src="assets/homepage/Top JP.png" alt="" />
                         </div>
                     </div>
@@ -290,7 +437,6 @@ const Homepage = () => {
                                 </div>
                                 <div style={{ width: '1.8vw', height:'auto' }}>
                                     <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
-                                    {/* <DownArrow /> */}
                                 </div>
                             </div>
                             <div className="flex flex-col justify-center items-center" style={{ width: '23%' }}>
@@ -299,7 +445,6 @@ const Homepage = () => {
                                 </div>
                                 <div style={{ width: '1.8vw', height:'auto' }}>
                                     <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
-                                    {/* <DownArrow /> */}
                                 </div>
                             </div>
                             <div className="flex flex-col justify-center items-center" style={{ width: '23%' }}>
@@ -308,7 +453,6 @@ const Homepage = () => {
                                 </div>
                                 <div style={{ width: '1.8vw', height:'auto' }}>
                                     <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
-                                    {/* <DownArrow /> */}
                                 </div>
                             </div>
                             <div className="flex flex-col justify-center items-center" style={{ width: '23%' }}>
@@ -317,7 +461,6 @@ const Homepage = () => {
                                 </div>
                                 <div style={{ width: '1.8vw', height:'auto' }}>
                                     <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
-                                    {/* <DownArrow /> */}
                                 </div>
                             </div>
                         </div>
@@ -327,7 +470,7 @@ const Homepage = () => {
                             <img className={`object-contain`} style={{ width: '48.5vw' }} src="assets/homepage/Idea JP.png" alt="" />
                         </div>
                     </div>
-                    <div className="seventh" style={{ marginBottom: '2vw', }}>
+                    <div className="seventh" style={{ marginBottom: '1vw', }}>
                         <div style={{ width: '48vw' }}>
                             {displayInterest.map((item, index) => {
                                 return (
@@ -359,8 +502,18 @@ const Homepage = () => {
                             })}
                         </div>
                     </div>
+                    <div className="eighth" style={{ width: '48vw', marginBottom: '5vw' }}>
+                        <div className="font-bold" style={{ fontSize: '1.6vw' }}>
+                            実績と言う「成功事例」を活用したデザイン力
+                        </div>
+                        <div style={{ fontSize: '1vw' }}>
+                            設計業務とグラフィックデザインが統合された「総合的なデザイン力」が弊社にはあります。
+                            <br />
+                            つまり、空間デザイン、店舗デザイン、ブランド戦略、そしてグラフィックデザインが一体となった
+                            ワンストップサービスが貴社の最大の強みです。
+                        </div>
+                    </div>
                 </div>
-
                 }
                 </>
             )}
