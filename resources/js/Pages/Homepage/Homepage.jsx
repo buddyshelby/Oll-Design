@@ -180,14 +180,14 @@ const Homepage = () => {
                 <>
                 {matches ?
                 
-                <div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center" style={{ padding: '4vw 0 0 0', opacity: firstQuestionDesc === 0 ? '0' : '1', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
-                    <div className="first w-fit flex h-max" style={{ marginBottom: '2vw' }}>
-                        <div className="relative flex justify-center items-center z-10" style={{ width: '10vw', height: '10vw', padding: '0 2vw 0 0', fontSize: '8vw', color: '#10643C' }}>
+                <div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center" style={{ padding: '10vw 0 0 0', opacity: firstQuestionDesc === 0 ? '0' : '1', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
+                    <div className="first w-fit flex h-max" style={{ marginBottom: '4vw' }}>
+                        <div className="relative flex justify-center items-center z-10" style={{ width: '15vw', height: '15vw', padding: '0 2vw 0 0', fontSize: '8vw', color: '#10643C' }}>
                             <img className={`w-full h-full object-contain`} src="assets/homepage/Q Mark.png" alt="" />
                         </div>
                         <div className="flex flex-col justify-center">
                             <div ref={firstQuestionRef} className="w-fit">
-                                <img className={`object-contain`} style={{ width: '70vw' }} src="assets/homepage/Q title JP.png" alt="" />
+                                <img className={`object-contain`} style={{ width: '62vw' }} src="assets/homepage/Q title JP.png" alt="" />
                             </div>
                             <div className="flex justify-center items-center" style={{ width: `${firstQuestionDesc}px`, fontSize: '2vw' }}>
                             設計業務だけに付随する事業だと思われがちで、よくこの質問をお客様か
@@ -196,7 +196,7 @@ const Homepage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="second w-fit flex h-max" style={{ marginBottom: '0.5vw' }}>
+                    <div className="second w-fit flex h-max text-center" style={{ marginBottom: '0.5vw' }}>
                         <div style={{ fontSize: '2.4vw', fontWeight: 'bold', textShadow: '0.1vw 0.2vw 0.4vw rgba(0, 0, 0, 0.5)' }}>
                             <img className={`object-contain`} style={{ width: '81vw' }} src="assets/homepage/Top JP.png" alt="" />
                         </div>
@@ -257,7 +257,7 @@ const Homepage = () => {
                         </div>
                     </div>
                     <div className="fifth w-fit flex flex-col items-center h-max" style={{ marginBottom: '2vw', }}>
-                        <div style={{ fontSize: '4.2vw', fontWeight: '500', letterSpacing: '0.1vw' }}>
+                        <div className="text-center" style={{ fontSize: '4.2vw', fontWeight: '500', letterSpacing: '0.1vw' }}>
                             &nbsp;弊社のグラフィック事業ができること
                         </div>
                         <div className="flex flex-col justify-between" style={{ width: '77vw', fontSize: '3vw', fontWeight: '500' }}>
@@ -289,13 +289,13 @@ const Homepage = () => {
                                 <div className="w-full h-full flex justify-center items-center" style={{ border: '0.1vw solid black', padding: '1vw', marginBottom: '2vw' }}>
                                     撮 影・映 像 制 作
                                 </div>
-                                <div style={{ width: '5vw', height:'auto', marginBottom: '2vw' }}>
+                                <div style={{ width: '5vw', height:'auto', marginBottom: '4vw' }}>
                                     <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="sixth w-fit flex h-max" style={{ marginBottom: '8vw', }}>
+                    <div className="sixth w-fit flex h-max" style={{ marginBottom: '12vw', }}>
                         <div style={{ fontSize: '2vw', fontWeight: '500', letterSpacing: '0.5vw' }}>
                             <img className={`object-contain`} style={{ width: '77vw' }} src="assets/homepage/Idea JP.png" alt="" />
                         </div>
@@ -304,20 +304,20 @@ const Homepage = () => {
                         <div style={{ width: '77vw' }}>
                             {displayInterest.map((item, index) => {
                                 return (
-                                    <div key={`${item}${index}`} className="w-full h-fit flex flex-col justify-center items-center" style={{ marginBottom: '2vw' }}>
-                                        <div className="relative flex justify-center items-end" style={{width: '50vw', height: '15vw', border: '0.1vw solid black', paddingBottom: '0.3vw', marginBottom: '3vw', fontSize: '4vw' }}>
-                                            <div className="absolute" style={{ width: '15vw', top: '-7vw' }}>
-                                                <img className={`object-contain`} style={{ width: '48.5vw' }} src={item.img} alt="" />
+                                    <div key={`${item}${index}`} className="w-full h-fit flex flex-col justify-center items-center" style={{ marginBottom: '6vw' }}>
+                                        <div className="relative flex justify-center items-end" style={{width: '60vw', height: '20vw', border: '0.1vw solid black', paddingBottom: '0.3vw', marginBottom: '3vw', fontSize: '4vw' }}>
+                                            <div className="absolute" style={{ width: '25vw', top: '-11vw' }}>
+                                                <img className={`w-full object-contain`} src={item.img} alt="" />
                                             </div>
                                             <div className="font-medium">
                                                 {item.title}
                                             </div>
                                         </div>
-                                        <div className="w-full flex flex-col" style={{ marginBottom: '9vw' }}>
-                                            <div style={{ fontSize: '3vw', fontWeight: '600' }} className="w-full">
+                                        <div className="w-full h-fit flex flex-col" style={{ marginBottom: '5vw' }}>
+                                            <div style={{ fontSize: '3vw', fontWeight: '600' }} className="w-full text-center">
                                                 {item.header}
                                             </div>
-                                            <div className="font-medium">
+                                            <div className="font-medium text-justify">
                                                 {item.desc.split('|||').map((item2, index2) => {
                                                     return (
                                                         <div key={`${item2}${index2}`}>
@@ -333,10 +333,10 @@ const Homepage = () => {
                         </div>
                     </div>
                     <div className="eighth" style={{ width: '76vw', marginBottom: '10vw' }}>
-                        <div className="font-bold" style={{ fontSize: '3vw' }}>
+                        <div className="font-bold" style={{ fontSize: '3.3vw' }}>
                             実績と言う「成功事例」を活用したデザイン力
                         </div>
-                        <div style={{ fontSize: '2vw' }}>
+                        <div style={{ fontSize: '2.7vw' }}>
                             設計業務とグラフィックデザインが統合された「総合的なデザイン力」が弊社にはあります。
                             <br />
                             つまり、空間デザイン、店舗デザイン、ブランド戦略、そしてグラフィックデザインが一体となった
