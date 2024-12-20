@@ -238,7 +238,7 @@ const Homepage = () => {
                         </div>
                     </div>
                     <div className="fourth relative" style={{ border: '0.1vw solid black', marginBottom: '4vw', padding: '2vw 0 0 0' }}>
-                        <div style={{ width: '77vw', height: '14vw' }} className="flex">
+                        <div style={{ width: '77vw', height: '28vw' }} className="flex">
                             <div className="w-full h-full absolute left-0 top-0">
                                 <img className={`w-full  h-full object-cover`} src="assets/homepage/Background.png" alt="" />
                             </div>
