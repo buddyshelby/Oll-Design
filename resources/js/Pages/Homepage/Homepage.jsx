@@ -199,22 +199,20 @@ const Homepage = () => {
                 <div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center overflow-hidden" style={{ padding: '10vw 0 0 0', opacity: firstQuestionDesc === 0 ? '0' : '1', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
                     <div className="first w-fit flex h-max" style={{ marginBottom: '4vw' }}>
                         <div className="relative flex justify-center items-center z-10" style={{ width: '15vw', height: '15vw', padding: '0 2vw 0 0', fontSize: '8vw', color: '#10643C' }}>
-                            <img className={`w-full h-full object-contain`} src={isLanguage.homepage['QMark']} alt="" />
+                            <img className={`w-full h-full object-contain`} src={isLanguage.homepage[0]['QMark']} alt="" />
                         </div>
                         <div className="flex flex-col justify-center">
                             <div ref={firstQuestionRef} className="w-fit">
-                                <img className={`object-contain`} style={{ width: '62vw' }} src={isLanguage.homepage['QHeader']} alt="" />
+                                <img className={`object-contain`} style={{ width: '62vw' }} src={isLanguage.homepage[0]['QHeader']} alt="" />
                             </div>
                             <div className="flex justify-center items-center" style={{ width: `${firstQuestionDesc}px`, fontSize: '2vw' }}>
-                            設計業務だけに付随する事業だと思われがちで、よくこの質問をお客様か
-                            ら頂きますが応えはもちろん「はい、よろこんで」。
-                            それが当グラフィック事業専用ページを開設した経緯です。
+                                {isLanguage.homepage[0]['QDesc']}
                             </div>
                         </div>
                     </div>
                     <div className="second w-fit flex h-max text-center" style={{ marginBottom: '0.5vw' }}>
                         <div style={{ fontSize: '2.4vw', fontWeight: 'bold', textShadow: '0.1vw 0.2vw 0.4vw rgba(0, 0, 0, 0.5)' }}>
-                            <img className={`object-contain`} style={{ width: '81vw' }} src="assets/homepage/Top JP.png" alt="" />
+                            <img className={`object-contain`} style={{ width: '81vw' }} src={isLanguage.homepage[1]['TopJP']} alt="" />
                         </div>
                     </div>
                     <div className="third" style={{  border: '0.1vw solid black', padding: '0.5vw', marginBottom: '4vw' }}>
@@ -274,51 +272,31 @@ const Homepage = () => {
                     </div>
                     <div className="fifth w-fit flex flex-col items-center h-max" style={{ marginBottom: '2vw', }}>
                         <div className="text-center" style={{ fontSize: '4.2vw', fontWeight: '500', letterSpacing: '0.1vw' }}>
-                            &nbsp;弊社のグラフィック事業ができること
+                        &nbsp;{isLanguage.homepage[2]['ideaTitle']}
                         </div>
                         <div className="flex flex-col justify-between" style={{ width: '77vw', fontSize: '3vw', fontWeight: '500' }}>
-                            <div className="flex flex-col justify-center items-center" style={{ width: '100%' }}>
-                                <div className="w-full h-full flex justify-center items-center" style={{ border: '0.1vw solid black', padding: '1vw', marginBottom: '2vw' }}>
-                                    ブランディング
-                                </div>
-                                <div style={{ width: '5vw', height:'auto', marginBottom: '2vw' }}>
-                                    <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
-                                </div>
-                            </div>
-                            <div className="flex flex-col justify-center items-center" style={{ width: '100%' }}>
-                                <div className="w-full h-full flex justify-center items-center" style={{ border: '0.1vw solid black', padding: '1vw', marginBottom: '2vw' }}>
-                                    サインデザイン
-                                </div>
-                                <div style={{ width: '5vw', height:'auto', marginBottom: '2vw' }}>
-                                    <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
-                                </div>
-                            </div>
-                            <div className="flex flex-col justify-center items-center" style={{ width: '100%' }}>
-                                <div className="w-full h-full flex justify-center items-center" style={{ border: '0.1vw solid black', padding: '1vw', marginBottom: '2vw' }}>
-                                    WEBサイトの制作
-                                </div>
-                                <div style={{ width: '5vw', height:'auto', marginBottom: '2vw' }}>
-                                    <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
-                                </div>
-                            </div>
-                            <div className="flex flex-col justify-center items-center" style={{ width: '100%' }}>
-                                <div className="w-full h-full flex justify-center items-center" style={{ border: '0.1vw solid black', padding: '1vw', marginBottom: '2vw' }}>
-                                    撮 影・映 像 制 作
-                                </div>
-                                <div style={{ width: '5vw', height:'auto', marginBottom: '4vw' }}>
-                                    <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
-                                </div>
-                            </div>
+                            {isLanguage.homepage[2]['children'].map((item, index) => {
+                                return (
+                                    <div key={`${item}${index}`} className="flex flex-col justify-center items-center" style={{ width: '100%' }}>
+                                        <div className="w-full h-full flex justify-center items-center text-center" style={{ border: '0.1vw solid black', padding: '1vw', marginBottom: '2vw' }}>
+                                            {item}
+                                        </div>
+                                        <div style={{ width: '5vw', height:'auto', marginBottom: '2vw' }}>
+                                            <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
+                                        </div>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
                     <div className="sixth w-fit flex h-max" style={{ marginBottom: '12vw', }}>
                         <div style={{ fontSize: '2vw', fontWeight: '500', letterSpacing: '0.5vw' }}>
-                            <img className={`object-contain`} style={{ width: '77vw' }} src="assets/homepage/Idea JP.png" alt="" />
+                            <img className={`object-contain`} style={{ width: '77vw' }} src={isLanguage.homepage[3]['ideaHeader']} alt="" />
                         </div>
                     </div>
                     <div className="seventh" style={{ marginBottom: '1vw', }}>
                         <div style={{ width: '77vw' }}>
-                            {displayInterest.map((item, index) => {
+                            {isLanguage.homepage[3]['childrenDetail'].map((item, index) => {
                                 return (
                                     <div key={`${item}${index}`} className="w-full h-fit flex flex-col justify-center items-center" style={{ marginBottom: '6vw' }}>
                                         <div className="relative flex justify-center items-end" style={{width: '60vw', height: '20vw', border: '0.1vw solid black', paddingBottom: '0.3vw', marginBottom: '3vw', fontSize: '4vw' }}>
@@ -350,13 +328,16 @@ const Homepage = () => {
                     </div>
                     <div className="eighth" style={{ width: '76vw', marginBottom: '10vw' }}>
                         <div className="font-bold" style={{ fontSize: '3.3vw' }}>
-                            実績と言う「成功事例」を活用したデザイン力
+                            {isLanguage.homepage[4]['header']}
                         </div>
                         <div style={{ fontSize: '2.7vw' }}>
-                            設計業務とグラフィックデザインが統合された「総合的なデザイン力」が弊社にはあります。
-                            <br />
-                            つまり、空間デザイン、店舗デザイン、ブランド戦略、そしてグラフィックデザインが一体となった
-                            ワンストップサービスが貴社の最大の強みです。
+                            {isLanguage.homepage[4]['desc'].split('|||').map((item, index) => {
+                                return (
+                                    <div key={`${item}${index}`}>
+                                        {item}
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
                 </div>
