@@ -303,7 +303,7 @@ const Homepage = () => {
                                             <div className="absolute" style={{ width: '25vw', top: '-11vw' }}>
                                                 <img className={`w-full object-contain`} src={item.img} alt="" />
                                             </div>
-                                            <div className="font-medium">
+                                            <div className="font-medium text-center">
                                                 {item.title}
                                             </div>
                                         </div>
