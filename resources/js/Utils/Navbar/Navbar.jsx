@@ -73,10 +73,18 @@ const Navbar = ({ language, setDeskNavWidth }) => {
         };
     }, []);
 
-    useEffect(() => {
+    const langClickHandler = () => {
         if (setDeskNavWidth)
-            if (deskNavRef.current)
-                    setDeskNavWidth(deskNavRef.current.clientWidth)
+            if (deskNavRef.current) {
+                setDeskNavWidth(deskNavRef.current.clientWidth)
+
+                console.log(deskNavRef.current?.clientWidth);
+                
+            }
+    }
+
+    useEffect(() => {
+        langClickHandler()
     }, [deskNavRef.current?.clientWidth])
 
     return (
@@ -204,12 +212,16 @@ const Navbar = ({ language, setDeskNavWidth }) => {
                                         {lang.map((item, index) => (
                                             <button
                                                 key={index}
-                                                onClick={() =>
-                                                    changeLanguage(
+                                                onClick={ async () => {
+                                                    await changeLanguage(
                                                         item.lang
-                                                            .toString()
-                                                            .toLowerCase()
+                                                        .toString()
+                                                        .toLowerCase()
                                                     )
+                                                    setTimeout(() => {
+                                                        langClickHandler()
+                                                    }, 100);
+                                                }
                                                 }
                                             >
                                                 {item.lang}
