@@ -69,6 +69,11 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad, loadPercent })
         img.src = gifPathTmp;
     }, [])
 
+    useEffect(() => {
+        console.log(deskNavWidth);
+        
+    }, [deskNavWidth])
+
     let content = (
         <div className="flex">
             {!galleryDetailView && <div ref={deskNavRef} style={{ width: `${deskNavWidth === 0 ? 'fit-content' : deskNavWidth}px`, transition: '.2s' }}>

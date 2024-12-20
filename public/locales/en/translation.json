@@ -377,5 +377,63 @@
                 "Outsourcing (cost reduction, original items, systematization)."
             ]
         }
+    ],
+    "homepage": [
+        {
+            "QMark": "assets/homepage/Q Mark.png",
+            "QHeader": "assets/homepage/Q title Eng.png",
+            "QDesc": "It is often thought to be a business that only accompanies design work, and we frequently receive this question from customers. But the answer is, of course, 'Yes, we'd be delighted.' This is the background to why we launched this dedicated page for our graphic business."
+        },
+        {
+            "TopJP": "assets/homepage/Top ENG.png"
+        },
+        {
+            "ideaTitle": "What our graphic business can do",
+            "children": [
+                "Branding",
+                "Sign design",
+                "Website creation",
+                "Photography and video production"
+            ]
+        },
+        {
+            "ideaHeader": "assets/homepage/Idea ENG.png",
+            "childrenDetail": [
+                {
+                    "img": "assets/homepage/Icon A.png",
+                    "title": "Branding",
+                    "header": "Building the image of your company's products and services",
+                    "desc": "■ Logo design ■ Package design ■ Web design ■ Illustration creation|||■ Brochures ■ Company profiles ■ Posters ■ Business cards ■ Medical appointment cards ■ Loyalty cards, etc.|||■ Uniforms ■ Custom merchandise creation"
+                },
+                {
+                    "img": "assets/homepage/Icon B.png",
+                    "title": "Sign design",
+                    "header": "Effective sign design that maximizes the image of your store",
+                    "desc": "■ Facade signs ■ Wall signs ■ Projecting signs (blade signs) ■ Freestanding signs (pole signs) ■ Stand signs|||■ Window signs ■ Neon signs ■ LED signs ■ Panel signs ■ Flag signs|||■ Rooftop signs ■ A-frame signs ■ Box signs (channel letters) ■ Banners and streamers"
+                },
+                {
+                    "img": "assets/homepage/Icon C.png",
+                    "title": "Website creation",
+                    "header": "Proposing web design services using the latest technology",
+                    "desc": "Together with our partner companies, we offer innovative web design services utilizing the latest technology. Responsive design, interactive elements, and AI-driven personalization maximize user experience. We provide SEO optimization, fast loading, and intuitive UI design for an excellent visitor experience. Additionally, we implement the latest security technologies to ensure safe site operations. Strengthen your digital presence and enhance your brand power."
+                },
+                {
+                    "img": "assets/homepage/Icon D.png",
+                    "title": "Advertising and promotional design",
+                    "header": "Effectively convey your message with visually appealing designs.",
+                    "desc": "Our advertising and promotional designs excel at catering to various advertising needs. With collaborations with many partner companies, we offer one-stop solutions. We have extensive knowledge and experience in printing and merchandise production, delivering high-quality results. We consistently support advertising and promotional strategies tailored to customer needs, from design to printing."
+                },
+                {
+                    "img": "assets/homepage/Icon E.png",
+                    "title": "Photography and video production",
+                    "header": "Enhancing your brand with high-quality visuals and technology",
+                    "desc": "Our photography and video production services deliver high-quality visuals that highlight your brand's appeal. Utilizing the latest filming techniques, we focus on storytelling to create compelling content. From promotional videos to product showcases, we cater to various needs and provide end-to-end support from editing to final production."
+                }
+            ]
+        },
+        {
+            "header": "Design skills utilizing 'success stories' referred to as achievements",
+            "desc": "We possess 'comprehensive design skills' that integrate design work and graphic design.|||In other words, our one-stop service, combining spatial design, store design, brand strategy, and graphic design, is your greatest strength."
+        }
     ]
 }
