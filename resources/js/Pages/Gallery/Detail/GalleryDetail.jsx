@@ -187,7 +187,7 @@ const GalleryDetail = (props) => {
             <div ref={pageRef} className={`w-full relative flex flex-col items-center ${waitRender ? 'opacity-100' : 'opacity-0'} transition-all duration-500`}>
                 {/* Photo Jumbotron  */}
                 <div className="w-full relative flex flex-col justify-center items-center text-white" style={{ height: '90vh'}}>
-                    <div style={{ transition: '500ms', transform: `translateX(-${scrollLength1 + (scrollLength1 * 1.5)}px)` }} className="absolute flex justify-center items-center top-10 right-10 w-28 h-28 rounded-full border-white border-8 z-10 cursor-pointer" onMouseEnter={() => backHandler('mouseEnter')} onMouseLeave={() => backHandler('mouseLeave')} onClick={() => backHandler('click')}>
+                    <div style={{ transition: '500ms', transform: `translateX(-${scrollLength1 + (scrollLength1 * 1.5)}px)` }} className="absolute flex justify-center items-center top-10 right-10 w-28 h-28 rounded-full border-white border-8 z-10 cursor-pointer select-none" onMouseEnter={() => backHandler('mouseEnter')} onMouseLeave={() => backHandler('mouseLeave')} onClick={() => backHandler('click')}>
                         <span className="material-icons transition-all duration-700" style={{ fontSize: (backState === 'mouseEnter') ? '118px' : '80px' }}> arrow_circle_left </span>
                     </div>
                     <img className={`absolute w-full h-full object-cover ${classes['bg-jumbotron']}`} src={`storage/${detailPages.Img[0]}`} alt="" />
