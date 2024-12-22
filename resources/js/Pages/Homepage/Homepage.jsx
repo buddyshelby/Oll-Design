@@ -207,7 +207,10 @@ const Homepage = () => {
                 const peopleRunnerBoxElement = mainContainerRef.current.children[4].children[0]
                 
                 const runnerTouchStartHandler = (e) => {
-                    peopleRunnerBoxElement.style.transition = '100ms linear'
+                    const peopleComputedTranslate = parseFloat(window.getComputedStyle(peopleRunnerBoxElement).translate)
+                    peopleRunnerBoxElement.style.translate = `${peopleComputedTranslate}px`;
+
+                    peopleRunnerBoxElement.style.transition = '5ms linear'
                     const firstTouch = e.changedTouches[0].clientX;
                     let currentTouch = 0
                     let timeoutTryToRun = setTimeout(() => {
@@ -223,7 +226,6 @@ const Homepage = () => {
                     const runnerTouchMoveHandler = (e) => {
                         clearTimeout(timeoutTryToRun)
                         const peopleComputedTranslate = parseFloat(window.getComputedStyle(peopleRunnerBoxElement).translate)
-                        console.log(window.getComputedStyle(peopleRunnerBoxElement).translate);
                         
                         let positionTouch = 0;
                         const runnerWidth = peopleRunnerBoxElement.clientWidth
@@ -232,9 +234,9 @@ const Homepage = () => {
                         const currentTranslate = parseFloat(peopleComputedTranslate)
         
                         if (currentTouch === 0) {
-                            positionTouch = (firstTouch - e.changedTouches[0].clientX) * 8
+                            positionTouch = (firstTouch - e.changedTouches[0].clientX) * 0.80
                         } else {
-                            positionTouch = (currentTouch - e.changedTouches[0].clientX) * 8
+                            positionTouch = (currentTouch - e.changedTouches[0].clientX) * 0.80
                         }
     
                         const checkOffsideRight = (currentTranslate - positionTouch) < sizeBox
@@ -248,6 +250,8 @@ const Homepage = () => {
                         } else {
                             peopleRunnerBoxElement.style.translate = `${peopleComputedTranslate - positionTouch}px`
                         }
+                        console.log(peopleComputedTranslate);
+                        
                     }
         
                     window.addEventListener('touchmove', runnerTouchMoveHandler)
@@ -255,7 +259,6 @@ const Homepage = () => {
                     const touchEndHandler = () => {
                 
                         window.removeEventListener('touchmove', runnerTouchMoveHandler)
-                        peopleRunnerBoxElement.style.transition = '50ms linear'
                         console.log(peopleRunnerBoxElement.style.translate);
                         clearTimeout(timeoutTryToRun)
                         timeoutTryToRun = setTimeout(() => {
