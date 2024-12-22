@@ -80,7 +80,7 @@ export const animationGraphicDesign = async (mainRef, focusOnPeople) => {
             setTimeout(() => {
                 peopleRunnerBoxElement.style.transition = '30s linear'
                 setTimeout(() => {
-                    peopleRunnerBoxElement.style.transform  = `translate(calc(-${runnerWidth}px  + ${boxWidth}px))`
+                    peopleRunnerBoxElement.style.translate  = `calc(-${runnerWidth}px  + ${boxWidth}px)`
                 }, 100);
             }, 1100);
         }
