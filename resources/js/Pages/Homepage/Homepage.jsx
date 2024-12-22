@@ -210,49 +210,38 @@ const Homepage = () => {
                 const boxWidth = peopleBoxElement.clientWidth
                 
                 const runnerTouchStartHandler = (e) => {
-                    let lastTouchMoveDate = 0;
                     const peopleComputedTranslate = parseFloat(window.getComputedStyle(peopleRunnerBoxElement).translate)
                     peopleRunnerBoxElement.style.translate = `${peopleComputedTranslate}px`;
 
                     peopleRunnerBoxElement.style.transition = '20ms linear'
                     const firstTouch = e.changedTouches[0].clientX;
                     let currentTouch = 0
-                    let timeoutTryToRun = setTimeout(() => {
-
-                        peopleRunnerBoxElement.style.transition = '500s linear'
-                        setTimeout(() => {
-                            peopleRunnerBoxElement.style.translate  = `calc(-${runnerWidth}px  + ${boxWidth}px)`
-                        }, 100);
-                    }, 5000);
+                    let timeoutTryToRun;
                     
                     const runnerTouchMoveHandler = (e) => {
-                        const now = Date.now();
-                        if (now - lastTouchMoveDate > 16) { // ~60fps (1000ms / 60fps = 16ms)
-                            lastTouchMoveDate = now;
-                            clearTimeout(timeoutTryToRun)
-                            const peopleComputedTranslate = parseFloat(window.getComputedStyle(peopleRunnerBoxElement).translate)
-                            
-                            let positionTouch = 0;
-                            const sizeBox = (-runnerWidth + boxWidth)
-                            const currentTranslate = parseFloat(peopleComputedTranslate)
-            
-                            if (currentTouch === 0) {
-                                positionTouch = (firstTouch - e.changedTouches[0].clientX) * 1.30
-                            } else {
-                                positionTouch = (currentTouch - e.changedTouches[0].clientX) * 1.30
-                            }
+                        clearTimeout(timeoutTryToRun)
+                        const peopleComputedTranslate = parseFloat(window.getComputedStyle(peopleRunnerBoxElement).translate)
+                        
+                        let positionTouch = 0;
+                        const sizeBox = (-runnerWidth + boxWidth)
+                        const currentTranslate = parseFloat(peopleComputedTranslate)
         
-                            const checkOffsideRight = (currentTranslate - positionTouch) < sizeBox
-                            const checkOffsideLeft = (currentTranslate - positionTouch) > 0
-                            
-                            currentTouch = e.changedTouches[0].clientX
-                            if (checkOffsideRight) {
-                                peopleRunnerBoxElement.style.translate = `${sizeBox}px`
-                            } else if (checkOffsideLeft) {
-                                peopleRunnerBoxElement.style.translate = `0px`
-                            } else {
-                                peopleRunnerBoxElement.style.translate = `${peopleComputedTranslate - positionTouch}px`
-                            }
+                        if (currentTouch === 0) {
+                            positionTouch = (firstTouch - e.changedTouches[0].clientX) * 1.30
+                        } else {
+                            positionTouch = (currentTouch - e.changedTouches[0].clientX) * 1.30
+                        }
+    
+                        const checkOffsideRight = (currentTranslate - positionTouch) < sizeBox
+                        const checkOffsideLeft = (currentTranslate - positionTouch) > 0
+                        
+                        currentTouch = e.changedTouches[0].clientX
+                        if (checkOffsideRight) {
+                            peopleRunnerBoxElement.style.translate = `${sizeBox}px`
+                        } else if (checkOffsideLeft) {
+                            peopleRunnerBoxElement.style.translate = `0px`
+                        } else {
+                            peopleRunnerBoxElement.style.translate = `${peopleComputedTranslate - positionTouch}px`
                         }
                     }
         
@@ -262,7 +251,6 @@ const Homepage = () => {
                 
                         window.removeEventListener('touchmove', runnerTouchMoveHandler)
                         console.log(peopleRunnerBoxElement.style.translate);
-                        clearTimeout(timeoutTryToRun)
                         timeoutTryToRun = setTimeout(() => {
                             const runnerWidth = peopleRunnerBoxElement.clientWidth;
                             const boxWidth = peopleBoxElement.clientWidth;
@@ -353,7 +341,7 @@ const Homepage = () => {
                         </div>
                     </div>
                     <div className="fourth relative overflow-hidden" style={{ width: '77vw', border: '0.1vw solid black', marginBottom: '4vw', transition: '1s', transform: 'translate(10vw)', opacity: '0' }}>
-                        <div style={{ width: '200vw', height: '28vw' }} className="flex" >
+                        <div style={{ width: '200vw', height: '28vw', willChange: 'translate' }} className="flex" >
                             <div className="w-full h-full absolute left-0 top-0">
                                 <img className={`w-full  h-full object-cover`} src="assets/homepage/Background.png" alt="" />
                             </div>
