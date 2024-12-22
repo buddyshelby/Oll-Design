@@ -210,21 +210,25 @@ const Homepage = () => {
                 const boxWidth = peopleBoxElement.clientWidth
                 
                 const runnerTouchStartHandler = (e) => {
+                    let lastTouchMoveDate = 0;
                     const peopleComputedTranslate = parseFloat(window.getComputedStyle(peopleRunnerBoxElement).translate)
                     peopleRunnerBoxElement.style.translate = `${peopleComputedTranslate}px`;
 
-                    peopleRunnerBoxElement.style.transition = '5ms linear'
+                    peopleRunnerBoxElement.style.transition = '500ms linear'
                     const firstTouch = e.changedTouches[0].clientX;
                     let currentTouch = 0
                     let timeoutTryToRun = setTimeout(() => {
 
-                        peopleRunnerBoxElement.style.transition = '30s linear'
+                        peopleRunnerBoxElement.style.transition = '500s linear'
                         setTimeout(() => {
                             peopleRunnerBoxElement.style.translate  = `calc(-${runnerWidth}px  + ${boxWidth}px)`
                         }, 100);
                     }, 5000);
                     
                     const runnerTouchMoveHandler = (e) => {
+                        const now = Date.now();
+                        if (now - lastTouchMoveDate > 16) { // ~60fps (1000ms / 60fps = 16ms)
+                            lastTouchMoveDate = now;
                             clearTimeout(timeoutTryToRun)
                             const peopleComputedTranslate = parseFloat(window.getComputedStyle(peopleRunnerBoxElement).translate)
                             
@@ -233,9 +237,9 @@ const Homepage = () => {
                             const currentTranslate = parseFloat(peopleComputedTranslate)
             
                             if (currentTouch === 0) {
-                                positionTouch = (firstTouch - e.changedTouches[0].clientX) * 0.80
+                                positionTouch = (firstTouch - e.changedTouches[0].clientX) * 2.25
                             } else {
-                                positionTouch = (currentTouch - e.changedTouches[0].clientX) * 0.80
+                                positionTouch = (currentTouch - e.changedTouches[0].clientX) * 2.25
                             }
         
                             const checkOffsideRight = (currentTranslate - positionTouch) < sizeBox
@@ -249,7 +253,7 @@ const Homepage = () => {
                             } else {
                                 peopleRunnerBoxElement.style.translate = `${peopleComputedTranslate - positionTouch}px`
                             }
-                        
+                        }
                     }
         
                     window.addEventListener('touchmove', runnerTouchMoveHandler)
