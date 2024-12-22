@@ -68,7 +68,7 @@ export const animationGraphicDesign = async (mainRef, focusOnPeople) => {
 
         const peopleBoxElement = mainRef.current.children[4]
         const peopleRunnerBoxElement = mainRef.current.children[4].children[0]
-        const peopleBoxPosition = peopleBoxElement.offsetTop + ( peopleBoxElement.clientHeight / 1.25)
+        const peopleBoxPosition = peopleBoxElement.offsetTop
 
         if (peopleBoxPosition < ( heightScreen + scrollPosition) && (peopleBoxElement.style.opacity === '0' || peopleBoxElement.style.opacity === '')) {
             peopleBoxElement.style.opacity = '1'
@@ -89,6 +89,40 @@ export const animationGraphicDesign = async (mainRef, focusOnPeople) => {
             peopleBoxElement.style.opacity = '0'
             peopleBoxElement.style.transform = 'translate(10vw)'
         }
+
+        const ideaElement = mainRef.current.children[5]
+        const ideaChildrenElement = mainRef.current.children[5].children[1].children
+        
+        const ideaTitleElement = mainRef.current.children[5].children[0]
+        const ideaTitleElementPosition = ideaElement.offsetTop - 20
+
+        if (ideaTitleElementPosition < ( heightScreen + scrollPosition) && ideaTitleElementPosition > scrollPosition) {
+            ideaTitleElement.style.opacity = '1'
+            ideaTitleElement.style.translate = '0 0'
+        }
+        
+        if (ideaTitleElementPosition < scrollPosition) {
+            ideaTitleElement.style.opacity = '0'
+            ideaTitleElement.style.translate = '0 20vw'
+        }
+
+        Array.from(ideaChildrenElement).forEach((item, indexes) => {
+            const index = indexes + 1
+            const ideaChildrenElementPosition = item.offsetTop - 20
+
+            setTimeout(() => {
+                if (ideaChildrenElementPosition < ( heightScreen + scrollPosition)) {
+                    item.style.opacity = '1'
+                    item.style.translate = '0 0'
+                }
+                
+                if (ideaChildrenElementPosition < scrollPosition) {
+                    item.style.opacity = '0'
+                    item.style.translate = '0 20vw'
+                }
+            }, 100 * index);
+            
+        })
     }
 
     wheelHandler()

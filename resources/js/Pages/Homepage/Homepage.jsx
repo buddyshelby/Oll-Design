@@ -381,13 +381,13 @@ const Homepage = () => {
                         </div>
                     </div>
                     <div className="fifth w-fit flex flex-col items-center h-max" style={{ marginBottom: '6vw', }}>
-                        <div className="text-center" style={{ fontSize: '4.2vw', fontWeight: '500', letterSpacing: '0.1vw', marginBottom: '2vw' }}>
+                        <div className="text-center" style={{ fontSize: '4.2vw', fontWeight: '500', letterSpacing: '0.1vw', marginBottom: '2vw', opacity: '0', translate: '0 20vw', transition: '1s' }}>
                         &nbsp;{isLanguage.homepage[2]['ideaTitle']}
                         </div>
                         <div className="flex flex-col justify-between" style={{ width: '77vw', fontSize: '3vw', fontWeight: '500' }}>
                             {isLanguage.homepage[2]['children'].map((item, index) => {
                                 return (
-                                    <div key={`${item}${index}`} className="flex flex-col justify-center items-center" style={{ width: '100%' }}>
+                                    <div key={`${item}${index}`} className="flex flex-col justify-center items-center" style={{ width: '100%', opacity: '0', translate: '0 20vw', transition: '1s' }}>
                                         <div className="w-full h-full flex justify-center items-center text-center" style={{ border: '0.1vw solid black', padding: '1vw', marginBottom: '2vw' }}>
                                             {item}
                                         </div>
