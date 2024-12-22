@@ -203,67 +203,81 @@ const Homepage = () => {
 
         if (mainContainerRef.current) {
             const peopleBoxElement = mainContainerRef.current.children[4]
-            
             if (peopleBoxElement.style.opacity !== '0' || peopleBoxElement.style.opacity !== '') {
                 const peopleRunnerBoxElement = mainContainerRef.current.children[4].children[0]
-                const runnerWidth = peopleRunnerBoxElement.clientWidth
-                const boxWidth = peopleBoxElement.clientWidth
                 
-                const runnerTouchStartHandler = (eStart) => {
+                const runnerTouchStartHandler = (e) => {
                     const peopleComputedTranslate = parseFloat(window.getComputedStyle(peopleRunnerBoxElement).translate)
                     peopleRunnerBoxElement.style.translate = `${peopleComputedTranslate}px`;
+                    peopleRunnerBoxElement.style.transition = '100ms linear'
+                    const firstTouch = e.changedTouches[0].clientX;
+                    let currentTouch = 0
+                    let timeoutTryToRun = setTimeout(() => {
+                        const runnerWidth = peopleRunnerBoxElement.clientWidth;
+                        const boxWidth = peopleBoxElement.clientWidth;
 
-                    peopleRunnerBoxElement.style.transition = '20ms linear'
-                    setTimeout(() => {
-                        const firstTouch = eStart.changedTouches[0].clientX;
-                        let currentTouch = 0
-                        
-                        const runnerTouchMoveHandler = (e) => {
-                            eStart.preventDefault()
-                            e.preventDefault()
-                            const peopleComputedTranslate = parseFloat(window.getComputedStyle(peopleRunnerBoxElement).translate)
-                            
-                            let positionTouch = 0;
-                            const sizeBox = (-runnerWidth + boxWidth)
-                            const currentTranslate = parseFloat(peopleComputedTranslate)
-            
-                            if (currentTouch === 0) {
-                                positionTouch = (firstTouch - e.changedTouches[0].clientX) * 3
-                            } else {
-                                positionTouch = (currentTouch - e.changedTouches[0].clientX) * 3
-                            }
-        
-                            const checkOffsideRight = (currentTranslate - positionTouch) < sizeBox
-                            const checkOffsideLeft = (currentTranslate - positionTouch) > 0
-                            
-                            currentTouch = e.changedTouches[0].clientX
-                            if (checkOffsideRight) {
-                                peopleRunnerBoxElement.style.translate = `${sizeBox}px`
-                            } else if (checkOffsideLeft) {
-                                peopleRunnerBoxElement.style.translate = `0px`
-                            } else {
-                                peopleRunnerBoxElement.style.translate = `${peopleComputedTranslate - positionTouch}px`
-                            }
-                        }
-            
-                        window.addEventListener('touchmove', runnerTouchMoveHandler, { passive: false })
-            
-                        const touchEndHandler = () => {
+                        peopleRunnerBoxElement.style.transition = '30s linear'
+                        setTimeout(() => {
+                            peopleRunnerBoxElement.style.translate  = `calc(-${runnerWidth}px  + ${boxWidth}px)`
+                        }, 100);
+                    }, 5000);
                     
-                            window.removeEventListener('touchmove', runnerTouchMoveHandler, { passive: false })
+                    const runnerTouchMoveHandler = (e) => {
+                        clearTimeout(timeoutTryToRun)
+                        const peopleComputedTranslate = parseFloat(window.getComputedStyle(peopleRunnerBoxElement).translate)
+                        
+                        let positionTouch = 0;
+                        const runnerWidth = peopleRunnerBoxElement.clientWidth
+                        const boxWidth = peopleBoxElement.clientWidth
+                        const sizeBox = (-runnerWidth + boxWidth)
+                        const currentTranslate = parseFloat(peopleComputedTranslate)
+        
+                        if (currentTouch === 0) {
+                            positionTouch = (firstTouch - e.changedTouches[0].clientX) * 8
+                        } else {
+                            positionTouch = (currentTouch - e.changedTouches[0].clientX) * 8
+                        }
+    
+                        const checkOffsideRight = (currentTranslate - positionTouch) < sizeBox
+                        const checkOffsideLeft = (currentTranslate - positionTouch) > 0
+                        
+                        currentTouch = e.changedTouches[0].clientX
+                        if (checkOffsideRight) {
+                            peopleRunnerBoxElement.style.translate = `${sizeBox}px`
+                        } else if (checkOffsideLeft) {
+                            peopleRunnerBoxElement.style.translate = `0px`
+                        } else {
+                            peopleRunnerBoxElement.style.translate = `${peopleComputedTranslate - positionTouch}px`
+                        }
+                        console.log(peopleComputedTranslate);
+                        
+                    }
+        
+                    window.addEventListener('touchmove', runnerTouchMoveHandler)
+        
+                    const touchEndHandler = () => {
+                
+                        window.removeEventListener('touchmove', runnerTouchMoveHandler)
+                        peopleRunnerBoxElement.style.transition = '50ms linear'
+                        console.log(peopleRunnerBoxElement.style.translate);
+                        clearTimeout(timeoutTryToRun)
+                        timeoutTryToRun = setTimeout(() => {
                             const runnerWidth = peopleRunnerBoxElement.clientWidth;
                             const boxWidth = peopleBoxElement.clientWidth;
+    
                             peopleRunnerBoxElement.style.transition = '30s linear'
                             setTimeout(() => {
                                 peopleRunnerBoxElement.style.translate  = `calc(-${runnerWidth}px  + ${boxWidth}px)`
                             }, 100);
-                            currentTouch = 0
-            
-                        }
-            
-                        window.addEventListener('touchend', touchEndHandler)
-                        return () => window.removeEventListener('touchend', touchEndHandler)
-                    }, 100);
+                        }, 5000);
+                        currentTouch = 0
+        
+                    }
+        
+                    window.addEventListener('touchend', touchEndHandler)
+                    return () => {
+                        window.removeEventListener('touchend', touchEndHandler)
+                    }
                 }
         
                 peopleRunnerBoxElement.addEventListener('touchstart', runnerTouchStartHandler)
