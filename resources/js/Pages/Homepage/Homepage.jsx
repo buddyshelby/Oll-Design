@@ -36,12 +36,6 @@ const Homepage = () => {
             })
         }
     }, [mainContainerRef.current])
-
-    const peopleBoxSlideMove = (e) => {
-
-        console.log(e);
-        
-    }
     
     const imageProjectOnLoad = (event, index) => {
         const checkExistingImage = imageLoaded.filter(item => item.randomImage === event.randomImage).length
@@ -212,18 +206,8 @@ const Homepage = () => {
                     peopleRunnerBoxElement.style.transition = '100ms linear'
                     const firstTouch = e.changedTouches[0].clientX;
                     let currentTouch = 0
-                    let timeoutTryToRun = setTimeout(() => {
-                        const runnerWidth = peopleRunnerBoxElement.clientWidth;
-                        const boxWidth = peopleBoxElement.clientWidth;
-
-                        peopleRunnerBoxElement.style.transition = '30s linear'
-                        setTimeout(() => {
-                            peopleRunnerBoxElement.style.translate  = `calc(-${runnerWidth}px  + ${boxWidth}px)`
-                        }, 100);
-                    }, 5000);
                     
                     const runnerTouchMoveHandler = async (e) => {
-                        clearTimeout(timeoutTryToRun)
                         const peopleComputedTranslate = parseFloat(window.getComputedStyle(peopleRunnerBoxElement).translate)
                         
                         let positionTouch = 0;
@@ -258,17 +242,13 @@ const Homepage = () => {
                 
                         window.removeEventListener('touchmove', runnerTouchMoveHandler)
                         peopleRunnerBoxElement.style.transition = '50ms linear'
-                        console.log(peopleRunnerBoxElement.style.translate);
-                        clearTimeout(timeoutTryToRun)
-                        timeoutTryToRun = setTimeout(() => {
-                            const runnerWidth = peopleRunnerBoxElement.clientWidth;
-                            const boxWidth = peopleBoxElement.clientWidth;
-    
-                            peopleRunnerBoxElement.style.transition = '30s linear'
-                            setTimeout(() => {
-                                peopleRunnerBoxElement.style.translate  = `calc(-${runnerWidth}px  + ${boxWidth}px)`
-                            }, 100);
-                        }, 5000);
+                        const runnerWidth = peopleRunnerBoxElement.clientWidth;
+                        const boxWidth = peopleBoxElement.clientWidth;
+
+                        peopleRunnerBoxElement.style.transition = '30s linear'
+                        setTimeout(() => {
+                            peopleRunnerBoxElement.style.translate  = `calc(-${runnerWidth}px  + ${boxWidth}px)`
+                        }, 100);
                         currentTouch = 0
         
                     }
