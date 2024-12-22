@@ -207,21 +207,11 @@ const Homepage = () => {
                 const peopleRunnerBoxElement = mainContainerRef.current.children[4].children[0]
                 
                 const runnerTouchStartHandler = (e) => {
-                    peopleRunnerBoxElement.style.transition = '500ms cubic-bezier(0.25, 1, 0.5, 1)'
+                    peopleRunnerBoxElement.style.transition = '100ms'
                     const firstTouch = e.changedTouches[0].clientX;
                     let currentTouch = 0
-                    let timeoutTryToRun = setTimeout(() => {
-                        const runnerWidth = peopleRunnerBoxElement.clientWidth;
-                        const boxWidth = peopleBoxElement.clientWidth;
-
-                        peopleRunnerBoxElement.style.transition = '30s linear'
-                        setTimeout(() => {
-                            peopleRunnerBoxElement.style.translate  = `calc(-${runnerWidth}px  + ${boxWidth}px)`
-                        }, 100);
-                    }, 5000);
                     
                     const runnerTouchMoveHandler = (e) => {
-                        clearTimeout(timeoutTryToRun)
                         const peopleComputedTranslate = parseFloat(window.getComputedStyle(peopleRunnerBoxElement).translate)
                         console.log(window.getComputedStyle(peopleRunnerBoxElement).translate);
                         
@@ -255,16 +245,6 @@ const Homepage = () => {
                     const touchEndHandler = () => {
                 
                         window.removeEventListener('touchmove', runnerTouchMoveHandler)
-                        clearTimeout(timeoutTryToRun)
-                        timeoutTryToRun = setTimeout(() => {
-                            const runnerWidth = peopleRunnerBoxElement.clientWidth;
-                            const boxWidth = peopleBoxElement.clientWidth;
-
-                            peopleRunnerBoxElement.style.transition = '30s linear'
-                            setTimeout(() => {
-                                peopleRunnerBoxElement.style.translate  = `calc(-${runnerWidth}px  + ${boxWidth}px)`
-                            }, 100);
-                        }, 5000);
                         currentTouch = 0
         
                     }
