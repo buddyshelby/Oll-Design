@@ -214,7 +214,7 @@ const Homepage = () => {
                     const peopleComputedTranslate = parseFloat(window.getComputedStyle(peopleRunnerBoxElement).translate)
                     peopleRunnerBoxElement.style.translate = `${peopleComputedTranslate}px`;
 
-                    peopleRunnerBoxElement.style.transition = '500ms linear'
+                    peopleRunnerBoxElement.style.transition = '20ms linear'
                     const firstTouch = e.changedTouches[0].clientX;
                     let currentTouch = 0
                     let timeoutTryToRun = setTimeout(() => {
@@ -237,9 +237,9 @@ const Homepage = () => {
                             const currentTranslate = parseFloat(peopleComputedTranslate)
             
                             if (currentTouch === 0) {
-                                positionTouch = (firstTouch - e.changedTouches[0].clientX) * 2.25
+                                positionTouch = (firstTouch - e.changedTouches[0].clientX) * 1.30
                             } else {
-                                positionTouch = (currentTouch - e.changedTouches[0].clientX) * 2.25
+                                positionTouch = (currentTouch - e.changedTouches[0].clientX) * 1.30
                             }
         
                             const checkOffsideRight = (currentTranslate - positionTouch) < sizeBox
