@@ -222,7 +222,7 @@ const Homepage = () => {
                         }, 100);
                     }, 5000);
                     
-                    const runnerTouchMoveHandler = (e) => {
+                    const runnerTouchMoveHandler = async (e) => {
                         clearTimeout(timeoutTryToRun)
                         const peopleComputedTranslate = parseFloat(window.getComputedStyle(peopleRunnerBoxElement).translate)
                         
@@ -249,8 +249,7 @@ const Homepage = () => {
                         } else {
                             peopleRunnerBoxElement.style.translate = `${peopleComputedTranslate - positionTouch}px`
                         }
-                        console.log(peopleComputedTranslate);
-                        
+                        await sleep(500)
                     }
         
                     window.addEventListener('touchmove', runnerTouchMoveHandler)
