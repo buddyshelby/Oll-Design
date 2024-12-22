@@ -73,11 +73,14 @@ export const animationGraphicDesign = async (mainRef, focusOnPeople) => {
         if (peopleBoxPosition < ( heightScreen + scrollPosition) && (peopleBoxElement.style.opacity === '0' || peopleBoxElement.style.opacity === '')) {
             peopleBoxElement.style.opacity = '1'
             peopleBoxElement.style.transform = 'translate(0vw)'
+
+            const runnerWidth = peopleRunnerBoxElement.clientWidth;
+            const boxWidth = peopleBoxElement.clientWidth;
             
             setTimeout(() => {
-                peopleRunnerBoxElement.style.transition = '30s'
+                peopleRunnerBoxElement.style.transition = '30s linear'
                 setTimeout(() => {
-                    peopleRunnerBoxElement.style.marginLeft = `calc(-${peopleRunnerBoxElement.clientWidth}px  + ${peopleBoxElement.clientWidth}px`
+                    peopleRunnerBoxElement.style.transform  = `translate(calc(-${runnerWidth}px  + ${boxWidth}px))`
                 }, 100);
             }, 1100);
         }
