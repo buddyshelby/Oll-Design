@@ -219,6 +219,7 @@ const Homepage = () => {
                     let timeoutTryToRun;
                     
                     const runnerTouchMoveHandler = (e) => {
+                        e.preventDefault()
                         clearTimeout(timeoutTryToRun)
                         const peopleComputedTranslate = parseFloat(window.getComputedStyle(peopleRunnerBoxElement).translate)
                         
@@ -245,11 +246,11 @@ const Homepage = () => {
                         }
                     }
         
-                    window.addEventListener('touchmove', runnerTouchMoveHandler)
+                    window.addEventListener('touchmove', runnerTouchMoveHandler, { passive: false })
         
                     const touchEndHandler = () => {
                 
-                        window.removeEventListener('touchmove', runnerTouchMoveHandler)
+                        window.removeEventListener('touchmove', runnerTouchMoveHandler, { passive: false })
                         console.log(peopleRunnerBoxElement.style.translate);
                         timeoutTryToRun = setTimeout(() => {
                             const runnerWidth = peopleRunnerBoxElement.clientWidth;
