@@ -50,6 +50,7 @@ const GalleryDetail = (props) => {
     
             const touchMoveHandler = (eventMove) => {
                 eventStart.preventDefault()
+                eventMove.preventDefault()
                 
                 const moveTouch = eventMove.changedTouches[0].clientY
                 
@@ -74,11 +75,11 @@ const GalleryDetail = (props) => {
     
             const touchEndHandler = () => {
     
-                window.removeEventListener('touchmove', touchMoveHandler)
+                window.removeEventListener('touchmove', touchMoveHandler, { passive: false })
     
             }
     
-            window.addEventListener('touchmove', touchMoveHandler)
+            window.addEventListener('touchmove', touchMoveHandler, { passive: false })
     
             window.addEventListener('touchend', touchEndHandler)
     
@@ -86,9 +87,9 @@ const GalleryDetail = (props) => {
     }
 
     useEffect(() => {
-        window.addEventListener('touchstart', touchHandler)
+        window.addEventListener('touchstart', touchHandler, { passive: false })
 
-        return () => window.removeEventListener('touchstart', touchHandler)
+        return () => window.removeEventListener('touchstart', touchHandler, { passive: false })
     }, [])
 
     useEffect(() => {

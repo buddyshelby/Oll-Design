@@ -70,9 +70,10 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad, loadPercent })
     }, [])
 
     useEffect(() => {
-        console.log(deskNavWidth);
+        if (mobileNavRef.current)
+        console.log(mobileNavRef);
         
-    }, [deskNavWidth])
+    }, [mobileNavRef.current])
 
     let content = (
         <div className="flex">
@@ -80,7 +81,7 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad, loadPercent })
                 <Navbar language={isLanguage} setDeskNavWidth={setDeskNavWidth} />
             </div>}
             <div className={`${galleryDetailView ? 'overflow-hidden fixed' : 'container-fluid relative'} `} style={{ width: !galleryDetailView ? `calc(100% - ${deskNavWidth}px)` : '100%', transition: '.2s' }}>
-                <div className="row">
+                <div className="row" style={{ marginTop: `0px` }}>
                     <div className="">{children}</div>
                 </div>
             </div>
@@ -281,10 +282,10 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad, loadPercent })
                                 </div>
                             ) : (
                                 <div className={`${ galleryDetailView ? 'fixed' : 'container-fluid'}`}>
-                                    {!galleryDetailView && <div className="row">
+                                    {!galleryDetailView && <div className="row" ref={mobileNavRef}> 
                                         <Navbar language={isLanguage} />
                                     </div>}
-                                    <div className="row">{children}</div>
+                                    <div className="row" style={{ marginTop: `${mobileNavRef.current?.children[0].clientHeight}px` }}>{children}</div>
                                 </div>
                             )
                         ) : (

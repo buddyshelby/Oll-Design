@@ -7,40 +7,7 @@ import MediaQuery from "@/Components/MediaQuery";
 import axios from "axios";
 import { sleep } from "@/Utils/Sleep/sleep";
 import { useTranslation } from "react-i18next";
-// import DownArrow from '/public/assets/icon/Pages/Homepage/arrow_down.jsx'
-
-const displayInterest = [
-    {
-        img: 'assets/homepage/Icon A.png',
-        title: 'ブランディング',
-        header: '会社やお店の商品、サービスのイメージの構築',
-        desc: '■ロゴデザイン　■パッケージデザイン　■ウェブデザイン　■イラスト作成|||■パンフレット　■会社案内　■ポスター　■名刺　■診察券　■ポイントカードなど|||■ユニフォーム　■オリジナルグッズ作成'
-    },
-    {
-        img: 'assets/homepage/Icon B.png',
-        title: 'サインデザイン',
-        header: 'お店のイメージを最大限に訴求する効果的なサインデザイン',
-        desc: '■ファサードサイン　■壁面看板　■突き出し看板（袖看板）　■自立看板（ポール看板）　■スタンド看板|||■窓面看板（ウィンドウサイン）　■ネオンサイン　■LED看板　■パネル看板　■旗看板（フラッグサイン）|||■屋上看板　■A型看板　■箱型看板（チャンネルサイン）　■垂れ幕・横断幕'
-    },
-    {
-        img: 'assets/homepage/Icon C.png',
-        title: 'WEBサイトの制作',
-        header: '最新技術を活用したWEBデザインサービスのご提案',
-        desc: '私たちの協力会社と共に、最新技術を駆使した革新的なWEBデザインサービスを提供します。 レスポンシブデザイン、インタラクティブ要素、AIを活用したパーソナライズなど、ユーザー体験を最大化。 SEO最適化や高速表示、直感的なUI設計で、訪問者に優れた体験を提供します。 また、最新のセキュリティ技術を導入し、安全なサイト運営を実現。 デジタルプレゼンスを強化し、ブランド力をアップさせます。'
-    },
-    {
-        img: 'assets/homepage/Icon D.png',
-        title: '広 告・販 促 デ ザ イ ン',
-        header: '視覚的に訴求力のあるデザインでメッセージを効果的に伝えます。',
-        desc: '弊社の広告・販促デザインは、多様な広告デザインに対応できる強みがあります。 多くの協力会社との連携により、ワンストップでの提案が可能です。 また、印刷やグッズ制作の知識と経験が豊富で、クオリティの高い仕上がりを提供しています。 お客様のニーズに合わせた最適な広告・販促戦略をデザインから印刷まで一貫してサポートいたします'
-    },
-    {
-        img: 'assets/homepage/Icon E.png',
-        title: '撮 影・映 像 制 作',
-        header: '高品質な映像と技術でブランドを引き立てる',
-        desc: '私たちの撮影・映像制作サービスは、ブランドの魅力を引き出す高品質な映像を提供します。 最新の撮影技術を駆使し、ストーリーテリングを重視したコンテンツ作成が可能です。 宣伝用動画や商品紹介など、さまざまなニーズに対応し、編集から仕上げまで一貫してサポートします。'
-    },
-]
+import { animationGraphicDesign } from "./Animation";
 
 const Homepage = () => {
 
@@ -48,7 +15,7 @@ const Homepage = () => {
     const [isLanguage, setIsLanguage] = useState(Object.values(i18n.store.data)[0].translation);
 
     const [isData, setIsData] = useState([]);
-    const [translateHomepage, setTranslateHomepage] = useState([]);
+    const [focusOnPeople, setFocusOnPeople] = useState('not halo');
     const [imageSlideData, setImageSlideData] = useState([]);
     const [firstQuestionDesc, setFirstQuestionDesc] = useState(0)
     const firstQuestionRef = useRef(null)
@@ -58,14 +25,32 @@ const Homepage = () => {
     
     const [loadingText, setLoadingText] = useState(0)
     const loadingRef = useRef(null)
+
+    const imageLoadedLocal = []
+
+    useEffect(() => {
+        if (mainContainerRef.current) {
+            const peopleRunnerBoxElement = mainContainerRef.current.children[4].children[0]
+            peopleRunnerBoxElement.addEventListener( 'touchstart' , (e) => {
+                peopleRunnerBoxElement.style.marginLeft = `${peopleRunnerBoxElement.offsetLeft}px`
+            })
+        }
+    }, [mainContainerRef.current])
+
+    const peopleBoxSlideMove = (e) => {
+
+        console.log(e);
+        
+    }
     
-    const testOnLoad = (event, index) => {
-        const checkExistingImage = imageLoaded.filter(item => item.target.src === event.target.src).length
+    const imageProjectOnLoad = (event, index) => {
+        const checkExistingImage = imageLoaded.filter(item => item.randomImage === event.randomImage).length
         event['id'] = index
         
         if (checkExistingImage === 0) {
+            imageLoadedLocal.push(event)
             setImageLoaded([
-                ...imageLoaded,
+                ...imageLoadedLocal,
                 event
             ])
         }
@@ -115,11 +100,12 @@ const Homepage = () => {
     
     useEffect(() => {
         if (mainContainerRef.current) {
-            mainContainerRef.current.parentElement.style.margin = '0'
-            mainContainerRef.current.parentElement.style.padding = '0'
-            mainContainerRef.current.parentElement.parentElement.style.padding = '0'
-            mainContainerRef.current.parentElement.parentElement.style.margin = '0'
-            mainContainerRef.current.parentElement.parentElement.parentElement.classList.remove("container-fluid")
+            // mainContainerRef.current.parentElement.style.margin = '0'
+            // mainContainerRef.current.parentElement.style.padding = '0'
+            // mainContainerRef.current.parentElement.parentElement.style.overflow = 'hidden'
+            // mainContainerRef.current.parentElement.parentElement.style.padding = '0'
+            // mainContainerRef.current.parentElement.parentElement.style.margin = '0'
+            // mainContainerRef.current.parentElement.parentElement.parentElement.classList.remove("container-fluid")
         }
     }, [mainContainerRef.current])
 
@@ -136,11 +122,32 @@ const Homepage = () => {
 
     useEffect(() => {
         fetchData()
+        setTimeout(() => {
+            setFocusOnPeople('halo')
+        }, 10000);
     }, [])
 
     useEffect(() => {
         setImageSlideData(isData.filter(item => item.TagsID === '2').slice(0, 2))
     }, [isData])
+
+    useEffect(() => {
+        for (let index = 0; index < 100; index++) {
+            
+        }
+        imageSlideData.forEach( async (item, index) => {
+            const getRandomImage = Math.floor(Math.random() * item.Img.length)
+            item['randomImage'] = `https://olldesign.jp/storage/${item.Img[getRandomImage]}`
+
+            const img = new Image();
+            img.src = `https://olldesign.jp/storage/${item.Img[getRandomImage]}`;
+            
+            img.onload = () => {
+                imageProjectOnLoad(item, index)
+            };
+        })
+        
+    }, [imageSlideData])
 
     let timeoutLoading;
 
@@ -150,20 +157,19 @@ const Homepage = () => {
             timeoutLoading = setTimeout ( async () => {
                 if (loadingRef.current) {
                     loadingRef.current.style.fontSize = '3vw'
-                    loadingRef.current.innerText = 'Data Image Currently Can\'t be proceed.'
+                    loadingRef.current.innerText = 'Data Image Can\'t be proceed properly.'
                     await sleep(3000)
                     loadingRef.current.style.transition = '2s'
                     loadingRef.current.style.opacity = '0'
+                    await sleep(2000)
                     loadingRef.current.style.display = 'none'
                 }
-            }, 30000);
-        } else {
+            }, 10000);
+        }
+        
+        if (imageLoaded.length !== 0) {
             clearTimeout(timeoutLoading)
             const totalData = imageLoaded.length / imageSlideData.length * 100
-
-            console.log(totalData);
-            
-    
             const loopLoading = async () => {
                 for (let index = loadingText; index <= totalData; index++) {
                     await sleep(10)
@@ -186,11 +192,75 @@ const Homepage = () => {
                 await sleep(2001)
                 loadingRef.current.style.display = 'none'
             }
+            animationGraphicDesign(mainContainerRef, focusOnPeople)
         }
         if (loadingText === 100) {
             afterLoading()
         }
     }, [loadingText])
+
+    useEffect(() => {
+
+        if (mainContainerRef.current) {
+            const peopleBoxElement = mainContainerRef.current.children[4]
+            if (peopleBoxElement.style.opacity !== '0' || peopleBoxElement.style.opacity !== '') {
+                const peopleRunnerBoxElement = mainContainerRef.current.children[4].children[0]
+        
+                const runnerTouchStartHandler = (e) => {
+                    peopleRunnerBoxElement.style.marginLeft = `${peopleRunnerBoxElement.offsetLeft}px`;
+                    peopleRunnerBoxElement.style.transition = '500ms cubic-bezier(0.25, 1, 0.5, 1)'
+                    const firstTouch = e.changedTouches[0].clientX;
+                    let currentTouch = 0
+                    
+                    const runnerTouchMoveHandler = (e) => {
+                        let positionTouch = 0;
+                        const sizeBox = (-peopleRunnerBoxElement.clientWidth + peopleBoxElement.clientWidth)
+                        const currentMarginLeft = parseFloat(window.getComputedStyle(peopleRunnerBoxElement).marginLeft)
+        
+                        if (currentTouch === 0) {
+                                positionTouch = (firstTouch - e.changedTouches[0].clientX) * 10
+                        } else {
+                            positionTouch = (currentTouch - e.changedTouches[0].clientX) * 10
+                        }
+    
+                        const checkOffsideRight = (currentMarginLeft - positionTouch) < sizeBox
+                        const checkOffsideLeft = (currentMarginLeft - positionTouch) > 0
+                        
+                        currentTouch = e.changedTouches[0].clientX
+                        if (checkOffsideRight) {
+                            peopleRunnerBoxElement.style.marginLeft = `calc(${sizeBox}px)`
+                        } else if (checkOffsideLeft) {
+                            peopleRunnerBoxElement.style.marginLeft = `calc(0px)`
+                        } else {
+                            peopleRunnerBoxElement.style.marginLeft = `calc(${window.getComputedStyle(peopleRunnerBoxElement).marginLeft} - ${positionTouch}px)`
+                        }
+                    }
+        
+                    window.addEventListener('touchmove', runnerTouchMoveHandler)
+        
+                    const touchEndHandler = () => {
+                
+                        window.removeEventListener('touchmove', runnerTouchMoveHandler)
+                        setTimeout(() => {
+                            peopleRunnerBoxElement.style.transition = '30s'
+                            setTimeout(() => {
+                                peopleRunnerBoxElement.style.marginLeft = `calc(-${peopleRunnerBoxElement.clientWidth}px  + ${peopleBoxElement.clientWidth}px`
+                            }, 100);
+                        }, 5000);
+                        currentTouch = 0
+        
+                    }
+        
+                    window.addEventListener('touchend', touchEndHandler)
+                    return () => {
+                        window.removeEventListener('touchend', touchEndHandler)
+                    }
+                }
+        
+                peopleRunnerBoxElement.addEventListener('touchstart', runnerTouchStartHandler)
+            }
+        }
+    }, [mainContainerRef.current])
 
     return (
         <Page>
@@ -200,28 +270,28 @@ const Homepage = () => {
                 {matches ?
                 
                 <div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center overflow-hidden" style={{ padding: '10vw 0 0 0', opacity: firstQuestionDesc === 0 ? '0' : '1', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
-                    {/* <div ref={loadingRef} className="fixed left-0 top-0 w-full h-screen flex justify-center items-center text-slate-800 z-20 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
+                    <div ref={loadingRef} className="fixed left-0 top-0 w-full h-screen flex justify-center items-center text-slate-800 z-20 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
                         {loadingText}
-                    </div> */}
+                    </div>
                     <div className="first w-fit flex h-max" style={{ marginBottom: '4vw' }}>
-                        <div className="relative flex justify-center items-center z-10" style={{ width: '15vw', height: '15vw', padding: '0 2vw 0 0', fontSize: '8vw', color: '#10643C' }}>
+                        <div className="relative flex justify-center items-center z-10" style={{ width: '15vw', height: '15vw', padding: '0 2vw 0 0', fontSize: '8vw', color: '#10643C', transition: '1s', opacity: '0', transform: 'translate(0, -15vw)' }}>
                             <img className={`w-full h-full object-contain`} src={isLanguage.homepage[0]['QMark']} alt="" />
                         </div>
                         <div className="flex flex-col justify-center">
-                            <div ref={firstQuestionRef} className="w-fit">
+                            <div ref={firstQuestionRef} style={{ transition: '1s', opacity: '0', transform: 'translate(10vw, 0)' }} className="w-fit">
                                 <img className={`object-contain`} style={{ width: '62vw' }} src={isLanguage.homepage[0]['QHeader']} alt="" />
                             </div>
-                            <div className="flex justify-center items-center" style={{ width: `${firstQuestionDesc}px`, fontSize: '2vw' }}>
+                            <div className="flex justify-center items-center" style={{ width: `${firstQuestionDesc}px`, fontSize: '2vw', transition: '1s', opacity: '0', transform: 'translate(-20vw, 0)' }}>
                                 {isLanguage.homepage[0]['QDesc']}
                             </div>
                         </div>
                     </div>
-                    <div className="second w-fit flex h-max text-center" style={{ marginBottom: '0.5vw' }}>
+                    <div className="second w-fit flex h-max text-center" style={{ marginBottom: '0.5vw', transition: '1s', scale: '0', opacity: '0' }}>
                         <div style={{ fontSize: '2.4vw', fontWeight: 'bold', textShadow: '0.1vw 0.2vw 0.4vw rgba(0, 0, 0, 0.5)' }}>
                             <img className={`object-contain`} style={{ width: '81vw' }} src={isLanguage.homepage[1]['TopJP']} alt="" />
                         </div>
                     </div>
-                    <div className="third" style={{  border: '0.1vw solid black', padding: '0.5vw', marginBottom: '4vw' }}>
+                    <div className="third" style={{  border: '0.1vw solid black', padding: '0.5vw', marginBottom: '4vw', transition: '1s', scale: '0', opacity: '0' }}>
                         <div style={{ width: '76vw' }} className="flex h-auto">
                             <div className="w-full h-full flex flex-col">
                                 {imageSlideData.map((item, index) => {
@@ -230,10 +300,10 @@ const Homepage = () => {
                                     const month = date.getMonth()
                                     const year = date.getFullYear()
                                     return (
-                                        <div key={`${item}${index}`} className="w-full">
+                                        <div key={`${item}${index}`} className="w-full" style={{ padding: '2vw' }}>
                                             <div ref={imageSlideRef} className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '30vw', marginBottom: '0.5vw' }}>
-                                                <img onLoad={(e) => testOnLoad(e, item.id)} className={`absolute w-full h-full object-cover blur-sm pointer-events-none`} src={`https://olldesign.jp/storage/${item.Img[0]}`} alt="" />
-                                                <img className={`w-fit h-full object-contain pointer-events-none ${classes['imageSlide']}`} src={`https://olldesign.jp/storage/${item.Img[0]}`} alt="" />
+                                                <img className={`absolute w-full h-full object-cover blur-sm pointer-events-none`} src={item['randomImage']} alt="" />
+                                                <img className={`w-fit h-full object-contain pointer-events-none ${classes['imageSlide']}`} src={item['randomImage']} alt="" />
                                             </div>
                                             <div className="w-full flex justify-center items-center">
                                                 <div className="flex flex-col" style={{ width: '95%', fontSize: '3vw' }}>
@@ -257,27 +327,39 @@ const Homepage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="fourth relative" style={{ border: '0.1vw solid black', marginBottom: '4vw', padding: '2vw 0 0 0' }}>
-                        <div style={{ width: '77vw', height: '28vw' }} className="flex">
+                    <div className="fourth relative overflow-hidden" style={{ width: '77vw', border: '0.1vw solid black', marginBottom: '4vw', transition: '1s', transform: 'translate(10vw)', opacity: '0' }}>
+                        <div style={{ width: '200vw', height: '28vw' }} className="flex" >
                             <div className="w-full h-full absolute left-0 top-0">
                                 <img className={`w-full  h-full object-cover`} src="assets/homepage/Background.png" alt="" />
                             </div>
                             <div className="w-1/4 h-full relative">
-                                <img className={`w-full  h-full object-contain`} src="assets/homepage/A_1.png" alt="" />
+                                <img className={`w-full  h-full object-contain`} style={{ padding: '2vw 0 0 0' }} src="assets/homepage/A_1.png" alt="" />
                             </div>
                             <div className="w-1/4 h-full relative">
-                                <img className={`w-full  h-full object-contain`} src="assets/homepage/A_2.png" alt="" />
+                                <img className={`w-full  h-full object-contain`} style={{ padding: '2vw 0 0 0' }} src="assets/homepage/A_2.png" alt="" />
                             </div>
                             <div className="w-1/4 h-full relative">
-                                <img className={`w-full  h-full object-contain`} src="assets/homepage/A_3.png" alt="" />
+                                <img className={`w-full  h-full object-contain`} style={{ padding: '2vw 0 0 0' }} src="assets/homepage/A_3.png" alt="" />
                             </div>
                             <div className="w-1/4 h-full relative">
-                                <img className={`w-full  h-full object-contain`} src="assets/homepage/A_4.png" alt="" />
+                                <img className={`w-full  h-full object-contain`} style={{ padding: '2vw 0 0 0' }} src="assets/homepage/A_4.png" alt="" />
+                            </div>
+                            <div className="w-1/4 h-full relative">
+                                <img className={`w-full  h-full object-contain`} style={{ padding: '2vw 0 0 0' }} src="assets/homepage/B_1.png" alt="" />
+                            </div>
+                            <div className="w-1/4 h-full relative">
+                                <img className={`w-full  h-full object-contain`} style={{ padding: '2vw 0 0 0' }} src="assets/homepage/B_2.png" alt="" />
+                            </div>
+                            <div className="w-1/4 h-full relative">
+                                <img className={`w-full  h-full object-contain`} style={{ padding: '2vw 0 0 0' }} src="assets/homepage/B_3.png" alt="" />
+                            </div>
+                            <div className="w-1/4 h-full relative">
+                                <img className={`w-full  h-full object-contain`} style={{ padding: '2vw 0 0 0' }} src="assets/homepage/B_4.png" alt="" />
                             </div>
                         </div>
                     </div>
-                    <div className="fifth w-fit flex flex-col items-center h-max" style={{ marginBottom: '2vw', }}>
-                        <div className="text-center" style={{ fontSize: '4.2vw', fontWeight: '500', letterSpacing: '0.1vw' }}>
+                    <div className="fifth w-fit flex flex-col items-center h-max" style={{ marginBottom: '6vw', }}>
+                        <div className="text-center" style={{ fontSize: '4.2vw', fontWeight: '500', letterSpacing: '0.1vw', marginBottom: '2vw' }}>
                         &nbsp;{isLanguage.homepage[2]['ideaTitle']}
                         </div>
                         <div className="flex flex-col justify-between" style={{ width: '77vw', fontSize: '3vw', fontWeight: '500' }}>
@@ -304,20 +386,20 @@ const Homepage = () => {
                         <div style={{ width: '77vw' }}>
                             {isLanguage.homepage[3]['childrenDetail'].map((item, index) => {
                                 return (
-                                    <div key={`${item}${index}`} className="w-full h-fit flex flex-col justify-center items-center" style={{ marginBottom: '6vw' }}>
-                                        <div className="relative flex justify-center items-end" style={{width: '60vw', height: '20vw', border: '0.1vw solid black', paddingBottom: '0.3vw', marginBottom: '3vw', fontSize: '4vw' }}>
-                                            <div className="absolute" style={{ width: '25vw', top: '-11vw' }}>
+                                    <div key={`${item}${index}`} className="w-full h-fit flex flex-col justify-center items-center" style={{ marginBottom: '10vw' }}>
+                                        <div className="relative flex justify-center items-end" style={{width: '55vw', height: '25vw', border: '0.1vw solid black', padding: '0 0.3vw 1.3vw 0.3vw', marginBottom: '3vw', fontSize: '4vw' }}>
+                                            <div className="absolute" style={{ width: '25vw', top: '-12vw' }}>
                                                 <img className={`w-full object-contain`} src={item.img} alt="" />
                                             </div>
-                                            <div className="font-medium text-center">
+                                            <div className="font-medium text-center" style={{ fontSize: '4vw' }}>
                                                 {item.title}
                                             </div>
                                         </div>
                                         <div className="w-full h-fit flex flex-col" style={{ marginBottom: '5vw' }}>
-                                            <div style={{ fontSize: '3vw', fontWeight: '600' }} className="w-full text-center">
+                                            <div style={{ fontSize: '4.5vw', fontWeight: '600' }} className="w-full text-center">
                                                 {item.header}
                                             </div>
-                                            <div className="font-medium text-justify">
+                                            <div className="font-medium text-justify" style={{ fontSize: '3vw' }}>
                                                 {item.desc.split('|||').map((item2, index2) => {
                                                     return (
                                                         <div key={`${item2}${index2}`}>
@@ -351,18 +433,18 @@ const Homepage = () => {
                 :
 
                 <div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center" style={{ padding: '4vw 0 0 0', opacity: firstQuestionDesc === 0 ? '0' : '1', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
-                    {/* <div ref={loadingRef} className="fixed top-0 w-full h-screen flex justify-center items-center text-slate-800 z-20 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
+                    <div ref={loadingRef} className="fixed top-0 w-full h-screen flex justify-center items-center text-slate-800 z-20 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
                         {loadingText}
-                    </div> */}
+                    </div>
                     <div className="first w-fit flex h-max" style={{ marginBottom: '2vw' }}>
-                        <div className="relative flex justify-center items-center z-10" style={{ width: '10vw', height: '10vw', padding: '0 2vw 0 0', fontSize: '8vw', color: '#10643C' }}>
+                        <div className="relative flex justify-center items-center z-10" style={{ width: '10vw', height: '10vw', padding: '0 2vw 0 0', fontSize: '8vw', color: '#10643C', transition: '1s', opacity: '0' }}>
                             <img className={`w-full h-full object-contain`} src={isLanguage.homepage[0]['QMark']} alt="" />
                         </div>
                         <div className="flex flex-col justify-center">
-                            <div ref={firstQuestionRef} style={{ fontSize: '2.3vw', letterSpacing: '0.2vw', marginBottom: '2vw' }} className="w-fit">
+                            <div ref={firstQuestionRef} style={{ fontSize: '2.3vw', letterSpacing: '0.2vw', marginBottom: '2vw', transition: '1s', opacity: '0' }} className="w-fit">
                                 <img className={`object-contain`} style={{ width: '40vw' }} src={isLanguage.homepage[0]['QHeader']} alt="" />
                             </div>
-                            <div className="flex justify-center items-center" style={{ width: `${firstQuestionDesc}px`, fontSize: '1.4vw' }}>
+                            <div className="flex justify-center items-center text-justify" style={{ width: `${firstQuestionDesc}px`, fontSize: '1.4vw', transition: '1s', opacity: '0' }}>
                                 {isLanguage.homepage[0]['QDesc']}
                             </div>
                         </div>
@@ -383,8 +465,8 @@ const Homepage = () => {
                                     return (
                                         <div key={`${item}${index}`} className="w-1/2">
                                             <div ref={imageSlideRef} className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '10vw', marginBottom: '0.5vw' }}>
-                                                <img onLoad={(e) => testOnLoad(e, item.id)} className={`absolute w-full h-full object-cover blur-sm pointer-events-none`} src={`https://olldesign.jp/storage/${item.Img[0]}`} alt="" />
-                                                <img className={`w-fit h-full object-contain pointer-events-none ${classes['imageSlide']}`} src={`https://olldesign.jp/storage/${item.Img[0]}`} alt="" />
+                                                <img className={`absolute w-full h-full object-cover blur-sm pointer-events-none`} src={item['randomImage']} alt="" />
+                                                <img className={`w-fit h-full object-contain pointer-events-none ${classes['imageSlide']}`} src={item['randomImage']} alt="" />
                                             </div>
                                             <div className="w-full flex justify-center items-center">
                                                 <div className="flex flex-col" style={{ width: '95%', fontSize: '0.9vw' }}>
@@ -465,10 +547,10 @@ const Homepage = () => {
                                             </div>
                                         </div>
                                         <div className="w-full flex flex-col">
-                                            <div style={{ fontSize: '1vw', fontWeight: '600' }} className="w-full">
+                                            <div style={{ fontSize: '1.3vw', fontWeight: '600' }} className="w-full">
                                                 {item.header}
                                             </div>
-                                            <div className="font-medium">
+                                            <div className="font-medium" style={{ fontSize: '0.8vw' }}>
                                                 {item.desc.split('|||').map((item2, index2) => {
                                                     return (
                                                         <div key={`${item2}${index2}`}>
