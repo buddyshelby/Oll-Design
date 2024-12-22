@@ -37,7 +37,7 @@ Route::get('/contact-us', function () {
     return Inertia::render('Contact/Contact');
 });
 
-Route::get('/homepage', function () {
+Route::get('/graphic-design', function () {
     return Inertia::render('Homepage/Homepage');
 });
 

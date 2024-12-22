@@ -27,6 +27,32 @@ const Homepage = () => {
     const loadingRef = useRef(null)
 
     const imageLoadedLocal = []
+    const imagePeopleSrc = [
+        {
+            src: 'assets/homepage/A_1.png'
+        },
+        {
+            src: 'assets/homepage/A_2.png'
+        },
+        {
+            src: 'assets/homepage/A_3.png'
+        },
+        {
+            src: 'assets/homepage/A_4.png'
+        },
+        {
+            src: 'assets/homepage/B_1.png'
+        },
+        {
+            src: 'assets/homepage/B_2.png'
+        },
+        {
+            src: 'assets/homepage/B_3.png'
+        },
+        {
+            src: 'assets/homepage/B_4.png'
+        },
+    ]
 
     useEffect(() => {
         if (mainContainerRef.current) {
@@ -37,17 +63,15 @@ const Homepage = () => {
         }
     }, [mainContainerRef.current])
     
-    const imageProjectOnLoad = (event, index) => {
-        const checkExistingImage = imageLoaded.filter(item => item.randomImage === event.randomImage).length
-        event['id'] = index
-        
-        if (checkExistingImage === 0) {
-            imageLoadedLocal.push(event)
-            setImageLoaded([
-                ...imageLoadedLocal,
-                event
-            ])
-        }
+    const allImage = (event) => {
+            // const checkExistingImage = imageLoadedLocal.filter(item => item === event).length
+            
+            // if (checkExistingImage === 0) {
+                setImageLoaded((prevLoaded) => [
+                    ...prevLoaded,
+                    event
+                ]);
+            // }
     }
 
     const handleResize = () => {
@@ -126,9 +150,6 @@ const Homepage = () => {
     }, [isData])
 
     useEffect(() => {
-        for (let index = 0; index < 100; index++) {
-            
-        }
         imageSlideData.forEach( async (item, index) => {
             const getRandomImage = Math.floor(Math.random() * item.Img.length)
             item['randomImage'] = `https://olldesign.jp/storage/${item.Img[getRandomImage]}`
@@ -137,33 +158,23 @@ const Homepage = () => {
             img.src = `https://olldesign.jp/storage/${item.Img[getRandomImage]}`;
             
             img.onload = () => {
-                imageProjectOnLoad(item, index)
+                allImage(img.src, index)
             };
         })
-        
+        imagePeopleSrc.forEach( async (item, index) => {
+            const img = new Image();
+            img.src = item.src;
+            
+            img.onload = () => {
+                allImage(img.src, index)
+            };
+        })
     }, [imageSlideData])
 
-    let timeoutLoading;
-
     useEffect(() => {
-
-        if (imageLoaded.length === 0) {
-            timeoutLoading = setTimeout ( async () => {
-                if (loadingRef.current) {
-                    loadingRef.current.style.fontSize = '3vw'
-                    loadingRef.current.innerText = 'Data Image Can\'t be proceed properly.'
-                    await sleep(3000)
-                    loadingRef.current.style.transition = '2s'
-                    loadingRef.current.style.opacity = '0'
-                    await sleep(2000)
-                    loadingRef.current.style.display = 'none'
-                }
-            }, 10000);
-        }
-        
         if (imageLoaded.length !== 0) {
-            clearTimeout(timeoutLoading)
-            const totalData = imageLoaded.length / imageSlideData.length * 100
+            const uniqueSortedArray = [...new Set(imageLoaded)].sort((a, b) => a - b);
+            const totalData = uniqueSortedArray.length / (imageSlideData.length + imagePeopleSrc.length) * 100
             const loopLoading = async () => {
                 for (let index = loadingText; index <= totalData; index++) {
                     await sleep(10)
@@ -178,6 +189,25 @@ const Homepage = () => {
         
     }, [imageLoaded, isData])
 
+    const timeoutRef = useRef(null);
+
+    useEffect(() => {
+        timeoutRef.current = setTimeout(() => {
+            if (loadingRef.current) {
+                loadingRef.current.style.fontSize = '3vw'
+                loadingRef.current.innerText = 'Data Image Can\'t be proceed properly.'
+                setTimeout(() => {
+                    window.location.reload()
+                    loadingRef.current.style.transition = '2s'
+                    loadingRef.current.style.opacity = '0'
+                }, 3000);
+                setTimeout(() => {
+                    loadingRef.current.style.display = 'none'
+                }, 2000);
+            }
+        }, 12000);
+    }, [])
+
     useEffect(() => {
         const afterLoading = async () => {
             if (loadingRef.current) {
@@ -188,7 +218,10 @@ const Homepage = () => {
             }
             animationGraphicDesign(mainContainerRef, focusOnPeople)
         }
-        if (loadingText === 100) {
+        if (loadingText >= 100) {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
             afterLoading()
         }
     }, [loadingText])
@@ -334,30 +367,13 @@ const Homepage = () => {
                             <div className="w-full h-full absolute left-0 top-0">
                                 <img className={`w-full  h-full object-cover`} src="assets/homepage/Background.png" alt="" />
                             </div>
-                            <div className="w-1/4 h-full relative">
-                                <img className={`w-full  h-full object-contain`} style={{ padding: '2vw 0 0 0' }} src="assets/homepage/A_1.png" alt="" />
-                            </div>
-                            <div className="w-1/4 h-full relative">
-                                <img className={`w-full  h-full object-contain`} style={{ padding: '2vw 0 0 0' }} src="assets/homepage/A_2.png" alt="" />
-                            </div>
-                            <div className="w-1/4 h-full relative">
-                                <img className={`w-full  h-full object-contain`} style={{ padding: '2vw 0 0 0' }} src="assets/homepage/A_3.png" alt="" />
-                            </div>
-                            <div className="w-1/4 h-full relative">
-                                <img className={`w-full  h-full object-contain`} style={{ padding: '2vw 0 0 0' }} src="assets/homepage/A_4.png" alt="" />
-                            </div>
-                            <div className="w-1/4 h-full relative">
-                                <img className={`w-full  h-full object-contain`} style={{ padding: '2vw 0 0 0' }} src="assets/homepage/B_1.png" alt="" />
-                            </div>
-                            <div className="w-1/4 h-full relative">
-                                <img className={`w-full  h-full object-contain`} style={{ padding: '2vw 0 0 0' }} src="assets/homepage/B_2.png" alt="" />
-                            </div>
-                            <div className="w-1/4 h-full relative">
-                                <img className={`w-full  h-full object-contain`} style={{ padding: '2vw 0 0 0' }} src="assets/homepage/B_3.png" alt="" />
-                            </div>
-                            <div className="w-1/4 h-full relative">
-                                <img className={`w-full  h-full object-contain`} style={{ padding: '2vw 0 0 0' }} src="assets/homepage/B_4.png" alt="" />
-                            </div>
+                            {imagePeopleSrc.map((item, index) => {
+                                return (
+                                    <div key={`${item}${index}`} className="w-1/4 h-full relative">
+                                        <img className={`w-full  h-full object-contain`} style={{ padding: '2vw 0 0 0' }} src={item.src} alt="" />
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
                     <div className="fifth w-fit flex flex-col items-center h-max" style={{ marginBottom: '6vw', }}>
@@ -389,19 +405,19 @@ const Homepage = () => {
                             {isLanguage.homepage[3]['childrenDetail'].map((item, index) => {
                                 return (
                                     <div key={`${item}${index}`} className="w-full h-fit flex flex-col justify-center items-center" style={{ marginBottom: '10vw' }}>
-                                        <div className="relative flex justify-center items-end" style={{width: '55vw', height: '25vw', border: '0.1vw solid black', padding: '0 0.3vw 1.3vw 0.3vw', marginBottom: '3vw', fontSize: '4vw' }}>
-                                            <div className="absolute" style={{ width: '25vw', top: '-12vw' }}>
+                                        <div className="relative flex justify-center items-end" style={{width: '55vw', height: '25vw', border: '0.1vw solid black', padding: '0 0.3vw 1.3vw 0.3vw', marginBottom: '3vw', fontSize: '4vw', opacity: '0', transition: '1s' }}>
+                                            <div className="absolute" style={{ width: '25vw', top: '-12vw', opacity: '0', scale: '0', transition: '1s' }}>
                                                 <img className={`w-full object-contain`} src={item.img} alt="" />
                                             </div>
-                                            <div className="font-medium text-center" style={{ fontSize: '4vw' }}>
+                                            <div className="font-medium text-center" style={{ fontSize: '4vw', opacity: '0', translate: '0 5vw', transition: '1s' }}>
                                                 {item.title}
                                             </div>
                                         </div>
                                         <div className="w-full h-fit flex flex-col" style={{ marginBottom: '5vw' }}>
-                                            <div style={{ fontSize: '4.5vw', fontWeight: '600' }} className="w-full text-center">
+                                            <div style={{ fontSize: '4.5vw', fontWeight: '600', opacity: '0', translate: '-10vw 0', transition: '1s' }} className="w-full text-center">
                                                 {item.header}
                                             </div>
-                                            <div className="font-medium text-justify" style={{ fontSize: '3vw' }}>
+                                            <div className="font-medium text-justify" style={{ fontSize: '3vw', opacity: '0', translate: '20vw 0', transition: '1s' }}>
                                                 {item.desc.split('|||').map((item2, index2) => {
                                                     return (
                                                         <div key={`${item2}${index2}`}>

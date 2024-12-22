@@ -14,7 +14,7 @@ export const animationGraphicDesign = async (mainRef, focusOnPeople) => {
         const QDesc = QArea.children[1].children[1]
         
 
-        if (QAreaPosition < ( heightScreen + scrollPosition)) {
+        if (QAreaPosition < ( heightScreen + scrollPosition) && QAreaPosition > scrollPosition) {
             QHead.style.opacity = '1'
             QHead.style.transform = 'translate(0,0)'
             setTimeout(() => {
@@ -27,7 +27,7 @@ export const animationGraphicDesign = async (mainRef, focusOnPeople) => {
             }, 900);
         }
         
-        if (QAreaPosition < scrollPosition) {
+        if (QAreaPosition < scrollPosition || QAreaPosition > ( heightScreen + scrollPosition)) {
             QHead.style.opacity = '0'
             QHead.style.transform = 'translate(10vw,0)'
             setTimeout(() => {
@@ -43,12 +43,12 @@ export const animationGraphicDesign = async (mainRef, focusOnPeople) => {
         const projectTitleElement = mainRef.current.children[2]
         const projectTitlePosition = projectTitleElement.offsetTop + ( projectTitleElement.clientHeight / 1.25)
 
-        if (projectTitlePosition < ( heightScreen + scrollPosition)) {
+        if (projectTitlePosition < ( heightScreen + scrollPosition) && projectTitlePosition > scrollPosition) {
             projectTitleElement.style.opacity = '1'
             projectTitleElement.style.scale = '1'
         }
         
-        if (projectTitlePosition < scrollPosition) {
+        if (projectTitlePosition < scrollPosition || projectTitlePosition > ( heightScreen + scrollPosition)) {
             projectTitleElement.style.opacity = '0'
             projectTitleElement.style.scale = '0'
         }
@@ -56,12 +56,12 @@ export const animationGraphicDesign = async (mainRef, focusOnPeople) => {
         const projectBoxElement = mainRef.current.children[3]
         const projectBoxPosition = projectBoxElement.offsetTop + ( projectBoxElement.clientHeight / 1.25)
 
-        if (projectBoxPosition < ( heightScreen + scrollPosition)) {
+        if (projectBoxPosition < ( heightScreen + scrollPosition) && projectBoxPosition > scrollPosition) {
             projectBoxElement.style.opacity = '1'
             projectBoxElement.style.scale = '1'
         }
         
-        if (projectBoxPosition < scrollPosition) {
+        if (projectBoxPosition < scrollPosition || projectBoxPosition > ( heightScreen + scrollPosition)) {
             projectBoxElement.style.opacity = '0'
             projectBoxElement.style.scale = '0'
         }
@@ -70,7 +70,7 @@ export const animationGraphicDesign = async (mainRef, focusOnPeople) => {
         const peopleRunnerBoxElement = mainRef.current.children[4].children[0]
         const peopleBoxPosition = peopleBoxElement.offsetTop
 
-        if (peopleBoxPosition < ( heightScreen + scrollPosition) && (peopleBoxElement.style.opacity === '0' || peopleBoxElement.style.opacity === '')) {
+        if (peopleBoxPosition < ( heightScreen + scrollPosition) && peopleBoxPosition > scrollPosition && (peopleBoxElement.style.opacity === '0' || peopleBoxElement.style.opacity === '')) {
             peopleBoxElement.style.opacity = '1'
             peopleBoxElement.style.transform = 'translate(0vw)'
 
@@ -85,42 +85,112 @@ export const animationGraphicDesign = async (mainRef, focusOnPeople) => {
             }, 1100);
         }
         
-        if (peopleBoxPosition < scrollPosition) {
+        if (peopleBoxPosition < scrollPosition || peopleBoxPosition > ( heightScreen + scrollPosition)) {
             peopleBoxElement.style.opacity = '0'
             peopleBoxElement.style.transform = 'translate(10vw)'
         }
 
-        const ideaElement = mainRef.current.children[5]
-        const ideaChildrenElement = mainRef.current.children[5].children[1].children
+        const skillsElement = mainRef.current.children[5]
+        const skillsChildrenElement = mainRef.current.children[5].children[1].children
         
-        const ideaTitleElement = mainRef.current.children[5].children[0]
-        const ideaTitleElementPosition = ideaElement.offsetTop - 20
+        const skillsTitleElement = mainRef.current.children[5].children[0]
+        const skillsTitleElementPosition = skillsElement.offsetTop - 20
 
-        if (ideaTitleElementPosition < ( heightScreen + scrollPosition) && ideaTitleElementPosition > scrollPosition) {
-            ideaTitleElement.style.opacity = '1'
-            ideaTitleElement.style.translate = '0 0'
+        if (skillsTitleElementPosition < ( heightScreen + scrollPosition) && skillsTitleElementPosition > scrollPosition) {
+            skillsTitleElement.style.opacity = '1'
+            skillsTitleElement.style.translate = '0 0'
         }
         
-        if (ideaTitleElementPosition < scrollPosition) {
-            ideaTitleElement.style.opacity = '0'
-            ideaTitleElement.style.translate = '0 20vw'
+        if (skillsTitleElementPosition < scrollPosition || skillsTitleElementPosition > ( heightScreen + scrollPosition)) {
+            skillsTitleElement.style.opacity = '0'
+            skillsTitleElement.style.translate = '0 20vw'
         }
 
-        Array.from(ideaChildrenElement).forEach((item, indexes) => {
+        Array.from(skillsChildrenElement).forEach((item, indexes) => {
             const index = indexes + 1
-            const ideaChildrenElementPosition = item.offsetTop - 20
+            const skillsChildrenElementPosition = item.offsetTop - 20
 
             setTimeout(() => {
-                if (ideaChildrenElementPosition < ( heightScreen + scrollPosition)) {
+                if (skillsChildrenElementPosition < ( heightScreen + scrollPosition) && skillsChildrenElementPosition > scrollPosition) {
                     item.style.opacity = '1'
                     item.style.translate = '0 0'
                 }
                 
-                if (ideaChildrenElementPosition < scrollPosition) {
+                if (skillsChildrenElementPosition < scrollPosition || skillsChildrenElementPosition > ( heightScreen + scrollPosition)) {
                     item.style.opacity = '0'
                     item.style.translate = '0 20vw'
                 }
             }, 100 * index);
+            
+        })
+
+        const ideaTitleElement = mainRef.current.children[6].children[0]
+        const ideaChildrenElement = mainRef.current.children[7].children[0].children
+
+        Array.from(ideaChildrenElement).forEach((item, indexes) => {
+            const index = indexes + 1
+            const parentBox = item.children[0]
+            const parentBoxPosition = parentBox.offsetTop
+
+            if (parentBoxPosition < ( heightScreen + scrollPosition) && parentBoxPosition > scrollPosition) {
+                parentBox.style.opacity = '1'
+            }
+
+            if (parentBoxPosition - 20 < scrollPosition || parentBoxPosition > ( heightScreen + scrollPosition)) {
+                parentBox.style.opacity = '0'
+            }
+
+            const ideaIcon = item.children[0].children[0]
+            const ideaIconPosition = parentBox.offsetTop
+
+            if (ideaIconPosition < ( heightScreen + scrollPosition) && ideaIconPosition > scrollPosition) {
+                ideaIcon.style.opacity = '1'
+                ideaIcon.style.scale = '1'
+            }
+
+            if (ideaIconPosition - 20 < scrollPosition || ideaIconPosition > ( heightScreen + scrollPosition)) {
+                ideaIcon.style.opacity = '0'
+                ideaIcon.style.scale = '0'
+            }
+
+            const ideaTitle = item.children[0].children[1]
+            const ideaTitlePosition = parentBox.offsetTop
+
+            if (ideaTitlePosition < ( heightScreen + scrollPosition) && ideaTitlePosition > scrollPosition) {
+                ideaTitle.style.opacity = '1'
+                ideaTitle.style.translate = '0 0vw'
+            }
+
+            if (ideaTitlePosition - 20 < scrollPosition || ideaTitlePosition > ( heightScreen + scrollPosition)) {
+                ideaTitle.style.opacity = '0'
+                ideaTitle.style.translate = '0 5vw'
+            }
+
+            const ideaHead = item.children[1].children[0]
+            const ideaHeadPosition = ideaHead.offsetTop - 20
+
+            if (ideaHeadPosition < ( heightScreen + scrollPosition) && ideaHeadPosition > scrollPosition) {
+                ideaHead.style.opacity = '1'
+                ideaHead.style.translate = '0 0'
+            }
+
+            if (ideaHeadPosition - 20 < scrollPosition || ideaHeadPosition > ( heightScreen + scrollPosition)) {
+                ideaHead.style.opacity = '0'
+                ideaHead.style.translate = '-10vw 0'
+            }
+
+            const ideaDesc = item.children[1].children[1]
+            const ideaDescPosition = ideaDesc.offsetTop - 20
+
+            if (ideaDescPosition < ( heightScreen + scrollPosition) && ideaDescPosition > scrollPosition) {
+                ideaDesc.style.opacity = '1'
+                ideaDesc.style.translate = '0 0'
+            }
+
+            if (ideaDescPosition - 20 < scrollPosition || ideaDescPosition > ( heightScreen + scrollPosition)) {
+                ideaDesc.style.opacity = '0'
+                ideaDesc.style.translate = '20vw 0'
+            }
             
         })
     }
