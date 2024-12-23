@@ -69,12 +69,6 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad, loadPercent })
         img.src = gifPathTmp;
     }, [])
 
-    useEffect(() => {
-        if (mobileNavRef.current)
-        console.log(mobileNavRef);
-        
-    }, [mobileNavRef.current])
-
     let content = (
         <div className="flex">
             {!galleryDetailView && <div ref={deskNavRef} style={{ width: `${deskNavWidth === 0 ? 'fit-content' : deskNavWidth}px`, transition: '.2s' }}>
@@ -175,7 +169,17 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad, loadPercent })
         const userLocale = navigator.language || navigator.userLanguage;
 
         const changeLanguage = async (lng) => {
+            const originalLog = console.log;
+            const originalWarn = console.warn;
+
+            // Disable logging temporarily
+            console.log = () => {};
+            console.warn = () => {};
+
             i18n.changeLanguage(lng)
+
+            console.log = originalLog;
+            console.warn = originalWarn;
         };
 
         if (jpRegex.test(userLocale.toLowerCase())) {

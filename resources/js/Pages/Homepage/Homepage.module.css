@@ -5,6 +5,34 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'dnp-shuei-mincho-pr6n';
+    src: url('assets/homepage/fonts/DNPShueiMinPr6 M.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'dnp-shuei-mincho-pr6n';
+    src: url('assets/homepage/fonts/DNPShueiMinPr6 B.ttf') format('truetype');
+    font-weight: Bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'dnp-shuei-mincho-pr6n';
+    src: url('assets/homepage/fonts/DNPShueiMinPr6 L.ttf') format('truetype');
+    font-weight: lighter;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'kozuka-mincho-pro';
+    src: url('assets/homepage/fonts/Kozuka Mincho Pro M.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .imageSlide {
     position: absolute;
     animation: slowMoveImage 100s ease-in-out infinite alternate;

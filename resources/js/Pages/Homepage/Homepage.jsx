@@ -7,12 +7,13 @@ import MediaQuery from "@/Components/MediaQuery";
 import axios from "axios";
 import { sleep } from "@/Utils/Sleep/sleep";
 import { useTranslation } from "react-i18next";
-import { animationGraphicDesign } from "./Animation";
+import { animationMobileGraphicDesign } from "./AnimationMobile";
 
 const Homepage = () => {
 
     const { i18n } = useTranslation();
     const [isLanguage, setIsLanguage] = useState(Object.values(i18n.store.data)[0].translation);
+    const [width, setWidth] = useState(0)
 
     const [isData, setIsData] = useState([]);
     const [focusOnPeople, setFocusOnPeople] = useState('not halo');
@@ -83,6 +84,7 @@ const Homepage = () => {
             mainContainerRef.current.parentElement.parentElement.margin = '0'
             mainContainerRef.current.parentElement.parentElement.parentElement.classList.remove("container-fluid")
         }
+        setWidth(window.innerWidth)
     };
     
     useEffect(() => {
@@ -109,6 +111,12 @@ const Homepage = () => {
             setIsLanguage(Object.values(i18n.store.data)[0].translation);
         }
     }, [i18n.language]);
+    
+    useEffect(() => {
+        if (width < 769 && width !== 0) {
+            animationMobileGraphicDesign(mainContainerRef)
+        }
+    }, [isLanguage])
 
     useEffect(() => {
         if (firstQuestionRef.current) {
@@ -117,13 +125,13 @@ const Homepage = () => {
     }, [firstQuestionRef.current?.clientWidth])
     
     useEffect(() => {
-        if (mainContainerRef.current) {
-            // mainContainerRef.current.parentElement.style.margin = '0'
-            // mainContainerRef.current.parentElement.style.padding = '0'
-            // mainContainerRef.current.parentElement.parentElement.style.overflow = 'hidden'
-            // mainContainerRef.current.parentElement.parentElement.style.padding = '0'
-            // mainContainerRef.current.parentElement.parentElement.style.margin = '0'
-            // mainContainerRef.current.parentElement.parentElement.parentElement.classList.remove("container-fluid")
+        if (mainContainerRef.current && width > 768) {
+            mainContainerRef.current.parentElement.style.margin = '0'
+            mainContainerRef.current.parentElement.style.padding = '0'
+            mainContainerRef.current.parentElement.parentElement.style.overflow = 'hidden'
+            mainContainerRef.current.parentElement.parentElement.style.padding = '0'
+            mainContainerRef.current.parentElement.parentElement.style.margin = '0'
+            mainContainerRef.current.parentElement.parentElement.parentElement.classList.remove("container-fluid")
         }
     }, [mainContainerRef.current])
 
@@ -140,9 +148,6 @@ const Homepage = () => {
 
     useEffect(() => {
         fetchData()
-        setTimeout(() => {
-            setFocusOnPeople('halo')
-        }, 10000);
     }, [])
 
     useEffect(() => {
@@ -216,7 +221,12 @@ const Homepage = () => {
                 await sleep(2001)
                 loadingRef.current.style.display = 'none'
             }
-            animationGraphicDesign(mainContainerRef, focusOnPeople)
+            console.log(width);
+            
+            if (width < 769 && width !== 0) {
+            console.log('loadText');
+                animationMobileGraphicDesign(mainContainerRef)
+            }
         }
         if (loadingText >= 100) {
             if (timeoutRef.current) {
@@ -227,8 +237,8 @@ const Homepage = () => {
     }, [loadingText])
 
     useEffect(() => {
-
-        if (mainContainerRef.current) {
+        // People slide for mobile
+        if (mainContainerRef.current && (width < 769 && width !== 0)) {
             const peopleBoxElement = mainContainerRef.current.children[4]
             if (peopleBoxElement.style.opacity !== '0' || peopleBoxElement.style.opacity !== '') {
                 const peopleRunnerBoxElement = mainContainerRef.current.children[4].children[0]
@@ -395,8 +405,8 @@ const Homepage = () => {
                             })}
                         </div>
                     </div>
-                    <div className="sixth w-fit flex h-max" style={{ marginBottom: '12vw', }}>
-                        <div style={{ fontSize: '2vw', fontWeight: '500', letterSpacing: '0.5vw' }}>
+                    <div className="sixth w-fit flex h-max" style={{ marginBottom: '12vw' }}>
+                        <div style={{ fontSize: '2vw', fontWeight: '500', letterSpacing: '0.5vw', opacity: '0', translate: '0 -10vw', transition: '1s' }}>
                             <img className={`object-contain`} style={{ width: '77vw' }} src={isLanguage.homepage[3]['ideaHeader']} alt="" />
                         </div>
                     </div>
@@ -433,10 +443,10 @@ const Homepage = () => {
                         </div>
                     </div>
                     <div className="eighth" style={{ width: '76vw', marginBottom: '10vw' }}>
-                        <div className="font-bold" style={{ fontSize: '3.3vw' }}>
+                        <div className="font-bold" style={{ fontSize: '3.3vw', opacity: '0', translate: '-10vw', transition: '1s' }}>
                             {isLanguage.homepage[4]['header']}
                         </div>
-                        <div style={{ fontSize: '2.7vw' }}>
+                        <div style={{ fontSize: '2.7vw', opacity: '0', translate: '10vw', transition: '1s' }}>
                             {isLanguage.homepage[4]['desc'].split('|||').map((item, index) => {
                                 return (
                                     <div key={`${item}${index}`}>
@@ -450,30 +460,69 @@ const Homepage = () => {
 
                 :
 
-                <div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center" style={{ padding: '4vw 0 0 0', opacity: firstQuestionDesc === 0 ? '0' : '1', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
-                    <div ref={loadingRef} className="fixed top-0 w-full h-screen flex justify-center items-center text-slate-800 z-20 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
+                <div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center" style={{ padding: '0 0 0 0', opacity: firstQuestionDesc === 0 ? '0' : '1', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
+                    {/* <div ref={loadingRef} className="fixed top-0 w-full h-screen flex justify-center items-center text-slate-800 z-20 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
                         {loadingText}
+                    </div> */}
+                    <div className="w-full flex flex-col justify-center items-center">
+                        <div className="w-full left-0 top-0 flex justify-center items-center" style={{ backgroundColor: '#403C3C', color: '#FDF100', fontSize: '2.5vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold' }}>
+                            <div style={{ marginBottom: '0.8vw' }}>
+                                &nbsp;&nbsp;設 計 企 業 の「 グ ラ フ ィ ッ ク デ ザ イ ン 事 務 所 」
+                            </div>
+                        </div>
                     </div>
-                    <div className="first w-fit flex h-max" style={{ marginBottom: '2vw' }}>
-                        <div className="relative flex justify-center items-center z-10" style={{ width: '10vw', height: '10vw', padding: '0 2vw 0 0', fontSize: '8vw', color: '#10643C', transition: '1s', opacity: '0' }}>
+                    <div className="first w-fit relative flex h-max" style={{ marginBottom: '1vw', marginTop: '2vw' }}>
+                        <div className="relative flex justify-center items-center z-10" style={{ width: '10vw', height: '10vw', padding: '0 2vw 0 0', fontSize: '8vw', color: '#10643C' }}>
                             <img className={`w-full h-full object-contain`} src={isLanguage.homepage[0]['QMark']} alt="" />
                         </div>
                         <div className="flex flex-col justify-center">
-                            <div ref={firstQuestionRef} style={{ fontSize: '2.3vw', letterSpacing: '0.2vw', marginBottom: '2vw', transition: '1s', opacity: '0' }} className="w-fit">
-                                <img className={`object-contain`} style={{ width: '40vw' }} src={isLanguage.homepage[0]['QHeader']} alt="" />
+                            <div ref={firstQuestionRef} style={{ fontSize: '2.2vw', marginBottom: '0.5vw', letterSpacing: '0.1vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif" }} className="w-fit">
+                                グラフィックだけはしてくれないの？
                             </div>
-                            <div className="flex justify-center items-center text-justify" style={{ width: `${firstQuestionDesc}px`, fontSize: '1.4vw', transition: '1s', opacity: '0' }}>
-                                {isLanguage.homepage[0]['QDesc']}
+                            <div className="flex flex-col justify-center" style={{ width: `${firstQuestionDesc}px`, fontSize: '1.4vw', fontFamily: "'kozuka-mincho-pro', sans-serif" }}>
+                                <div>
+                                    設計業務だけに付随する事業だと思われがちで、よくこの質問をお客様か
+                                </div>
+                                <div>
+                                    ら頂きますが応えはもちろん「はい、よろこんで」。
+                                </div>
+                                <div>
+                                    それが当グラフィック事業専用ページを開設した経緯です。
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className="second w-fit flex h-max" style={{ marginBottom: '0.5vw' }}>
+                    <div className="w-full bg-white flex flex-col justify-center items-center">
+                        <div>
+                            <div style={{ width: '5vw', height:'auto' }}>
+                                <img className={`w-full block`} src="assets/icon/Pages/Homepage/triangle.svg" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-full bg-white flex flex-col justify-center items-center">
+                        <div style={{ width: '47.5vw', marginBottom: '2vw' }}>
+                            <div style={{ marginBottom: '1vw', fontSize: '2vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold', color: '#0b6e43' }}>
+                                店舗を知り尽くした「グラフィックデザイン」
+                            </div>
+                            <div style={{ fontSize: '1.2vw', fontFamily: "'kozuka-mincho-pro', sans-serif" }}>
+                            お店の成功には、空間だけでなく、視覚的な印象も大きな影響を与えます。
+店舗の特性やターゲットに最適なグラフィックデザインを提供し、お店のブランド価値を
+最大限に引き出します。ロゴ、看板、ポスター、メニューなど、あらゆるデザインを一貫性
+を持って統一し、ブランドイメージを強化。
+お客様が自然に足を運びたくなるような、魅力的で印象的なデザインを実現します。
+店舗に必要な「デザイン」を知り尽くし、お客様にとって本当に響くビジュアルを提案。洗
+練されたデザインが、売上アップとブランド認知度の向上に繋がります。あなたのお店の
+個性を際立たせるデザインで、競争の激しい市場でも一歩リードしましょう。
+                            </div>
+                        </div>
+                    </div>
+                    {/* <div className="second w-fit flex h-max" style={{ marginBottom: '0.5vw' }}>
                         <div style={{ fontSize: '2.4vw', fontWeight: 'bold', textShadow: '0.1vw 0.2vw 0.4vw rgba(0, 0, 0, 0.5)' }}>
                             <img className={`object-contain`} style={{ width: '50vw' }} src={isLanguage.homepage[1]['TopJP']} alt="" />
                         </div>
-                    </div>
-                    <div className="third" style={{  border: '0.1vw solid black', padding: '0.5vw', marginBottom: '2vw' }}>
-                        <div style={{ width: '47vw' }} className="flex h-auto">
+                    </div> */}
+                    <div className="third w-full flex flex-col justify-center items-center bg-white">
+                        <div style={{ width: '48vw', border: '0.1vw solid black', padding: '0.5vw', marginBottom: '2vw' }} className="flex h-auto">
                             <div className="w-full h-full flex">
                                 {imageSlideData.map((item, index) => {
                                     const date = new Date(item.Date)
@@ -508,8 +557,8 @@ const Homepage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="fourth relative" style={{ border: '0.1vw solid black', marginBottom: '2vw', padding: '2vw 0 0 0' }}>
-                        <div style={{ width: '48vw', height: '14vw' }} className="flex">
+                    <div className="fourth w-full flex flex-col justify-center items-center bg-white">
+                        <div style={{ width: '48vw', height: '14vw', border: '0.1vw solid black', marginBottom: '2vw', padding: '2vw 0 0 0' }} className="relative flex">
                             <div className="w-full h-full absolute left-0 top-0">
                                 <img className={`w-full  h-full object-cover`} src="assets/homepage/Background.png" alt="" />
                             </div>
