@@ -1,6 +1,6 @@
 import { sleep } from "@/Utils/Sleep/sleep"
 
-export const animationMobileGraphicDesign = async (mainRef) => {
+export const animationMobile = async (mainRef) => {
 
     const wheelHandler = (e) => {
 

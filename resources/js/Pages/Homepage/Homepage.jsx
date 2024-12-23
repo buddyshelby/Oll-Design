@@ -7,7 +7,8 @@ import MediaQuery from "@/Components/MediaQuery";
 import axios from "axios";
 import { sleep } from "@/Utils/Sleep/sleep";
 import { useTranslation } from "react-i18next";
-import { animationMobileGraphicDesign } from "./AnimationMobile";
+import { animationMobile } from "./AnimationMobile";
+import { animationDesktop } from "./AnimationDesktop";
 
 const Homepage = () => {
 
@@ -114,7 +115,9 @@ const Homepage = () => {
     
     useEffect(() => {
         if (width < 769 && width !== 0) {
-            animationMobileGraphicDesign(mainContainerRef)
+            animationMobile(mainContainerRef)
+        } else {
+            animationDesktop(mainContainerRef)
         }
     }, [isLanguage])
 
@@ -221,11 +224,11 @@ const Homepage = () => {
                 await sleep(2001)
                 loadingRef.current.style.display = 'none'
             }
-            console.log(width);
             
             if (width < 769 && width !== 0) {
-            console.log('loadText');
-                animationMobileGraphicDesign(mainContainerRef)
+                animationMobile(mainContainerRef)
+            } else {
+                animationDesktop(mainContainerRef)
             }
         }
         if (loadingText >= 100) {
@@ -461,9 +464,9 @@ const Homepage = () => {
                 :
 
                 <div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center" style={{ padding: '0 0 0 0', opacity: firstQuestionDesc === 0 ? '0' : '1', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
-                    {/* <div ref={loadingRef} className="fixed top-0 w-full h-screen flex justify-center items-center text-slate-800 z-20 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
+                    <div ref={loadingRef} className="fixed top-0 w-full h-screen flex justify-center items-center text-slate-800 z-20 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
                         {loadingText}
-                    </div> */}
+                    </div>
                     <div className="w-full flex flex-col justify-center items-center">
                         <div className="w-full left-0 top-0 flex justify-center items-center" style={{ backgroundColor: '#403C3C', color: '#FDF100', fontSize: '2.5vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold' }}>
                             <div style={{ marginBottom: '0.8vw' }}>
@@ -472,14 +475,14 @@ const Homepage = () => {
                         </div>
                     </div>
                     <div className="first w-fit relative flex h-max" style={{ marginBottom: '1vw', marginTop: '2vw' }}>
-                        <div className="relative flex justify-center items-center z-10" style={{ width: '10vw', height: '10vw', padding: '0 2vw 0 0', fontSize: '8vw', color: '#10643C' }}>
+                        <div className="relative flex justify-center items-center z-10" style={{ width: '10vw', height: '10vw', padding: '0 2vw 0 0', fontSize: '8vw', color: '#10643C', transition: '1s', opacity: '0', transform: 'translate(0, -15vw)' }}>
                             <img className={`w-full h-full object-contain`} src={isLanguage.homepage[0]['QMark']} alt="" />
                         </div>
                         <div className="flex flex-col justify-center">
-                            <div ref={firstQuestionRef} style={{ fontSize: '2.2vw', marginBottom: '0.5vw', letterSpacing: '0.1vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif" }} className="w-fit">
+                            <div ref={firstQuestionRef} style={{ fontSize: '2.2vw', marginBottom: '0.5vw', letterSpacing: '0.1vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", transition: '1s', opacity: '0', transform: 'translate(10vw, 0)' }} className="w-fit">
                                 グラフィックだけはしてくれないの？
                             </div>
-                            <div className="flex flex-col justify-center" style={{ width: `${firstQuestionDesc}px`, fontSize: '1.4vw', fontFamily: "'kozuka-mincho-pro', sans-serif" }}>
+                            <div className="flex flex-col justify-center" style={{ width: `${firstQuestionDesc}px`, fontSize: '1.4vw', fontFamily: "'kozuka-mincho-pro', sans-serif", transition: '1s', opacity: '0', transform: 'translate(-20vw, 0)' }}>
                                 <div>
                                     設計業務だけに付随する事業だと思われがちで、よくこの質問をお客様か
                                 </div>
