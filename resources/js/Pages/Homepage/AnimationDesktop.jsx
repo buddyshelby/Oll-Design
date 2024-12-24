@@ -37,35 +37,35 @@ export const animationDesktop = (mainRef) => {
                 }, 300);
                 setTimeout(() => {
                     QIcon.style.opacity = '0'
-                    QIcon.style.transform = 'translate(0,-15vw)'
+                    QIcon.style.transform = 'translate(0,-3vw)'
                 }, 900);
             }
 
-            const projectTitleElement = mainRef.current.children[3]
-            const projectTitlePosition = projectTitleElement.offsetTop + ( projectTitleElement.clientHeight / 1.25)
+            // const projectTitleElement = mainRef.current.children[3]
+            // const projectTitlePosition = projectTitleElement.offsetTop + ( projectTitleElement.clientHeight / 1.25)
     
-            if (projectTitlePosition < ( heightScreen + scrollPosition) && projectTitlePosition > scrollPosition) {
-                projectTitleElement.style.opacity = '1'
-                projectTitleElement.style.scale = '1'
-            }
+            // if (projectTitlePosition < ( heightScreen + scrollPosition) && projectTitlePosition > scrollPosition) {
+            //     projectTitleElement.style.opacity = '1'
+            //     projectTitleElement.style.scale = '1'
+            // }
             
-            if (projectTitlePosition < scrollPosition || projectTitlePosition > ( heightScreen + scrollPosition)) {
-                projectTitleElement.style.opacity = '0'
-                projectTitleElement.style.scale = '0'
-            }
+            // if (projectTitlePosition < scrollPosition || projectTitlePosition > ( heightScreen + scrollPosition)) {
+            //     projectTitleElement.style.opacity = '0'
+            //     projectTitleElement.style.scale = '0'
+            // }
 
-            const projectBoxElement = mainRef.current.children[4]
-            const projectBoxPosition = projectBoxElement.offsetTop + ( projectBoxElement.clientHeight / 1.25)
+            // const projectBoxElement = mainRef.current.children[4]
+            // const projectBoxPosition = projectBoxElement.offsetTop + ( projectBoxElement.clientHeight / 1.25)
     
-            if (projectBoxPosition < ( heightScreen + scrollPosition) && projectBoxPosition > scrollPosition) {
-                projectBoxElement.style.opacity = '1'
-                projectBoxElement.style.scale = '1'
-            }
+            // if (projectBoxPosition < ( heightScreen + scrollPosition) && projectBoxPosition > scrollPosition) {
+            //     projectBoxElement.style.opacity = '1'
+            //     projectBoxElement.style.scale = '1'
+            // }
             
-            if (projectBoxPosition < scrollPosition || projectBoxPosition > ( heightScreen + scrollPosition)) {
-                projectBoxElement.style.opacity = '0'
-                projectBoxElement.style.scale = '0'
-            }
+            // if (projectBoxPosition < scrollPosition || projectBoxPosition > ( heightScreen + scrollPosition)) {
+            //     projectBoxElement.style.opacity = '0'
+            //     projectBoxElement.style.scale = '0'
+            // }
         }
     }
     scrollHandler()

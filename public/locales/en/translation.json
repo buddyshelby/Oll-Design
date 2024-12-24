@@ -380,60 +380,68 @@
     ],
     "homepage": [
         {
-            "QMark": "assets/homepage/Q Mark.png",
-            "QHeader": "assets/homepage/Q title Eng.png",
-            "QDesc": "It is often thought to be a business that only accompanies design work, and we frequently receive this question from customers. But the answer is, of course, 'Yes, we'd be delighted.' This is the background to why we launched this dedicated page for our graphic business."
+            "title": "Graphic design office of a design company."
         },
         {
-            "TopJP": "assets/homepage/Top ENG.png"
+            "QMark": "assets/homepage/Q Mark.png",
+            "QHeader": "Won't you do just the graphics?",
+            "QDesc": "It is often thought to be a business only associated with design work, and we frequently receive this question from our customers||| The answer is, of course, 'Yes, gladly.'||| This is the reason we launched a dedicated page for our graphic design business."
+        },
+        {
+            "head": "Graphic design that knows the store inside and out",
+            "desc": "Success of a store is influenced not only by the space but also by its visual impression.||| We provide graphic design that is optimal for the store's characteristics and target audience, maximizing the store's brand value.||| We ensure consistency in all designs, such as logos, signs, posters, and menus, to strengthen the brand image.||| We create attractive and memorable designs that make customers naturally want to visit.||| We know the 'designs' required for a store and propose visuals that truly resonate with customers. Sophisticated designs lead to increased sales and enhanced brand recognition.||| With designs that highlight your store's individuality, let's take the lead in a competitive market."
         },
         {
             "ideaTitle": "What our graphic business can do",
             "children": [
                 "Branding",
-                "Sign design",
-                "Website creation",
-                "Photography and video production"
+                "Sign Design",
+                "Website Creation",
+                "Advertising and Promotional Design",
+                "Photography and Video Production",
+                "Photography and Video Production"
             ]
         },
         {
-            "ideaHeader": "assets/homepage/Idea ENG.png",
+            "ideaHeader": "As long as you have an idea, you can create anything.",
             "childrenDetail": [
                 {
                     "img": "assets/homepage/Icon A.png",
                     "title": "Branding",
-                    "header": "Building the image of your company's products and services",
-                    "desc": "■ Logo design ■ Package design ■ Web design ■ Illustration creation|||■ Brochures ■ Company profiles ■ Posters ■ Business cards ■ Medical appointment cards ■ Loyalty cards, etc.|||■ Uniforms ■ Custom merchandise creation"
+                    "button": "First, I'll ask",
+                    "desc": "□ Want to make my store *look more attractive*, but how should I do it?|||□ Want to *create a brand*, but where should I start?|||□ Want customers to remember my store more and *make a strong impression*|||□ Want to *stand out from other stores* and be noticeable|||□ Want to create a *beloved brand* for customers|||□ *Can't unify the brand image*... I want to fix that!|||□ Want to create a brand that gets *noticed on social media and advertising*|||□ Want to *strengthen the bond with customers* through brand creation|||□ Want to *increase sales* by enhancing the brand power|||□ Want to create a brand that resonates not just visually, but *emotionally*"
                 },
                 {
                     "img": "assets/homepage/Icon B.png",
-                    "title": "Sign design",
-                    "header": "Effective sign design that maximizes the image of your store",
-                    "desc": "■ Facade signs ■ Wall signs ■ Projecting signs (blade signs) ■ Freestanding signs (pole signs) ■ Stand signs|||■ Window signs ■ Neon signs ■ LED signs ■ Panel signs ■ Flag signs|||■ Rooftop signs ■ A-frame signs ■ Box signs (channel letters) ■ Banners and streamers"
+                    "title": "Sign Design",
+                    "button": "First, I'll ask",
+                    "desc": "□ Want to *make my store stand out more*, but what kind of sign is effective?|||□ Want to *catch the eye of passersby*!|||□ Want a sign that *expresses the store's personality*, but how should I choose it?|||□ For a new store, *how can I get noticed first*?|||□ Want to convey *comfort* with a sign that matches the store's atmosphere|||□ Want to guide customers *clearly and smoothly* to the store|||□ Want a sign that *stands out* even at night|||□ Want a *simple and memorable sign* that stays in customers' minds|||□ Want a sign that makes the store *look even more attractive* according to its location|||□ The sign is getting old, but I want to *renew it and make it fresh!*"
                 },
                 {
                     "img": "assets/homepage/Icon C.png",
-                    "title": "Website creation",
-                    "header": "Proposing web design services using the latest technology",
-                    "desc": "Together with our partner companies, we offer innovative web design services utilizing the latest technology. Responsive design, interactive elements, and AI-driven personalization maximize user experience. We provide SEO optimization, fast loading, and intuitive UI design for an excellent visitor experience. Additionally, we implement the latest security technologies to ensure safe site operations. Strengthen your digital presence and enhance your brand power."
+                    "title": "Website Development",
+                    "button": "First, I'll ask",
+                    "desc": "□ Want to convey more attraction, need an *effective website*|||□ Want a new site to get *more customers to know about the store*|||□ Want to create a site that is *easy to view on smartphones*|||□ Want a site that *easily introduces the store online*|||□ Want to create an *original LP site*|||□ Want to create an effective website to *increase customer attraction*|||□ Don't know which design *fits my store the best*|||□ Want to focus not only on appearance but also on *ease of use*|||□ Want a website with *solid SEO measures*|||□ After the site is created, want *support for updates and management*"
                 },
                 {
                     "img": "assets/homepage/Icon D.png",
-                    "title": "Advertising and promotional design",
-                    "header": "Effectively convey your message with visually appealing designs.",
-                    "desc": "Our advertising and promotional designs excel at catering to various advertising needs. With collaborations with many partner companies, we offer one-stop solutions. We have extensive knowledge and experience in printing and merchandise production, delivering high-quality results. We consistently support advertising and promotional strategies tailored to customer needs, from design to printing."
+                    "title": "Advertising & Promotional Design",
+                    "button": "First, I'll ask",
+                    "desc": "□ Want a *more eye-catching and effective design*|||□ Want to *increase sales* with promotional materials that resonate with customers|||□ Want to *get attention* for new products or services|||□ Want an advertisement design that perfectly matches the target to *get a response*|||□ Want to highlight store campaigns and *increase foot traffic*|||□ Want to create designs that are *easily shareable on social media*|||□ Want a *simple and memorable ad design* that stays in people's minds|||□ Want to think about *seasonal promotional designs*|||□ Want to increase *brand awareness* with promotional materials|||□ Want to *effectively promote the store* with flyers and posters"
                 },
                 {
                     "img": "assets/homepage/Icon E.png",
-                    "title": "Photography and video production",
-                    "header": "Enhancing your brand with high-quality visuals and technology",
-                    "desc": "Our photography and video production services deliver high-quality visuals that highlight your brand's appeal. Utilizing the latest filming techniques, we focus on storytelling to create compelling content. From promotional videos to product showcases, we cater to various needs and provide end-to-end support from editing to final production."
+                    "title": "Photography & Video Production",
+                    "button": "First, I'll ask",
+                    "desc": "□ Want *photos and videos that bring out the store's charm* to the fullest|||□ Need *professional photos* to get *noticed on social media and websites*!|||□ Want to create *videos that convey the charm* of products and services|||□ Want to produce *videos of events or campaigns*|||□ Want to *capture the hearts of customers* with powerful photos that appeal visually|||□ Want to enhance the impression with *beautiful photos* that convey the store's atmosphere|||□ Want *professional photos and videos* for advertising|||□ Want to *explain products clearly* with videos|||□ Want to convey the *brand story* with videos and *evoke emotions*|||□ Want to *stand out from other stores* with high-quality photos and videos"
+                },
+                {
+                    "img": "assets/homepage/Icon E.png",
+                    "title": "Original Goods",
+                    "button": "First, I'll ask",
+                    "desc": "□ Want to *spread the brand* more with the store's original goods|||□ Want goods perfect for *events and campaigns*|||□ Want to create *unique and attractive goods* that customers will love|||□ Want goods with the company logo or message to *increase recognition*|||□ Want to create goods that *convey the store's charm* and increase fans|||□ Want to create *commemorative items and promotional goods* that leave an impression on customers|||□ Want to create *original goods for pets*|||□ Want to create goods that *strengthen branding* and match the store's atmosphere|||□ Want goods for events that will *leave a lasting memory with customers*|||□ Want to create *special designs* for *memorable* goods"
                 }
             ]
-        },
-        {
-            "header": "Design skills utilizing 'success stories' referred to as achievements",
-            "desc": "We possess 'comprehensive design skills' that integrate design work and graphic design.|||In other words, our one-stop service, combining spatial design, store design, brand strategy, and graphic design, is your greatest strength."
         }
     ]
 }

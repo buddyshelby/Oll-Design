@@ -17,7 +17,6 @@ const Homepage = () => {
     const [width, setWidth] = useState(0)
 
     const [isData, setIsData] = useState([]);
-    const [focusOnPeople, setFocusOnPeople] = useState('not halo');
     const [imageSlideData, setImageSlideData] = useState([]);
     const [firstQuestionDesc, setFirstQuestionDesc] = useState(0)
     const firstQuestionRef = useRef(null)
@@ -27,6 +26,7 @@ const Homepage = () => {
     
     const [loadingText, setLoadingText] = useState(0)
     const loadingRef = useRef(null)
+    const skillsRef = useRef([])
 
     const imageLoadedLocal = []
     const imagePeopleSrc = [
@@ -56,6 +56,8 @@ const Homepage = () => {
         },
     ]
 
+    const testDesc = '□ もっと*お店を魅力的に見せたい*、でもどうすれば？|||□ *ブランドを作りたい*けど、どこから始めたらいい？|||□ お店をもっと覚えてもらいたい、*強い印象を与えたい*|||□ *他のお店と差をつけたい*、目立つ存在になりたい|||□ お客様に*愛されるブランド*を作りたい|||□ *ブランドイメージが統一できていない*…どうにかしたい！|||□ *SNSや広告で注目される*ブランドにしたい|||□ ブランド作りで*お客様との絆を深めたい*|||□ *売上をアップ*させるために、ブランド力を高めたい|||□ 見た目だけでなく、*心にも響くブランド*を作りたい'
+
     useEffect(() => {
         if (mainContainerRef.current) {
             const peopleRunnerBoxElement = mainContainerRef.current.children[4].children[0]
@@ -66,15 +68,29 @@ const Homepage = () => {
     }, [mainContainerRef.current])
     
     const allImage = (event) => {
-            // const checkExistingImage = imageLoadedLocal.filter(item => item === event).length
-            
-            // if (checkExistingImage === 0) {
                 setImageLoaded((prevLoaded) => [
                     ...prevLoaded,
                     event
                 ]);
             // }
     }
+
+    const skillsLoadRef = (element, index) => {
+        if (skillsRef.current) skillsRef.current[index] = element
+    }
+
+    useEffect(() => {
+        if (skillsRef.current[0]) {
+            let maxHeight = 0;
+            skillsRef.current.forEach(item => {
+                const clientHeight = item.clientHeight
+                if (clientHeight > maxHeight) maxHeight = item.clientHeight
+            })
+            skillsRef.current.forEach(item => {
+                item.style.height = `${maxHeight}px`
+            })
+        }
+    }, [skillsRef.current[0]])
 
     const handleResize = () => {
         if (firstQuestionRef.current) {
@@ -84,6 +100,16 @@ const Homepage = () => {
             mainContainerRef.current.parentElement.margin = '0'
             mainContainerRef.current.parentElement.parentElement.margin = '0'
             mainContainerRef.current.parentElement.parentElement.parentElement.classList.remove("container-fluid")
+        }
+        if (skillsRef.current[0]) {
+            let maxHeight = 0;
+            skillsRef.current.forEach(item => {
+                const clientHeight = item.clientHeight
+                if (clientHeight > maxHeight) maxHeight = item.clientHeight
+            })
+            skillsRef.current.forEach(item => {
+                item.style.height = `${maxHeight}px`
+            })
         }
         setWidth(window.innerWidth)
     };
@@ -119,6 +145,7 @@ const Homepage = () => {
         } else {
             animationDesktop(mainContainerRef)
         }
+        handleResize()
     }, [isLanguage])
 
     useEffect(() => {
@@ -317,7 +344,7 @@ const Homepage = () => {
                 <>
                 {matches ?
                 
-                <div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center overflow-hidden" style={{ padding: '10vw 0 0 0', opacity: firstQuestionDesc === 0 ? '0' : '1', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
+                <div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center overflow-hidden" style={{ padding: '10vw 0 0 0', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
                     <div ref={loadingRef} className="fixed left-0 top-0 w-full h-screen flex justify-center items-center text-slate-800 z-20 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
                         {loadingText}
                     </div>
@@ -329,7 +356,7 @@ const Homepage = () => {
                             <div ref={firstQuestionRef} style={{ transition: '1s', opacity: '0', transform: 'translate(10vw, 0)' }} className="w-fit">
                                 <img className={`object-contain`} style={{ width: '62vw' }} src={isLanguage.homepage[0]['QHeader']} alt="" />
                             </div>
-                            <div className="flex justify-center items-center" style={{ width: `${firstQuestionDesc}px`, fontSize: '2vw', transition: '1s', opacity: '0', transform: 'translate(-20vw, 0)' }}>
+                            <div className="flex justify-center items-center" style={{ fontSize: '2vw', transition: '1s', opacity: '0', transform: 'translate(-20vw, 0)' }}>
                                 {isLanguage.homepage[0]['QDesc']}
                             </div>
                         </div>
@@ -463,35 +490,33 @@ const Homepage = () => {
 
                 :
 
-                <div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center" style={{ padding: '0 0 0 0', opacity: firstQuestionDesc === 0 ? '0' : '1', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
+                <div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center" style={{ padding: '0 0 0 0', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
                     <div ref={loadingRef} className="fixed top-0 w-full h-screen flex justify-center items-center text-slate-800 z-20 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
                         {loadingText}
                     </div>
                     <div className="w-full flex flex-col justify-center items-center">
-                        <div className="w-full left-0 top-0 flex justify-center items-center" style={{ backgroundColor: '#403C3C', color: '#FDF100', fontSize: '2.5vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold' }}>
+                        <div className="w-full left-0 top-0 flex justify-center items-center" style={{ backgroundColor: '#403C3C', color: '#FDF100', fontSize: '2.3vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold' }}>
                             <div style={{ marginBottom: '0.8vw' }}>
-                                &nbsp;&nbsp;設 計 企 業 の「 グ ラ フ ィ ッ ク デ ザ イ ン 事 務 所 」
+                                &nbsp;&nbsp;{isLanguage.homepage[0]['title']}
                             </div>
                         </div>
                     </div>
-                    <div className="first w-fit relative flex h-max" style={{ marginBottom: '1vw', marginTop: '2vw' }}>
-                        <div className="relative flex justify-center items-center z-10" style={{ width: '10vw', height: '10vw', padding: '0 2vw 0 0', fontSize: '8vw', color: '#10643C', transition: '1s', opacity: '0', transform: 'translate(0, -15vw)' }}>
-                            <img className={`w-full h-full object-contain`} src={isLanguage.homepage[0]['QMark']} alt="" />
+                    <div className="first w-fit relative flex h-max" style={{ marginBottom: '1vw', marginTop: '2vw', width: '47.5vw' }}>
+                        <div className="relative flex justify-center items-center z-10" style={{ width: '10vw', height: '10vw', padding: '0 2vw 0 0', fontSize: '8vw', color: '#10643C', transition: '1s', opacity: '0', transform: 'translate(0, -3vw)' }}>
+                            <img className={`w-full h-full object-contain`} src={isLanguage.homepage[1]['QMark']} alt="" />
                         </div>
                         <div className="flex flex-col justify-center">
                             <div ref={firstQuestionRef} style={{ fontSize: '2.2vw', marginBottom: '0.5vw', letterSpacing: '0.1vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", transition: '1s', opacity: '0', transform: 'translate(10vw, 0)' }} className="w-fit">
-                                グラフィックだけはしてくれないの？
+                                {isLanguage.homepage[1]['QHeader']}
                             </div>
-                            <div className="flex flex-col justify-center" style={{ width: `${firstQuestionDesc}px`, fontSize: '1.4vw', fontFamily: "'kozuka-mincho-pro', sans-serif", transition: '1s', opacity: '0', transform: 'translate(-20vw, 0)' }}>
-                                <div>
-                                    設計業務だけに付随する事業だと思われがちで、よくこの質問をお客様か
-                                </div>
-                                <div>
-                                    ら頂きますが応えはもちろん「はい、よろこんで」。
-                                </div>
-                                <div>
-                                    それが当グラフィック事業専用ページを開設した経緯です。
-                                </div>
+                            <div className="flex flex-col justify-center" style={{ fontSize: '1.1vw', fontFamily: "'kozuka-mincho-pro', sans-serif", transition: '1s', opacity: '0', transform: 'translate(-20vw, 0)' }}>
+                                {isLanguage.homepage[1]['QDesc'].split('|||').map((item, index) => {
+                                    return (
+                                        <div key={`${item}${index}`} className="text-justify">
+                                            {item}
+                                        </div>
+                                    )
+                                })}
                             </div>
                         </div>
                     </div>
@@ -505,25 +530,19 @@ const Homepage = () => {
                     <div className="w-full bg-white flex flex-col justify-center items-center">
                         <div style={{ width: '47.5vw', marginBottom: '2vw' }}>
                             <div style={{ marginBottom: '1vw', fontSize: '2vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold', color: '#0b6e43' }}>
-                                店舗を知り尽くした「グラフィックデザイン」
+                               {isLanguage.homepage[2]['head']}
                             </div>
                             <div style={{ fontSize: '1.2vw', fontFamily: "'kozuka-mincho-pro', sans-serif" }}>
-                            お店の成功には、空間だけでなく、視覚的な印象も大きな影響を与えます。
-店舗の特性やターゲットに最適なグラフィックデザインを提供し、お店のブランド価値を
-最大限に引き出します。ロゴ、看板、ポスター、メニューなど、あらゆるデザインを一貫性
-を持って統一し、ブランドイメージを強化。
-お客様が自然に足を運びたくなるような、魅力的で印象的なデザインを実現します。
-店舗に必要な「デザイン」を知り尽くし、お客様にとって本当に響くビジュアルを提案。洗
-練されたデザインが、売上アップとブランド認知度の向上に繋がります。あなたのお店の
-個性を際立たせるデザインで、競争の激しい市場でも一歩リードしましょう。
+                               {isLanguage.homepage[2]['desc'].split('|||').map((item, index) => {
+                                    return (
+                                        <div key={`${item}${index}`} className="text-justify">
+                                            {item}
+                                        </div>
+                                    )
+                               })}
                             </div>
                         </div>
                     </div>
-                    {/* <div className="second w-fit flex h-max" style={{ marginBottom: '0.5vw' }}>
-                        <div style={{ fontSize: '2.4vw', fontWeight: 'bold', textShadow: '0.1vw 0.2vw 0.4vw rgba(0, 0, 0, 0.5)' }}>
-                            <img className={`object-contain`} style={{ width: '50vw' }} src={isLanguage.homepage[1]['TopJP']} alt="" />
-                        </div>
-                    </div> */}
                     <div className="third w-full flex flex-col justify-center items-center bg-white">
                         <div style={{ width: '48vw', border: '0.1vw solid black', padding: '0.5vw', marginBottom: '2vw' }} className="flex h-auto">
                             <div className="w-full h-full flex">
@@ -579,15 +598,15 @@ const Homepage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="fifth w-fit flex flex-col items-center h-max" style={{ marginBottom: '2vw', }}>
-                        <div style={{ fontSize: '1.5vw', fontWeight: '500', letterSpacing: '0.1vw', marginBottom: '0.7vw' }}>
-                            &nbsp;{isLanguage.homepage[2]['ideaTitle']}
+                    <div className="fifth w-fit flex flex-col items-center h-max">
+                        <div style={{ fontSize: '2.9vw', fontWeight: '500', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", marginBottom: '1vw' }}>
+                            &nbsp;{isLanguage.homepage[3]['ideaTitle']}
                         </div>
-                        <div className="flex justify-between" style={{ width: '48.5vw', fontSize: '1.1vw', fontWeight: '500' }}>
-                            {isLanguage.homepage[2]['children'].map((item, index) => {
+                        <div className="flex justify-between flex-wrap items-stretch" style={{ width: '48.5vw', fontSize: '1.1vw', fontWeight: '500', gap: '1vw' }}>
+                            {isLanguage.homepage[3]['children'].map((item, index) => {
                                 return (
-                                    <div key={`${item}${index}`} className="flex flex-col justify-center items-center" style={{ width: '23%' }}>
-                                        <div className="w-full h-full flex justify-center items-center text-center" style={{ border: '0.1vw solid black', padding: '0.2vw', marginBottom: '0.6vw' }}>
+                                    <div key={`${item}${index}`} className="flex flex-col justify-center items-center" style={{ flex: '1 1 28%' }}>
+                                        <div ref={(element) => skillsLoadRef(element, index)} className="w-full flex justify-center items-center text-center bg-white" style={{ border: '0.1vw solid black', padding: '1vw 2vw', marginBottom: '0.6vw', fontSize: '1vw', fontFamily: "'kozuka-mincho-pro', sans-serif" }}>
                                             {item}
                                         </div>
                                         <div style={{ width: '1.8vw', height:'auto' }}>
@@ -598,56 +617,51 @@ const Homepage = () => {
                             })}
                         </div>
                     </div>
-                    <div className="sixth w-fit flex h-max" style={{ marginBottom: '4vw', }}>
-                        <div style={{ fontSize: '2vw', fontWeight: '500', letterSpacing: '0.5vw' }}>
-                            <img className={`object-contain`} style={{ width: '48.5vw' }} src={isLanguage.homepage[3]['ideaHeader']} alt="" />
+                    <div className="sixth w-fit flex h-max" style={{ marginBottom: '1vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif" }}>
+                        <div style={{ fontSize: '2.1vw' }}>
+                            {isLanguage.homepage[4]['ideaHeader']}
                         </div>
                     </div>
                     <div className="seventh" style={{ marginBottom: '1vw', }}>
-                        <div style={{ width: '48vw' }}>
-                            {isLanguage.homepage[3]['childrenDetail'].map((item, index) => {
-                                return (
-                                    <div key={`${item}${index}`} className="w-full h-fit flex justify-center items-center" style={{ marginBottom: '2vw' }}>
-                                        <div className="relative flex justify-center items-end" style={{width: '13.8vw', height: '5vw', border: '0.1vw solid black', paddingBottom: '0.3vw', marginRight: '1vw', fontSize: '0.8vw' }}>
-                                            <div className="absolute" style={{ width: '5vw', top: '-2.4vw' }}>
-                                                <img className={`object-contain`} style={{ width: '48.5vw' }} src={item.img} alt="" />
+                        {isLanguage.homepage[4]['childrenDetail'].map((itemReference, index) => {
+                            return (
+                                <div key={`${itemReference}${index}`} style={{ width: '48.2vw', marginBottom: '4vw' }} className="flex flex-col justify-center items-center">
+                                    <div className="w-full" style={{ marginBottom: '1vw' }}>
+                                        <div className="w-full flex" style={{ backgroundColor: 'white', padding: '0.5vw 1vw', borderRadius: '1vw', boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.2), -5px -5px 10px rgba(0, 0, 0, 0.1)' }}>
+                                            <div className="relative flex flex-col justify-center items-center" style={{width: '20vw', padding: '1vw', fontSize: '0.8vw' }}>
+                                                <div className="relative" style={{ width: '5vw' }}>
+                                                    <img className={`object-contain`} style={{ width: '48.5vw' }} src={itemReference.img} alt="" />
+                                                </div>
+                                                <div className="font-medium text-center" style={{ fontSize: '1.2vw' }}>
+                                                    {itemReference.title}
+                                                </div>
                                             </div>
-                                            <div className="font-medium text-center">
-                                                {item.title}
-                                            </div>
-                                        </div>
-                                        <div className="w-full flex flex-col">
-                                            <div style={{ fontSize: '1.3vw', fontWeight: '600' }} className="w-full">
-                                                {item.header}
-                                            </div>
-                                            <div className="font-medium" style={{ fontSize: '0.8vw' }}>
-                                                {item.desc.split('|||').map((item2, index2) => {
+                                            <div className="w-full">
+                                                {itemReference.desc.split('|||').map((item, index) => {
                                                     return (
-                                                        <div key={`${item2}${index2}`}>
-                                                            {item2}
+                                                        <div key={`${item}${index}`} className="w-full" style={{ fontSize: '1vw', fontStyle: "'a-otfud-shin-go-pr6n', sans-serif", backgroundColor: '#403c3c', padding: '0.1vw', margin: '0.5vw 0', clipPath: 'polygon(0% 0%, 100% 0%, 97% 100%, 0% 100%)' }}>
+                                                            {item.split('*').map((item, index) => {
+                    
+                                                                const colorText = index === 1 ? '#D8DC24' : 'white'
+                    
+                                                                return (
+                                                                    <span key={`${item}${index}`} style={{ color: colorText }}>
+                                                                        {item}
+                                                                    </span>
+                                                                )
+                                                            })}
                                                         </div>
                                                     )
                                                 })}
                                             </div>
                                         </div>
                                     </div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                    <div className="eighth" style={{ width: '48vw', marginBottom: '5vw' }}>
-                        <div className="font-bold" style={{ fontSize: '1.6vw' }}>
-                            {isLanguage.homepage[4]['header']}
-                        </div>
-                        <div style={{ fontSize: '1vw' }}>
-                            {isLanguage.homepage[4]['desc'].split('|||').map((item, index) => {
-                                return (
-                                    <div key={`${item}${index}`}>
-                                        {item}
+                                    <div className="flex justify-center items-center text-center" style={{ width: '15vw', fontSize: '1.2vw', color: 'white', backgroundColor: '#20248c', borderRadius: '1vw' }}>
+                                        {itemReference.button}
                                     </div>
-                                )
-                            })}
-                        </div>
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
                 }

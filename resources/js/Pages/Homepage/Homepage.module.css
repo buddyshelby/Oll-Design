@@ -33,6 +33,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'a-otfud-shin-go-pr6n';
+    src: url('assets/homepage/fonts/A-OTF UD Shin Go Pr6N L.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .imageSlide {
     position: absolute;
     animation: slowMoveImage 100s ease-in-out infinite alternate;
