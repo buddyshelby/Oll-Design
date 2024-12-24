@@ -506,7 +506,7 @@ const Homepage = () => {
                             <img className={`w-full h-full object-contain`} src={isLanguage.homepage[1]['QMark']} alt="" />
                         </div>
                         <div className="flex flex-col justify-center">
-                            <div ref={firstQuestionRef} style={{ fontSize: '2.2vw', marginBottom: '0.5vw', letterSpacing: '0.1vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", transition: '1s', opacity: '0', transform: 'translate(10vw, 0)' }} className="w-fit">
+                            <div ref={firstQuestionRef} style={{ fontSize: '2vw', marginBottom: '0.5vw', letterSpacing: '0.1vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", transition: '1s', opacity: '0', transform: 'translate(10vw, 0)' }} className="w-fit">
                                 {isLanguage.homepage[1]['QHeader']}
                             </div>
                             <div className="flex flex-col justify-center" style={{ fontSize: '1.1vw', fontFamily: "'kozuka-mincho-pro', sans-serif", transition: '1s', opacity: '0', transform: 'translate(-20vw, 0)' }}>
