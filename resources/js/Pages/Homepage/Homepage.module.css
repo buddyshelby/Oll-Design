@@ -1,41 +1,41 @@
 @font-face {
     font-family: 'SimHei';
-    src: url('assets/homepage/fonts/SimHei.ttf') format('truetype');
+    src: url('/assets/homepage/fonts/SimHei.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'dnp-shuei-mincho-pr6n';
-    src: url('assets/homepage/fonts/DNPShueiMinPr6 M.ttf') format('truetype');
+    src: url('/assets/homepage/fonts/DNPShueiMinPr6 M.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'dnp-shuei-mincho-pr6n';
-    src: url('assets/homepage/fonts/DNPShueiMinPr6 B.ttf') format('truetype');
+    src: url('/assets/homepage/fonts/DNPShueiMinPr6 B.ttf') format('truetype');
     font-weight: Bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'dnp-shuei-mincho-pr6n';
-    src: url('assets/homepage/fonts/DNPShueiMinPr6 L.ttf') format('truetype');
+    src: url('/assets/homepage/fonts/DNPShueiMinPr6 L.ttf') format('truetype');
     font-weight: lighter;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'kozuka-mincho-pro';
-    src: url('assets/homepage/fonts/Kozuka Mincho Pro M.ttf') format('truetype');
+    src: url('/assets/homepage/fonts/Kozuka Mincho Pro M.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'a-otfud-shin-go-pr6n';
-    src: url('assets/homepage/fonts/A-OTF UD Shin Go Pr6N L.ttf') format('truetype');
+    src: url('/assets/homepage/fonts/A-OTF UD Shin Go Pr6N L.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
