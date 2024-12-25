@@ -42,7 +42,7 @@
 
 .imageSlide {
     position: absolute;
-    animation: slowMoveImage 100s ease-in-out infinite alternate;
+    animation: slowMoveImage 8s ease-in-out alternate;
     /* transform: scale(3.2); */
     transition: 1s;
     object-fit: cover;
@@ -51,7 +51,7 @@
 @media (max-width: 768px) {
     .imageSlide {
         position: absolute;
-        animation: slowMoveImageMobile 100s ease-in-out infinite alternate;
+        animation: slowMoveImageMobile 8s ease-in-out alternate;
         /* transform: scale(3.2); */
         transition: 1s;
         object-fit: cover;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 
 import Page from "../Page";
 
@@ -15,8 +15,6 @@ const Homepage = () => {
     const { i18n } = useTranslation();
     const [isLanguage, setIsLanguage] = useState(Object.values(i18n.store.data)[0].translation);
     const [width, setWidth] = useState(0)
-
-    const [isData, setIsData] = useState([]);
     const [firstQuestionDesc, setFirstQuestionDesc] = useState(0)
     const firstQuestionRef = useRef(null)
     const mainContainerRef = useRef(null)
@@ -176,28 +174,148 @@ const Homepage = () => {
         }
     }, [mainContainerRef.current])
     
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         try {
             const res = await axios.get(
                 "https://olldesign.jp/api/galleryList"
             );
-            setIsData(res.data.galleryList.sort((a, b) => new Date(a.Date) - new Date(b.Date)));
+            setTemporaryData(res.data.galleryList.sort((a, b) => new Date(a.Date) - new Date(b.Date)).filter(item => item.TagsID === '2'));
         } catch (e) {
             console.error("Error fetching imagings:", e);
         }
-    };
+    }, []);
     
     useEffect(() => {
         fetchData()
     }, [])
     
-    const [imageSlideData, setImageSlideData] = useState([]);
-    const imageSlideRef = useRef(null)
+    const [theImageSlideData, setTheImageSlideData] = useState([]);
+    const [isData, setIsData] = useState([]);
+    const [temporaryData, setTemporaryData] = useState([])
+    const imageSlideRef = useRef([])
+
+    const imageSlideLoad = (element, index) => {
+        imageSlideRef.current[index] = element
+    }
+
+    const animationRef = useRef()
     
+    const [thePeople, setThePeople] = useState([])
+    const [allPeople, setAllPeople] = useState(isLanguage.homepage[5]['thePeople'])
+    const thePeopleRef = useRef(null)
+
     useEffect(() => {
-        setImageSlideData(isData.filter(item => item.TagsID === '2').slice(0, 2))
+        if (isData[0]) {
+            cancelAnimationFrame(animationRef.current);
+            const theAnimation = () => {
+                setTimeout(() => {
+                    if (isData.length > 0) {
+                        setIsData((previsData) => {
+                            const getTheSplice = previsData.slice(2); // Get remaining
+                            const spliced = previsData.slice(0, 2); // Get first 2
+                            setTheImageSlideData(spliced)
+                            return getTheSplice; // Return remaining for isData
+                        });
+                    }
+                    if (allPeople.length > 0) {
+                        setAllPeople((prevAllPeople) => {
+                            const getTheSplice = prevAllPeople.slice(2); // Get remaining
+                            const spliced = prevAllPeople.slice(0, 2); // Get first 2
+                            setThePeople(spliced)
+                            return getTheSplice; // Return remaining for allPeople
+                        });
+                    }
+                    
+                    animationRef.current = requestAnimationFrame(theAnimation);
+                }, 8000);
+            };
+    
+            animationRef.current = requestAnimationFrame(theAnimation);
+        }
+
+        return () => {
+            if (animationRef.current) {
+                cancelAnimationFrame(animationRef.current);
+            }
+        };
+    }, [isData[0]]);
+
+    useEffect(() => {
+        setIsData(temporaryData)
+    }, [temporaryData[0]])
+
+    useEffect(() => {
+
+        if (isData.length === 0) {
+            setIsData(temporaryData);
+        }
         
-    }, [isData])
+        
+    }, [isData[0]])
+
+    useEffect(() => {
+
+        if (allPeople.length === 0) {
+            setAllPeople(isLanguage.homepage[5]['thePeople']);
+        }
+        
+        
+    }, [allPeople[0]])
+
+    const [imageSlideData, setImageSlideData] = useState([])
+    const [newPeople, setNewPeople] = useState(Array.from(isLanguage.homepage[5]['thePeople']).slice(-1))
+
+    useEffect(() => {
+        setImageSlideData(temporaryData.filter(item => item.TagsID === '2').slice(-2))
+    }, [temporaryData[0]])
+
+    useEffect(() => {
+        if (imageSlideRef.current) {
+            setTimeout(() => {
+                imageSlideRef.current.forEach(item => {
+                    item.parentElement.style.opacity = '0'
+                    item.parentElement.style.translate = '-3vw'
+                    setTimeout(() => {
+                        item.parentElement.style.transition = '0ms'
+                        item.children[1].classList.remove(classes['imageSlide'])
+                        setImageSlideData(theImageSlideData)
+                        setTimeout(() => {
+                            item.children[1].classList.add(classes['imageSlide'])
+                            item.parentElement.style.translate = '3vw'
+                            item.parentElement.style.transition = '500ms'
+                            setTimeout(() => {
+                                item.parentElement.style.opacity = '1'
+                                item.parentElement.style.translate = '0vw'
+                            }, 500);
+                        }, 100);
+                    }, 1000);
+                })
+            }, 100);
+        }
+    }, [theImageSlideData[0]])
+
+    useEffect(() => {
+        if (thePeopleRef.current) {
+            setTimeout(() => {
+                thePeopleRef.current.style.opacity = '0'
+                thePeopleRef.current.style.translate = '-3vw'
+                setTimeout(() => {
+                    thePeopleRef.current.style.transition = '0ms'
+                    setNewPeople(thePeople)
+                    setTimeout(() => {
+                        thePeopleRef.current.style.translate = '3vw'
+                        thePeopleRef.current.style.transition = '500ms'
+                        setTimeout(() => {
+                            thePeopleRef.current.style.opacity = '1'
+                            thePeopleRef.current.style.translate = '0vw'
+                        }, 500);
+                    }, 100);
+                }, 1000);
+            }, 100);
+        }
+    }, [thePeople[0]])
+
+    
 
     useEffect(() => {
         imageSlideData.forEach( async (item, index) => {
@@ -352,59 +470,6 @@ const Homepage = () => {
         }
     }, [mainContainerRef.current])
 
-    const [thePeople, setThePeople] = useState([])
-    const [allPeople, setAllPeople] = useState(isLanguage.homepage[5]['thePeople'])
-    const thePeopleRef = useRef(null)
-
-    useEffect(() => {
-        const thePeopleAnimation = () => {
-            setTimeout(() => {
-                if (allPeople.length > 0) {
-                    setAllPeople((prevAllPeople) => {
-                        const getTheSplice = prevAllPeople.slice(2); // Get remaining
-                        const splicedPeople = prevAllPeople.slice(0, 2); // Get first 2
-                        setThePeople(splicedPeople)
-                        return getTheSplice; // Return remaining for allPeople
-                    });
-                }
-                requestAnimationFrame(thePeopleAnimation);
-            }, 7000);
-        };
-
-        thePeopleAnimation();
-    }, []);
-
-    useEffect(() => {
-
-        if (allPeople.length === 0) {
-            setAllPeople(isLanguage.homepage[5]['thePeople']);
-        }
-        
-    }, [allPeople, thePeople])
-
-    const [newPeople, setNewPeople] = useState(Array.from(isLanguage.homepage[5]['thePeople']).slice(-1))
-
-    useEffect(() => {
-        if (thePeopleRef.current) {
-            setTimeout(() => {
-                thePeopleRef.current.style.opacity = '0'
-                thePeopleRef.current.style.translate = '-3vw'
-                setTimeout(() => {
-                    thePeopleRef.current.style.transition = '0ms'
-                    setNewPeople(thePeople)
-                    setTimeout(() => {
-                        thePeopleRef.current.style.translate = '3vw'
-                        thePeopleRef.current.style.transition = '500ms'
-                        setTimeout(() => {
-                            thePeopleRef.current.style.opacity = '1'
-                            thePeopleRef.current.style.translate = '0vw'
-                        }, 500);
-                    }, 100);
-                }, 1000);
-            }, 100);
-        }
-    }, [thePeople])
-
     const [ideaDescHeight, setIdeaDescHeight] = useState(0)
     const ideaDescRef = useRef(null)
 
@@ -458,16 +523,16 @@ const Homepage = () => {
                             <img className={`object-contain`} style={{ width: '81vw' }} src={isLanguage.homepage[1]['TopJP']} alt="" />
                         </div>
                     </div>
-                    <div className="third" style={{  border: '0.1vw solid black', padding: '0.5vw', marginBottom: '4vw', transition: '1s', scale: '0', opacity: '0' }}>
+                    <div className="third overflow-hidden" style={{  border: '0.1vw solid black', padding: '0.5vw', marginBottom: '4vw', transition: '1s', scale: '0', opacity: '0' }}>
                         <div style={{ width: '76vw' }} className="flex h-auto">
-                            <div className="w-full h-full flex flex-col">
+                            <div className="w-full h-full flex flex-col overflow-hidden">
                                 {imageSlideData.map((item, index) => {
                                     const date = new Date(item.Date)
                                     date.setMonth(date.getMonth() + 1)
                                     const month = date.getMonth()
                                     const year = date.getFullYear()
                                     return (
-                                        <div key={`${item}${index}`} className="w-full" style={{ padding: '2vw' }}>
+                                        <div key={`${item}${index}`} className="w-full" style={{ padding: '2vw', opacity: '0', transition: '500ms' }}>
                                             <div ref={imageSlideRef} className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '30vw', marginBottom: '0.5vw' }}>
                                                 <img className={`absolute w-full h-full object-cover blur-sm pointer-events-none`} src={item['randomImage']} alt="" />
                                                 <img className={`w-fit h-full object-contain pointer-events-none ${classes['imageSlide']}`} src={item['randomImage']} alt="" />
@@ -624,10 +689,10 @@ const Homepage = () => {
                             <div style={{ marginBottom: '1vw', fontSize: '2vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold', color: '#0b6e43' }}>
                                {isLanguage.homepage[2]['head']}
                             </div>
-                            <div style={{ fontSize: '1.2vw', fontFamily: "'kozuka-mincho-pro', sans-serif" }}>
+                            <div style={{ fontSize: '1.1vw', fontFamily: "'kozuka-mincho-pro', sans-serif" }}>
                                {isLanguage.homepage[2]['desc'].split('|||').map((item, index) => {
                                     return (
-                                        <div key={`${item}${index}`} className="text-justify">
+                                        <div key={`${item}${index}`}>
                                             {item}
                                         </div>
                                     )
@@ -636,7 +701,7 @@ const Homepage = () => {
                         </div>
                     </div>
                     <div className="third w-full flex flex-col justify-center items-center bg-white">
-                        <div style={{ width: '48vw', border: '0.1vw solid black', padding: '0.5vw', marginBottom: '2vw' }} className="flex h-auto">
+                        <div style={{ width: '48vw', border: '0.1vw solid black', padding: '0.5vw', marginBottom: '2vw' }} className="flex h-auto overflow-hidden">
                             <div className="w-full h-full flex">
                                 {imageSlideData.map((item, index) => {
                                     const date = new Date(item.Date)
@@ -644,8 +709,8 @@ const Homepage = () => {
                                     const month = date.getMonth()
                                     const year = date.getFullYear()
                                     return (
-                                        <div key={`${item}${index}`} className="w-1/2">
-                                            <div ref={imageSlideRef} className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '10vw', marginBottom: '0.5vw' }}>
+                                        <div key={`${item}${index}`} className="w-full">
+                                            <div ref={(el) => imageSlideLoad(el, index)} className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '10vw', marginBottom: '0.5vw' }}>
                                                 <img className={`absolute w-full h-full object-cover blur-sm pointer-events-none`} src={item['randomImage']} alt="" />
                                                 <img className={`w-fit h-full object-contain pointer-events-none ${classes['imageSlide']}`} src={item['randomImage']} alt="" />
                                             </div>
