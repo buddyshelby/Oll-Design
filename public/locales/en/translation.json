@@ -442,6 +442,15 @@
                     "desc": "□ Want to *spread the brand* more with the store's original goods|||□ Want goods perfect for *events and campaigns*|||□ Want to create *unique and attractive goods* that customers will love|||□ Want goods with the company logo or message to *increase recognition*|||□ Want to create goods that *convey the store's charm* and increase fans|||□ Want to create *commemorative items and promotional goods* that leave an impression on customers|||□ Want to create *original goods for pets*|||□ Want to create goods that *strengthen branding* and match the store's atmosphere|||□ Want goods for events that will *leave a lasting memory with customers*|||□ Want to create *special designs* for *memorable* goods"
                 }
             ]
+        },
+        {
+            "thePeople": [
+                "assets/homepage/People1.png",
+                "assets/homepage/People2.png",
+                "assets/homepage/People3.png",
+                "assets/homepage/People4.png",
+                "assets/homepage/People5.png"
+            ]
         }
     ]
 }

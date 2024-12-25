@@ -56,8 +56,6 @@ const Homepage = () => {
         },
     ]
 
-    const testDesc = '□ もっと*お店を魅力的に見せたい*、でもどうすれば？|||□ *ブランドを作りたい*けど、どこから始めたらいい？|||□ お店をもっと覚えてもらいたい、*強い印象を与えたい*|||□ *他のお店と差をつけたい*、目立つ存在になりたい|||□ お客様に*愛されるブランド*を作りたい|||□ *ブランドイメージが統一できていない*…どうにかしたい！|||□ *SNSや広告で注目される*ブランドにしたい|||□ ブランド作りで*お客様との絆を深めたい*|||□ *売上をアップ*させるために、ブランド力を高めたい|||□ 見た目だけでなく、*心にも響くブランド*を作りたい'
-
     useEffect(() => {
         if (mainContainerRef.current) {
             const peopleRunnerBoxElement = mainContainerRef.current.children[4].children[0]
@@ -193,15 +191,15 @@ const Homepage = () => {
             img.src = `https://olldesign.jp/storage/${item.Img[getRandomImage]}`;
             
             img.onload = () => {
-                allImage(img.src, index)
+                allImage(img.src)
             };
         })
-        imagePeopleSrc.forEach( async (item, index) => {
+        isLanguage.homepage[5]['thePeople'].forEach( async (item, index) => {
             const img = new Image();
-            img.src = item.src;
+            img.src = item;
             
             img.onload = () => {
-                allImage(img.src, index)
+                allImage(item)
             };
         })
     }, [imageSlideData])
@@ -209,7 +207,7 @@ const Homepage = () => {
     useEffect(() => {
         if (imageLoaded.length !== 0) {
             const uniqueSortedArray = [...new Set(imageLoaded)].sort((a, b) => a - b);
-            const totalData = uniqueSortedArray.length / (imageSlideData.length + imagePeopleSrc.length) * 100
+            const totalData = uniqueSortedArray.length / (imageSlideData.length + isLanguage.homepage[5]['thePeople'].length) * 100
             const loopLoading = async () => {
                 for (let index = loadingText; index <= totalData; index++) {
                     await sleep(10)
@@ -336,6 +334,60 @@ const Homepage = () => {
             }
         }
     }, [mainContainerRef.current])
+
+    const [thePeople, setThePeople] = useState([])
+    const [allPeople, setAllPeople] = useState(isLanguage.homepage[5]['thePeople'])
+    const thePeopleRef = useRef(null)
+
+    useEffect(() => {
+        const thePeopleAnimation = () => {
+            setTimeout(() => {
+                if (allPeople.length > 0) {
+                    setAllPeople((prevAllPeople) => {
+                        const getTheSplice = prevAllPeople.slice(2); // Get remaining
+                        const splicedPeople = prevAllPeople.slice(0, 2); // Get first 2
+                        setThePeople(splicedPeople)
+                        return getTheSplice; // Return remaining for allPeople
+                    });
+                }
+                requestAnimationFrame(thePeopleAnimation);
+            }, 5000);
+        };
+
+        thePeopleAnimation();
+    }, []);
+
+    useEffect(() => {
+
+        if (allPeople.length === 0) {
+            setAllPeople(isLanguage.homepage[5]['thePeople']);
+        }
+        
+    }, [allPeople, thePeople])
+
+    const [newPeople, setNewPeople] = useState(Array.from(isLanguage.homepage[5]['thePeople']).slice(-1))
+
+    useEffect(() => {
+        if (thePeopleRef.current) {
+            setTimeout(() => {
+                thePeopleRef.current.style.opacity = '0'
+                thePeopleRef.current.style.translate = '-3vw'
+                setTimeout(() => {
+                    thePeopleRef.current.style.transition = '0ms'
+                    setNewPeople(thePeople)
+                    setTimeout(() => {
+                        thePeopleRef.current.style.translate = '3vw'
+                        thePeopleRef.current.style.transition = '500ms'
+                        setTimeout(() => {
+                            thePeopleRef.current.style.opacity = '1'
+                            thePeopleRef.current.style.translate = '0vw'
+                        }, 500);
+                    }, 100);
+                }, 500);
+            }, 100);
+        }
+        console.log(thePeopleRef);
+    }, [thePeople])
 
     return (
         <Page>
@@ -584,18 +636,24 @@ const Homepage = () => {
                             <div className="w-full h-full absolute left-0 top-0">
                                 <img className={`w-full  h-full object-cover`} src="assets/homepage/Background.png" alt="" />
                             </div>
-                            <div className="w-1/4 h-full relative">
-                                <img className={`w-full  h-full object-contain`} src="assets/homepage/A_1.png" alt="" />
+                            <div ref={thePeopleRef} className="w-full h-full flex" style={{ transition: '500ms', opacity: '1' }}>
+                                {newPeople.map((item, index) => {
+                                    return (
+                                        <div key={`${item}${index}`} className="w-full h-full relative">
+                                            <img className={`w-full  h-full object-contain`} src={item} alt="" />
+                                        </div>
+                                    )
+                                })}
                             </div>
-                            <div className="w-1/4 h-full relative">
-                                <img className={`w-full  h-full object-contain`} src="assets/homepage/A_2.png" alt="" />
-                            </div>
-                            <div className="w-1/4 h-full relative">
+                            {/* <div className="w-full h-full relative">
+                                <img className={`w-full  h-full object-contain`} src="assets/homepage/People2.png" alt="" />
+                            </div> */}
+                            {/* <div className="w-1/4 h-full relative">
                                 <img className={`w-full  h-full object-contain`} src="assets/homepage/A_3.png" alt="" />
                             </div>
                             <div className="w-1/4 h-full relative">
                                 <img className={`w-full  h-full object-contain`} src="assets/homepage/A_4.png" alt="" />
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className="fifth w-fit flex flex-col items-center h-max">
