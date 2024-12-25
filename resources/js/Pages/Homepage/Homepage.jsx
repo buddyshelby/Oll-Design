@@ -17,17 +17,15 @@ const Homepage = () => {
     const [width, setWidth] = useState(0)
 
     const [isData, setIsData] = useState([]);
-    const [imageSlideData, setImageSlideData] = useState([]);
     const [firstQuestionDesc, setFirstQuestionDesc] = useState(0)
     const firstQuestionRef = useRef(null)
     const mainContainerRef = useRef(null)
     const [imageLoaded, setImageLoaded] = useState([])
-    const imageSlideRef = useRef(null)
     
     const [loadingText, setLoadingText] = useState(0)
     const loadingRef = useRef(null)
     const skillsRef = useRef([])
-
+    
     const imageLoadedLocal = []
     const imagePeopleSrc = [
         {
@@ -55,7 +53,7 @@ const Homepage = () => {
             src: 'assets/homepage/B_4.png'
         },
     ]
-
+    
     useEffect(() => {
         if (mainContainerRef.current) {
             const peopleRunnerBoxElement = mainContainerRef.current.children[4].children[0]
@@ -66,13 +64,13 @@ const Homepage = () => {
     }, [mainContainerRef.current])
     
     const allImage = (event) => {
-                setImageLoaded((prevLoaded) => [
-                    ...prevLoaded,
-                    event
+        setImageLoaded((prevLoaded) => [
+            ...prevLoaded,
+            event
                 ]);
             // }
     }
-
+    
     const skillsLoadRef = (element, index) => {
         if (skillsRef.current) skillsRef.current[index] = element
     }
@@ -109,6 +107,21 @@ const Homepage = () => {
                 item.style.height = `${maxHeight}px`
             })
         }
+        setIdeaDescHeight(0)
+        setTimeout(() => {
+            if (ideaDescRef.current) {
+                Array.from(ideaDescRef.current.children).forEach(item => {
+                    setIdeaDescHeight((prev) => {
+                        if (prev < item.clientHeight) {
+                            return item.clientHeight
+                        } else {
+                            return prev
+                        }
+    
+                    })
+                })
+            }
+        }, 1000);
         setWidth(window.innerWidth)
     };
     
@@ -145,7 +158,7 @@ const Homepage = () => {
         }
         handleResize()
     }, [isLanguage])
-
+    
     useEffect(() => {
         if (firstQuestionRef.current) {
             setFirstQuestionDesc(firstQuestionRef.current.clientWidth)
@@ -162,7 +175,7 @@ const Homepage = () => {
             mainContainerRef.current.parentElement.parentElement.parentElement.classList.remove("container-fluid")
         }
     }, [mainContainerRef.current])
-
+    
     const fetchData = async () => {
         try {
             const res = await axios.get(
@@ -173,13 +186,17 @@ const Homepage = () => {
             console.error("Error fetching imagings:", e);
         }
     };
-
+    
     useEffect(() => {
         fetchData()
     }, [])
-
+    
+    const [imageSlideData, setImageSlideData] = useState([]);
+    const imageSlideRef = useRef(null)
+    
     useEffect(() => {
         setImageSlideData(isData.filter(item => item.TagsID === '2').slice(0, 2))
+        
     }, [isData])
 
     useEffect(() => {
@@ -351,7 +368,7 @@ const Homepage = () => {
                     });
                 }
                 requestAnimationFrame(thePeopleAnimation);
-            }, 5000);
+            }, 7000);
         };
 
         thePeopleAnimation();
@@ -383,11 +400,34 @@ const Homepage = () => {
                             thePeopleRef.current.style.translate = '0vw'
                         }, 500);
                     }, 100);
-                }, 500);
+                }, 1000);
             }, 100);
         }
-        console.log(thePeopleRef);
     }, [thePeople])
+
+    const [ideaDescHeight, setIdeaDescHeight] = useState(0)
+    const ideaDescRef = useRef(null)
+
+    useEffect(() => {
+        if (ideaDescRef.current) {
+            Array.from(ideaDescRef.current.children).forEach(item => {
+                item.style.height = 'auto'
+                setIdeaDescHeight(0)
+            })
+            setTimeout(() => {
+                Array.from(ideaDescRef.current.children).forEach(item => {
+                    setIdeaDescHeight((prev) => {
+                        if (prev < item.clientHeight) {
+                            return item.clientHeight
+                        } else {
+                            return prev
+                        }
+    
+                    })
+                })
+            }, 1000);
+        }
+    }, [ideaDescRef.current])
 
     return (
         <Page>
@@ -694,20 +734,22 @@ const Homepage = () => {
                                                     {itemReference.title}
                                                 </div>
                                             </div>
-                                            <div className="w-full">
+                                            <div ref={ideaDescRef} className="w-full">
                                                 {itemReference.desc.split('|||').map((item, index) => {
                                                     return (
-                                                        <div key={`${item}${index}`} className="w-full" style={{ fontSize: '1vw', fontStyle: "'a-otfud-shin-go-pr6n', sans-serif", backgroundColor: '#403c3c', padding: '0.1vw', margin: '0.5vw 0', clipPath: 'polygon(0% 0%, 100% 0%, 97% 100%, 0% 100%)' }}>
-                                                            {item.split('*').map((item, index) => {
-                    
-                                                                const colorText = index === 1 ? '#D8DC24' : 'white'
-                    
-                                                                return (
-                                                                    <span key={`${item}${index}`} style={{ color: colorText }}>
-                                                                        {item}
-                                                                    </span>
-                                                                )
-                                                            })}
+                                                        <div key={`${item}${index}`} className="w-full flex items-center" style={{ height: `${ideaDescHeight > 0 ? `${ideaDescHeight}px` :  `auto`}`, fontSize: '1vw', fontStyle: "'a-otfud-shin-go-pr6n', sans-serif", backgroundColor: '#403c3c', padding: '0.1vw 2vw 0.1vw 0.1vw', margin: '0.5vw 0', clipPath: 'polygon(0% 0%, 100% 0%, 97% 100%, 0% 100%)' }}>
+                                                            <div className="w-fit h-fit">
+                                                                {item.split('*').map((item, index) => {
+                        
+                                                                    const colorText = index === 1 ? '#D8DC24' : 'white'
+                        
+                                                                    return (
+                                                                        <span key={`${item}${index}`} style={{ color: colorText }}>
+                                                                            {item}
+                                                                        </span>
+                                                                    )
+                                                                })}
+                                                            </div>
                                                         </div>
                                                     )
                                                 })}
