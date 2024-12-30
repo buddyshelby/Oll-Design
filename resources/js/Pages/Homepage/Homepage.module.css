@@ -48,6 +48,21 @@
     object-fit: cover;
 }
 
+.imageInvisible {
+    transition: 0s;
+    transform: translate(200%);
+    opacity: 0;
+    display: none;
+}
+
+.imageHide {
+    animation: showHide 1s forwards;
+}
+
+.imageShow {
+    animation: showImage 1s forwards ;
+}
+
 @media (max-width: 768px) {
     .imageSlide {
         position: absolute;
@@ -55,6 +70,28 @@
         /* transform: scale(3.2); */
         transition: 1s;
         object-fit: cover;
+    }
+}
+
+@keyframes showImage {
+    0% {
+        translate: 200%;
+        opacity: 0;
+    }
+    100% {
+        translate: 0%;
+        opacity: 1;
+    }
+}
+
+@keyframes hideImage {
+    0% {
+        translate: -200%;
+        opacity: 1;
+    }
+    100% {
+        translate: 0%;
+        opacity: 0;
     }
 }
 

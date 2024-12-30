@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, Fragment } from "react";
 
 import Page from "../Page";
 
@@ -179,7 +179,7 @@ const Homepage = () => {
             const res = await axios.get(
                 "https://olldesign.jp/api/galleryList"
             );
-            setTemporaryData(res.data.galleryList.sort((a, b) => new Date(a.Date) - new Date(b.Date)).filter(item => item.TagsID === '2'));
+            setIsData(res.data.galleryList.sort((a, b) => new Date(a.Date) - new Date(b.Date)).filter(item => item.TagsID === '2'));
         } catch (e) {
             console.error("Error fetching imagings:", e);
         }
@@ -189,136 +189,136 @@ const Homepage = () => {
         fetchData()
     }, [])
     
-    const [theImageSlideData, setTheImageSlideData] = useState([]);
+    // const [theImageSlideData, setTheImageSlideData] = useState([]);
     const [isData, setIsData] = useState([]);
-    const [temporaryData, setTemporaryData] = useState([])
-    const imageSlideRef = useRef([])
+    // const [temporaryData, setTemporaryData] = useState([])
+    // const imageSlideRef = useRef([])
 
-    const imageSlideLoad = (element, index) => {
-        imageSlideRef.current[index] = element
-    }
+    // const imageSlideLoad = (element, index) => {
+    //     imageSlideRef.current[index] = element
+    // }
 
-    const animationRef = useRef()
+    // const animationRef = useRef()
     
-    const [thePeople, setThePeople] = useState([])
-    const [allPeople, setAllPeople] = useState(isLanguage.homepage[5]['thePeople'])
-    const thePeopleRef = useRef(null)
+    // const [thePeople, setThePeople] = useState([])
+    // const [allPeople, setAllPeople] = useState(isLanguage.homepage[5]['thePeople'])
+    // const thePeopleRef = useRef(null)
 
-    useEffect(() => {
-        if (isData[0]) {
-            cancelAnimationFrame(animationRef.current);
-            const theAnimation = () => {
-                setTimeout(() => {
-                    if (isData.length > 0) {
-                        setIsData((previsData) => {
-                            const getTheSplice = previsData.slice(2); // Get remaining
-                            const spliced = previsData.slice(0, 2); // Get first 2
-                            setTheImageSlideData(spliced)
-                            return getTheSplice; // Return remaining for isData
-                        });
-                    }
-                    if (allPeople.length > 0) {
-                        setAllPeople((prevAllPeople) => {
-                            const getTheSplice = prevAllPeople.slice(2); // Get remaining
-                            const spliced = prevAllPeople.slice(0, 2); // Get first 2
-                            setThePeople(spliced)
-                            return getTheSplice; // Return remaining for allPeople
-                        });
-                    }
+    // useEffect(() => {
+    //     if (isData[0]) {
+    //         cancelAnimationFrame(animationRef.current);
+    //         const theAnimation = () => {
+    //             setTimeout(() => {
+    //                 if (isData.length > 0) {
+    //                     setIsData((previsData) => {
+    //                         const getTheSplice = previsData.slice(2); // Get remaining
+    //                         const spliced = previsData.slice(0, 2); // Get first 2
+    //                         setTheImageSlideData(spliced)
+    //                         return getTheSplice; // Return remaining for isData
+    //                     });
+    //                 }
+    //                 if (allPeople.length > 0) {
+    //                     setAllPeople((prevAllPeople) => {
+    //                         const getTheSplice = prevAllPeople.slice(2); // Get remaining
+    //                         const spliced = prevAllPeople.slice(0, 2); // Get first 2
+    //                         setThePeople(spliced)
+    //                         return getTheSplice; // Return remaining for allPeople
+    //                     });
+    //                 }
                     
-                    animationRef.current = requestAnimationFrame(theAnimation);
-                }, 8000);
-            };
+    //                 animationRef.current = requestAnimationFrame(theAnimation);
+    //             }, 8000);
+    //         };
     
-            animationRef.current = requestAnimationFrame(theAnimation);
-        }
+    //         animationRef.current = requestAnimationFrame(theAnimation);
+    //     }
 
-        return () => {
-            if (animationRef.current) {
-                cancelAnimationFrame(animationRef.current);
-            }
-        };
-    }, [isData[0]]);
+    //     return () => {
+    //         if (animationRef.current) {
+    //             cancelAnimationFrame(animationRef.current);
+    //         }
+    //     };
+    // }, [isData[0]]);
 
-    useEffect(() => {
-        setIsData(temporaryData)
-    }, [temporaryData[0]])
+    // useEffect(() => {
+    //     setIsData(temporaryData)
+    // }, [temporaryData[0]])
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (isData.length === 0) {
-            setIsData(temporaryData);
-        }
+    //     if (isData.length === 0) {
+    //         setIsData(temporaryData);
+    //     }
         
         
-    }, [isData[0]])
+    // }, [isData[0]])
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (allPeople.length === 0) {
-            setAllPeople(isLanguage.homepage[5]['thePeople']);
-        }
+    //     if (allPeople.length === 0) {
+    //         setAllPeople(isLanguage.homepage[5]['thePeople']);
+    //     }
         
         
-    }, [allPeople[0]])
+    // }, [allPeople[0]])
 
-    const [imageSlideData, setImageSlideData] = useState([])
-    const [newPeople, setNewPeople] = useState(Array.from(isLanguage.homepage[5]['thePeople']).slice(-1))
+    // const [imageSlideData, setImageSlideData] = useState([])
+    // const [newPeople, setNewPeople] = useState(Array.from(isLanguage.homepage[5]['thePeople']).slice(-1))
 
-    useEffect(() => {
-        setImageSlideData(temporaryData.filter(item => item.TagsID === '2').slice(-2))
-    }, [temporaryData[0]])
+    // useEffect(() => {
+    //     setImageSlideData(temporaryData.filter(item => item.TagsID === '2').slice(-2))
+    // }, [temporaryData[0]])
 
-    useEffect(() => {
-        if (imageSlideRef.current) {
-            setTimeout(() => {
-                imageSlideRef.current.forEach(item => {
-                    item.parentElement.style.opacity = '0'
-                    item.parentElement.style.translate = '-3vw'
-                    setTimeout(() => {
-                        item.parentElement.style.transition = '0ms'
-                        item.children[1].classList.remove(classes['imageSlide'])
-                        setImageSlideData(theImageSlideData)
-                        setTimeout(() => {
-                            item.children[1].classList.add(classes['imageSlide'])
-                            item.parentElement.style.translate = '3vw'
-                            item.parentElement.style.transition = '500ms'
-                            setTimeout(() => {
-                                item.parentElement.style.opacity = '1'
-                                item.parentElement.style.translate = '0vw'
-                            }, 500);
-                        }, 100);
-                    }, 1000);
-                })
-            }, 100);
-        }
-    }, [theImageSlideData[0]])
+    // useEffect(() => {
+    //     if (imageSlideRef.current) {
+    //         setTimeout(() => {
+    //             imageSlideRef.current.forEach(item => {
+    //                 item.parentElement.style.opacity = '0'
+    //                 item.parentElement.style.translate = '-3vw'
+    //                 setTimeout(() => {
+    //                     item.parentElement.style.transition = '0ms'
+    //                     item.children[1].classList.remove(classes['imageSlide'])
+    //                     setImageSlideData(theImageSlideData)
+    //                     setTimeout(() => {
+    //                         item.children[1].classList.add(classes['imageSlide'])
+    //                         item.parentElement.style.translate = '3vw'
+    //                         item.parentElement.style.transition = '500ms'
+    //                         setTimeout(() => {
+    //                             item.parentElement.style.opacity = '1'
+    //                             item.parentElement.style.translate = '0vw'
+    //                         }, 500);
+    //                     }, 100);
+    //                 }, 1000);
+    //             })
+    //         }, 100);
+    //     }
+    // }, [theImageSlideData[0]])
 
-    useEffect(() => {
-        if (thePeopleRef.current) {
-            setTimeout(() => {
-                thePeopleRef.current.style.opacity = '0'
-                thePeopleRef.current.style.translate = '-3vw'
-                setTimeout(() => {
-                    thePeopleRef.current.style.transition = '0ms'
-                    setNewPeople(thePeople)
-                    setTimeout(() => {
-                        thePeopleRef.current.style.translate = '3vw'
-                        thePeopleRef.current.style.transition = '500ms'
-                        setTimeout(() => {
-                            thePeopleRef.current.style.opacity = '1'
-                            thePeopleRef.current.style.translate = '0vw'
-                        }, 500);
-                    }, 100);
-                }, 1000);
-            }, 100);
-        }
-    }, [thePeople[0]])
+    // useEffect(() => {
+    //     if (thePeopleRef.current) {
+    //         setTimeout(() => {
+    //             thePeopleRef.current.style.opacity = '0'
+    //             thePeopleRef.current.style.translate = '-3vw'
+    //             setTimeout(() => {
+    //                 thePeopleRef.current.style.transition = '0ms'
+    //                 setNewPeople(thePeople)
+    //                 setTimeout(() => {
+    //                     thePeopleRef.current.style.translate = '3vw'
+    //                     thePeopleRef.current.style.transition = '500ms'
+    //                     setTimeout(() => {
+    //                         thePeopleRef.current.style.opacity = '1'
+    //                         thePeopleRef.current.style.translate = '0vw'
+    //                     }, 500);
+    //                 }, 100);
+    //             }, 1000);
+    //         }, 100);
+    //     }
+    // }, [thePeople[0]])
 
     
 
     useEffect(() => {
-        imageSlideData.forEach( async (item, index) => {
+        isData.forEach( async (item, index) => {
             const getRandomImage = Math.floor(Math.random() * item.Img.length)
             item['randomImage'] = `https://olldesign.jp/storage/${item.Img[getRandomImage]}`
 
@@ -337,12 +337,12 @@ const Homepage = () => {
                 allImage(item)
             };
         })
-    }, [imageSlideData])
+    }, [isData])
 
     useEffect(() => {
         if (imageLoaded.length !== 0) {
             const uniqueSortedArray = [...new Set(imageLoaded)].sort((a, b) => a - b);
-            const totalData = uniqueSortedArray.length / (imageSlideData.length + isLanguage.homepage[5]['thePeople'].length) * 100
+            const totalData = uniqueSortedArray.length / (isData.length + isLanguage.homepage[5]['thePeople'].length) * 100
             const loopLoading = async () => {
                 for (let index = loadingText; index <= totalData; index++) {
                     await sleep(10)
@@ -493,6 +493,77 @@ const Homepage = () => {
             }, 1000);
         }
     }, [ideaDescRef.current])
+
+    const [currentProject, setCurrentProject] = useState([0, 1])
+    const [sliceFrom, setSliceFrom] = useState([0, 1])
+    const [animationIds, setAnimationIds] = useState([])
+    const imageSlideRef = useRef([])
+
+    const imageSlideRefLoad = (element, index) => {
+        imageSlideRef.current[index] = element
+    }
+
+    useEffect(() => {
+        if (isData.length > 0) {
+            function runAnimation() {
+                function animate(timestamp) {
+                    setSliceFrom(prev => {
+                        console.log(prev);
+
+                        const totalDataIndex = isData.length - 1
+                        
+                        const firstNum = prev[0] + 2
+                        const secondNum = prev[1] + 2
+                        if (secondNum === totalDataIndex + 1) return [firstNum, firstNum]
+                        else if (secondNum > totalDataIndex) return [0, 1]
+                        else return [firstNum, secondNum]
+                    })
+                    setTimeout(runAnimation, 7000);
+                }
+                
+                const id = requestAnimationFrame(animate);
+                setAnimationIds(prev => [
+                    ...prev,
+                    id
+                ])
+            }
+              
+            // Start the loop
+            const id = requestAnimationFrame(runAnimation);
+            setAnimationIds(prev => [
+                ...prev,
+                id
+            ])
+
+            return () => {
+                animationIds.forEach(id => cancelAnimationFrame(id))
+            }
+        }
+    }, [isData])
+
+    useEffect(() => {
+        if (imageSlideRef.current.length > 0) {
+            imageSlideRef.current.forEach((item, index) => {
+                item.style.transition = '1s'
+                item.style.opacity = '1'
+                setTimeout(() => {
+                    item.style.translate = '-200%'
+                    item.style.opacity = '0'
+                }, 50);
+                setTimeout(() => {
+                    item.style.transition = '0s'
+                }, 1050);
+                setTimeout(() => {
+                    setCurrentProject(sliceFrom)
+                }, 1500);
+            })
+        }
+    }, [sliceFrom])
+
+    // useEffect(() => {
+    //     console.log(currentProject);
+        
+    // }, [currentProject])
 
     return (
         <Page>
@@ -702,8 +773,108 @@ const Homepage = () => {
                     </div>
                     <div className="third w-full flex flex-col justify-center items-center bg-white">
                         <div style={{ width: '48vw', border: '0.1vw solid black', padding: '0.5vw', marginBottom: '2vw' }} className="flex h-auto overflow-hidden">
-                            <div className="w-full h-full flex">
-                                {imageSlideData.map((item, index) => {
+                            <div className="w-full h-full flex relative">
+                                <div className="w-full invisible select-none pointer-events-none">
+                                    <div className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '10vw', marginBottom: '0.5vw' }}>
+                                        <img className={`absolute w-full h-full object-cover blur-sm pointer-events-none`} src={`https://olldesign.jp/storage/images/3a0tBqacm1DRUCkyfH2C1IbkSdJU7yxQYBxBMHCg.jpg`} alt="" />
+                                        <img className={`w-fit h-full object-contain pointer-events-none ${classes['imageSlide']}`} src={`https://olldesign.jp/storage/images/3a0tBqacm1DRUCkyfH2C1IbkSdJU7yxQYBxBMHCg.jpg`} alt="" />
+                                    </div>
+                                    <div className="w-full flex justify-center items-center">
+                                        <div className="flex flex-col" style={{ width: '95%', fontSize: '0.9vw' }}>
+                                            <div className="relative flex w-full">
+                                                <div>
+                                                    PACKAGE DESIGN
+                                                </div>
+                                                <div className="absolute right-0">
+                                                    2025.0
+                                                </div>
+                                            </div>
+                                            <div className="border-slate-600" style={{ borderTop: '0.1vw solid' }} />
+                                            <div>
+                                                WAKAYAMA
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="w-full h-full flex absolute">
+                                    <div className="w-full">
+                                        <div className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '10vw', marginBottom: '0.5vw' }}>
+                                            {
+                                                isData.map((item, index) => {
+                                                    const date = new Date(item.Date)
+                                                    date.setMonth(date.getMonth() + 1)
+                                                    const month = date.getMonth()
+                                                    const year = date.getFullYear()
+                                                    return (
+                                                        <Fragment key={`${item}${index}`}>
+                                                            <img style={currentProject[0] === index ? {} : { translate: '200%', transition: '0s' }} ref={(el) => currentProject[0] === index ? imageSlideRefLoad(el, 0) : {}} className={`absolute w-full h-full object-cover blur-sm pointer-events-none ${currentProject[0] === index ? classes['imageShow'] : 'opacity-0'}`} src={item['randomImage']} alt="" />
+                                                            <img style={currentProject[0] === index ? {} : { translate: '200%', transition: '0s' }} ref={(el) => currentProject[0] === index ? imageSlideRefLoad(el, 1) : {}} className={`absolute w-fit h-full object-contain pointer-events-none ${classes['imageSlide']} ${currentProject[0] === index ? classes['imageShow'] : 'opacity-0'}`} src={item['randomImage']} alt="" />
+                                                        </Fragment>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                        <div className="w-full flex justify-center items-center">
+                                            <div className="flex flex-col" style={{ width: '95%', fontSize: '0.9vw' }}>
+                                                <div className="relative flex w-full">
+                                                    <div className={`left-0 pointer-events-none invisible`}>
+                                                        PACKAGE DESIGN
+                                                    </div>
+                                                    <div className={`right-0 pointer-events-none invisible`}>
+                                                        2024.10
+                                                    </div>
+                                                    {
+                                                        isData.map((item, index) => {
+                                                            const date = new Date(item.Date)
+                                                            date.setMonth(date.getMonth() + 1)
+                                                            const month = date.getMonth()
+                                                            const year = date.getFullYear()
+                                                            return (
+                                                                <Fragment key={`${item}${index}`}>
+                                                                    {/* <img style={currentProject[0] === index ? {} : { translate: '200%', transition: '0s' }} ref={(el) => currentProject[0] === index ? imageSlideRefLoad(el, 0) : {}} className={`absolute w-full h-full object-cover blur-sm pointer-events-none ${currentProject[0] === index ? classes['imageShow'] : 'opacity-0'}`} src={item['randomImage']} alt="" />
+                                                                    <img style={currentProject[0] === index ? {} : { translate: '200%', transition: '0s' }} ref={(el) => currentProject[0] === index ? imageSlideRefLoad(el, 1) : {}} className={`absolute w-fit h-full object-contain pointer-events-none ${classes['imageSlide']} ${currentProject[0] === index ? classes['imageShow'] : 'opacity-0'}`} src={item['randomImage']} alt="" /> */}
+                                                                    <div style={currentProject[0] === index ? {} : { translate: '200%', transition: '0s' }} ref={(el) => currentProject[0] === index ? imageSlideRefLoad(el, 2) : {}} className={`absolute left-0 pointer-events-none ${currentProject[0] === index ? classes['imageShow'] : 'opacity-0'}`}>
+                                                                        PACKAGE DESIGN
+                                                                    </div>
+                                                                    <div style={currentProject[0] === index ? {} : { translate: '200%', transition: '0s' }} ref={(el) => currentProject[0] === index ? imageSlideRefLoad(el, 3) : {}} className={`absolute right-0 pointer-events-none ${currentProject[0] === index ? classes['imageShow'] : 'opacity-0'}`}>
+                                                                        2024.10
+                                                                    </div>
+                                                                </Fragment>
+                                                            )
+                                                        })
+                                                    }
+                                                </div>
+                                                <div className="border-slate-600" style={{ borderTop: '0.1vw solid' }} />
+                                                <div>
+                                                    WAKAYAMA
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="w-full">
+                                        <div className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '10vw', marginBottom: '0.5vw' }}>
+                                            <img className={`absolute w-full h-full object-cover blur-sm pointer-events-none`} src={`https://olldesign.jp/storage/images/3a0tBqacm1DRUCkyfH2C1IbkSdJU7yxQYBxBMHCg.jpg`} alt="" />
+                                            <img className={`w-fit h-full object-contain pointer-events-none ${classes['imageSlide']}`} src={`https://olldesign.jp/storage/images/3a0tBqacm1DRUCkyfH2C1IbkSdJU7yxQYBxBMHCg.jpg`} alt="" />
+                                        </div>
+                                        <div className="w-full flex justify-center items-center">
+                                            <div className="flex flex-col" style={{ width: '95%', fontSize: '0.9vw' }}>
+                                                <div className="relative flex w-full">
+                                                    <div>
+                                                        PACKAGE DESIGN
+                                                    </div>
+                                                    <div className="absolute right-0">
+                                                        2025.0
+                                                    </div>
+                                                </div>
+                                                <div className="border-slate-600" style={{ borderTop: '0.1vw solid' }} />
+                                                <div>
+                                                    WAKAYAMA
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* {imageSlideData.map((item, index) => {
                                     const date = new Date(item.Date)
                                     date.setMonth(date.getMonth() + 1)
                                     const month = date.getMonth()
@@ -732,7 +903,7 @@ const Homepage = () => {
                                             </div>
                                         </div>
                                     )
-                                })}
+                                })} */}
                             </div>
                         </div>
                     </div>
@@ -741,24 +912,15 @@ const Homepage = () => {
                             <div className="w-full h-full absolute left-0 top-0">
                                 <img className={`w-full  h-full object-cover`} src="assets/homepage/Background.png" alt="" />
                             </div>
-                            <div ref={thePeopleRef} className="w-full h-full flex" style={{ transition: '500ms', opacity: '1' }}>
-                                {newPeople.map((item, index) => {
+                            <div className="w-full h-full flex" style={{ transition: '500ms', opacity: '1' }}>
+                                {/* {newPeople.map((item, index) => {
                                     return (
                                         <div key={`${item}${index}`} className="w-full h-full relative">
                                             <img className={`w-full  h-full object-contain`} src={item} alt="" />
                                         </div>
                                     )
-                                })}
+                                })} */}
                             </div>
-                            {/* <div className="w-full h-full relative">
-                                <img className={`w-full  h-full object-contain`} src="assets/homepage/People2.png" alt="" />
-                            </div> */}
-                            {/* <div className="w-1/4 h-full relative">
-                                <img className={`w-full  h-full object-contain`} src="assets/homepage/A_3.png" alt="" />
-                            </div>
-                            <div className="w-1/4 h-full relative">
-                                <img className={`w-full  h-full object-contain`} src="assets/homepage/A_4.png" alt="" />
-                            </div> */}
                         </div>
                     </div>
                     <div className="fifth w-fit flex flex-col items-center h-max">
