@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, Fragment } from "react";
+import { Element, Link, animateScroll as scroll } from 'react-scroll';
 
 import Page from "../Page";
 
@@ -505,8 +506,6 @@ const Homepage = () => {
             function runAnimation() {
                 function animate() {
                     setCurrentProject(prev => {
-                        console.log(prev);
-
                         const totalDataIndex = isData.length
                         const nextValue = prev + 1
                         
@@ -526,21 +525,23 @@ const Homepage = () => {
             function runAnimationChild() {
                 function animate() {
                     setCurrentImage(prev => {
-
+                        
+                        const detailImage = []
                         const newValueArray = []
                         isData.forEach((itemData, index) => {
-                            const totalDataIndex = itemData.Img.length - 2
+                            const totalDataIndex = itemData.Img.length - 1
                             const nextValue = prev.length > 0 ? prev[index] + 1 : 0
+
+                            detailImage.push(itemData.Img.length)
 
                             if (nextValue > totalDataIndex) newValueArray.push(0)
                             // else if (nextValue < 0) return totalDataIndex
                             else newValueArray.push(nextValue)
                         })
-                        
+                        setTimeout(runAnimationChild, (7000 / Math.max(...detailImage)));
                         return newValueArray
                         
                     })
-                    setTimeout(runAnimationChild, 3500);
                 }
                 
                 const id = requestAnimationFrame(animate);
@@ -552,8 +553,6 @@ const Homepage = () => {
             function runAnimationPeople() {
                 function animate() {
                     setCurrentPeople(prev => {
-                        console.log(prev);
-
                         const totalDataIndex = isLanguage.homepage[5]['thePeople'].length
                         const nextValue = prev + 1
                         
@@ -595,6 +594,7 @@ const Homepage = () => {
         ideaDetailRef.current[index] = element
     }
 
+    const scrollTimeout = useRef(null);
     const scrollToIdea = (index) => {
         if (Object.keys(ideaDetailRef.current).length > 0) {
             ideaDetailRef.current[index].scrollIntoView({
@@ -602,13 +602,13 @@ const Homepage = () => {
                 block: 'nearest',
                 inline: 'end'
             });
-//             var scrollTimeout;
-// addEventListener('scroll', function(e) {
-//     clearTimeout(scrollTimeout);
-//     scrollTimeout = setTimeout(function() {
-//         console.log('Scroll ended');
-//     }, 100);
-// });
+
+            scrollTimeout.current = setTimeout(() => {
+                window.scrollBy({
+                    top: 20,
+                    behavior: 'smooth'
+                });
+            }, 1000);
             // const marginSize = window.getComputedStyle(ideaDetailRef.current[index]).margin.split(' ')[2].replace('px', '')
             // window.scrollBy({
             //     top: (ideaDetailRef.current[index].getBoundingClientRect().top - ideaDetailRef.current[index].getBoundingClientRect().height + window.scrollY + -20 + marginSize),
@@ -618,6 +618,23 @@ const Homepage = () => {
             
         }
     }
+
+    useEffect(() => {
+        const handleScroll = (e) => {
+            console.log(e);
+            
+            if (scrollTimeout.current) {
+                clearTimeout(scrollTimeout.current);
+            }
+        };
+    
+        window.addEventListener('scroll', handleScroll);
+    
+        // Cleanup the event listener when the component unmounts
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     return (
         <Page>
@@ -829,13 +846,13 @@ const Homepage = () => {
                         <div style={{ width: '48vw', border: '0.1vw solid black', padding: '0.5vw', marginBottom: '2vw' }} className="flex h-auto overflow-hidden">
                             <div className="w-full h-full flex relative overflow-hidden">
                                 {/* <div className="w-full relative"> */}
-                                {isData.map((item, index) => {
+                                {isData.map((item, index1) => {
                                     return (
-                                        <div key={`${item}${index}`} className="w-1/2 select-none pointer-events-none" style={{ transition: '2s', translate: `-${currentProject * 100}%`, flex: '0 0 50%' }}>
+                                        <div key={`${item}${index1}`} className="w-1/2 select-none pointer-events-none" style={{ transition: '1500ms', translate: `-${currentProject * 100}%`, flex: '0 0 50%' }}>
                                             <div className="w-full select-none pointer-events-none flex flex-col-reverse overflow-hidden" style={{ height: '10vw', marginBottom: '0.5vw' }}>
                                                 {item.Img.map((item, index) => {
                                                     return(
-                                                        <div key={`${item}${index}`} className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '10vw', transition: '2s', translate: `0 ${currentImage[index] * 100}%`, flex: '0 0 100%' }}>
+                                                        <div key={`${item}${index}`} className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '10vw', transition: '500ms', translate: `0 ${currentImage[index1] * 100}%`, flex: '0 0 100%' }}>
                                                             <img className={`absolute w-full h-full object-cover blur-sm pointer-events-none`} src={`https://olldesign.jp/storage/${item}`} alt="" />
                                                             <img className={`w-full h-full object-contain pointer-events-none scale-100 absolute`} src={`https://olldesign.jp/storage/${item}`} alt="" />
                                                         </div>
@@ -887,14 +904,22 @@ const Homepage = () => {
                         <div className="flex justify-between flex-wrap items-stretch" style={{ width: '48.5vw', fontSize: '1.1vw', fontWeight: '500', gap: '1vw' }}>
                             {isLanguage.homepage[3]['children'].map((item, index) => {
                                 return (
-                                    <div key={`${item}${index}`} className="flex flex-col justify-center items-center cursor-pointer" style={{ flex: '1 1 28%' }}>
-                                        <div ref={(element) => skillsLoadRef(element, index)} onClick={() => scrollToIdea(index)} className="w-full flex justify-center items-center text-center bg-white" style={{ border: '0.1vw solid black', padding: '1vw 2vw', marginBottom: '0.6vw', fontSize: '1vw', fontFamily: "'kozuka-mincho-pro', sans-serif" }}>
+                                    <Link 
+                                    key={`${item}${index}`}
+                                    className="flex flex-col justify-center items-center cursor-pointer no-underline text-black" style={{ flex: '1 1 28%' }}
+                                    to={`ideaScroll${index}`} 
+                                    spy={true} 
+                                    smooth={true} 
+                                    offset={-50} 
+                                    duration={100}
+                                    >
+                                        <div ref={(element) => skillsLoadRef(element, index)} className="w-full flex justify-center items-center text-center bg-white" style={{ border: '0.1vw solid black', padding: '1vw 2vw', marginBottom: '0.6vw', fontSize: '1vw', fontFamily: "'kozuka-mincho-pro', sans-serif" }}>
                                             {item}
                                         </div>
                                         <div style={{ width: '1.8vw', height:'auto' }}>
                                             <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
                                         </div>
-                                    </div>
+                                    </Link>
                                 )
                             })}
                         </div>
@@ -907,43 +932,45 @@ const Homepage = () => {
                     <div className="seventh" style={{ marginBottom: '1vw', }}>
                         {isLanguage.homepage[4]['childrenDetail'].map((itemReference, index) => {
                             return (
-                                <div key={`${itemReference}${index}`} ref={(el) => ideaDetailRefLoad(el, index)} style={{ width: '48.2vw', marginBottom: '4vw' }} className={`flex flex-col justify-center items-center`}>
-                                    <div className="w-full" style={{ marginBottom: '1vw' }}>
-                                        <div className="w-full flex" style={{ backgroundColor: 'white', padding: '0.5vw 1vw', borderRadius: '1vw', boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.2), -5px -5px 10px rgba(0, 0, 0, 0.1)' }}>
-                                            <div className="relative flex flex-col justify-center items-center" style={{width: '20vw', padding: '1vw', fontSize: '0.8vw' }}>
-                                                <div className="relative" style={{ width: '5vw' }}>
-                                                    <img className={`object-contain`} style={{ width: '48.5vw' }} src={itemReference.img} alt="" />
+                                <Element name={`ideaScroll${index}`}>
+                                    <div key={`${itemReference}${index}`} style={{ width: '48.2vw', marginBottom: '4vw' }} className={`flex flex-col justify-center items-center`}>
+                                        <div className="w-full" style={{ marginBottom: '1vw' }}>
+                                            <div className="w-full flex" style={{ backgroundColor: 'white', padding: '0.5vw 1vw', borderRadius: '1vw', boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.2), -5px -5px 10px rgba(0, 0, 0, 0.1)' }}>
+                                                <div className="relative flex flex-col justify-center items-center" style={{width: '20vw', padding: '1vw', fontSize: '0.8vw' }}>
+                                                    <div className="relative" style={{ width: '5vw' }}>
+                                                        <img className={`object-contain`} style={{ width: '48.5vw' }} src={itemReference.img} alt="" />
+                                                    </div>
+                                                    <div className="font-medium text-center" style={{ fontSize: '1.2vw' }}>
+                                                        {itemReference.title}
+                                                    </div>
                                                 </div>
-                                                <div className="font-medium text-center" style={{ fontSize: '1.2vw' }}>
-                                                    {itemReference.title}
-                                                </div>
-                                            </div>
-                                            <div ref={ideaDescRef} className="w-full">
-                                                {itemReference.desc.split('|||').map((item, index) => {
-                                                    return (
-                                                        <div key={`${item}${index}`} className="w-full flex items-center" style={{ height: `${ideaDescHeight > 0 ? `${ideaDescHeight}px` :  `auto`}`, fontSize: '1vw', fontStyle: "'a-otfud-shin-go-pr6n', sans-serif", backgroundColor: '#403c3c', padding: '0.1vw 2vw 0.1vw 0.1vw', margin: '0.5vw 0', clipPath: 'polygon(0% 0%, 100% 0%, 97% 100%, 0% 100%)' }}>
-                                                            <div className="w-fit h-fit">
-                                                                {item.split('*').map((item, index) => {
-                        
-                                                                    const colorText = index === 1 ? '#D8DC24' : 'white'
-                        
-                                                                    return (
-                                                                        <span key={`${item}${index}`} style={{ color: colorText }}>
-                                                                            {item}
-                                                                        </span>
-                                                                    )
-                                                                })}
+                                                <div ref={ideaDescRef} className="w-full">
+                                                    {itemReference.desc.split('|||').map((item, index) => {
+                                                        return (
+                                                            <div key={`${item}${index}`} className="w-full flex items-center" style={{ height: `${ideaDescHeight > 0 ? `${ideaDescHeight}px` :  `auto`}`, fontSize: '1vw', fontStyle: "'a-otfud-shin-go-pr6n', sans-serif", backgroundColor: '#403c3c', padding: '0.1vw 2vw 0.1vw 0.1vw', margin: '0.5vw 0', clipPath: 'polygon(0% 0%, 100% 0%, 97% 100%, 0% 100%)' }}>
+                                                                <div className="w-fit h-fit">
+                                                                    {item.split('*').map((item, index) => {
+                            
+                                                                        const colorText = index === 1 ? '#D8DC24' : 'white'
+                            
+                                                                        return (
+                                                                            <span key={`${item}${index}`} style={{ color: colorText }}>
+                                                                                {item}
+                                                                            </span>
+                                                                        )
+                                                                    })}
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    )
-                                                })}
+                                                        )
+                                                    })}
+                                                </div>
                                             </div>
                                         </div>
+                                        <div className="flex justify-center items-center text-center" style={{ width: '15vw', fontSize: '1.2vw', color: 'white', backgroundColor: '#20248c', borderRadius: '1vw' }}>
+                                            {itemReference.button}
+                                        </div>
                                     </div>
-                                    <div className="flex justify-center items-center text-center" style={{ width: '15vw', fontSize: '1.2vw', color: 'white', backgroundColor: '#20248c', borderRadius: '1vw' }}>
-                                        {itemReference.button}
-                                    </div>
-                                </div>
+                                </Element>
                             )
                         })}
                     </div>
