@@ -347,6 +347,23 @@ const Homepage = () => {
             const loopLoading = async () => {
                 for (let index = loadingText; index <= totalData; index++) {
                     await sleep(10)
+                    if (timeoutRef.current) {
+                        clearTimeout(timeoutRef.current);
+                    }
+                    timeoutRef.current = setTimeout(() => {
+                        if (loadingRef.current) {
+                            loadingRef.current.style.fontSize = '3vw'
+                            loadingRef.current.innerText = 'Data Image Can\'t be proceed properly.'
+                            setTimeout(() => {
+                                window.location.reload()
+                                loadingRef.current.style.transition = '2s'
+                                loadingRef.current.style.opacity = '0'
+                            }, 3000);
+                            setTimeout(() => {
+                                loadingRef.current.style.display = 'none'
+                            }, 2000);
+                        }
+                    }, 12000);
                     if (index <= 100) {
                         setLoadingText(index)
                     }
@@ -361,6 +378,9 @@ const Homepage = () => {
     const timeoutRef = useRef(null);
 
     useEffect(() => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
         timeoutRef.current = setTimeout(() => {
             if (loadingRef.current) {
                 loadingRef.current.style.fontSize = '3vw'
@@ -587,54 +607,6 @@ const Homepage = () => {
         }
         
     }, [isData])
-
-    const ideaDetailRef = useRef({})
-
-    const ideaDetailRefLoad = (element, index) => {
-        ideaDetailRef.current[index] = element
-    }
-
-    const scrollTimeout = useRef(null);
-    const scrollToIdea = (index) => {
-        if (Object.keys(ideaDetailRef.current).length > 0) {
-            ideaDetailRef.current[index].scrollIntoView({
-                behavior: 'smooth',
-                block: 'nearest',
-                inline: 'end'
-            });
-
-            scrollTimeout.current = setTimeout(() => {
-                window.scrollBy({
-                    top: 20,
-                    behavior: 'smooth'
-                });
-            }, 1000);
-            // const marginSize = window.getComputedStyle(ideaDetailRef.current[index]).margin.split(' ')[2].replace('px', '')
-            // window.scrollBy({
-            //     top: (ideaDetailRef.current[index].getBoundingClientRect().top - ideaDetailRef.current[index].getBoundingClientRect().height + window.scrollY + -20 + marginSize),
-            //     behavior: 'smooth'
-            //   });
-            // console.log(ideaDetailRef.current[index].getBoundingClientRect().top - ideaDetailRef.current[index].getBoundingClientRect().height + window.scrollY + -20 - (Number(marginSize)));
-            
-        }
-    }
-
-    useEffect(() => {
-        const handleScroll = (e) => {
-            console.log(e);
-            
-            if (scrollTimeout.current) {
-                clearTimeout(scrollTimeout.current);
-            }
-        };
-    
-        window.addEventListener('scroll', handleScroll);
-    
-        // Cleanup the event listener when the component unmounts
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
 
     return (
         <Page>
