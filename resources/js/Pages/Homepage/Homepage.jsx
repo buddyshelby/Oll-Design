@@ -409,6 +409,14 @@ const Homepage = () => {
                         // else if (nextValue < 0) return totalDataIndex
                         else return nextValue
                     })
+                    setCurrentPeople(prev => {
+                        const totalDataIndex = isLanguage.homepage[5]['thePeople'].length
+                        const nextValue = prev + 1
+                        
+                        if (nextValue > totalDataIndex - 2) return 0
+                        // else if (nextValue < 0) return totalDataIndex
+                        else return nextValue
+                    })
                     setTimeout(runAnimation, 7000);
                 }
                 
@@ -446,35 +454,35 @@ const Homepage = () => {
                     id
                 ])
             }
-            function runAnimationPeople() {
-                function animate() {
-                    setCurrentPeople(prev => {
-                        const totalDataIndex = isLanguage.homepage[5]['thePeople'].length
-                        const nextValue = prev + 1
+            // function runAnimationPeople() {
+            //     function animate() {
+            //         setCurrentPeople(prev => {
+            //             const totalDataIndex = isLanguage.homepage[5]['thePeople'].length
+            //             const nextValue = prev + 1
                         
-                        if (nextValue > totalDataIndex - 2) return 0
-                        // else if (nextValue < 0) return totalDataIndex
-                        else return nextValue
-                    })
-                    setTimeout(runAnimationPeople, 7000);
-                }
+            //             if (nextValue > totalDataIndex - 2) return 0
+            //             // else if (nextValue < 0) return totalDataIndex
+            //             else return nextValue
+            //         })
+            //         setTimeout(runAnimationPeople, 7000);
+            //     }
                 
-                const id = requestAnimationFrame(animate);
-                setAnimationIds(prev => [
-                    ...prev,
-                    id
-                ])
-            }
+            //     const id = requestAnimationFrame(animate);
+            //     setAnimationIds(prev => [
+            //         ...prev,
+            //         id
+            //     ])
+            // }
               
             // Start the loop
             const id = requestAnimationFrame(runAnimation);
             const id2 = requestAnimationFrame(runAnimationChild);
-            const id3 = requestAnimationFrame(runAnimationPeople);
+            // const id3 = requestAnimationFrame(runAnimationPeople);
             setAnimationIds(prev => [
                 ...prev,
                 id,
                 id2,
-                id3
+                // id3
             ])
 
             return () => {
@@ -483,6 +491,8 @@ const Homepage = () => {
         }
         
     }, [isData])
+
+    const [ideaButton, setIdeaButton] = useState('') 
 
     return (
         <Page>
@@ -758,15 +768,22 @@ const Homepage = () => {
                                 return (
                                     <Link 
                                     key={`${item}${index}`}
-                                    className="flex flex-col justify-center items-center cursor-pointer no-underline text-black" style={{ flex: '1 1 28%' }}
+                                    className="relative flex flex-col justify-center items-center cursor-pointer no-underline text-black" style={{ flex: '1 1 28%' }}
+                                    onMouseEnter={() => setIdeaButton(`ideaAboveButton${index}`)}
+                                    onMouseLeave={() => setIdeaButton('')}
                                     to={`ideaScroll${index}`} 
                                     spy={true} 
                                     smooth={true} 
                                     offset={-50} 
                                     duration={100}
                                     >
-                                        <div ref={(element) => skillsLoadRef(element, index)} className="w-full flex justify-center items-center text-center bg-white" style={{ border: '0.1vw solid black', padding: '1vw 2vw', marginBottom: '0.6vw', fontSize: '1vw', fontFamily: "'kozuka-mincho-pro', sans-serif" }}>
+                                        <div ref={(element) => skillsLoadRef(element, index)} className="relative w-full flex justify-center items-center text-center bg-white" style={{ transition: '1s', border: '0.1vw solid black', padding: '1vw 2vw', marginBottom: '0.6vw', fontSize: '1vw', fontFamily: "'kozuka-mincho-pro', sans-serif", color: ideaButton === `ideaAboveButton${index}` ? '#20248c' : 'black' }}>
+                                            <div className="absolute w-full h-full overflow-hidden">
+                                                <div className="w-full h-full flex justify-center items-center text-black text-center" style={{ transition: '1s', willChange: 'translate', translate: ideaButton === `ideaAboveButton${index}` ? '0%' : '-100%', backgroundColor: '#D8DC24', padding: '1vw 2vw', marginBottom: '0.6vw', fontSize: '1vw', fontFamily: "'kozuka-mincho-pro', sans-serif" }} />
+                                            </div>
+                                            <span className="relative">
                                             {item}
+                                            </span>
                                         </div>
                                         <div style={{ width: '1.8vw', height:'auto' }}>
                                             <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
@@ -818,8 +835,13 @@ const Homepage = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="flex justify-center items-center text-center" style={{ width: '15vw', fontSize: '1.2vw', color: 'white', backgroundColor: '#20248c', borderRadius: '1vw' }}>
-                                            {itemReference.button}
+                                        <div className="relative flex justify-center items-center text-center cursor-pointer" onMouseEnter={() => setIdeaButton(`ideaBelowButton${index}`)} onMouseLeave={() => setIdeaButton('')} style={{ width: '15vw', fontSize: '1.2vw', color: ideaButton === `ideaBelowButton${index}` ? '#20248c' : 'white', backgroundColor: ideaButton === `ideaBelowButton${index}` ? 'white' : '#20248c', borderRadius: '1vw', transition: '1s' }}>
+                                            {/* <div className="absolute w-full h-full overflow-hidden">
+                                                <div className="w-full h-full flex justify-center items-center text-black text-center" style={{ transition: '500ms', willChange: 'scale', scale: ideaButton === `ideaBelowButton${index}` ? '1' : '0', backgroundColor: 'white',  borderRadius: '1vw' }} />
+                                            </div> */}
+                                            <span className="relative">
+                                                {itemReference.button}
+                                            </span>
                                         </div>
                                     </div>
                                 </Element>
