@@ -212,6 +212,8 @@ const Homepage = () => {
                 allImage(item)
             };
         })
+        console.log(isData);
+        
     }, [isData])
 
     useEffect(() => {
@@ -693,6 +695,10 @@ const Homepage = () => {
                             <div className="w-full h-full flex relative overflow-hidden">
                                 {/* <div className="w-full relative"> */}
                                 {isData.map((item, index1) => {
+                                    const date = new Date(item.Date)
+                                    date.setMonth(date.getMonth() + 1)
+                                    const month = date.getMonth()
+                                    const year = date.getFullYear()
                                     return (
                                         <div key={`${item}${index1}`} className="w-1/2 select-none pointer-events-none" style={{ transition: '1500ms', translate: `-${currentProject * 100}%`, flex: '0 0 50%' }}>
                                             <div className="w-full select-none pointer-events-none flex flex-col-reverse overflow-hidden" style={{ height: '10vw', marginBottom: '0.5vw' }}>
@@ -709,15 +715,15 @@ const Homepage = () => {
                                                 <div className="flex flex-col" style={{ width: '95%', fontSize: '0.9vw' }}>
                                                     <div className="relative flex w-full">
                                                         <div>
-                                                            PACKAGE DESIGN
+                                                            {item.City_Name}
                                                         </div>
                                                         <div className="absolute right-0">
-                                                            2025.0
+                                                            {year}.{month}
                                                         </div>
                                                     </div>
                                                     <div className="border-slate-600" style={{ borderTop: '0.1vw solid' }} />
                                                     <div>
-                                                        WAKAYAMA
+                                                        {item.City_Name}
                                                     </div>
                                                 </div>
                                             </div>
