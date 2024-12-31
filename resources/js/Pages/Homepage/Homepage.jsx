@@ -836,9 +836,6 @@ const Homepage = () => {
                                             </div>
                                         </div>
                                         <div className="relative flex justify-center items-center text-center cursor-pointer" onMouseEnter={() => setIdeaButton(`ideaBelowButton${index}`)} onMouseLeave={() => setIdeaButton('')} style={{ width: '15vw', fontSize: '1.2vw', color: ideaButton === `ideaBelowButton${index}` ? '#20248c' : 'white', backgroundColor: ideaButton === `ideaBelowButton${index}` ? 'white' : '#20248c', borderRadius: '1vw', transition: '1s' }}>
-                                            {/* <div className="absolute w-full h-full overflow-hidden">
-                                                <div className="w-full h-full flex justify-center items-center text-black text-center" style={{ transition: '500ms', willChange: 'scale', scale: ideaButton === `ideaBelowButton${index}` ? '1' : '0', backgroundColor: 'white',  borderRadius: '1vw' }} />
-                                            </div> */}
                                             <span className="relative">
                                                 {itemReference.button}
                                             </span>
