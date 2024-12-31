@@ -494,31 +494,74 @@ const Homepage = () => {
         }
     }, [ideaDescRef.current])
 
-    const [currentProject, setCurrentProject] = useState([0, 1])
-    const [sliceFrom, setSliceFrom] = useState([0, 1])
+    const [currentProject, setCurrentProject] = useState(0)
+    const [currentImage, setCurrentImage] = useState([])
+    const [currentPeople, setCurrentPeople] = useState(0)
     const [animationIds, setAnimationIds] = useState([])
     const imageSlideRef = useRef([])
-
-    const imageSlideRefLoad = (element, index) => {
-        imageSlideRef.current[index] = element
-    }
 
     useEffect(() => {
         if (isData.length > 0) {
             function runAnimation() {
-                function animate(timestamp) {
-                    setSliceFrom(prev => {
+                function animate() {
+                    setCurrentProject(prev => {
                         console.log(prev);
 
-                        const totalDataIndex = isData.length - 1
+                        const totalDataIndex = isData.length
+                        const nextValue = prev + 1
                         
-                        const firstNum = prev[0] + 2
-                        const secondNum = prev[1] + 2
-                        if (secondNum === totalDataIndex + 1) return [firstNum, firstNum]
-                        else if (secondNum > totalDataIndex) return [0, 1]
-                        else return [firstNum, secondNum]
+                        if (nextValue > totalDataIndex - 2) return 0
+                        // else if (nextValue < 0) return totalDataIndex
+                        else return nextValue
                     })
                     setTimeout(runAnimation, 7000);
+                }
+                
+                const id = requestAnimationFrame(animate);
+                setAnimationIds(prev => [
+                    ...prev,
+                    id
+                ])
+            }
+            function runAnimationChild() {
+                function animate() {
+                    setCurrentImage(prev => {
+
+                        const newValueArray = []
+                        isData.forEach((itemData, index) => {
+                            const totalDataIndex = itemData.Img.length - 2
+                            const nextValue = prev.length > 0 ? prev[index] + 1 : 0
+
+                            if (nextValue > totalDataIndex) newValueArray.push(0)
+                            // else if (nextValue < 0) return totalDataIndex
+                            else newValueArray.push(nextValue)
+                        })
+                        
+                        return newValueArray
+                        
+                    })
+                    setTimeout(runAnimationChild, 3500);
+                }
+                
+                const id = requestAnimationFrame(animate);
+                setAnimationIds(prev => [
+                    ...prev,
+                    id
+                ])
+            }
+            function runAnimationPeople() {
+                function animate() {
+                    setCurrentPeople(prev => {
+                        console.log(prev);
+
+                        const totalDataIndex = isLanguage.homepage[5]['thePeople'].length
+                        const nextValue = prev + 1
+                        
+                        if (nextValue > totalDataIndex - 2) return 0
+                        // else if (nextValue < 0) return totalDataIndex
+                        else return nextValue
+                    })
+                    setTimeout(runAnimationPeople, 7000);
                 }
                 
                 const id = requestAnimationFrame(animate);
@@ -530,40 +573,51 @@ const Homepage = () => {
               
             // Start the loop
             const id = requestAnimationFrame(runAnimation);
+            const id2 = requestAnimationFrame(runAnimationChild);
+            const id3 = requestAnimationFrame(runAnimationPeople);
             setAnimationIds(prev => [
                 ...prev,
-                id
+                id,
+                id2,
+                id3
             ])
 
             return () => {
                 animationIds.forEach(id => cancelAnimationFrame(id))
             }
         }
+        
     }, [isData])
 
-    useEffect(() => {
-        if (imageSlideRef.current.length > 0) {
-            imageSlideRef.current.forEach((item, index) => {
-                item.style.transition = '1s'
-                item.style.opacity = '1'
-                setTimeout(() => {
-                    item.style.translate = '-200%'
-                    item.style.opacity = '0'
-                }, 50);
-                setTimeout(() => {
-                    item.style.transition = '0s'
-                }, 1050);
-                setTimeout(() => {
-                    setCurrentProject(sliceFrom)
-                }, 1500);
-            })
-        }
-    }, [sliceFrom])
+    const ideaDetailRef = useRef({})
 
-    // useEffect(() => {
-    //     console.log(currentProject);
-        
-    // }, [currentProject])
+    const ideaDetailRefLoad = (element, index) => {
+        ideaDetailRef.current[index] = element
+    }
+
+    const scrollToIdea = (index) => {
+        if (Object.keys(ideaDetailRef.current).length > 0) {
+            ideaDetailRef.current[index].scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'end'
+            });
+//             var scrollTimeout;
+// addEventListener('scroll', function(e) {
+//     clearTimeout(scrollTimeout);
+//     scrollTimeout = setTimeout(function() {
+//         console.log('Scroll ended');
+//     }, 100);
+// });
+            // const marginSize = window.getComputedStyle(ideaDetailRef.current[index]).margin.split(' ')[2].replace('px', '')
+            // window.scrollBy({
+            //     top: (ideaDetailRef.current[index].getBoundingClientRect().top - ideaDetailRef.current[index].getBoundingClientRect().height + window.scrollY + -20 + marginSize),
+            //     behavior: 'smooth'
+            //   });
+            // console.log(ideaDetailRef.current[index].getBoundingClientRect().top - ideaDetailRef.current[index].getBoundingClientRect().height + window.scrollY + -20 - (Number(marginSize)));
+            
+        }
+    }
 
     return (
         <Page>
@@ -773,137 +827,40 @@ const Homepage = () => {
                     </div>
                     <div className="third w-full flex flex-col justify-center items-center bg-white">
                         <div style={{ width: '48vw', border: '0.1vw solid black', padding: '0.5vw', marginBottom: '2vw' }} className="flex h-auto overflow-hidden">
-                            <div className="w-full h-full flex relative">
-                                <div className="w-full invisible select-none pointer-events-none">
-                                    <div className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '10vw', marginBottom: '0.5vw' }}>
-                                        <img className={`absolute w-full h-full object-cover blur-sm pointer-events-none`} src={`https://olldesign.jp/storage/images/3a0tBqacm1DRUCkyfH2C1IbkSdJU7yxQYBxBMHCg.jpg`} alt="" />
-                                        <img className={`w-fit h-full object-contain pointer-events-none ${classes['imageSlide']}`} src={`https://olldesign.jp/storage/images/3a0tBqacm1DRUCkyfH2C1IbkSdJU7yxQYBxBMHCg.jpg`} alt="" />
-                                    </div>
-                                    <div className="w-full flex justify-center items-center">
-                                        <div className="flex flex-col" style={{ width: '95%', fontSize: '0.9vw' }}>
-                                            <div className="relative flex w-full">
-                                                <div>
-                                                    PACKAGE DESIGN
-                                                </div>
-                                                <div className="absolute right-0">
-                                                    2025.0
-                                                </div>
-                                            </div>
-                                            <div className="border-slate-600" style={{ borderTop: '0.1vw solid' }} />
-                                            <div>
-                                                WAKAYAMA
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="w-full h-full flex absolute">
-                                    <div className="w-full">
-                                        <div className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '10vw', marginBottom: '0.5vw' }}>
-                                            {
-                                                isData.map((item, index) => {
-                                                    const date = new Date(item.Date)
-                                                    date.setMonth(date.getMonth() + 1)
-                                                    const month = date.getMonth()
-                                                    const year = date.getFullYear()
-                                                    return (
-                                                        <Fragment key={`${item}${index}`}>
-                                                            <img style={currentProject[0] === index ? {} : { translate: '200%', transition: '0s' }} ref={(el) => currentProject[0] === index ? imageSlideRefLoad(el, 0) : {}} className={`absolute w-full h-full object-cover blur-sm pointer-events-none ${currentProject[0] === index ? classes['imageShow'] : 'opacity-0'}`} src={item['randomImage']} alt="" />
-                                                            <img style={currentProject[0] === index ? {} : { translate: '200%', transition: '0s' }} ref={(el) => currentProject[0] === index ? imageSlideRefLoad(el, 1) : {}} className={`absolute w-fit h-full object-contain pointer-events-none ${classes['imageSlide']} ${currentProject[0] === index ? classes['imageShow'] : 'opacity-0'}`} src={item['randomImage']} alt="" />
-                                                        </Fragment>
-                                                    )
-                                                })
-                                            }
-                                        </div>
-                                        <div className="w-full flex justify-center items-center">
-                                            <div className="flex flex-col" style={{ width: '95%', fontSize: '0.9vw' }}>
-                                                <div className="relative flex w-full">
-                                                    <div className={`left-0 pointer-events-none invisible`}>
-                                                        PACKAGE DESIGN
-                                                    </div>
-                                                    <div className={`right-0 pointer-events-none invisible`}>
-                                                        2024.10
-                                                    </div>
-                                                    {
-                                                        isData.map((item, index) => {
-                                                            const date = new Date(item.Date)
-                                                            date.setMonth(date.getMonth() + 1)
-                                                            const month = date.getMonth()
-                                                            const year = date.getFullYear()
-                                                            return (
-                                                                <Fragment key={`${item}${index}`}>
-                                                                    {/* <img style={currentProject[0] === index ? {} : { translate: '200%', transition: '0s' }} ref={(el) => currentProject[0] === index ? imageSlideRefLoad(el, 0) : {}} className={`absolute w-full h-full object-cover blur-sm pointer-events-none ${currentProject[0] === index ? classes['imageShow'] : 'opacity-0'}`} src={item['randomImage']} alt="" />
-                                                                    <img style={currentProject[0] === index ? {} : { translate: '200%', transition: '0s' }} ref={(el) => currentProject[0] === index ? imageSlideRefLoad(el, 1) : {}} className={`absolute w-fit h-full object-contain pointer-events-none ${classes['imageSlide']} ${currentProject[0] === index ? classes['imageShow'] : 'opacity-0'}`} src={item['randomImage']} alt="" /> */}
-                                                                    <div style={currentProject[0] === index ? {} : { translate: '200%', transition: '0s' }} ref={(el) => currentProject[0] === index ? imageSlideRefLoad(el, 2) : {}} className={`absolute left-0 pointer-events-none ${currentProject[0] === index ? classes['imageShow'] : 'opacity-0'}`}>
-                                                                        PACKAGE DESIGN
-                                                                    </div>
-                                                                    <div style={currentProject[0] === index ? {} : { translate: '200%', transition: '0s' }} ref={(el) => currentProject[0] === index ? imageSlideRefLoad(el, 3) : {}} className={`absolute right-0 pointer-events-none ${currentProject[0] === index ? classes['imageShow'] : 'opacity-0'}`}>
-                                                                        2024.10
-                                                                    </div>
-                                                                </Fragment>
-                                                            )
-                                                        })
-                                                    }
-                                                </div>
-                                                <div className="border-slate-600" style={{ borderTop: '0.1vw solid' }} />
-                                                <div>
-                                                    WAKAYAMA
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="w-full">
-                                        <div className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '10vw', marginBottom: '0.5vw' }}>
-                                            <img className={`absolute w-full h-full object-cover blur-sm pointer-events-none`} src={`https://olldesign.jp/storage/images/3a0tBqacm1DRUCkyfH2C1IbkSdJU7yxQYBxBMHCg.jpg`} alt="" />
-                                            <img className={`w-fit h-full object-contain pointer-events-none ${classes['imageSlide']}`} src={`https://olldesign.jp/storage/images/3a0tBqacm1DRUCkyfH2C1IbkSdJU7yxQYBxBMHCg.jpg`} alt="" />
-                                        </div>
-                                        <div className="w-full flex justify-center items-center">
-                                            <div className="flex flex-col" style={{ width: '95%', fontSize: '0.9vw' }}>
-                                                <div className="relative flex w-full">
-                                                    <div>
-                                                        PACKAGE DESIGN
-                                                    </div>
-                                                    <div className="absolute right-0">
-                                                        2025.0
-                                                    </div>
-                                                </div>
-                                                <div className="border-slate-600" style={{ borderTop: '0.1vw solid' }} />
-                                                <div>
-                                                    WAKAYAMA
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* {imageSlideData.map((item, index) => {
-                                    const date = new Date(item.Date)
-                                    date.setMonth(date.getMonth() + 1)
-                                    const month = date.getMonth()
-                                    const year = date.getFullYear()
+                            <div className="w-full h-full flex relative overflow-hidden">
+                                {/* <div className="w-full relative"> */}
+                                {isData.map((item, index) => {
                                     return (
-                                        <div key={`${item}${index}`} className="w-full">
-                                            <div ref={(el) => imageSlideLoad(el, index)} className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '10vw', marginBottom: '0.5vw' }}>
-                                                <img className={`absolute w-full h-full object-cover blur-sm pointer-events-none`} src={item['randomImage']} alt="" />
-                                                <img className={`w-fit h-full object-contain pointer-events-none ${classes['imageSlide']}`} src={item['randomImage']} alt="" />
+                                        <div key={`${item}${index}`} className="w-1/2 select-none pointer-events-none" style={{ transition: '2s', translate: `-${currentProject * 100}%`, flex: '0 0 50%' }}>
+                                            <div className="w-full select-none pointer-events-none flex flex-col-reverse overflow-hidden" style={{ height: '10vw', marginBottom: '0.5vw' }}>
+                                                {item.Img.map((item, index) => {
+                                                    return(
+                                                        <div key={`${item}${index}`} className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '10vw', transition: '2s', translate: `0 ${currentImage[index] * 100}%`, flex: '0 0 100%' }}>
+                                                            <img className={`absolute w-full h-full object-cover blur-sm pointer-events-none`} src={`https://olldesign.jp/storage/${item}`} alt="" />
+                                                            <img className={`w-full h-full object-contain pointer-events-none scale-100 absolute`} src={`https://olldesign.jp/storage/${item}`} alt="" />
+                                                        </div>
+                                                    )
+                                                })}
                                             </div>
                                             <div className="w-full flex justify-center items-center">
                                                 <div className="flex flex-col" style={{ width: '95%', fontSize: '0.9vw' }}>
                                                     <div className="relative flex w-full">
                                                         <div>
-                                                            {item.Name}
+                                                            PACKAGE DESIGN
                                                         </div>
                                                         <div className="absolute right-0">
-                                                            {year}.{month}
+                                                            2025.0
                                                         </div>
                                                     </div>
                                                     <div className="border-slate-600" style={{ borderTop: '0.1vw solid' }} />
                                                     <div>
-                                                        {item.City_Name}
+                                                        WAKAYAMA
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     )
-                                })} */}
+                                })}
                             </div>
                         </div>
                     </div>
@@ -912,14 +869,14 @@ const Homepage = () => {
                             <div className="w-full h-full absolute left-0 top-0">
                                 <img className={`w-full  h-full object-cover`} src="assets/homepage/Background.png" alt="" />
                             </div>
-                            <div className="w-full h-full flex" style={{ transition: '500ms', opacity: '1' }}>
-                                {/* {newPeople.map((item, index) => {
+                            <div className="w-full h-full flex overflow-hidden" style={{ transition: '500ms', opacity: '1' }}>
+                                {isLanguage.homepage[5]['thePeople'].map((item, index) => {
                                     return (
-                                        <div key={`${item}${index}`} className="w-full h-full relative">
+                                        <div key={`${item}${index}`} className="w-full h-full relative" style={{ transition: '2s', translate: `-${currentPeople * 100}%`, flex: '0 0 50%' }}>
                                             <img className={`w-full  h-full object-contain`} src={item} alt="" />
                                         </div>
                                     )
-                                })} */}
+                                })}
                             </div>
                         </div>
                     </div>
@@ -930,8 +887,8 @@ const Homepage = () => {
                         <div className="flex justify-between flex-wrap items-stretch" style={{ width: '48.5vw', fontSize: '1.1vw', fontWeight: '500', gap: '1vw' }}>
                             {isLanguage.homepage[3]['children'].map((item, index) => {
                                 return (
-                                    <div key={`${item}${index}`} className="flex flex-col justify-center items-center" style={{ flex: '1 1 28%' }}>
-                                        <div ref={(element) => skillsLoadRef(element, index)} className="w-full flex justify-center items-center text-center bg-white" style={{ border: '0.1vw solid black', padding: '1vw 2vw', marginBottom: '0.6vw', fontSize: '1vw', fontFamily: "'kozuka-mincho-pro', sans-serif" }}>
+                                    <div key={`${item}${index}`} className="flex flex-col justify-center items-center cursor-pointer" style={{ flex: '1 1 28%' }}>
+                                        <div ref={(element) => skillsLoadRef(element, index)} onClick={() => scrollToIdea(index)} className="w-full flex justify-center items-center text-center bg-white" style={{ border: '0.1vw solid black', padding: '1vw 2vw', marginBottom: '0.6vw', fontSize: '1vw', fontFamily: "'kozuka-mincho-pro', sans-serif" }}>
                                             {item}
                                         </div>
                                         <div style={{ width: '1.8vw', height:'auto' }}>
@@ -950,7 +907,7 @@ const Homepage = () => {
                     <div className="seventh" style={{ marginBottom: '1vw', }}>
                         {isLanguage.homepage[4]['childrenDetail'].map((itemReference, index) => {
                             return (
-                                <div key={`${itemReference}${index}`} style={{ width: '48.2vw', marginBottom: '4vw' }} className="flex flex-col justify-center items-center">
+                                <div key={`${itemReference}${index}`} ref={(el) => ideaDetailRefLoad(el, index)} style={{ width: '48.2vw', marginBottom: '4vw' }} className={`flex flex-col justify-center items-center`}>
                                     <div className="w-full" style={{ marginBottom: '1vw' }}>
                                         <div className="w-full flex" style={{ backgroundColor: 'white', padding: '0.5vw 1vw', borderRadius: '1vw', boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.2), -5px -5px 10px rgba(0, 0, 0, 0.1)' }}>
                                             <div className="relative flex flex-col justify-center items-center" style={{width: '20vw', padding: '1vw', fontSize: '0.8vw' }}>
