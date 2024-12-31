@@ -40,6 +40,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'a-otf-ud新ゴpr6n-l';
+    src: url('/assets/homepage/fonts/A-OTF UD新ゴ Pr6N L.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .imageSlide {
     position: absolute;
     animation: slowMoveImage 8s ease-in-out alternate;

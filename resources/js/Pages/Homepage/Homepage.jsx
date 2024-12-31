@@ -799,7 +799,7 @@ const Homepage = () => {
                                                 <div ref={ideaDescRef} className="w-full">
                                                     {itemReference.desc.split('|||').map((item, index) => {
                                                         return (
-                                                            <div key={`${item}${index}`} className="w-full flex items-center" style={{ height: `${ideaDescHeight > 0 ? `${ideaDescHeight}px` :  `auto`}`, fontSize: '1vw', fontStyle: "'a-otfud-shin-go-pr6n', sans-serif", backgroundColor: '#403c3c', padding: '0.1vw 2vw 0.1vw 0.1vw', margin: '0.5vw 0', clipPath: 'polygon(0% 0%, 100% 0%, 97% 100%, 0% 100%)' }}>
+                                                            <div key={`${item}${index}`} className="w-full flex items-center" style={{ height: `${ideaDescHeight > 0 ? `${ideaDescHeight}px` :  `auto`}`, fontSize: '1vw', fontStyle: "'a-otf-ud新ゴpr6n-l', sans-serif", backgroundColor: '#403c3c', padding: '0.1vw 2vw 0.1vw 0.1vw', margin: '0.5vw 0', clipPath: 'polygon(0% 0%, 100% 0%, 97% 100%, 0% 100%)' }}>
                                                                 <div className="w-fit h-fit">
                                                                     {item.split('*').map((item, index) => {
                             
