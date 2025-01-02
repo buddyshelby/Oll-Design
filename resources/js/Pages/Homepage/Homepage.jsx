@@ -733,7 +733,7 @@ const Homepage = () => {
                                                     </div>
                                                     <div className="border-slate-600" style={{ borderTop: '0.1vw solid' }} />
                                                     <div>
-                                                        {item.City_Name}
+                                                        {item.Name}
                                                     </div>
                                                 </div>
                                             </div>
