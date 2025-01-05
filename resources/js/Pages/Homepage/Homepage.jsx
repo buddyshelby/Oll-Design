@@ -454,30 +454,9 @@ const Homepage = () => {
                     id
                 ])
             }
-            // function runAnimationPeople() {
-            //     function animate() {
-            //         setCurrentPeople(prev => {
-            //             const totalDataIndex = isLanguage.homepage[5]['thePeople'].length
-            //             const nextValue = prev + 1
-                        
-            //             if (nextValue > totalDataIndex - 2) return 0
-            //             // else if (nextValue < 0) return totalDataIndex
-            //             else return nextValue
-            //         })
-            //         setTimeout(runAnimationPeople, 7000);
-            //     }
-                
-            //     const id = requestAnimationFrame(animate);
-            //     setAnimationIds(prev => [
-            //         ...prev,
-            //         id
-            //     ])
-            // }
-              
-            // Start the loop
+            
             const id = requestAnimationFrame(runAnimation);
             const id2 = requestAnimationFrame(runAnimationChild);
-            // const id3 = requestAnimationFrame(runAnimationPeople);
             setAnimationIds(prev => [
                 ...prev,
                 id,
@@ -501,149 +480,7 @@ const Homepage = () => {
                 <>
                 {matches ?
                 
-                <div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center overflow-hidden" style={{ padding: '10vw 0 0 0', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
-                    <div ref={loadingRef} className="fixed left-0 top-0 w-full h-screen flex justify-center items-center text-slate-800 z-20 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
-                        {loadingText}
-                    </div>
-                    <div className="first w-fit flex h-max" style={{ marginBottom: '4vw' }}>
-                        <div className="relative flex justify-center items-center z-10" style={{ width: '15vw', height: '15vw', padding: '0 2vw 0 0', fontSize: '8vw', color: '#10643C', transition: '1s', opacity: '0', transform: 'translate(0, -15vw)' }}>
-                            <img className={`w-full h-full object-contain`} src={isLanguage.homepage[0]['QMark']} alt="" />
-                        </div>
-                        <div className="flex flex-col justify-center">
-                            <div ref={firstQuestionRef} style={{ transition: '1s', opacity: '0', transform: 'translate(10vw, 0)' }} className="w-fit">
-                                <img className={`object-contain`} style={{ width: '62vw' }} src={isLanguage.homepage[0]['QHeader']} alt="" />
-                            </div>
-                            <div className="flex justify-center items-center" style={{ fontSize: '2vw', transition: '1s', opacity: '0', transform: 'translate(-20vw, 0)' }}>
-                                {isLanguage.homepage[0]['QDesc']}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="second w-fit flex h-max text-center" style={{ marginBottom: '0.5vw', transition: '1s', scale: '0', opacity: '0' }}>
-                        <div style={{ fontSize: '2.4vw', fontWeight: 'bold', textShadow: '0.1vw 0.2vw 0.4vw rgba(0, 0, 0, 0.5)' }}>
-                            <img className={`object-contain`} style={{ width: '81vw' }} src={isLanguage.homepage[1]['TopJP']} alt="" />
-                        </div>
-                    </div>
-                    <div className="third overflow-hidden" style={{  border: '0.1vw solid black', padding: '0.5vw', marginBottom: '4vw', transition: '1s', scale: '0', opacity: '0' }}>
-                        <div style={{ width: '76vw' }} className="flex h-auto">
-                            <div className="w-full h-full flex flex-col overflow-hidden">
-                                {imageSlideData.map((item, index) => {
-                                    const date = new Date(item.Date)
-                                    date.setMonth(date.getMonth() + 1)
-                                    const month = date.getMonth()
-                                    const year = date.getFullYear()
-                                    return (
-                                        <div key={`${item}${index}`} className="w-full" style={{ padding: '2vw', opacity: '0', transition: '500ms' }}>
-                                            <div ref={imageSlideRef} className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '30vw', marginBottom: '0.5vw' }}>
-                                                <img className={`absolute w-full h-full object-cover blur-sm pointer-events-none`} src={item['randomImage']} alt="" />
-                                                <img className={`w-fit h-full object-contain pointer-events-none ${classes['imageSlide']}`} src={item['randomImage']} alt="" />
-                                            </div>
-                                            <div className="w-full flex justify-center items-center">
-                                                <div className="flex flex-col" style={{ width: '95%', fontSize: '3vw' }}>
-                                                    <div className="relative flex w-full">
-                                                        <div>
-                                                            {item.Name}
-                                                        </div>
-                                                        <div className="absolute right-0">
-                                                            {year}.{month}
-                                                        </div>
-                                                    </div>
-                                                    <div className="border-slate-600" style={{ borderTop: '0.1vw solid' }} />
-                                                    <div>
-                                                        {item.City_Name}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="fourth relative overflow-hidden" style={{ width: '77vw', border: '0.1vw solid black', marginBottom: '4vw', transition: '1s', transform: 'translate(10vw)', opacity: '0' }}>
-                        <div style={{ width: '200vw', height: '28vw', willChange: 'translate' }} className="flex" >
-                            <div className="w-full h-full absolute left-0 top-0">
-                                <img className={`w-full  h-full object-cover`} src="assets/homepage/Background.png" alt="" />
-                            </div>
-                            {imagePeopleSrc.map((item, index) => {
-                                return (
-                                    <div key={`${item}${index}`} className="w-1/4 h-full relative">
-                                        <img className={`w-full  h-full object-contain`} style={{ padding: '2vw 0 0 0' }} src={item.src} alt="" />
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                    <div className="fifth w-fit flex flex-col items-center h-max" style={{ marginBottom: '6vw', }}>
-                        <div className="text-center" style={{ fontSize: '4.2vw', fontWeight: '500', letterSpacing: '0.1vw', marginBottom: '2vw', opacity: '0', translate: '0 20vw', transition: '1s' }}>
-                        &nbsp;{isLanguage.homepage[2]['ideaTitle']}
-                        </div>
-                        <div className="flex flex-col justify-between" style={{ width: '77vw', fontSize: '3vw', fontWeight: '500' }}>
-                            {isLanguage.homepage[2]['children'].map((item, index) => {
-                                return (
-                                    <div key={`${item}${index}`} className="flex flex-col justify-center items-center" style={{ width: '100%', opacity: '0', translate: '0 20vw', transition: '1s' }}>
-                                        <div className="w-full h-full flex justify-center items-center text-center" style={{ border: '0.1vw solid black', padding: '1vw', marginBottom: '2vw' }}>
-                                            {item}
-                                        </div>
-                                        <div style={{ width: '5vw', height:'auto', marginBottom: '2vw' }}>
-                                            <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                    <div className="sixth w-fit flex h-max" style={{ marginBottom: '12vw' }}>
-                        <div style={{ fontSize: '2vw', fontWeight: '500', letterSpacing: '0.5vw', opacity: '0', translate: '0 -10vw', transition: '1s' }}>
-                            <img className={`object-contain`} style={{ width: '77vw' }} src={isLanguage.homepage[3]['ideaHeader']} alt="" />
-                        </div>
-                    </div>
-                    <div className="seventh" style={{ marginBottom: '1vw', }}>
-                        <div style={{ width: '77vw' }}>
-                            {isLanguage.homepage[3]['childrenDetail'].map((item, index) => {
-                                return (
-                                    <div key={`${item}${index}`} className="w-full h-fit flex flex-col justify-center items-center" style={{ marginBottom: '10vw' }}>
-                                        <div className="relative flex justify-center items-end" style={{width: '55vw', height: '25vw', border: '0.1vw solid black', padding: '0 0.3vw 1.3vw 0.3vw', marginBottom: '3vw', fontSize: '4vw', opacity: '0', transition: '1s' }}>
-                                            <div className="absolute" style={{ width: '25vw', top: '-12vw', opacity: '0', scale: '0', transition: '1s' }}>
-                                                <img className={`w-full object-contain`} src={item.img} alt="" />
-                                            </div>
-                                            <div className="font-medium text-center" style={{ fontSize: '4vw', opacity: '0', translate: '0 5vw', transition: '1s' }}>
-                                                {item.title}
-                                            </div>
-                                        </div>
-                                        <div className="w-full h-fit flex flex-col" style={{ marginBottom: '5vw' }}>
-                                            <div style={{ fontSize: '4.5vw', fontWeight: '600', opacity: '0', translate: '-10vw 0', transition: '1s' }} className="w-full text-center">
-                                                {item.header}
-                                            </div>
-                                            <div className="font-medium text-justify" style={{ fontSize: '3vw', opacity: '0', translate: '20vw 0', transition: '1s' }}>
-                                                {item.desc.split('|||').map((item2, index2) => {
-                                                    return (
-                                                        <div key={`${item2}${index2}`}>
-                                                            {item2}
-                                                        </div>
-                                                    )
-                                                })}
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                    <div className="eighth" style={{ width: '76vw', marginBottom: '10vw' }}>
-                        <div className="font-bold" style={{ fontSize: '3.3vw', opacity: '0', translate: '-10vw', transition: '1s' }}>
-                            {isLanguage.homepage[4]['header']}
-                        </div>
-                        <div style={{ fontSize: '2.7vw', opacity: '0', translate: '10vw', transition: '1s' }}>
-                            {isLanguage.homepage[4]['desc'].split('|||').map((item, index) => {
-                                return (
-                                    <div key={`${item}${index}`}>
-                                        {item}
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                </div>
+                <></>
 
                 :
 
@@ -686,10 +523,10 @@ const Homepage = () => {
                     </div>
                     <div className="w-full bg-white flex flex-col justify-center items-center">
                         <div style={{ width: '47.5vw', marginBottom: '2vw' }}>
-                            <div style={{ marginBottom: '1vw', fontSize: '2vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold', color: '#0b6e43' }}>
+                            <div style={{ marginBottom: '1vw', fontSize: '2vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold', color: '#0b6e43', transition: '1s', translate: '-5vw', opacity: '0' }}>
                                {isLanguage.homepage[2]['head']}
                             </div>
-                            <div style={{ fontSize: '1.1vw', fontFamily: "'kozuka-mincho-pro', sans-serif" }}>
+                            <div style={{ fontSize: '1.1vw', fontFamily: "'kozuka-mincho-pro', sans-serif", transition: '1s', translate: '5vw', opacity: '0' }}>
                                {isLanguage.homepage[2]['desc'].split('|||').map((item, index) => {
                                     return (
                                         <div key={`${item}${index}`}>
@@ -701,7 +538,7 @@ const Homepage = () => {
                         </div>
                     </div>
                     <div className="third w-full flex flex-col justify-center items-center bg-white">
-                        <div style={{ width: '48vw', border: '0.1vw solid black', padding: '0.5vw', marginBottom: '2vw' }} className="flex h-auto overflow-hidden">
+                        <div style={{ width: '48vw', border: '0.1vw solid black', padding: '0.5vw', marginBottom: '2vw', transition: '1s', translate: '0 5vw', opacity: '0' }} className="flex h-auto overflow-hidden">
                             <div className="w-full h-full flex relative overflow-hidden">
                                 {/* <div className="w-full relative"> */}
                                 {isData.map((item, index1) => {
@@ -744,7 +581,7 @@ const Homepage = () => {
                         </div>
                     </div>
                     <div className="fourth w-full flex flex-col justify-center items-center bg-white">
-                        <div style={{ width: '48vw', height: '14vw', border: '0.1vw solid black', marginBottom: '2vw', padding: '2vw 0 0 0' }} className="relative flex">
+                        <div style={{ width: '48vw', height: '14vw', border: '0.1vw solid black', marginBottom: '2vw', padding: '2vw 0 0 0', transition: '1s', translate: '5vw', opacity: '0' }} className="relative flex">
                             <div className="w-full h-full absolute left-0 top-0">
                                 <img className={`w-full  h-full object-cover`} src="assets/homepage/Background.png" alt="" />
                             </div>
@@ -760,7 +597,7 @@ const Homepage = () => {
                         </div>
                     </div>
                     <div className="fifth w-fit flex flex-col items-center h-max">
-                        <div style={{ fontSize: '2.9vw', fontWeight: '500', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", marginBottom: '1vw' }}>
+                        <div style={{ fontSize: '2.9vw', fontWeight: '500', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", marginBottom: '1vw', transition: '1s', opacity: '0' }}>
                             &nbsp;{isLanguage.homepage[3]['ideaTitle']}
                         </div>
                         <div className="flex justify-between flex-wrap items-stretch" style={{ width: '48.5vw', fontSize: '1.1vw', fontWeight: '500', gap: '1vw' }}>
@@ -768,7 +605,8 @@ const Homepage = () => {
                                 return (
                                     <Link 
                                     key={`${item}${index}`}
-                                    className="relative flex flex-col justify-center items-center cursor-pointer no-underline text-black" style={{ flex: '1 1 28%' }}
+                                    className="relative flex flex-col justify-center items-center cursor-pointer no-underline text-black"
+                                    style={{ flex: '1 1 28%', transition: '1s', scale: '0', opacity: '0' }}
                                     onMouseEnter={() => setIdeaButton(`ideaAboveButton${index}`)}
                                     onMouseLeave={() => setIdeaButton('')}
                                     to={`ideaScroll${index}`} 
@@ -794,18 +632,18 @@ const Homepage = () => {
                         </div>
                     </div>
                     <div className="sixth w-fit flex h-max" style={{ marginBottom: '1vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif" }}>
-                        <div style={{ fontSize: '2.1vw' }}>
+                        <div style={{ fontSize: '2.1vw', transition: '1s', translate: '5vw', opacity: '0' }}>
                             {isLanguage.homepage[4]['ideaHeader']}
                         </div>
                     </div>
-                    <div className="seventh" style={{ marginBottom: '1vw', }}>
+                    <div className="seventh" style={{ marginBottom: '1vw'}}>
                         {isLanguage.homepage[4]['childrenDetail'].map((itemReference, index) => {
                             return (
-                                <Element name={`ideaScroll${index}`}>
-                                    <div key={`${itemReference}${index}`} style={{ width: '48.2vw', marginBottom: '4vw' }} className={`flex flex-col justify-center items-center`}>
+                                <Element name={`ideaScroll${index}`} key={`${itemReference}${index}`} style={{ transition: '1s', translate: '0 -5vw', opacity: '0' }}>
+                                    <div style={{ width: '48.2vw', marginBottom: '4vw' }} className={`flex flex-col justify-center items-center`}>
                                         <div className="w-full" style={{ marginBottom: '1vw' }}>
                                             <div className="w-full flex" style={{ backgroundColor: 'white', padding: '0.5vw 1vw', borderRadius: '1vw', boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.2), -5px -5px 10px rgba(0, 0, 0, 0.1)' }}>
-                                                <div className="relative flex flex-col justify-center items-center" style={{width: '20vw', padding: '1vw', fontSize: '0.8vw' }}>
+                                                <div className="relative flex flex-col justify-center items-center" style={{width: '20vw', padding: '1vw', fontSize: '0.8vw', transition: '1s', scale: '0', opacity: '0' }}>
                                                     <div className="relative" style={{ width: '5vw' }}>
                                                         <img className={`object-contain`} style={{ width: '48.5vw' }} src={itemReference.img} alt="" />
                                                     </div>
@@ -816,7 +654,7 @@ const Homepage = () => {
                                                 <div ref={ideaDescRef} className="w-full">
                                                     {itemReference.desc.split('|||').map((item, index) => {
                                                         return (
-                                                            <div key={`${item}${index}`} className="w-full flex items-center" style={{ height: `${ideaDescHeight > 0 ? `${ideaDescHeight}px` :  `auto`}`, fontSize: '1vw', fontStyle: "'a-otf-ud新ゴpr6n-l', sans-serif", backgroundColor: '#403c3c', padding: '0.1vw 2vw 0.1vw 0.1vw', margin: '0.5vw 0', clipPath: 'polygon(0% 0%, 100% 0%, 97% 100%, 0% 100%)' }}>
+                                                            <div key={`${item}${index}`} className="w-full flex items-center" style={{ height: `${ideaDescHeight > 0 ? `${ideaDescHeight}px` :  `auto`}`, fontSize: '1vw', fontStyle: "'a-otf-ud新ゴpr6n-l', sans-serif", backgroundColor: '#403c3c', padding: '0.1vw 2vw 0.1vw 0.1vw', margin: '0.5vw 0', clipPath: 'polygon(0% 0%, 100% 0%, 97% 100%, 0% 100%)', transition: '1s', translate: '-5vw', opacity: '0' }}>
                                                                 <div className="w-fit h-fit">
                                                                     {item.split('*').map((item, index) => {
                             
