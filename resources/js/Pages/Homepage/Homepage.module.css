@@ -28,7 +28,7 @@
 
 @font-face {
     font-family: 'kozuka-mincho-pro';
-    src: url('/assets/homepage/fonts/Kozuka Mincho Pro M.ttf') format('truetype');
+    src: url('assets/homepage/fonts/Kozuka Mincho Pro M.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -42,7 +42,7 @@
 
 @font-face {
     font-family: 'a-otf-ud新ゴpr6n-l';
-    src: url('/assets/homepage/fonts/A-OTF UD新ゴ Pr6N L.ttf') format('truetype');
+    src: url('/assets/homepage/fonts/A-OTF UD Shin Go Pr6N L.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
