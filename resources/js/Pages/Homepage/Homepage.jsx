@@ -543,8 +543,8 @@ const Homepage = () => {
                                 {/* <div className="w-full relative"> */}
                                 {isData.map((item, index1) => {
                                     const date = new Date(item.Date)
-                                    date.setMonth(date.getMonth() + 1)
-                                    const month = date.getMonth()
+                                    // date.setMonth(date.getMonth() + 1)
+                                    const month = date.getMonth() + 1
                                     const year = date.getFullYear()
                                     return (
                                         <div key={`${item}${index1}`} className="w-1/2 select-none pointer-events-none" style={{ transition: '1500ms', translate: `-${currentProject * 100}%`, flex: '0 0 50%' }}>
