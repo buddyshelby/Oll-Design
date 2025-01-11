@@ -445,15 +445,75 @@
         },
         {
             "thePeople": [
-                "assets/homepage/People1.png",
-                "assets/homepage/People2.png",
-                "assets/homepage/People3.png",
-                "assets/homepage/People4.png",
-                "assets/homepage/People5.png",
-                "assets/homepage/People6.png",
-                "assets/homepage/People7.png",
-                "assets/homepage/People8.png"
+                "assets/homepage/1000ppi/Asset 9.png",
+                "assets/homepage/1000ppi/Asset 10.png",
+                "assets/homepage/1000ppi/Asset 11.png",
+                "assets/homepage/1000ppi/Asset 12.png",
+                "assets/homepage/1000ppi/Asset 13.png",
+                "assets/homepage/1000ppi/Asset 14.png",
+                "assets/homepage/1000ppi/Asset 15.png",
+                "assets/homepage/1000ppi/Asset 16.png"
             ]
-        }
+        },
+        {
+            "stickyText": "Contact Us"
+        },
+        {
+            "blueBGText": "Frequently Asked Questions"
+        },
+        {
+            "header": "Frequently Asked Questions",
+            "qna": [
+                {
+                    "Q": "I want to request graphic design services. How should I proceed?",
+                    "A": "Please contact us first via the inquiry form or by phone.|||After the initial consultation, we will propose a plan and estimate based on your needs."
+                },
+                {
+                    "Q": "Is it possible to request services from overseas?",
+                    "A": "Yes, it is possible!|||We have extensive experience delivering designs to countries like China and the United States, so rest assured."
+                },
+                {
+                    "Q": "This is my first time requesting. How much will it cost?",
+                    "A": "It depends on the design content and volume. We will provide specific costs through an estimate."
+                },
+                {
+                    "Q": "Can you also design logos and business cards?",
+                    "A": "Yes, we can! We handle a wide range of designs, including logos, business cards, and brochures.|||Feel free to consult with us."
+                },
+                {
+                    "Q": "How many revisions are allowed?",
+                    "A": "We generally allow up to two revisions free of charge.|||Additional revisions may incur separate fees."
+                },
+                {
+                    "Q": "What formats are the delivered data available in?",
+                    "A": "We can provide delivery data in AI, PDF, JPEG, PNG, and other formats according to your preference.|||The files will be suitable for printing or web use."
+                },
+                {
+                    "Q": "Can you handle printing as well?",
+                    "A": "Yes, we can arrange printing.|||We have extensive knowledge of printing and can propose the best specifications."
+                },
+                {
+                    "Q": "Can you accommodate urgent requests?",
+                    "A": "It depends on the schedule.|||For urgent requests, we will do our best to meet your needs."
+                },
+                {
+                    "Q": "Can you handle small requests?",
+                    "A": "Of course!|||We can handle anything from a single business card or banner to large-scale projects."
+                },
+                {
+                    "Q": "Is it possible to have remote meetings?",
+                    "A": "Yes, it is possible.|||We can accommodate online meetings via tools, email, or phone."
+                },
+                {
+                    "Q": "Can I see specific examples of your work?",
+                    "A": "Yes, some of our work is featured in the [Portfolio].|||Please take a look."
+                },
+                {
+                    "Q": "What happens to the copyright of the designs you create?",
+                    "A": "In principle, the copyright belongs to our company after delivery.|||However, if requested, we can transfer the copyright for an additional fee."
+                }
+            ],
+            "button": "Ask Us First"
+        }        
     ]
 }

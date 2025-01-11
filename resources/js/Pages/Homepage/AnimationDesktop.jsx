@@ -8,7 +8,20 @@ export const animationDesktop = (mainRef) => {
             const heightScreen = window.innerHeight
             const scrollPosition = window.scrollY
 
-            const QArea = mainRef.current.children[2]
+            const projectArea = mainRef.current.children[3].children[0]
+            const projectPosition = projectArea.offsetTop + ( projectArea.clientHeight / 2.25)
+
+            if (projectPosition < ( heightScreen + scrollPosition) && projectPosition > scrollPosition) {
+                projectArea.style.opacity = '1'
+                projectArea.style.translate = '0 0vw'
+            }
+            
+            // if (projectPosition - 50 < scrollPosition || projectPosition + 200 > ( heightScreen + scrollPosition)) {
+            //     projectArea.style.opacity = '0'
+            //     projectArea.style.translate = '0 5vw'
+            // }
+
+            const QArea = mainRef.current.children[4]
             
             const QAreaPosition = QArea.offsetTop + ( QArea.clientHeight / 2.25)
             const QIcon = QArea.children[0]
@@ -41,7 +54,7 @@ export const animationDesktop = (mainRef) => {
                 }, 900);
             }
 
-            const aboutArea = mainRef.current.children[4]
+            const aboutArea = mainRef.current.children[6]
 
             const aboutTitle = aboutArea.children[0].children[0]
             const aboutTitlePosition = aboutTitle.offsetTop + ( aboutTitle.clientHeight / 2.25)
@@ -78,20 +91,7 @@ export const animationDesktop = (mainRef) => {
                 aboutDesc.style.translate = '5vw'
             }
 
-            const projectArea = mainRef.current.children[5].children[0]
-            const projectPosition = projectArea.offsetTop + ( projectArea.clientHeight / 2.25)
-
-            if (projectPosition < ( heightScreen + scrollPosition) && projectPosition > scrollPosition) {
-                projectArea.style.opacity = '1'
-                projectArea.style.translate = '0 0vw'
-            }
-            
-            if (projectPosition - 50 < scrollPosition || projectPosition + 200 > ( heightScreen + scrollPosition)) {
-                projectArea.style.opacity = '0'
-                projectArea.style.translate = '0 5vw'
-            }
-
-            const peopleArea = mainRef.current.children[6].children[0]
+            const peopleArea = mainRef.current.children[7].children[0]
             const peoplePosition = peopleArea.offsetTop + ( peopleArea.clientHeight / 2.25)
 
             if (peoplePosition < ( heightScreen + scrollPosition) && peoplePosition > scrollPosition) {
@@ -104,7 +104,7 @@ export const animationDesktop = (mainRef) => {
                 peopleArea.style.translate = '0 5vw'
             }
 
-            const shortIdeaArea = mainRef.current.children[7]
+            const shortIdeaArea = mainRef.current.children[9]
             
             const shortIdeaHeadArea = shortIdeaArea.children[0]
             const shortIdeaHeadPosition = shortIdeaHeadArea.offsetTop + ( shortIdeaHeadArea.clientHeight / 2.25)
@@ -138,7 +138,7 @@ export const animationDesktop = (mainRef) => {
                 }
             })
 
-            const longIdeaHeadArea = mainRef.current.children[8].children[0]
+            const longIdeaHeadArea = mainRef.current.children[10].children[0]
             const longIdeaHeadPosition = longIdeaHeadArea.offsetTop + ( longIdeaHeadArea.clientHeight / 2.25)
             
             if (longIdeaHeadPosition < ( heightScreen + scrollPosition) && longIdeaHeadPosition > scrollPosition) {
@@ -151,7 +151,7 @@ export const animationDesktop = (mainRef) => {
                 longIdeaHeadArea.style.translate = '5vw'
             }
             
-            const detailIdeaAreaParent = mainRef.current.children[9].children
+            const detailIdeaAreaParent = mainRef.current.children[11].children
             
             Array.from(detailIdeaAreaParent).forEach((detailIdeaAreas, index) => {
                 const detailIdeaAreaPosition = detailIdeaAreas.offsetTop + ( detailIdeaAreas.clientHeight / 2.25)

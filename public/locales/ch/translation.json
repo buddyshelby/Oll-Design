@@ -445,15 +445,75 @@
         },
         {
             "thePeople": [
-                "assets/homepage/People1.png",
-                "assets/homepage/People2.png",
-                "assets/homepage/People3.png",
-                "assets/homepage/People4.png",
-                "assets/homepage/People5.png",
-                "assets/homepage/People6.png",
-                "assets/homepage/People7.png",
-                "assets/homepage/People8.png"
+                "assets/homepage/1000ppi/Asset 17.png",
+                "assets/homepage/1000ppi/Asset 18.png",
+                "assets/homepage/1000ppi/Asset 19.png",
+                "assets/homepage/1000ppi/Asset 20.png",
+                "assets/homepage/1000ppi/Asset 21.png",
+                "assets/homepage/1000ppi/Asset 22.png",
+                "assets/homepage/1000ppi/Asset 23.png",
+                "assets/homepage/1000ppi/Asset 24.png"
             ]
-        }
+        },
+        {
+            "stickyText": "咨询"
+        },
+        {
+            "blueBGText": "常见问题"
+        },
+        {
+            "header": "常见问题",
+            "qna": [
+                {
+                    "Q": "我想申请平面设计服务，该如何进行？",
+                    "A": "请先通过咨询表单或电话与我们联系。|||在初步了解后，我们会根据您的需求提出方案和报价。"
+                },
+                {
+                    "Q": "可以接受海外的订单吗？",
+                    "A": "可以！|||我们有丰富的经验，为中国、美国等国家提供设计服务，请放心。"
+                },
+                {
+                    "Q": "我是第一次申请服务，大概需要多少费用？",
+                    "A": "费用取决于设计内容和工作量。具体费用将通过报价为您提供。"
+                },
+                {
+                    "Q": "可以设计标志和名片吗？",
+                    "A": "可以！我们可以提供标志、名片、宣传册等多种设计服务。|||欢迎随时咨询我们。"
+                },
+                {
+                    "Q": "可以修改几次？",
+                    "A": "基本上提供最多两次免费修改服务。|||额外的修改可能需要支付额外费用。"
+                },
+                {
+                    "Q": "交付数据的格式有哪些？",
+                    "A": "交付数据可以提供AI、PDF、JPEG、PNG等格式，根据您的需求选择。|||我们会以适合印刷或网络用途的格式交付。"
+                },
+                {
+                    "Q": "可以安排印刷吗？",
+                    "A": "可以，我们也提供印刷安排服务。|||我们对印刷有丰富的知识，可以为您提供最优的规格建议。"
+                },
+                {
+                    "Q": "可以接受紧急的订单吗？",
+                    "A": "根据时间安排可以接受。|||如果您有紧急需求，我们会尽力调整以满足您的要求。"
+                },
+                {
+                    "Q": "小订单也可以接受吗？",
+                    "A": "当然可以！|||我们可以处理从一张名片或横幅到大型项目的各种需求。"
+                },
+                {
+                    "Q": "可以远程会议吗？",
+                    "A": "可以。|||我们支持通过在线会议工具、电子邮件或电话进行沟通。"
+                },
+                {
+                    "Q": "可以看到具体的案例吗？",
+                    "A": "可以，我们的一部分案例已发布在[作品介绍]中。|||欢迎查看。"
+                },
+                {
+                    "Q": "设计完成后，版权归谁所有？",
+                    "A": "原则上，交付后的版权归我们公司所有。|||但如果您有需求，我们可以另行收费转让版权。"
+                }
+            ],
+            "button": "先咨询一下"
+        }        
     ]
 }

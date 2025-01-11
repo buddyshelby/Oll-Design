@@ -11,12 +11,31 @@ import { useTranslation } from "react-i18next";
 import { animationMobile } from "./AnimationMobile";
 import { animationDesktop } from "./AnimationDesktop";
 
+const imageProjectSrc = [
+    {
+        src: '/assets/homepage/4x/image_1.jpg'
+    },
+    {
+        src: '/assets/homepage/4x/image_2.jpg'
+    },
+    {
+        src: '/assets/homepage/4x/image_3.jpg'
+    },
+    {
+        src: '/assets/homepage/4x/image_4.jpg'
+    },
+    {
+        src: '/assets/homepage/4x/image_5.jpg'
+    },
+]
+
+const stickyText = 'お問い合わせ'
+
 const Homepage = () => {
 
     const { i18n } = useTranslation();
     const [isLanguage, setIsLanguage] = useState(Object.values(i18n.store.data)[0].translation);
     const [width, setWidth] = useState(0)
-    const [firstQuestionDesc, setFirstQuestionDesc] = useState(0)
     const firstQuestionRef = useRef(null)
     const mainContainerRef = useRef(null)
     const [imageLoaded, setImageLoaded] = useState([])
@@ -24,43 +43,6 @@ const Homepage = () => {
     const [loadingText, setLoadingText] = useState(0)
     const loadingRef = useRef(null)
     const skillsRef = useRef([])
-    
-    const imageLoadedLocal = []
-    const imagePeopleSrc = [
-        {
-            src: 'assets/homepage/A_1.png'
-        },
-        {
-            src: 'assets/homepage/A_2.png'
-        },
-        {
-            src: 'assets/homepage/A_3.png'
-        },
-        {
-            src: 'assets/homepage/A_4.png'
-        },
-        {
-            src: 'assets/homepage/B_1.png'
-        },
-        {
-            src: 'assets/homepage/B_2.png'
-        },
-        {
-            src: 'assets/homepage/B_3.png'
-        },
-        {
-            src: 'assets/homepage/B_4.png'
-        },
-    ]
-    
-    useEffect(() => {
-        if (mainContainerRef.current) {
-            const peopleRunnerBoxElement = mainContainerRef.current.children[4].children[0]
-            peopleRunnerBoxElement.addEventListener( 'touchstart' , (e) => {
-                peopleRunnerBoxElement.style.marginLeft = `${peopleRunnerBoxElement.offsetLeft}px`
-            })
-        }
-    }, [mainContainerRef.current])
     
     const allImage = (event) => {
         setImageLoaded((prevLoaded) => [
@@ -88,9 +70,6 @@ const Homepage = () => {
     }, [skillsRef.current[0]])
 
     const handleResize = () => {
-        if (firstQuestionRef.current) {
-            setFirstQuestionDesc(firstQuestionRef.current.clientWidth)
-        }
         if (mainContainerRef.current) {
             mainContainerRef.current.parentElement.margin = '0'
             mainContainerRef.current.parentElement.parentElement.margin = '0'
@@ -159,12 +138,6 @@ const Homepage = () => {
     }, [isLanguage])
     
     useEffect(() => {
-        if (firstQuestionRef.current) {
-            setFirstQuestionDesc(firstQuestionRef.current.clientWidth)
-        }
-    }, [firstQuestionRef.current?.clientWidth])
-    
-    useEffect(() => {
         if (mainContainerRef.current && width > 768) {
             mainContainerRef.current.parentElement.style.margin = '0'
             mainContainerRef.current.parentElement.style.padding = '0'
@@ -193,12 +166,21 @@ const Homepage = () => {
     const [isData, setIsData] = useState([]);
 
     useEffect(() => {
-        isData.forEach( async (item, index) => {
-            const getRandomImage = Math.floor(Math.random() * item.Img.length)
-            item['randomImage'] = `https://olldesign.jp/storage/${item.Img[getRandomImage]}`
+        // isData.forEach( async (item, index) => {
+        //     const getRandomImage = Math.floor(Math.random() * item.Img.length)
+        //     item['randomImage'] = `https://olldesign.jp/storage/${item.Img[getRandomImage]}`
+
+        //     const img = new Image();
+        //     img.src = `https://olldesign.jp/storage/${item.Img[getRandomImage]}`;
+            
+        //     img.onload = () => {
+        //         allImage(img.src)
+        //     };
+        // })
+        imageProjectSrc.forEach( async (item, index) => {
 
             const img = new Image();
-            img.src = `https://olldesign.jp/storage/${item.Img[getRandomImage]}`;
+            img.src = item.src;
             
             img.onload = () => {
                 allImage(img.src)
@@ -212,14 +194,13 @@ const Homepage = () => {
                 allImage(item)
             };
         })
-        console.log(isData);
         
-    }, [isData])
+    }, [])
 
     useEffect(() => {
         if (imageLoaded.length !== 0) {
             const uniqueSortedArray = [...new Set(imageLoaded)].sort((a, b) => a - b);
-            const totalData = uniqueSortedArray.length / (isData.length + isLanguage.homepage[5]['thePeople'].length) * 100
+            const totalData = uniqueSortedArray.length / (imageProjectSrc.length + isLanguage.homepage[5]['thePeople'].length) * 100
             const loopLoading = async () => {
                 for (let index = loadingText; index <= totalData; index++) {
                     await sleep(10)
@@ -249,7 +230,7 @@ const Homepage = () => {
             loopLoading()
         }
         
-    }, [imageLoaded, isData])
+    }, [imageLoaded, imageProjectSrc])
 
     const timeoutRef = useRef(null);
 
@@ -296,77 +277,6 @@ const Homepage = () => {
         }
     }, [loadingText])
 
-    useEffect(() => {
-        // People slide for mobile
-        if (mainContainerRef.current && (width < 769 && width !== 0)) {
-            const peopleBoxElement = mainContainerRef.current.children[4]
-            if (peopleBoxElement.style.opacity !== '0' || peopleBoxElement.style.opacity !== '') {
-                const peopleRunnerBoxElement = mainContainerRef.current.children[4].children[0]
-                
-                const runnerTouchStartHandler = (e) => {
-                    const peopleComputedTranslate = parseFloat(window.getComputedStyle(peopleRunnerBoxElement).translate)
-                    peopleRunnerBoxElement.style.translate = `${peopleComputedTranslate}px`;
-                    peopleRunnerBoxElement.style.transition = '100ms linear'
-                    const firstTouch = e.changedTouches[0].clientX;
-                    let currentTouch = 0
-                    
-                    const runnerTouchMoveHandler = async (e) => {
-                        const peopleComputedTranslate = parseFloat(window.getComputedStyle(peopleRunnerBoxElement).translate)
-                        
-                        let positionTouch = 0;
-                        const runnerWidth = peopleRunnerBoxElement.clientWidth
-                        const boxWidth = peopleBoxElement.clientWidth
-                        const sizeBox = (-runnerWidth + boxWidth)
-                        const currentTranslate = parseFloat(peopleComputedTranslate)
-        
-                        if (currentTouch === 0) {
-                            positionTouch = (firstTouch - e.changedTouches[0].clientX) * 8
-                        } else {
-                            positionTouch = (currentTouch - e.changedTouches[0].clientX) * 8
-                        }
-    
-                        const checkOffsideRight = (currentTranslate - positionTouch) < sizeBox
-                        const checkOffsideLeft = (currentTranslate - positionTouch) > 0
-                        
-                        currentTouch = e.changedTouches[0].clientX
-                        if (checkOffsideRight) {
-                            peopleRunnerBoxElement.style.translate = `${sizeBox}px`
-                        } else if (checkOffsideLeft) {
-                            peopleRunnerBoxElement.style.translate = `0px`
-                        } else {
-                            peopleRunnerBoxElement.style.translate = `${peopleComputedTranslate - positionTouch}px`
-                        }
-                        await sleep(500)
-                    }
-        
-                    window.addEventListener('touchmove', runnerTouchMoveHandler)
-        
-                    const touchEndHandler = () => {
-                
-                        window.removeEventListener('touchmove', runnerTouchMoveHandler)
-                        peopleRunnerBoxElement.style.transition = '50ms linear'
-                        const runnerWidth = peopleRunnerBoxElement.clientWidth;
-                        const boxWidth = peopleBoxElement.clientWidth;
-
-                        peopleRunnerBoxElement.style.transition = '30s linear'
-                        setTimeout(() => {
-                            peopleRunnerBoxElement.style.translate  = `calc(-${runnerWidth}px  + ${boxWidth}px)`
-                        }, 100);
-                        currentTouch = 0
-        
-                    }
-        
-                    window.addEventListener('touchend', touchEndHandler)
-                    return () => {
-                        window.removeEventListener('touchend', touchEndHandler)
-                    }
-                }
-        
-                peopleRunnerBoxElement.addEventListener('touchstart', runnerTouchStartHandler)
-            }
-        }
-    }, [mainContainerRef.current])
-
     const [ideaDescHeight, setIdeaDescHeight] = useState(0)
     const ideaDescRef = useRef(null)
 
@@ -398,14 +308,14 @@ const Homepage = () => {
     const imageSlideRef = useRef([])
 
     useEffect(() => {
-        if (isData.length > 0) {
+        if (imageProjectSrc.length > 0) {
             function runAnimation() {
                 function animate() {
                     setCurrentProject(prev => {
-                        const totalDataIndex = isData.length
+                        const totalDataIndex = imageProjectSrc.length
                         const nextValue = prev + 1
                         
-                        if (nextValue > totalDataIndex - 2) return 0
+                        if (nextValue > totalDataIndex - 1) return 0
                         // else if (nextValue < 0) return totalDataIndex
                         else return nextValue
                     })
@@ -426,41 +336,41 @@ const Homepage = () => {
                     id
                 ])
             }
-            function runAnimationChild() {
-                function animate() {
-                    setCurrentImage(prev => {
+            // function runAnimationChild() {
+            //     function animate() {
+            //         setCurrentImage(prev => {
                         
-                        const detailImage = []
-                        const newValueArray = []
-                        isData.forEach((itemData, index) => {
-                            const totalDataIndex = itemData.Img.length - 1
-                            const nextValue = prev.length > 0 ? prev[index] + 1 : 0
+            //             const detailImage = []
+            //             const newValueArray = []
+            //             imageProjectSrc.forEach((itemData, index) => {
+            //                 const totalDataIndex = itemData.Img.length - 1
+            //                 const nextValue = prev.length > 0 ? prev[index] + 1 : 0
 
-                            detailImage.push(itemData.Img.length)
+            //                 detailImage.push(itemData.Img.length)
 
-                            if (nextValue > totalDataIndex) newValueArray.push(0)
-                            // else if (nextValue < 0) return totalDataIndex
-                            else newValueArray.push(nextValue)
-                        })
-                        setTimeout(runAnimationChild, (7000 / Math.max(...detailImage)));
-                        return newValueArray
+            //                 if (nextValue > totalDataIndex) newValueArray.push(0)
+            //                 // else if (nextValue < 0) return totalDataIndex
+            //                 else newValueArray.push(nextValue)
+            //             })
+            //             setTimeout(runAnimationChild, (7000 / Math.max(...detailImage)));
+            //             return newValueArray
                         
-                    })
-                }
+            //         })
+            //     }
                 
-                const id = requestAnimationFrame(animate);
-                setAnimationIds(prev => [
-                    ...prev,
-                    id
-                ])
-            }
+            //     const id = requestAnimationFrame(animate);
+            //     setAnimationIds(prev => [
+            //         ...prev,
+            //         id
+            //     ])
+            // }
             
             const id = requestAnimationFrame(runAnimation);
-            const id2 = requestAnimationFrame(runAnimationChild);
+            // const id2 = requestAnimationFrame(runAnimationChild);
             setAnimationIds(prev => [
                 ...prev,
                 id,
-                id2,
+                // id2,
                 // id3
             ])
 
@@ -469,33 +379,77 @@ const Homepage = () => {
             }
         }
         
-    }, [isData])
+    }, [imageProjectSrc])
 
     const [ideaButton, setIdeaButton] = useState('') 
 
     return (
         <Page>
             <MediaQuery query="(max-width: 768px)">
-            {({ matches }) => (
-                <>
-                {matches ?
+            {({ matches }) => 
+                matches ?
                 
-                <></>
+                (<></>)
 
                 :
 
-                <div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center" style={{ padding: '0 0 0 0', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
-                    <div ref={loadingRef} className="fixed top-0 w-full h-screen flex justify-center items-center text-slate-800 z-20 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
+                (<div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center" style={{ padding: '0 0 0 0', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
+                    <div ref={loadingRef} className="fixed top-0 w-full h-screen flex justify-center items-center text-slate-800 z-30 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
                         {loadingText}
                     </div>
-                    <div className="w-full flex flex-col justify-center items-center">
+                    <div className="sticky-text right-0 fixed z-20 text-white flex flex-col" style={{ top: '30%', padding: '2vw 1vw', borderTopLeftRadius: '1vw', borderBottomLeftRadius: '1vw', backgroundColor: '#281C24', translate: '0 -30%', color: 'white', fontSize: '1vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold' }}>
+                        {isLanguage.homepage[6]['stickyText'].split('').map(item =>
+                        item !== ' ' ?
+                        (
+                            <span>
+                                {item.toUpperCase()}
+                            </span>
+                        ) : (<br/>)
+                        )}
+                    </div>
+                    <div className="first w-full flex flex-col justify-center items-center">
                         <div className="w-full left-0 top-0 flex justify-center items-center" style={{ backgroundColor: '#403C3C', color: '#FDF100', fontSize: '2.3vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold' }}>
                             <div style={{ marginBottom: '0.8vw' }}>
                                 &nbsp;&nbsp;{isLanguage.homepage[0]['title']}
                             </div>
                         </div>
                     </div>
-                    <div className="first w-fit relative flex h-max" style={{ marginBottom: '1vw', marginTop: '2vw', width: '47.5vw' }}>
+                    <div className="second w-full flex flex-col justify-center items-center bg-white">
+                        <div style={{  transition: '1s', translate: '0 5vw', opacity: '0' }} className="flex w-full h-auto overflow-hidden">
+                            <div className="w-full h-full flex relative overflow-hidden">
+                                {/* <div className="w-full relative"> */}
+                                {imageProjectSrc.map((item, index) => {
+                                    return (
+                                        <div key={`${item}${index}`} className="w-full select-none pointer-events-none" style={{ transition: '1500ms', translate: `-${currentProject * 100}%`, flex: '0 0 100%' }}>
+                                            <div className="w-full select-none pointer-events-none flex flex-col-reverse overflow-hidden h-auto">
+                                                <div className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '10vw', transition: '500ms', flex: '0 0 100%' }}>
+                                                    {/* <img className={` w-full h-full object-cover pointer-events-none blur-sm`} src={item.src} alt="" /> */}
+                                                    <img className={`w-full h-full object-contain pointer-events-none scale-100`} src={item.src} alt="" />
+                                                </div>
+                                            </div>
+                                            {/* <div className="w-full flex justify-center items-center">
+                                                <div className="flex flex-col" style={{ width: '95%', fontSize: '0.9vw' }}>
+                                                    <div className="relative flex w-full">
+                                                        <div>
+                                                            {item.City_Name}
+                                                        </div>
+                                                        <div className="absolute right-0">
+                                                            {year}.{month}
+                                                        </div>
+                                                    </div>
+                                                    <div className="border-slate-600" style={{ borderTop: '0.1vw solid' }} />
+                                                    <div>
+                                                        {item.Name}
+                                                    </div>
+                                                </div>
+                                            </div> */}
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="third w-fit relative flex h-max" style={{ marginBottom: '1vw', marginTop: '0vw', width: '47.5vw' }}>
                         <div className="relative flex justify-center items-center z-10" style={{ width: '10vw', height: '10vw', padding: '0 2vw 0 0', fontSize: '8vw', color: '#10643C', transition: '1s', opacity: '0', transform: 'translate(0, -3vw)' }}>
                             <img className={`w-full h-full object-contain`} src={isLanguage.homepage[1]['QMark']} alt="" />
                         </div>
@@ -514,14 +468,14 @@ const Homepage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="w-full bg-white flex flex-col justify-center items-center">
+                    <div className="fourth bg-white flex flex-col justify-center items-center w-full">
                         <div>
                             <div style={{ width: '5vw', height:'auto' }}>
                                 <img className={`w-full block`} src="assets/icon/Pages/Homepage/triangle.svg" alt="" />
                             </div>
                         </div>
                     </div>
-                    <div className="w-full bg-white flex flex-col justify-center items-center">
+                    <div className="fifth bg-white flex flex-col justify-center items-center w-full">
                         <div style={{ width: '47.5vw', marginBottom: '2vw' }}>
                             <div style={{ marginBottom: '1vw', fontSize: '2vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold', color: '#0b6e43', transition: '1s', translate: '-5vw', opacity: '0' }}>
                                {isLanguage.homepage[2]['head']}
@@ -537,51 +491,8 @@ const Homepage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="third w-full flex flex-col justify-center items-center bg-white">
-                        <div style={{ width: '48vw', border: '0.1vw solid black', padding: '0.5vw', marginBottom: '2vw', transition: '1s', translate: '0 5vw', opacity: '0' }} className="flex h-auto overflow-hidden">
-                            <div className="w-full h-full flex relative overflow-hidden">
-                                {/* <div className="w-full relative"> */}
-                                {isData.map((item, index1) => {
-                                    const date = new Date(item.Date)
-                                    // date.setMonth(date.getMonth() + 1)
-                                    const month = date.getMonth() + 1
-                                    const year = date.getFullYear()
-                                    return (
-                                        <div key={`${item}${index1}`} className="w-1/2 select-none pointer-events-none" style={{ transition: '1500ms', translate: `-${currentProject * 100}%`, flex: '0 0 50%' }}>
-                                            <div className="w-full select-none pointer-events-none flex flex-col-reverse overflow-hidden" style={{ height: '10vw', marginBottom: '0.5vw' }}>
-                                                {item.Img.map((item, index) => {
-                                                    return(
-                                                        <div key={`${item}${index}`} className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '10vw', transition: '500ms', translate: `0 ${currentImage[index1] * 100}%`, flex: '0 0 100%' }}>
-                                                            <img className={`absolute w-full h-full object-cover blur-sm pointer-events-none`} src={`https://olldesign.jp/storage/${item}`} alt="" />
-                                                            <img className={`w-full h-full object-contain pointer-events-none scale-100 absolute`} src={`https://olldesign.jp/storage/${item}`} alt="" />
-                                                        </div>
-                                                    )
-                                                })}
-                                            </div>
-                                            <div className="w-full flex justify-center items-center">
-                                                <div className="flex flex-col" style={{ width: '95%', fontSize: '0.9vw' }}>
-                                                    <div className="relative flex w-full">
-                                                        <div>
-                                                            {item.City_Name}
-                                                        </div>
-                                                        <div className="absolute right-0">
-                                                            {year}.{month}
-                                                        </div>
-                                                    </div>
-                                                    <div className="border-slate-600" style={{ borderTop: '0.1vw solid' }} />
-                                                    <div>
-                                                        {item.Name}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="fourth w-full flex flex-col justify-center items-center bg-white">
-                        <div style={{ width: '48vw', height: '14vw', border: '0.1vw solid black', marginBottom: '2vw', padding: '2vw 0 0 0', transition: '1s', translate: '5vw', opacity: '0' }} className="relative flex">
+                    <div className="sixth w-full flex flex-col justify-center items-center bg-white">
+                        <div style={{ width: '48vw', height: '18vw', border: '0.1vw solid black', marginBottom: '2vw', padding: '1.5vw 0 0 0', transition: '1s', translate: '5vw', opacity: '0' }} className="relative flex">
                             <div className="w-full h-full absolute left-0 top-0">
                                 <img className={`w-full  h-full object-cover`} src="assets/homepage/Background.png" alt="" />
                             </div>
@@ -596,7 +507,12 @@ const Homepage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="fifth w-fit flex flex-col items-center h-max">
+                    <div className="seventh w-full flex flex-col items-center h-max bg-white" style={{ paddingBottom: '2vw' }}>
+                        <div className="w-full flex justify-center items-center" style={{ backgroundColor: '#303494', color: 'white', fontSize: '1.7vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold' }}>
+                            {isLanguage.homepage[7]['blueBGText']}
+                        </div>
+                    </div>
+                    <div className="eighth w-fit flex flex-col items-center h-max">
                         <div style={{ fontSize: '2.9vw', fontWeight: '500', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", marginBottom: '1vw', transition: '1s', opacity: '0' }}>
                             &nbsp;{isLanguage.homepage[3]['ideaTitle']}
                         </div>
@@ -631,12 +547,12 @@ const Homepage = () => {
                             })}
                         </div>
                     </div>
-                    <div className="sixth w-fit flex h-max" style={{ marginBottom: '1vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif" }}>
+                    <div className="nineth w-fit flex h-max" style={{ marginBottom: '1vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif" }}>
                         <div style={{ fontSize: '2.1vw', transition: '1s', translate: '5vw', opacity: '0' }}>
                             {isLanguage.homepage[4]['ideaHeader']}
                         </div>
                     </div>
-                    <div className="seventh" style={{ marginBottom: '1vw'}}>
+                    <div className="tenth" style={{ marginBottom: '1vw'}}>
                         {isLanguage.homepage[4]['childrenDetail'].map((itemReference, index) => {
                             return (
                                 <Element name={`ideaScroll${index}`} key={`${itemReference}${index}`} style={{ transition: '1s', translate: '0 -5vw', opacity: '0' }}>
@@ -683,10 +599,8 @@ const Homepage = () => {
                             )
                         })}
                     </div>
-                </div>
-                }
-                </>
-            )}
+                </div>)
+            }
             </MediaQuery>
         </Page>
     );
