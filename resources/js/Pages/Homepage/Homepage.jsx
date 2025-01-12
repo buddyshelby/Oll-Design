@@ -13,19 +13,19 @@ import { animationDesktop } from "./AnimationDesktop";
 
 const imageProjectSrc = [
     {
-        src: '/assets/homepage/4x/image_1.jpg'
+        src: '/assets/homepage/4x/image_1.png'
     },
     {
-        src: '/assets/homepage/4x/image_2.jpg'
+        src: '/assets/homepage/4x/image_2.png'
     },
     {
-        src: '/assets/homepage/4x/image_3.jpg'
+        src: '/assets/homepage/4x/image_3.png'
     },
     {
-        src: '/assets/homepage/4x/image_4.jpg'
+        src: '/assets/homepage/4x/image_4.png'
     },
     {
-        src: '/assets/homepage/4x/image_5.jpg'
+        src: '/assets/homepage/4x/image_5.png'
     },
 ]
 
