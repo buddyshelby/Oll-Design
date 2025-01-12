@@ -456,7 +456,10 @@
             ]
         },
         {
-            "stickyText": "咨询"
+            "stickyText": [
+                "咨询",
+                "返回顶部"
+            ]
         },
         {
             "blueBGText": "常见问题"

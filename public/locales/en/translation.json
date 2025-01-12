@@ -456,7 +456,10 @@
             ]
         },
         {
-            "stickyText": "Contact Us"
+            "stickyText": [
+                "Contact Us",
+                "Back to Top"
+            ]
         },
         {
             "blueBGText": "Frequently Asked Questions"

@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react"
 
-export const animationDesktop = (mainRef) => {
+export const animationDesktop = (mainRef, setHalfPage, setScrollIncrement) => {
 
 
     const scrollHandler = (e) => {
         if (mainRef.current) {
+            
             const heightScreen = window.innerHeight
             const scrollPosition = window.scrollY
+
+            if (heightScreen > scrollPosition) {
+                setHalfPage(false)
+            } else {
+                setHalfPage(true)
+            }
 
             const projectArea = mainRef.current.children[3].children[0]
             const projectPosition = projectArea.offsetTop + ( projectArea.clientHeight / 2.25)
@@ -15,11 +22,6 @@ export const animationDesktop = (mainRef) => {
                 projectArea.style.opacity = '1'
                 projectArea.style.translate = '0 0vw'
             }
-            
-            // if (projectPosition - 50 < scrollPosition || projectPosition + 200 > ( heightScreen + scrollPosition)) {
-            //     projectArea.style.opacity = '0'
-            //     projectArea.style.translate = '0 5vw'
-            // }
 
             const QArea = mainRef.current.children[4]
             
@@ -40,19 +42,6 @@ export const animationDesktop = (mainRef) => {
                     QIcon.style.transform = 'translate(0,0)'
                 }, 900);
             }
-            
-            // if (QAreaPosition - 50 < scrollPosition || QAreaPosition + 200 > ( heightScreen + scrollPosition)) {
-            //     QHead.style.opacity = '0'
-            //     QHead.style.transform = 'translate(10vw,0)'
-            //     setTimeout(() => {
-            //         QDesc.style.opacity = '0'
-            //         QDesc.style.transform = 'translate(-20vw,0)'
-            //     }, 300);
-            //     setTimeout(() => {
-            //         QIcon.style.opacity = '0'
-            //         QIcon.style.transform = 'translate(0,-3vw)'
-            //     }, 900);
-            // }
 
             const aboutArea = mainRef.current.children[6]
 
@@ -76,20 +65,10 @@ export const animationDesktop = (mainRef) => {
                 aboutTitle.style.translate = '0vw'
             }
             
-            // if (aboutTitlePosition - 50 < scrollPosition || aboutTitlePosition + 200 > ( heightScreen + scrollPosition)) {
-            //     aboutTitle.style.opacity = '0'
-            //     aboutTitle.style.translate = '-5vw'
-            // }
-            
             if (aboutDescPosition < ( heightScreen + scrollPosition) && aboutDescPosition > scrollPosition) {
                 aboutDesc.style.opacity = '1'
                 aboutDesc.style.translate = '0vw'
             }
-            
-            // if (aboutDescPosition - 50 < scrollPosition || aboutDescPosition + 200 > ( heightScreen + scrollPosition)) {
-            //     aboutDesc.style.opacity = '0'
-            //     aboutDesc.style.translate = '5vw'
-            // }
 
             const peopleArea = mainRef.current.children[7].children[0]
             const peoplePosition = peopleArea.offsetTop + ( peopleArea.clientHeight / 2.25)
@@ -98,12 +77,6 @@ export const animationDesktop = (mainRef) => {
                 peopleArea.style.opacity = '1'
                 peopleArea.style.translate = '0 0vw'
             }
-            
-            // if (peoplePosition - 50 < scrollPosition || peoplePosition + 200 > ( heightScreen + scrollPosition)) {
-            //     peopleArea.style.opacity = '0'
-            //     peopleArea.style.translate = '0 5vw'
-            // }
-
             
             const FlowButtonQnaArea = mainRef.current.children[8].children[0]
             
@@ -123,10 +96,6 @@ export const animationDesktop = (mainRef) => {
                 shortIdeaHeadArea.style.opacity = '1'
             }
             
-            // if (shortIdeaHeadPosition - 50 < scrollPosition || shortIdeaHeadPosition + 200 > ( heightScreen + scrollPosition)) {
-            //     shortIdeaHeadArea.style.opacity = '0'
-            // }
-            
             const shortIdeaButtonAreaParent = shortIdeaArea.children[1]
             const shortIdeaButtonPosition = shortIdeaButtonAreaParent.offsetTop + ( shortIdeaButtonAreaParent.clientHeight / 2.25)
             const shortIdeaButtonAreaArray = shortIdeaButtonAreaParent.children
@@ -139,13 +108,7 @@ export const animationDesktop = (mainRef) => {
                         shortIdeaButtonArea.style.scale = '1'
                     }, 100 * index);
                 }
-                
-                // if (shortIdeaButtonPosition - 50 < scrollPosition || shortIdeaButtonPosition + 200 > ( heightScreen + scrollPosition)) {
-                //     setTimeout(() => {
-                //         shortIdeaButtonArea.style.opacity = '0'
-                //         shortIdeaButtonArea.style.scale = '0'
-                //     }, 100 * index);
-                // }
+
             })
             
             const longIdeaHeadArea = mainRef.current.children[10].children[0]
@@ -156,11 +119,6 @@ export const animationDesktop = (mainRef) => {
                 longIdeaHeadArea.style.translate = '0vw'
             }
             
-            // if (longIdeaHeadPosition - 50 < scrollPosition || longIdeaHeadPosition + 200 > ( heightScreen + scrollPosition)) {
-            //     longIdeaHeadArea.style.opacity = '0'
-            //     longIdeaHeadArea.style.translate = '5vw'
-            // }
-            
             const detailIdeaAreaParent = mainRef.current.children[11].children
             
             Array.from(detailIdeaAreaParent).forEach((detailIdeaAreas, index) => {
@@ -170,11 +128,6 @@ export const animationDesktop = (mainRef) => {
                     detailIdeaAreas.style.opacity = '1'
                     detailIdeaAreas.style.translate = '0 0vw'
                 }
-                
-                // if (detailIdeaAreaPosition - 50 < scrollPosition || detailIdeaAreaPosition + 200 > ( heightScreen + scrollPosition)) {
-                //     detailIdeaAreas.style.opacity = '0'
-                //     detailIdeaAreas.style.translate = '0 -5vw'
-                // }
 
                 const detailIdeaArea = detailIdeaAreas.children[0]
                 const detailIdeaIconArea = detailIdeaArea.children[0].children[0].children[0]
@@ -186,11 +139,6 @@ export const animationDesktop = (mainRef) => {
                     }
                 }, 1000);
                 
-                // if (detailIdeaAreaPosition - 50 < scrollPosition || detailIdeaAreaPosition + 200 > ( heightScreen + scrollPosition)) {
-                //     detailIdeaIconArea.style.opacity = '0'
-                //     detailIdeaIconArea.style.scale = '0'
-                // }
-                
                 const detailIdeaListAreaArray = detailIdeaArea.children[0].children[0].children[1].children
                 
                 Array.from(detailIdeaListAreaArray).forEach((detailIdeaListArea, indexList) => {
@@ -201,12 +149,6 @@ export const animationDesktop = (mainRef) => {
                         }, 100 * (indexList + 1));
                     }
                     
-                    // if (detailIdeaAreaPosition - 50 < scrollPosition || detailIdeaAreaPosition + 200 > ( heightScreen + scrollPosition)) {
-                    //     setTimeout(() => {
-                    //         detailIdeaListArea.style.opacity = '0'
-                    //         detailIdeaListArea.style.translate = '-5vw'
-                    //     }, 100 * (indexList + 1));
-                    // }
                 })
             })
 
