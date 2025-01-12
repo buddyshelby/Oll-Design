@@ -243,7 +243,7 @@ const Homepage = () => {
                 loadingRef.current.style.fontSize = '3vw'
                 loadingRef.current.innerText = 'Data Image Can\'t be proceed properly.'
                 setTimeout(() => {
-                    window.location.reload()
+                    // window.location.reload()
                     loadingRef.current.style.transition = '2s'
                     loadingRef.current.style.opacity = '0'
                 }, 3000);
