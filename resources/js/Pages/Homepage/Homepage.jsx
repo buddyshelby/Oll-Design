@@ -220,7 +220,7 @@ const Homepage = () => {
                                 loadingRef.current.style.display = 'none'
                             }, 2000);
                         }
-                    }, 12000);
+                    }, 30000);
                     if (index <= 100) {
                         setLoadingText(index)
                     }
@@ -251,7 +251,7 @@ const Homepage = () => {
                     loadingRef.current.style.display = 'none'
                 }, 2000);
             }
-        }, 12000);
+        }, 30000);
     }, [])
 
     useEffect(() => {
