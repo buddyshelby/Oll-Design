@@ -397,14 +397,14 @@ const Homepage = () => {
                     <div ref={loadingRef} className="fixed top-0 w-full h-screen flex justify-center items-center text-slate-800 z-30 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
                         {loadingText}
                     </div>
-                    <div className="sticky-text right-0 fixed z-20 text-white flex flex-col" style={{ top: '30%', padding: '2vw 1vw', borderTopLeftRadius: '1vw', borderBottomLeftRadius: '1vw', backgroundColor: '#281C24', translate: '0 -30%', color: 'white', fontSize: '1vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold' }}>
-                        {isLanguage.homepage[6]['stickyText'].split('').map(item =>
+                    <div onClick={() => {window.location.href = '/contact-us'}} className="sticky-text right-0 fixed z-20 text-white flex flex-col cursor-pointer" style={{ top: '30%', padding: '2vw 1vw', borderTopLeftRadius: '1vw', borderBottomLeftRadius: '1vw', backgroundColor: '#281C24', translate: '0 -30%', color: 'white', fontSize: '1vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold' }}>
+                        {isLanguage.homepage[6]['stickyText'].split('').map((item, index) =>
                         item !== ' ' ?
                         (
-                            <span>
+                            <span key={`${item}${index}`}>
                                 {item.toUpperCase()}
                             </span>
-                        ) : (<br/>)
+                        ) : (<br key={`${item}${index}`}/>)
                         )}
                     </div>
                     <div className="first w-full flex flex-col justify-center items-center">
@@ -508,9 +508,19 @@ const Homepage = () => {
                         </div>
                     </div>
                     <div className="seventh w-full flex flex-col items-center h-max bg-white" style={{ paddingBottom: '2vw' }}>
-                        <div className="w-full flex justify-center items-center" style={{ backgroundColor: '#303494', color: 'white', fontSize: '1.7vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold' }}>
-                            {isLanguage.homepage[7]['blueBGText']}
-                        </div>
+                        <Link 
+                        className="w-full flex justify-center items-center cursor-pointer no-underline"
+                        style={{ backgroundColor: '#303494', color: 'white', fontSize: '1.7vw', fontFamily: "'hira-kaku-pro-w6', sans-serif", fontWeight: 'normal', transition: '1s', opacity: '0', scale: '0' }}
+                        onMouseEnter={() => setIdeaButton(`toQnaSectionButton`)}
+                        onMouseLeave={() => setIdeaButton('')}
+                        to={`toQnaSectionButton`} 
+                        spy={true} 
+                        smooth={true} 
+                        offset={-50} 
+                        duration={100}
+                        >
+                                {isLanguage.homepage[7]['blueBGText']}
+                        </Link>
                     </div>
                     <div className="eighth w-fit flex flex-col items-center h-max">
                         <div style={{ fontSize: '2.9vw', fontWeight: '500', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", marginBottom: '1vw', transition: '1s', opacity: '0' }}>
@@ -556,7 +566,7 @@ const Homepage = () => {
                         {isLanguage.homepage[4]['childrenDetail'].map((itemReference, index) => {
                             return (
                                 <Element name={`ideaScroll${index}`} key={`${itemReference}${index}`} style={{ transition: '1s', translate: '0 -5vw', opacity: '0' }}>
-                                    <div style={{ width: '48.2vw', marginBottom: '4vw' }} className={`flex flex-col justify-center items-center`}>
+                                    <div style={{ width: '48.2vw', marginBottom: '2vw' }} className={`flex flex-col justify-center items-center`}>
                                         <div className="w-full" style={{ marginBottom: '1vw' }}>
                                             <div className="w-full flex" style={{ backgroundColor: 'white', padding: '0.5vw 1vw', borderRadius: '1vw', boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.2), -5px -5px 10px rgba(0, 0, 0, 0.1)' }}>
                                                 <div className="relative flex flex-col justify-center items-center" style={{width: '20vw', padding: '1vw', fontSize: '0.8vw', transition: '1s', scale: '0', opacity: '0' }}>
@@ -589,7 +599,7 @@ const Homepage = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="relative flex justify-center items-center text-center cursor-pointer" onMouseEnter={() => setIdeaButton(`ideaBelowButton${index}`)} onMouseLeave={() => setIdeaButton('')} style={{ width: '15vw', fontSize: '1.2vw', color: ideaButton === `ideaBelowButton${index}` ? '#20248c' : 'white', backgroundColor: ideaButton === `ideaBelowButton${index}` ? 'white' : '#20248c', borderRadius: '1vw', transition: '1s' }}>
+                                        <div className="relative flex justify-center items-center text-center cursor-pointer" onClick={() => {window.location.href = '/contact-us'}} onMouseEnter={() => setIdeaButton(`ideaBelowButton${index}`)} onMouseLeave={() => setIdeaButton('')} style={{ width: '15vw', fontSize: '1.2vw', color: ideaButton === `ideaBelowButton${index}` ? '#20248c' : 'white', backgroundColor: ideaButton === `ideaBelowButton${index}` ? 'white' : '#20248c', borderRadius: '1vw', transition: '1s' }}>
                                             <span className="relative">
                                                 {itemReference.button}
                                             </span>
@@ -599,6 +609,44 @@ const Homepage = () => {
                             )
                         })}
                     </div>
+                    <Element name={'toQnaSectionButton'} className="eleventh w-full flex flex-col items-center h-max bg-white" style={{ paddingBottom: '2vw' }}>
+                        <div className="flex flex-col justify-center items-center" style={{ marginTop: '2vw', width: '48.5vw' }}>
+                            <div className="w-full flex justify-center items-center" style={{ fontSize: '1.7vw', fontFamily: "'hira-kaku-pro-w6', sans-serif", fontWeight: 'bold', backgroundColor: '#303494', color: 'white', transition: '1s', translate: '-5vw', opacity: '0' }}>
+                                {isLanguage.homepage[8]['header']}
+                            </div>
+                            <div className="w-full" style={{ fontSize: '1.1vw', fontFamily: "'kozuka-gothic-pr6n', sans-serif", fontWeight: 'bold' }}>
+                                {isLanguage.homepage[8]['qna'].map((item, index) => (
+                                        <div key={`${item}${index}`} className="w-full" style={{ marginTop: '1vw' }}>
+                                            <div className="Q w-full flex" style={{ backgroundColor: '#D8DC24', padding: '0.7vw 0', transition: '1s', translate: '5vw', opacity: '0' }}>
+                                                <div style={{ padding: '0 0.7vw' }}>
+                                                    Q
+                                                </div>
+                                                <div style={{ paddingLeft: '0.7vw' }}>
+                                                    {item['Q']}
+                                                </div>
+                                            </div>
+                                            <div className="A w-full flex" style={{ backgroundColor: '#F0EC9C', padding: '0.7vw 0', transition: '1s', translate: '-5vw', opacity: '0' }}>
+                                                <div style={{ padding: '0 0.7vw' }}>
+                                                    A
+                                                </div>
+                                                <div style={{ paddingLeft: '0.7vw' }}>
+                                                    {item['A'].split('|||').map((item, index) => (
+                                                        <div key={`${item}${index}`}>
+                                                            {item}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                ))}
+                            </div>
+                            <div className="relative flex justify-center items-center text-center cursor-pointer" onClick={() => {window.location.href = '/contact-us'}} onMouseEnter={() => setIdeaButton(`qnaBelowButton0`)} onMouseLeave={() => setIdeaButton('')} style={{ width: '15vw', marginTop: '1vw', fontSize: '1.2vw', color: ideaButton === `qnaBelowButton0` ? '#20248c' : 'white', backgroundColor: ideaButton === `qnaBelowButton0` ? 'white' : '#20248c', borderRadius: '1vw', transition: '1s', translate: '5vw', opacity: '0' }}>
+                                <span className="relative">
+                                    {isLanguage.homepage[8]['button']}
+                                </span>
+                            </div>
+                        </div>
+                    </Element>
                 </div>)
             }
             </MediaQuery>

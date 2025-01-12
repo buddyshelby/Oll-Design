@@ -27,8 +27,22 @@
 }
 
 @font-face {
+    font-family: 'hira-kaku-pro-w6';
+    src: url('/assets/homepage/fonts/HiraKakuPro-W6.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'kozuka-gothic-pr6n';
+    src: url('/assets/homepage/fonts/Kozuka Gothic Pr6N B.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
     font-family: 'kozuka-mincho-pro';
-    src: url('assets/homepage/fonts/Kozuka Mincho Pro M.ttf') format('truetype');
+    src: url('/assets/homepage/fonts/Kozuka Mincho Pro M.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
