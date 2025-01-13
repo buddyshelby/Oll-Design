@@ -59,12 +59,18 @@ const Homepage = () => {
         if (skillsRef.current[0]) {
             let maxHeight = 0;
             skillsRef.current.forEach(item => {
-                const clientHeight = item.clientHeight
-                if (clientHeight > maxHeight) maxHeight = item.clientHeight
+                item.style.height = `max-content`
             })
-            skillsRef.current.forEach(item => {
-                item.style.height = `${maxHeight}px`
-            })
+            setTimeout(() => {
+                skillsRef.current.forEach(item => {
+                    const clientHeight = item.scrollHeight
+                    
+                    if (clientHeight > maxHeight) maxHeight = item.scrollHeight
+                })
+                skillsRef.current.forEach(item => {
+                    item.style.height = `${(maxHeight / width) * 100}vw`
+                })
+            }, 1000);
         }
     }, [skillsRef.current[0]])
 
@@ -73,16 +79,6 @@ const Homepage = () => {
             mainContainerRef.current.parentElement.margin = '0'
             mainContainerRef.current.parentElement.parentElement.margin = '0'
             mainContainerRef.current.parentElement.parentElement.parentElement.classList.remove("container-fluid")
-        }
-        if (skillsRef.current[0]) {
-            let maxHeight = 0;
-            skillsRef.current.forEach(item => {
-                const clientHeight = item.clientHeight
-                if (clientHeight > maxHeight) maxHeight = item.clientHeight
-            })
-            skillsRef.current.forEach(item => {
-                item.style.height = `${maxHeight}px`
-            })
         }
         setIdeaDescHeight(0)
         setTimeout(() => {
@@ -180,7 +176,7 @@ const Homepage = () => {
     
     useEffect(() => {
         if (width < 769 && width !== 0) {
-            animationMobile(mainContainerRef)
+            animationMobile(mainContainerRef, setHalfPage)
         } else {
             animationDesktop(mainContainerRef, setHalfPage)
         }
@@ -314,7 +310,7 @@ const Homepage = () => {
             }
             
             if (width < 769 && width !== 0) {
-                animationMobile(mainContainerRef)
+                animationMobile(mainContainerRef, setHalfPage)
             } else {
                 animationDesktop(mainContainerRef, setHalfPage)
             }
@@ -400,7 +396,7 @@ const Homepage = () => {
     const questionHandler = (e) => {
         if (e.target.nextSibling.style.height === '0px') {
             e.target.nextSibling.style.height = `calc(${(e.target.nextSibling.scrollHeight / width) * 100}vw + 1.4vw)`
-            e.target.nextSibling.style.padding = '0.7vw 0'
+            e.target.nextSibling.style.padding = '1.3vw 0'
         } else {
             e.target.nextSibling.style.height = `0px`
             e.target.nextSibling.style.padding = '0'
@@ -413,7 +409,299 @@ const Homepage = () => {
             {({ matches }) => 
                 matches ?
                 
-                (<></>)
+                (<div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center" style={{ padding: '0 0 0 0', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
+                    <div ref={loadingRef} className="fixed top-0 w-full h-screen flex justify-center items-center text-slate-800 z-30 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
+                        {loadingText}
+                    </div>
+                    <div className="sticky-text right-0 fixed z-20 text-white cursor-pointer" style={{ willChange: 'translate', top: `${halfPage ? 30 : 78.5}%`, transition: '1s', translate: `0 ${halfPage ? -30 : -98.5}%`, color: 'white', fontSize: '3vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold' }}>
+                        {halfPage ? <Link 
+                        className="w-full h-full flex flex-col no-underline text-white select-none"
+                        style={{ padding: '3vw 2vw', borderTopLeftRadius: '3vw', borderBottomLeftRadius: '3vw', backgroundColor: '#281C24' }}
+                        to={`mainTop`} 
+                        spy={true} 
+                        smooth={true} 
+                        offset={0} 
+                        duration={100}
+                        >
+                            {isLanguage.homepage[6]['stickyText'][1].split('').map((item, index) =>
+                            item !== ' ' ?
+                            (
+                                <span key={`${item}${index}`}>
+                                    {item.toUpperCase()}
+                                </span>
+                            ) : (<br key={`${item}${index}`}/>)
+                            )}
+                        </Link>
+                        :
+                        <div onClick={() => {window.location.href = '/contact-us'}} className="w-full h-full flex flex-col select-none" style={{ padding: '3vw 2vw', borderTopLeftRadius: '3vw', borderBottomLeftRadius: '3vw', backgroundColor: '#281C24' }}>
+                            {isLanguage.homepage[6]['stickyText'][0].split('').map((item, index) =>
+                            item !== ' ' ?
+                            (
+                                <span key={`${item}${index}`}>
+                                    {item.toUpperCase()}
+                                </span>
+                            ) : (<br key={`${item}${index}`}/>)
+                            )}
+                        </div>}
+                    </div>
+                    <Element name="mainTop" className="first w-full flex flex-col justify-center items-center">
+                        <div className="w-full left-0 top-0 flex justify-center items-center" style={{ backgroundColor: '#403C3C', color: '#FDF100', fontSize: '3.8vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold' }}>
+                            <div style={{ marginBottom: '0.8vw' }}>
+                                &nbsp;{isLanguage.homepage[0]['title']}
+                            </div>
+                        </div>
+                    </Element>
+                    <div className="second w-full flex flex-col justify-center items-center bg-white">
+                        <div style={{  transition: '1s', translate: '0 5vw', opacity: '0' }} className="flex w-full h-auto overflow-hidden">
+                            <div className="w-full h-full flex relative overflow-hidden">
+                                {imageProjectSrc.map((item, index) => {
+                                    return (
+                                        <div key={`${item}${index}`} className="w-full select-none pointer-events-none" style={{ transition: '1500ms', translate: `-${currentProject * 100}%`, flex: '0 0 100%' }}>
+                                            <div className="w-full select-none pointer-events-none flex flex-col-reverse overflow-hidden h-auto">
+                                                <div className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '10vw', transition: '500ms', flex: '0 0 100%' }}>
+                                                    {/* <img className={` w-full h-full object-cover pointer-events-none blur-sm`} src={item.src} alt="" /> */}
+                                                    <img className={`w-full h-full object-contain pointer-events-none scale-100`} src={item.src} alt="" />
+                                                </div>
+                                            </div>
+                                            {/* <div className="w-full flex justify-center items-center">
+                                                <div className="flex flex-col" style={{ width: '95%', fontSize: '0.9vw' }}>
+                                                    <div className="relative flex w-full">
+                                                        <div>
+                                                            {item.City_Name}
+                                                        </div>
+                                                        <div className="absolute right-0">
+                                                            {year}.{month}
+                                                        </div>
+                                                    </div>
+                                                    <div className="border-slate-600" style={{ borderTop: '0.1vw solid' }} />
+                                                    <div>
+                                                        {item.Name}
+                                                    </div>
+                                                </div>
+                                            </div> */}
+                                        </div>
+                                    )
+                                })}
+                                {/* <div className="absolute w-full h-full bg-black opacity-15"></div> */}
+                                <div onClick={() => setCurrentProject(prev => prev > 0 ? (prev - 1) : 0)} className="absolute h-full flex items-center left-0 bg-black bg-opacity-10 text-white select-none cursor-pointer" style={{ padding: '0 1vw' }}>
+                                    <div style={{ width: '2vw', height: '2vw', rotate: '180deg' }}>
+                                        <img className="w-full h-full object-cover" src="/assets/homepage/arrow.svg" alt="" />
+                                    </div>
+                                </div>
+                                <div onClick={() => setCurrentProject(prev => prev <= imageProjectSrc.length - 2 ? (prev + 1) : 0)}  className="absolute h-full flex items-center right-0 bg-black bg-opacity-10 text-white select-none cursor-pointer" style={{ padding: '0 1vw' }}>
+                                    <div style={{ width: '2vw', height: '2vw' }}>
+                                        <img className="w-full h-full object-cover" src="/assets/homepage/arrow.svg" alt="" />
+                                    </div>
+                                </div>
+                                <div className="absolute bottom-0 w-full flex justify-center bg-red bg-opacity-10 text-white select-none cursor-pointer">
+                                    {imageProjectSrc.map((item, index) => (
+                                        <div key={`${item}${index}`} style={{ padding: '1vw' }} onClick={() => setCurrentProject(index)}>
+                                            <div style={{ width: '0.7vw', height: '0.7vw', borderRadius: '9999vw', backgroundColor: 'white', mixBlendMode: 'difference', opacity: index === currentProject ? '1' : '0.2' }} />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="third w-fit relative flex h-max" style={{ marginBottom: '3vw', marginTop: '3vw', width: '90vw' }}>
+                        <div className="relative flex justify-center items-center z-10" style={{ width: '20vw', height: '20vw', padding: '0 2vw 0 0', fontSize: '6vw', color: '#10643C', transition: '1s', opacity: '0', transform: 'translate(0, -3vw)' }}>
+                            <img className={`w-full h-full object-contain`} src={isLanguage.homepage[1]['QMark']} alt="" />
+                        </div>
+                        <div className="flex flex-col justify-center">
+                            <div ref={firstQuestionRef} style={{ fontSize: '4vw', marginBottom: '0.5vw', letterSpacing: '0.1vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", transition: '1s', opacity: '0', transform: 'translate(10vw, 0)' }} className="w-fit">
+                                {isLanguage.homepage[1]['QHeader']}
+                            </div>
+                            <div className="flex flex-col justify-center" style={{ fontSize: '2.2vw', fontFamily: "'kozuka-mincho-pro', sans-serif", transition: '1s', opacity: '0', transform: 'translate(-20vw, 0)' }}>
+                                {isLanguage.homepage[1]['QDesc'].split('|||').map((item, index) => {
+                                    return (
+                                        <div key={`${item}${index}`} className="text-justify">
+                                            {item}
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="fourth bg-white flex flex-col justify-center items-center w-full">
+                        <div>
+                            <div style={{ width: '10vw', height:'auto' }}>
+                                <img className={`w-full block`} src="assets/icon/Pages/Homepage/triangle.svg" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="fifth bg-white flex flex-col justify-center items-center w-full">
+                        <div style={{ width: '90vw', margin: '2vw 0 4vw 0' }}>
+                            <div style={{ marginBottom: '1vw', fontSize: '4vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold', color: '#0b6e43', transition: '1s', translate: '-5vw', opacity: '0' }}>
+                               {isLanguage.homepage[2]['head']}
+                            </div>
+                            <div style={{ fontSize: '2.2vw', fontFamily: "'kozuka-mincho-pro', sans-serif", transition: '1s', translate: '5vw', opacity: '0' }}>
+                               {isLanguage.homepage[2]['desc'].split('|||').map((item, index) => {
+                                    return (
+                                        <div key={`${item}${index}`}>
+                                            {item}
+                                        </div>
+                                    )
+                               })}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="sixth w-full flex flex-col justify-center items-center bg-white">
+                        <div style={{ width: '90vw', height: '35vw', border: '0.1vw solid black', marginBottom: '4vw', padding: '1.5vw 0.6vw 0 0.6vw', transition: '1s', translate: '5vw', opacity: '0' }} className="relative flex">
+                            <div className="w-full h-full absolute left-0 top-0">
+                                <img className={`w-full  h-full object-cover`} src="assets/homepage/Background.png" alt="" />
+                            </div>
+                            <div className="w-full h-full flex overflow-hidden" style={{ transition: '500ms', opacity: '1' }}>
+                                {isLanguage.homepage[5]['thePeople'].map((item, index) => {
+                                    return (
+                                        <div key={`${item}${index}`} className="w-full h-full relative" style={{ transition: '2s', translate: `-${currentPeople * 100}%`, flex: '0 0 50%' }}>
+                                            <img className={`w-full  h-full object-contain`} src={item} alt="" />
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="seventh w-full flex flex-col items-center h-max bg-white" style={{ paddingBottom: '4vw' }}>
+                        <Link 
+                        className="w-full flex justify-center items-center cursor-pointer no-underline"
+                        style={{ padding: '1vw 0', backgroundColor: '#303494', color: 'white', fontSize: '3.8vw', fontFamily: "'hira-kaku-pro-w6', sans-serif", fontWeight: 'normal', transition: '1s', opacity: '0', scale: '0' }}
+                        onMouseEnter={() => setIdeaButton(`toQnaSectionButton`)}
+                        onMouseLeave={() => setIdeaButton('')}
+                        to={`toQnaSectionButton`} 
+                        spy={true} 
+                        smooth={true} 
+                        offset={-50} 
+                        duration={100}
+                        >
+                                {isLanguage.homepage[7]['blueBGText']}
+                        </Link>
+                    </div>
+                    <div className="eighth w-fit flex flex-col items-center h-max" style={{ margin: '4vw 0' }}>
+                        <div style={{ fontSize: '4vw', fontWeight: '500', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", transition: '1s', opacity: '0', marginBottom: '4vw' }}>
+                            &nbsp;{isLanguage.homepage[3]['ideaTitle']}
+                        </div>
+                        <div className="flex justify-between flex-wrap items-stretch" style={{ width: '90vw', fontSize: '3.2vw', fontWeight: '500', gap: '1vw' }}>
+                            {isLanguage.homepage[3]['children'].map((item, index) => {
+                                return (
+                                    <Link 
+                                    key={`${item}${index}`}
+                                    className="relative flex flex-col justify-center items-center cursor-pointer no-underline text-black"
+                                    style={{ flex: '1 1 48%', transition: '1s', scale: '0', opacity: '0' }}
+                                    onMouseEnter={() => setIdeaButton(`ideaAboveButton${index}`)}
+                                    onMouseLeave={() => setIdeaButton('')}
+                                    to={`ideaScroll${index}`} 
+                                    spy={true} 
+                                    smooth={true} 
+                                    offset={-50} 
+                                    duration={100}
+                                    >
+                                        <div ref={(element) => skillsLoadRef(element, index)} className="relative w-full flex justify-center items-center text-center bg-white" style={{ transition: '1s', border: '0.1vw solid black', padding: '3vw 2vw', marginBottom: '0.6vw', fontSize: '3.2vw', fontFamily: "'kozuka-mincho-pro', sans-serif", color: ideaButton === `ideaAboveButton${index}` ? '#20248c' : 'black' }}>
+                                            <div className="absolute w-full h-full overflow-hidden">
+                                                <div className="w-full h-full flex justify-center items-center text-black text-center" style={{ transition: '1s', willChange: 'translate', translate: ideaButton === `ideaAboveButton${index}` ? '0%' : '-100%', backgroundColor: '#D8DC24', padding: '3vw 2vw', marginBottom: '0.6vw', fontSize: '1vw', fontFamily: "'kozuka-mincho-pro', sans-serif" }} />
+                                            </div>
+                                            <span className="relative">
+                                            {item}
+                                            </span>
+                                        </div>
+                                        <div style={{ width: '1.8vw', height:'auto' }}>
+                                            <img className={`object-contain block`} src="assets/icon/Pages/Homepage/arrow_down.svg" alt="" />
+                                        </div>
+                                    </Link>
+                                )
+                            })}
+                        </div>
+                    </div>
+                    <div className="nineth w-fit flex h-max" style={{ marginBottom: '4vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif" }}>
+                        <div style={{ fontSize: '4vw', transition: '1s', translate: '5vw', opacity: '0' }}>
+                            {isLanguage.homepage[4]['ideaHeader']}
+                        </div>
+                    </div>
+                    <div className="tenth" style={{ marginBottom: '1vw'}}>
+                        {isLanguage.homepage[4]['childrenDetail'].map((itemReference, index) => {
+                            return (
+                                <Element name={`ideaScroll${index}`} key={`${itemReference}${index}`} style={{ transition: '1s', translate: '0 -5vw', opacity: '0' }}>
+                                    <div style={{ width: '90vw', marginBottom: '6vw' }} className={`flex flex-col justify-center items-center`}>
+                                        <div className="w-full" style={{ marginBottom: '3vw' }}>
+                                            <div className="w-full flex flex-col" style={{ backgroundColor: 'white', padding: '2vw', borderRadius: '1vw', boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.2), -5px -5px 10px rgba(0, 0, 0, 0.1)' }}>
+                                                <div className="relative flex flex-col justify-center items-center" style={{width: '100%', padding: '1vw', fontSize: '3vw', transition: '1s', scale: '0', opacity: '0' }}>
+                                                    <div className="relative" style={{ width: '30%' }}>
+                                                        <img className={`object-contain`} style={{ width: '100%' }} src={itemReference.img} alt="" />
+                                                    </div>
+                                                    <div className="font-medium text-center" style={{ fontSize: '5vw' }}>
+                                                        {itemReference.title}
+                                                    </div>
+                                                </div>
+                                                <div ref={ideaDescRef} className="w-full">
+                                                    {itemReference.desc.split('|||').map((item, index) => {
+                                                        return (
+                                                            <div key={`${item}${index}`} className="w-full flex items-center" style={{ height: `${ideaDescHeight > 0 ? `${ideaDescHeight}px` :  `auto`}`, fontSize: '2.9vw', fontFamily: "'a-otf-ud新ゴpr6n-l', sans-serif", backgroundColor: '#403c3c', padding: '1vw 3vw 1vw 1vw', margin: '0.5vw 0', clipPath: 'polygon(0% 0%, 100% 0%, 97% 100%, 0% 100%)', transition: '1s', translate: '-5vw', opacity: '0' }}>
+                                                                <div className="w-fit h-fit">
+                                                                    {item.split('*').map((item, index) => {
+                            
+                                                                        const colorText = index === 1 ? '#D8DC24' : 'white'
+                            
+                                                                        return (
+                                                                            <span key={`${item}${index}`} style={{ color: colorText }}>
+                                                                                {item}
+                                                                            </span>
+                                                                        )
+                                                                    })}
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    })}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="relative flex justify-center items-center text-center cursor-pointer" onClick={() => {window.location.href = '/contact-us'}} onMouseEnter={() => setIdeaButton(`ideaBelowButton${index}`)} onMouseLeave={() => setIdeaButton('')} style={{ width: '50vw', fontSize: '5vw', color: ideaButton === `ideaBelowButton${index}` ? '#20248c' : 'white', backgroundColor: ideaButton === `ideaBelowButton${index}` ? 'white' : '#20248c', borderRadius: '4vw', transition: '1s' }}>
+                                            <span className="relative">
+                                                {itemReference.button}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </Element>
+                            )
+                        })}
+                    </div>
+                    <Element name={'toQnaSectionButton'} className="eleventh w-full flex flex-col items-center h-max bg-white" style={{ paddingBottom: '2vw' }}>
+                        <div className="flex flex-col justify-center items-center" style={{ marginTop: '4vw', width: '90vw' }}>
+                            <div className="w-full flex justify-center items-center" style={{ fontSize: '4vw', fontFamily: "'hira-kaku-pro-w6', sans-serif", fontWeight: 'bold', backgroundColor: '#303494', color: 'white', transition: '1s', translate: '-5vw', opacity: '0' }}>
+                                {isLanguage.homepage[8]['header']}
+                            </div>
+                            <div className="w-full" style={{ fontSize: '3vw', fontFamily: "'kozuka-gothic-pr6n', sans-serif", fontWeight: 'bold' }}>
+                                {isLanguage.homepage[8]['qna'].map((item, index) => (
+                                        <div key={`${item}${index}`} className="w-full overflow-hidden" style={{ marginTop: '3vw' }}>
+                                            <div className="Q relative w-full flex cursor-pointer z-10" onClick={questionHandler} style={{ backgroundColor: '#D8DC24', padding: '1.3vw 0', transition: '1s', translate: '5vw', opacity: '0' }}>
+                                                <div className="pointer-events-none" style={{ padding: '0 1.3vw' }}>
+                                                    Q
+                                                </div>
+                                                <div className="pointer-events-none" style={{ paddingLeft: '1.3vw' }}>
+                                                    {item['Q']}
+                                                </div>
+                                            </div>
+                                            <div className="A w-full flex" style={{ height: '0px', backgroundColor: '#F0EC9C', transition: '.5s', translate: '-5vw', opacity: '0' }}>
+                                                <div style={{ padding: '1vw 1.3vw' }}>
+                                                    A
+                                                </div>
+                                                <div style={{ paddingLeft: '1.3vw' }}>
+                                                    {item['A'].split('|||').map((item, index) => (
+                                                        <div key={`${item}${index}`}>
+                                                            {item}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                ))}
+                            </div>
+                            <div className="relative flex justify-center items-center text-center cursor-pointer" onClick={() => {window.location.href = '/contact-us'}} onMouseEnter={() => setIdeaButton(`qnaBelowButton0`)} onMouseLeave={() => setIdeaButton('')} style={{ width: '50vw', marginTop: '3vw', fontSize: '5vw', color: ideaButton === `qnaBelowButton0` ? '#20248c' : 'white', backgroundColor: ideaButton === `qnaBelowButton0` ? 'white' : '#20248c', borderRadius: '4vw', transition: '1s', translate: '5vw', opacity: '0' }}>
+                                <span className="relative">
+                                    {isLanguage.homepage[8]['button']}
+                                </span>
+                            </div>
+                        </div>
+                    </Element>
+                </div>)
 
                 :
 
