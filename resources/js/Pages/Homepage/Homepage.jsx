@@ -410,7 +410,7 @@ const Homepage = () => {
                 matches ?
                 
                 (<div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center" style={{ padding: '0 0 0 0', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
-                    <div ref={loadingRef} className="fixed top-0 w-full h-screen flex justify-center items-center text-slate-800 z-30 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
+                    <div ref={loadingRef} className="fixed top-0 w-full h-screen flex justify-center items-center text-slate-800 z-30 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '10vw' }}>
                         {loadingText}
                     </div>
                     <div className="sticky-text right-0 fixed z-20 text-white cursor-pointer" style={{ willChange: 'translate', top: `${halfPage ? 30 : 78.5}%`, transition: '1s', translate: `0 ${halfPage ? -30 : -98.5}%`, color: 'white', fontSize: '3vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold' }}>
@@ -559,6 +559,23 @@ const Homepage = () => {
                                     )
                                 })}
                             </div>
+                            <div onClick={() => setCurrentPeople(prev => prev > 0 ? (prev - 1) : 0)} className="absolute h-full flex items-center left-0 top-0 bg-black bg-opacity-10 text-white select-none cursor-pointer" style={{ padding: '0 1vw' }}>
+                                <div style={{ width: '2vw', height: '2vw', rotate: '180deg' }}>
+                                    <img className="w-full h-full object-cover" src="/assets/homepage/arrow.svg" alt="" />
+                                </div>
+                            </div>
+                            <div onClick={() => setCurrentPeople(prev => prev <= isLanguage.homepage[5]['thePeople'].length - 2 ? (prev + 1) : 0)}  className="absolute h-full flex items-center right-0 top-0 bg-black bg-opacity-10 text-white select-none cursor-pointer" style={{ padding: '0 1vw' }}>
+                                <div style={{ width: '2vw', height: '2vw' }}>
+                                    <img className="w-full h-full object-cover" src="/assets/homepage/arrow.svg" alt="" />
+                                </div>
+                            </div>
+                            <div className="absolute bottom-0 w-full flex justify-center bg-red bg-opacity-10 text-white select-none cursor-pointer">
+                                {isLanguage.homepage[5]['thePeople'].map((item, index) => (
+                                    <div key={`${item}${index}`} style={{ padding: '1vw' }} onClick={() => setCurrentPeople(index)}>
+                                        <div style={{ width: '0.7vw', height: '0.7vw', borderRadius: '9999vw', backgroundColor: 'white', mixBlendMode: 'difference', opacity: index === currentPeople ? '1' : '0.2' }} />
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                     <div className="seventh w-full flex flex-col items-center h-max bg-white" style={{ paddingBottom: '4vw' }}>
@@ -706,7 +723,7 @@ const Homepage = () => {
                 :
 
                 (<div ref={mainContainerRef} className="relative w-full h-full bg-green-500 flex flex-col items-center" style={{ padding: '0 0 0 0', backgroundColor: '#D8DC24', fontFamily: "'SimHei', sans-serif" }}>
-                    <div ref={loadingRef} className="fixed top-0 w-full h-screen flex justify-center items-center text-slate-800 z-30 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '20vw' }}>
+                    <div ref={loadingRef} className="fixed top-0 w-full h-screen flex justify-center items-center text-slate-800 z-30 text-opacity-20" style={{ backgroundColor: '#D8DC24', fontSize: '10vw' }}>
                         {loadingText}
                     </div>
                     <div className="sticky-text right-0 fixed z-20 text-white cursor-pointer" style={{ willChange: 'translate', top: `${halfPage ? 30 : 98.5}%`, transition: '1s', translate: `0 ${halfPage ? -30 : -98.5}%`, color: 'white', fontSize: '1vw', fontFamily: "'dnp-shuei-mincho-pr6n', sans-serif", fontWeight: 'bold' }}>
@@ -854,6 +871,23 @@ const Homepage = () => {
                                         </div>
                                     )
                                 })}
+                            </div>
+                            <div onClick={() => setCurrentPeople(prev => prev > 0 ? (prev - 1) : 0)} className="absolute h-full flex items-center left-0 top-0 bg-black bg-opacity-10 text-white select-none cursor-pointer" style={{ padding: '0 1vw' }}>
+                                <div style={{ width: '2vw', height: '2vw', rotate: '180deg' }}>
+                                    <img className="w-full h-full object-cover" src="/assets/homepage/arrow.svg" alt="" />
+                                </div>
+                            </div>
+                            <div onClick={() => setCurrentPeople(prev => prev <= isLanguage.homepage[5]['thePeople'].length - 2 ? (prev + 1) : 0)}  className="absolute h-full flex items-center right-0 top-0 bg-black bg-opacity-10 text-white select-none cursor-pointer" style={{ padding: '0 1vw' }}>
+                                <div style={{ width: '2vw', height: '2vw' }}>
+                                    <img className="w-full h-full object-cover" src="/assets/homepage/arrow.svg" alt="" />
+                                </div>
+                            </div>
+                            <div className="absolute bottom-0 w-full flex justify-center bg-red bg-opacity-10 text-white select-none cursor-pointer">
+                                {isLanguage.homepage[5]['thePeople'].map((item, index) => (
+                                    <div key={`${item}${index}`} style={{ padding: '1vw' }} onClick={() => setCurrentPeople(index)}>
+                                        <div style={{ width: '0.7vw', height: '0.7vw', borderRadius: '9999vw', backgroundColor: 'white', mixBlendMode: 'difference', opacity: index === currentPeople ? '1' : '0.2' }} />
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>

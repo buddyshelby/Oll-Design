@@ -158,7 +158,7 @@ const Navbar = ({ language, setDeskNavWidth }) => {
                                             }
                                         >
                                             {isLanguage.navbar_jp.map(
-                                                (m, index) => (
+                                                (m, index) => m.title !== 'BR' ? (
                                                     <a
                                                         href={m.url}
                                                         className="text-sm"
@@ -169,6 +169,12 @@ const Navbar = ({ language, setDeskNavWidth }) => {
                                                             ? m.title_hover.toUpperCase()
                                                             : m.title.toUpperCase()}
                                                     </a>
+                                                )
+                                                :
+                                                (
+                                                    <div key={index} className="w-full flex justify-center">
+                                                        <div className="bg-white" style={{ width: '99%', height: '0.2vw', margin: '1vw 0' }} />
+                                                    </div>
                                                 )
                                             )}
                                         </div>
@@ -226,17 +232,24 @@ const Navbar = ({ language, setDeskNavWidth }) => {
                                         ))}
                                     </div>
                                     <div className={classes["sidebar-title"]}>
-                                        {isLanguage.navbar_jp.map((m, index) => (
-                                            <a
-                                                href={m.url}
-                                                id={m.id}
-                                                key={index}
-                                            >
-                                                {isHover === m.id
-                                                    ? m.title_hover.toUpperCase()
-                                                    : m.title.toUpperCase()}
-                                            </a>
-                                        ))}
+                                        {isLanguage.navbar_jp.map((m, index) => m.title !== 'BR' ? (
+                                                <a
+                                                    href={m.url}
+                                                    id={m.id}
+                                                    key={index}
+                                                >
+                                                    {isHover === m.id
+                                                        ? m.title_hover.toUpperCase()
+                                                        : m.title.toUpperCase()}
+                                                </a>
+                                            )
+                                            :
+                                            (
+                                                <div key={index} className="w-full flex justify-center">
+                                                    <div className="bg-black" style={{ width: '99%', height: '0.2vw', margin: '1vw 0' }} />
+                                                </div>
+                                            )
+                                        )}
                                     </div>
                                     {/* <div
                                         className={classes["sidebar-socialmedia"]}

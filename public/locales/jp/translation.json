@@ -38,6 +38,18 @@
             "title": "問い合わせ",
             "title_hover": "Contact Us",
             "url": "/contact-us"
+        },
+        {
+            "id": 5,
+            "title": "BR",
+            "title_hover": "BR",
+            "url": "#"
+        },
+        {
+            "id": 6,
+            "title": "グラフィック事業",
+            "title_hover": "Graphic Business",
+            "url": "/graphic-design"
         }
     ],
     "gallery": [

@@ -38,6 +38,18 @@
             "title": "询问",
             "title_hover": "Contact Us",
             "url": "/contact-us"
+        },
+        {
+            "id": 5,
+            "title": "BR",
+            "title_hover": "BR",
+            "url": "#"
+        },
+        {
+            "id": 6,
+            "title": "图形业务",
+            "title_hover": "Graphic Business",
+            "url": "/graphic-design"
         }
     ],
     "gallery": [

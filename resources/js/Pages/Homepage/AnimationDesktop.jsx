@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 
 export const animationDesktop = (mainRef, setHalfPage, setScrollIncrement) => {
 
+    let timeoutHalfPage;
 
     const scrollHandler = (e) => {
         if (mainRef.current) {
@@ -10,9 +11,11 @@ export const animationDesktop = (mainRef, setHalfPage, setScrollIncrement) => {
             const scrollPosition = window.scrollY
 
             if (heightScreen > scrollPosition) {
-                setHalfPage(false)
+                if (timeoutHalfPage !== null) clearTimeout(timeoutHalfPage)
+                timeoutHalfPage = setTimeout(() => setHalfPage(false), 300);
             } else {
-                setHalfPage(true)
+                if (timeoutHalfPage !== null) clearTimeout(timeoutHalfPage)
+                timeoutHalfPage = setTimeout(() => setHalfPage(true), 300);
             }
 
             const projectArea = mainRef.current.children[3].children[0]
