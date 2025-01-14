@@ -6,9 +6,7 @@
 <tbody>
 <tr>
 <td align="left" valign="middle">
-<a href="https://www.olldesign.jp/">
 <img alt="ol-design" src="	https://olldesign.jp/assets/images/OLL_DESIGN.png" style="outline:none;text-decoration:none;display:block;width:100%;height:100%;object-fit: cover;"
-</a>
 </td>
 </tr>
 </tbody>
@@ -22,7 +20,6 @@
 <tbody>
 <tr>
 <td style="border-width:0;border-bottom-width:1px;border-style:solid;border-color:#e6e6e6;padding:24px">
-<a href="https://www.olldesign.jp/" style="color:#0a66c2;display:inline-block;text-decoration:none;width:100%" target="_blank">
 <table role="presentation" valign="top" border="0" cellspacing="0" cellpadding="0" width="100%">
 <tbody>
 <tr>
@@ -31,12 +28,10 @@
 <tbody>
 <tr>
 <td>
-<a href="https://www.olldesign.jp/" style="color:#0a66c2;text-decoration:none;vertical-align:top;text-decoration-line:none;width:100%!important;display:block!important" target="_blank">
 <table role="presentation" valign="top" border="0" cellspacing="0" cellpadding="0" width="100%">
 <tbody>
 <tr>
 <td style="width:72px;" width="72" align="center">
-<img src="https://i.sstatic.net/34AD2.jpg" alt="Profile Picture" style="outline:none;text-decoration:none;background-color:#eae6df;display:block!important;height:72px!important;width:72px!important;border-radius: 9999px;" width="72" height="72" class="CToWUd" data-bit="iit">
 </td>
 </tr>
 <tr>
@@ -55,7 +50,6 @@
 </tr>
 </tbody>
 </table>
-</a>
 </td>
 </tr>
 <tr>
@@ -69,19 +63,15 @@
 <tbody>
 <tr>
 <td valign="middle" align="middle">
-<a href="https://www.olldesign.jp/" style="color:#0a66c2;text-decoration:none;vertical-align:top;text-decoration-line:none;width:100%!important;display:block!important" target="_blank">
 <table role="presentation" valign="top" border="0" cellspacing="0" cellpadding="0" width="100%" style="border-collapse:separate;width:100%!important">
 <tbody>
 <tr>
 <td style="height:min-content;border-radius:24px;padding-top:12px;padding-bottom:12px;padding-left:24px;padding-right:24px;text-align:center;font-size:16px;font-weight:600;text-decoration-line:none;background-color:rgba(0,0,0,0);color:#0a66c2;border-width:1px;border-style:solid;border-color:#0a66c2;line-height:1.25;min-height:auto!important">
-<a href="https://www.olldesign.jp/" style="color:#0a66c2;text-decoration:none;vertical-align:top;text-decoration-line:none;width:100%!important;display:block!important" target="_blank">
 <span style="color:#0a66c2;text-decoration-line:none"> Contact {{ $name }} </span>
-</a>
 </td>
 </tr>
 </tbody>
 </table>
-</a>
 </td>
 </tr>
 </tbody>
@@ -95,7 +85,6 @@
 </tr>
 </tbody>
 </table>
-</a>
 </td>
 </tr>
 </tr>
