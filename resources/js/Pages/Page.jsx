@@ -122,9 +122,9 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad, loadPercent })
                             </div>
                             {!imageShow && (
                                 <div className={`w-full h-full absolute flex flex-col top-0 left-0 justify-center items-center ${!hideLoad ? 'opacity-100' : 'opacity-0' } transition-all duration-1000`}>
-                                    <Loading />
-                                    <span className="mt-4">Wait for a moment, it will take longer than usual...</span>
-                                    <span className="mt-2 text-xl" style={{ color: '#b4b5b8' }}>{loadPercent}%</span>
+                                    {/* <Loading /> */}
+                                    {/* <span className="mt-4">Wait for a moment, it will take longer than usual...</span> */}
+                                    <span className="mt-2 text-6xl" style={{ color: '#b4b5b8' }}>{loadPercent}</span>
                                 </div>
                             )}
                         </div>
@@ -269,9 +269,9 @@ const Page = ({ children, galleryDetailView, imageShow, hideLoad, loadPercent })
                                             </div>
                                             {!imageShow && (
                                                 <div className={`w-full h-full absolute flex flex-col top-0 left-0 justify-center items-center ${!hideLoad ? 'opacity-100' : 'opacity-0' } transition-all duration-1000`}>
-                                                    <Loading />
-                                                    <span className="mt-4">Wait for a moment, it will take longer than usual...</span>
-                                                    <span className="mt-2 text-xl" style={{ color: '#b4b5b8' }}>{loadPercent}%</span>
+                                                    {/* <Loading /> */}
+                                                    {/* <span className="mt-4">Wait for a moment, it will take longer than usual...</span> */}
+                                                    <span className="mt-2 text-6xl" style={{ color: '#b4b5b8' }}>{loadPercent}%</span>
                                                 </div>
                                             )}
                                         </div>

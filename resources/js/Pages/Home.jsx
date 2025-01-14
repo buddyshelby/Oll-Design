@@ -7,6 +7,7 @@ import Page from "./Page";
 import Gallery from "@/Pages/Gallery/Gallery";
 import GalleryDetail from "@/Pages/Gallery/Detail/GalleryDetail";
 import HomeSkeleton from "@/Components/HomeSkeleton";
+import { sleep } from "@/Utils/Sleep/sleep";
 
 const ITEMS_PER_PAGE = 9999999;
 
@@ -18,9 +19,18 @@ const Home = () => {
     const [filteredData, setFilteredData] = useState([]);
     const [navDate, setNavDate] = useState([])
     const [galleryDetailView, setGalleryDetailView] = useState(false)
-    const [imageShow, setImageShow] = useState(true)
-    const [hideLoad, setHideLoad] = useState(true)
+    const [imageShow, setImageShow] = useState(false)
+    const [hideLoad, setHideLoad] = useState(false)
     const [loadPercent, setLoadPercent] = useState(0)
+    const [imageLoaded, setImageLoaded] = useState([])
+    const [totalImage, setTotalImage] = useState(0)
+
+    const allImage = (event) => {
+        setImageLoaded((prevLoaded) => [
+            ...prevLoaded,
+            event
+        ]);
+    }
 
     useEffect(() => {
         fetchData();
@@ -39,6 +49,51 @@ const Home = () => {
         fill.sort((a, b) => b - a)
         setNavDate([...new Set (fill)])
     }, [isData])
+
+    useEffect(() => {
+        isData.forEach( async (item, index) => {
+            // const getRandomImage = Math.floor(Math.random() * item.Img.length)
+            // item['randomImage'] = `https://olldesign.jp/storage/${item.Img[getRandomImage]}`
+
+            item.Img.forEach(item => {
+                const img = new Image();
+                img.src = `https://olldesign.jp/storage/${item}`;
+                
+                img.onload = () => {
+                    allImage(img.src)
+                };
+            })
+
+            setTotalImage(prev => (prev + item.Img.length))
+        })
+    }, [isData])
+
+    useEffect(() => {
+        console.log(totalImage);
+        
+    }, [totalImage])
+
+    useEffect(() => {
+        if (imageLoaded.length !== 0) {
+            const uniqueSortedArray = [...new Set(imageLoaded)].sort((a, b) => a - b);
+            const totalData = uniqueSortedArray.length / totalImage * 100
+            const loopLoading = async () => {
+                for (let index = loadPercent; index <= totalData; index++) {
+                    await sleep(10)
+                    if (index <= 100) {
+                        setLoadPercent(index)
+                    }
+                    if (index === 100) {
+                        setHideLoad(true)
+                        setImageShow(true)
+                    }
+                }
+            }
+    
+            loopLoading()
+        }
+        
+    }, [imageLoaded])
 
     useEffect(() => {
         const newFilteredData = isData.filter((item) => {
