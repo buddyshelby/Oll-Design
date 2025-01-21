@@ -38,7 +38,7 @@ class MailController extends Controller
         $token = $request->input('token'); // Token from the frontend
 
         // Secret key from Google reCAPTCHA v3
-        $secretKey = 'YOUR_SECRET_KEY';
+        $secretKey = env('RECAPTCHA_SECRET_KEY');
 
         // Send request to Google's reCAPTCHA verification endpoint
         $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
