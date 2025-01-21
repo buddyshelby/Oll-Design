@@ -1,4 +1,5 @@
 import React, { Component, useEffect, useRef, useState } from "react";
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import Card from "@/Components/Card";
 import Loading from "../Loading/Loading";
@@ -12,6 +13,11 @@ import { useTranslation } from "react-i18next";
 const ContactUs = () => {
     const { i18n } = useTranslation();
     const [isLanguage, setIsLanguage] = useState(false)
+    const [captchaToken, setCaptchaToken] = useState(null);
+
+    const handleCaptchaChange = (token) => {
+        setCaptchaToken(token);
+    };
 
     useEffect(() => {
         if (i18n['language'].toLowerCase() === "en-us") {
@@ -79,9 +85,13 @@ const ContactUs = () => {
     }, [refCheckbox.current[0], i18n['language']])
 
     const sendEmail = async () => {
+        // if (!captchaToken) {
+        //     alert("Please complete the reCAPTCHA");
+        //     return;
+        // }
         setIsLoading(true);
         try {
-            await axios.post("https://olldesign.jp/api/sendEmail", dataInput, {
+            await axios.post("https://olldesign.jp/api/sendEmail", {...dataInput, 'g-recaptcha-response': captchaToken}, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -184,6 +194,10 @@ const ContactUs = () => {
                                 ></textarea>
                             </div>
                         </div>
+                        <ReCAPTCHA
+                            sitekey="6LeVn74qAAAAADvSzKTxqJ5p-HjE7gZVYwCsf0Jp"
+                            onChange={handleCaptchaChange}
+                        />
                         <div className="flex align-items-end">
                             <button type="submit" onClick={clickHandler} className="btn btn-black">
                                 Submit

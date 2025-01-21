@@ -24,6 +24,19 @@ class MailController extends Controller
             return response()->json(['errors' => $e->errors()], 422);
         }
     
+        $secretKey = env('RECAPTCHA_SECRET_KEY');
+
+        $response = Http::post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => env('RECAPTCHA_SECRET_KEY'),
+            'response' => $recaptchaToken,
+        ]);
+
+        $responseBody = $response->json();
+
+        if (!$responseBody['success']) {
+            return response()->json(['error' => 'reCAPTCHA validation failed.'], 400);
+        }
+
         $company = $request->input('company');
         $name = $request->input('name');
         $phone = $request->input('phone');

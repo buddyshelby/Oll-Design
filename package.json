@@ -30,6 +30,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "react-google-recaptcha": "^3.1.0",
         "react-scroll": "^1.9.0"
     }
 }
