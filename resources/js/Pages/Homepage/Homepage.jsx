@@ -460,7 +460,7 @@ const Homepage = () => {
                                             <div className="w-full select-none pointer-events-none flex flex-col-reverse overflow-hidden h-auto">
                                                 <div className="relative w-full flex justify-center items-center overflow-hidden" style={{ opacity: '1', height: '10vw', transition: '500ms', flex: '0 0 100%' }}>
                                                     {/* <img className={` w-full h-full object-cover pointer-events-none blur-sm`} src={item.src} alt="" /> */}
-                                                    <img className={`w-full h-full object-contain pointer-events-none scale-100`} src={item.src} alt="" />
+                                                    <img className={`h-full object-contain pointer-events-none scale-100`} style={{ width: '100vw' }} src={item.src} alt="" />
                                                 </div>
                                             </div>
                                             {/* <div className="w-full flex justify-center items-center">
