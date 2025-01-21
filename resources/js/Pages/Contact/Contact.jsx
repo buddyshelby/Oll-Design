@@ -117,16 +117,19 @@ const ContactUsChild = () => {
 
     const clickHandler = (e) => {
         e.preventDefault()
-        executeRecaptcha('submit_action')
+        executeRecaptcha('submit_action').then((token) => {
+            // Send token to your backend
+            sendEmail(token);
+        });
     }
 
     useEffect(() => {
         if (executeRecaptcha) {
-        // Trigger reCAPTCHA when needed
-        executeRecaptcha('submit_action').then((token) => {
-            // Send token to your backend
-            handleSubmit(token);
-        });
+            // Trigger reCAPTCHA when needed
+            executeRecaptcha('submit_action').then((token) => {
+                // Send token to your backend
+                sendEmail(token);
+            });
         }
     }, [executeRecaptcha]);
 
