@@ -123,15 +123,15 @@ const ContactUsChild = () => {
         });
     }
 
-    useEffect(() => {
-        if (executeRecaptcha) {
-            // Trigger reCAPTCHA when needed
-            executeRecaptcha('submit_action').then((token) => {
-                // Send token to your backend
-                sendEmail(token);
-            });
-        }
-    }, [executeRecaptcha]);
+    // useEffect(() => {
+    //     if (executeRecaptcha) {
+    //         // Trigger reCAPTCHA when needed
+    //         executeRecaptcha('submit_action').then((token) => {
+    //             // Send token to your backend
+    //             sendEmail(token);
+    //         });
+    //     }
+    // }, [executeRecaptcha]);
 
     return isLanguage && (
         <Page>
