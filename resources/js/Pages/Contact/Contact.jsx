@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useRef, useState } from "react";
-import ReCAPTCHA from 'react-google-recaptcha';
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 import Card from "@/Components/Card";
 import Loading from "../Loading/Loading";
@@ -10,14 +10,13 @@ import dataContact from './contact.json'
 import Page from "../Page";
 import "./Contact.css";
 import { useTranslation } from "react-i18next";
-const ContactUs = () => {
+
+const ContactUsChild = () => {
+
+    const { executeRecaptcha } = useGoogleReCaptcha();
+
     const { i18n } = useTranslation();
     const [isLanguage, setIsLanguage] = useState(false)
-    const [captchaToken, setCaptchaToken] = useState(null);
-
-    const handleCaptchaChange = (token) => {
-        setCaptchaToken(token);
-    };
 
     useEffect(() => {
         if (i18n['language'].toLowerCase() === "en-us") {
@@ -84,14 +83,10 @@ const ContactUs = () => {
         }
     }, [refCheckbox.current[0], i18n['language']])
 
-    const sendEmail = async () => {
-        // if (!captchaToken) {
-        //     alert("Please complete the reCAPTCHA");
-        //     return;
-        // }
+    const sendEmail = async (token) => {
         setIsLoading(true);
         try {
-            await axios.post("https://olldesign.jp/api/sendEmail", {...dataInput, 'g-recaptcha-response': captchaToken}, {
+            await axios.post("https://olldesign.jp/api/sendEmail", {...dataInput, token}, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -122,95 +117,109 @@ const ContactUs = () => {
 
     const clickHandler = (e) => {
         e.preventDefault()
-        sendEmail()
+        executeRecaptcha('submit_action')
     }
+
+    useEffect(() => {
+        if (executeRecaptcha) {
+        // Trigger reCAPTCHA when needed
+        executeRecaptcha('submit_action').then((token) => {
+            // Send token to your backend
+            handleSubmit(token);
+        });
+        }
+    }, [executeRecaptcha]);
 
     return isLanguage && (
         <Page>
             {isLoading && <div className="absolute w-full h-screen top-0 left-0 flex justify-center items-center bg-slate-50 bg-opacity-50">
                 <Loading />
             </div>}
-            <div className="container my-4 w-full flex flex-col items-center">
-                <Card
-                    rounded={"rounded-[12px]"}
-                    color={"bg-[#F4F3F3]"}
-                    padding={"p-4"}
-                    className="w-full"
-                    style={{ maxWidth: '600px' }}
-                >
-                    <form>
-                        {dataContact[0].map((item, index) => {
-                            return item['type'] !== "select" ? (
-                                <div className="w-full mb-8" key={index}>
-                                    <label htmlFor={item['key']} className="form-label">
-                                        {item['label']}
-                                    </label>
-                                    <input
-                                        type={item['type']}
-                                        className="form-control"
-                                        id={item['key']}
-                                        name={item['key']}
-                                        onChange={(e) => onChangeHandler(e, item['key'])}
-                                    />
-                                </div>
-                            ) : (
-                                <div className="mb-8 text-left" key={index}>
-                                    <label
-                                        htmlFor="question"
-                                        className="form-label"
-                                    >
-                                        {item['label']}
-                                    </label>
-                                    {item['option'][isLanguage].map((item2, index2) => {
-                                        return (
-                                            <div key={index2} className="d-flex align-items-center mb-2">
-                                                <input
-                                                    ref={e => wrapRef(e,index2)}
-                                                    type="checkbox"
-                                                    name="checkbox"
-                                                    className="mr-2"
-                                                    id={item2}
-                                                    value={item2}
-                                                    onChange={e => optionHandler(e, index2)}
-                                                />
-                                                <label htmlFor={item2}>
-                                                    {item2}
-                                                </label>
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                            )
-                        })}
-                        
-                        <div className="mb-3 text-left">
+                <div className="container my-4 w-full flex flex-col items-center">
+                    <Card
+                        rounded={"rounded-[12px]"}
+                        color={"bg-[#F4F3F3]"}
+                        padding={"p-4"}
+                        className="w-full"
+                        style={{ maxWidth: '600px' }}
+                    >
+                        <form>
+                            {dataContact[0].map((item, index) => {
+                                return item['type'] !== "select" ? (
+                                    <div className="w-full mb-8" key={index}>
+                                        <label htmlFor={item['key']} className="form-label">
+                                            {item['label']}
+                                        </label>
+                                        <input
+                                            type={item['type']}
+                                            className="form-control"
+                                            id={item['key']}
+                                            name={item['key']}
+                                            onChange={(e) => onChangeHandler(e, item['key'])}
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="mb-8 text-left" key={index}>
+                                        <label
+                                            htmlFor="question"
+                                            className="form-label"
+                                        >
+                                            {item['label']}
+                                        </label>
+                                        {item['option'][isLanguage].map((item2, index2) => {
+                                            return (
+                                                <div key={index2} className="d-flex align-items-center mb-2">
+                                                    <input
+                                                        ref={e => wrapRef(e,index2)}
+                                                        type="checkbox"
+                                                        name="checkbox"
+                                                        className="mr-2"
+                                                        id={item2}
+                                                        value={item2}
+                                                        onChange={e => optionHandler(e, index2)}
+                                                    />
+                                                    <label htmlFor={item2}>
+                                                        {item2}
+                                                    </label>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                )
+                            })}
+                            
                             <div className="mb-3 text-left">
-                                <textarea
-                                    className="form-control message-box"
-                                    id="message"
-                                    name="message"
-                                    rows="5"
-                                    onChange={(e) => onChangeHandler(e, "question")}
-                                ></textarea>
+                                <div className="mb-3 text-left">
+                                    <textarea
+                                        className="form-control message-box"
+                                        id="message"
+                                        name="message"
+                                        rows="5"
+                                        onChange={(e) => onChangeHandler(e, "question")}
+                                    ></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <ReCAPTCHA
-                            sitekey="6LeVn74qAAAAADvSzKTxqJ5p-HjE7gZVYwCsf0Jp"
-                            onChange={handleCaptchaChange}
-                        />
-                        <div className="flex align-items-end">
-                            <button type="submit" onClick={clickHandler} className="btn btn-black">
-                                Submit
-                            </button>
-                            <div>
-                                <div className="pl-5">※{dataContact[1][isLanguage]['warn']}</div>
+                            <div className="flex align-items-end">
+                                <button type="submit" onClick={clickHandler} className="btn btn-black">
+                                    Submit
+                                </button>
+                                <div>
+                                    <div className="pl-5">※{dataContact[1][isLanguage]['warn']}</div>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </Card>
-            </div>
+                        </form>
+                    </Card>
+                </div>
         </Page>
     );
+}
+
+const ContactUs = () => {
+    return (
+        <GoogleReCaptchaProvider reCaptchaKey="6LeVn74qAAAAADvSzKTxqJ5p-HjE7gZVYwCsf0Jp">
+            <ContactUsChild />
+        </GoogleReCaptchaProvider>
+    )
 }
 
 export default ContactUs;
